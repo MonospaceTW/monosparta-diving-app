@@ -18,7 +18,7 @@ export default class Tab extends React.Component {
         // <View style={styles.tabsContainer + (value.id === this.state.active ? styles.tabsActcontainer : '')}>
         
         <View style={value.id === this.props.active ? styles.tabsActcontainer : styles.tabsContainer}> 
-          <TouchableOpacity onPress={this.props.onChangeTab}>
+          <TouchableOpacity onPress={this.props.onChangeTab.bind(this, value.id)}>
             <Text>{value.name}</Text>
           </TouchableOpacity>
         </View>
