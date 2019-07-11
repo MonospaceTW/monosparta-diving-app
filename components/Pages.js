@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Home from './hSpot/index';
-import FirstPage from './FirstPage';
-import FourthPage from './FourthPage';
-import FifthPage from './FifthPage';
 
-import SearchPage from './Page/Search/index';
+import SearchPage from '../Page/Search/index';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View} from 'react-native';
@@ -42,19 +39,19 @@ const SearchNavigator = createStackNavigator({
 ;
 
 const TabNavigator = createBottomTabNavigator({
-    page1:
-    {
-      screen: FirstPage,
-      navigationOptions: {
-        tabBarLabel: "People",
-        tabBarIcon: ({focused, tintColor}) => (
-                 <Icon
-                     name={focused? 'md-people' : 'md-people' }
-                     size={24}
-                 />
-             ),
-      }
-    },
+    // page1:
+    // {
+    //   screen: FirstPage,
+    //   navigationOptions: {
+    //     tabBarLabel: "People",
+    //     tabBarIcon: ({focused, tintColor}) => (
+    //              <Icon
+    //                  name={focused? 'md-people' : 'md-people' }
+    //                  size={24}
+    //              />
+    //          ),
+    //   }
+    // },
 
     Search:
     {
@@ -84,33 +81,33 @@ const TabNavigator = createBottomTabNavigator({
       }
     },
 
-    page4:
-    {
-      screen: FourthPage,
-      navigationOptions: {
-        tabBarLabel: "Notifications",
-        tabBarIcon: ({focused, tintColor}) => (
-                 <Icon
-                     name={focused? 'md-notifications' : 'md-notifications' }
-                     size={24}
-                 />
-             ),
-      }
-    },
+    // page4:
+    // {
+    //   screen: FourthPage,
+    //   navigationOptions: {
+    //     tabBarLabel: "Notifications",
+    //     tabBarIcon: ({focused, tintColor}) => (
+    //              <Icon
+    //                  name={focused? 'md-notifications' : 'md-notifications' }
+    //                  size={24}
+    //              />
+    //          ),
+    //   }
+    // },
 
-    page5:
-    {
-      screen: FifthPage,
-      navigationOptions: {
-        tabBarLabel: "Person",
-        tabBarIcon: ({focused, tintColor}) => (
-                 <Icon
-                     name={focused? 'md-person' : 'md-person' }
-                     size={24}
-                 />
-             ),
-      }
-    },
+    // page5:
+    // {
+    //   screen: FifthPage,
+    //   navigationOptions: {
+    //     tabBarLabel: "Person",
+    //     tabBarIcon: ({focused, tintColor}) => (
+    //              <Icon
+    //                  name={focused? 'md-person' : 'md-person' }
+    //                  size={24}
+    //              />
+    //          ),
+    //   }
+    // },
 
 },{
      initialRouteName: 'Home',

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, CheckBox,} from 'react-native';
-import Header from '../../Header/index'
-import Tab from '../../Tab/index'
+import Tab from '../../components/Tab/index'
 
 export default class SearchPage extends React.Component {
 
