@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Image, FlatList, Navigator, ScrollView, Dimensions, Button} from 'react-native';
+import { StyleSheet, Text, View, Button, CheckBox,} from 'react-native';
 import Header from '../../Header/index'
 import Tab from '../../Tab/index'
 
@@ -9,7 +9,6 @@ export default class SearchPage extends React.Component {
     super(props);
     this.state = {
       active : 1,
-      name: '區域',
       tabs : [
         {id: 1, name:'找潛點'},
         {id: 2, name:'找潛店'},
@@ -80,6 +79,7 @@ export default class SearchPage extends React.Component {
     });
   }
 
+
   render () {
     let array1=[];
     let array2=[];
@@ -101,7 +101,10 @@ export default class SearchPage extends React.Component {
       <View style={styles.padding}>
       <Text>{titleary[0]}</Text>
       {array1.map((value) => 
-        <Button title={value.location} /> 
+        
+          <Button title={value.location} />
+          
+        
       )}
 
       <Text>{titleary[1]}</Text>
@@ -125,7 +128,9 @@ const styles = StyleSheet.create({
   padding : {
     paddingTop : 30,
   },
+
 })
+
 
 // {
 //   name : '區域',
