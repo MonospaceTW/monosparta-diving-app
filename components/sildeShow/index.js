@@ -1,5 +1,12 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Image, FlatList, Navigator, ScrollView, Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  Image,
+  ScrollView, 
+  Dimensions
+} from 'react-native';
 
 const width = Dimensions.get('window').width;
 

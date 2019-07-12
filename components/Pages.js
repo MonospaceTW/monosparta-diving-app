@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Home from './hSpot/index';
-
-import SearchPage from '../Page/Search/index';
-
+//components
+import Home from '../container/home';
+import SearchPage from '../container/search';
+//套件
 import Icon from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, View} from 'react-native';
+
 import {
     createStackNavigator, createAppContainer, createBottomTabNavigator,
 } from 'react-navigation';
@@ -22,7 +22,7 @@ export default class Pages extends Component{
 }
 
 
-const HomeNavigator = createStackNavigator({
+const homeNavigator = createStackNavigator({
     Home: {screen: Home},
 
 },{
@@ -30,7 +30,7 @@ const HomeNavigator = createStackNavigator({
  })
 ;
 
-const SearchNavigator = createStackNavigator({
+const searchNavigator = createStackNavigator({
     SearchPage: {screen: SearchPage},
       
 },{
@@ -55,7 +55,7 @@ const TabNavigator = createBottomTabNavigator({
 
     Search:
     {
-      screen: SearchNavigator,
+      screen: searchNavigator,
       navigationOptions: {
         tabBarLabel: "Search",
         tabBarIcon: ({focused, tintColor}) => (
@@ -69,7 +69,7 @@ const TabNavigator = createBottomTabNavigator({
 
     Home:
     {
-      screen: HomeNavigator,
+      screen: homeNavigator,
       navigationOptions: {
         tabBarLabel: "Home",
         tabBarIcon: ({focused, tintColor}) => (
