@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, CheckBox,} from 'react-native';
 import Tab from '../../components/Tab/index'
 
+
+
 export default class SearchPage extends React.Component {
 
   constructor(props) {
@@ -15,11 +17,11 @@ export default class SearchPage extends React.Component {
       ],
       Button1: [
         [
-          {location: '北部'},
-          {location: '中部'},
-          {location: '南部'},
-          {location: '東部'},
-          {location: '外島'},
+          {id: 1, location: '北部'},
+          {id: 2, location: '中部'},
+          {id: 3, location: '南部'},
+          {id: 4, location: '東部'},
+          {id: 5, location: '外島'},
         ],
 
         [
@@ -67,8 +69,9 @@ export default class SearchPage extends React.Component {
         ["區域", "難度"],
         ["區域", "服務項目"],
         ["Test1", "Test2"]
-      ]
-
+      ],
+      selLocation: [],
+      selLvl: [],
     }
   }
 
@@ -78,6 +81,19 @@ export default class SearchPage extends React.Component {
     });
   }
 
+  handleLocation = (value) => {
+    let location=[]
+    location.push(value);
+    this.setState({
+      selLocation: location
+    });
+    
+    console.log(location)
+  }
+
+  test = () => {
+    console.log(this.state.checkstate)
+  }
 
   render () {
     let array1=[];
@@ -101,9 +117,9 @@ export default class SearchPage extends React.Component {
       <Text>{titleary[0]}</Text>
       {array1.map((value) => 
         
-          <Button title={value.location} />
+          <Button title={value.location} onPress={this.handleLocation.bind(this, value.location)} color={this.state.selLocation.includes(value.location) ? 'blue' : '#5CA0FC'} />
+          //onPress={this.handlelvl.bind(this, value.lvl)} color={this.state.selLvl.includes(value.lvl) ? 'blue' : '#5CA0FC'}
           
-        
       )}
 
       <Text>{titleary[1]}</Text>
@@ -113,7 +129,7 @@ export default class SearchPage extends React.Component {
       </View>
 
      <View style={styles.padding}>
-       <Button title="GO!" />
+       <Button title="GO!" onPress={this.test} />
      </View>
      
 
