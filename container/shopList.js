@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { 
-  StyleSheet, 
+  StyleSheet,
   Text, 
-  View,
+  View, 
 } from 'react-native';
 
 

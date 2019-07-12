@@ -1,6 +1,12 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Navigator, ScrollView, Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TouchableOpacity,
+} from 'react-native';
 
+// import PropTypes from 'prop-types';
 
 export default class Tab extends React.Component {
 
@@ -30,6 +36,10 @@ export default class Tab extends React.Component {
   }
 
 }
+
+// Tab.propTyeps = {
+
+// }
 
 const styles = StyleSheet.create({
      container: {
