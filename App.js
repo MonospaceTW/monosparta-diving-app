@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Image, FlatList, Navigator } from 'react-native';
-import Pages from './components/Pages';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-export default class App extends React.Component {
+import React, { Component } from 'react'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
+import Pages from './components/Pages'
 
-  render () {
+export default class App extends React.Component {
+  render() {
     return (
       <Pages/>
-    );
+    )
   }
-
 }
