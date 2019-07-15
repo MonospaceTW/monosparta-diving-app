@@ -133,34 +133,41 @@ export default class SearchPage extends React.Component {
     }
 
     return (
-
+    
       <ImageBackground source={require('../assets/searchBg.png')} style={styles.bgImg}>
         <Tab
           tabs={this.state.tabs}
           active={this.state.active}
           onChangeTab={this.onChangeTab.bind(this)}
         />
-        <View style={styles.padding}>
+        
           <Text style={styles.title}>{titleArray[0]}</Text>
           <View style={styles.hr} />
-          {array1.map((item) => { return <Button title={item.label} onPress={this.onFristselect.bind(this, item.label)} color={this.state.selLocation.includes(item.label) ? 'blue' : '#5CA0FC'} /> })}
-      })}
+          {array1.map((item) => { 
+            return <Button 
+                      title={item.label} 
+                      onPress={this.onFristselect.bind(this, item.label)} 
+                      color={this.state.selLocation.includes(item.label) ? 'blue' : '#5CA0FC'} 
+                    /> })}
 
           <Text style={styles.title}>{titleArray[1]}</Text>
           <View style={styles.hr} />
-          {array2.map((item) => { return <Button title={item.label} onPress={this.onSecondselect.bind(this, item.label)} color={this.state.selLvl.includes(item.label) ? 'blue' : '#5CA0FC'} /> })}
-        </View>
+          {array2.map((item) => { 
+            return <Button 
+                      title={item.label} 
+                      onPress={this.onSecondselect.bind(this, item.label)} 
+                      color={this.state.selLvl.includes(item.label) ? 'blue' : '#5CA0FC'} 
+                    /> })}
+        
         <Button style={styles.goBtn} disabled={(this.state.selLocation == '' && this.state.selLvl == '') ? true : false} title="GO!" onPress={this.test} />
 
       </ImageBackground>
+     
     )
   }
 }
 
 const styles = StyleSheet.create({
-  padding: {
-    paddingTop: 30 
-  },
   title: {
     color: '#FFFFFF',
     fontSize: 14,
