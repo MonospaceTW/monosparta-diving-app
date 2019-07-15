@@ -1,23 +1,19 @@
-
 import React, { Component } from 'react'
 
 import Icon from 'react-native-vector-icons/Ionicons'
-
+import {
+  createStackNavigator,
+  createAppContainer,
+  createBottomTabNavigator
+} from 'react-navigation'
 import Home from '../container/home'
 import SearchPage from '../container/search'
 
-import {
-    createStackNavigator, createAppContainer, createBottomTabNavigator
-  } from 'react-navigation'
 
 export default class Pages extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
-        <AppContainer/>
+      <AppContainer />
     )
   }
 }
@@ -59,14 +55,14 @@ const TabNavigator = createBottomTabNavigator({
       screen: searchNavigator,
       navigationOptions: {
         tabBarLabel: 'Search',
-        tabBarIcon: ({ focused, tintColor }) => { 
-return (
-                 <Icon
-                     name={focused ? 'md-search' : 'md-search' }
-                     size={24}
-                 />
-        )
- }
+        tabBarIcon: ({ focused }) => {
+          return (
+                <Icon
+                    name={focused ? 'md-search' : 'md-search'}
+                    size={24}
+                />
+          )
+        }
       }
     },
 
@@ -75,14 +71,14 @@ return (
       screen: homeNavigator,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: ({ focused, tintColor }) => { 
-return (
-                 <Icon
-                     name={focused ? 'md-home' : 'md-home' }
-                     size={24}
-                 />
-        ) 
-}
+        tabBarIcon: ({ focused }) => {
+          return (
+                <Icon
+                    name={focused ? 'md-home' : 'md-home'}
+                    size={24}
+                />
+          )
+        }
       }
     }
 

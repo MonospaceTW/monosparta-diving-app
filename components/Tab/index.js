@@ -8,33 +8,6 @@ import {
 
 // import PropTypes from 'prop-types';
 
-export default class Tab extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.props.tabs.map((value) =>
-        // <View style={styles.tabsContainer + (value.id === this.state.active ? styles.tabsActcontainer : '')}>
-
-        { return <View style={value.id === this.props.active ? styles.tabsActcontainer : styles.tabsContainer}>
-            <TouchableOpacity onPress={this.props.onChangeTab.bind(this, value.id)}>
-              <Text>{value.name}</Text>
-            </TouchableOpacity>
-          </View>
- })}
-      </View>
-
-    )
-  }
-}
-
-// Tab.propTyeps = {
-
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -51,10 +24,37 @@ const styles = StyleSheet.create({
     height: 30
   },
 
-  tabsActcontainer: {
+  ActiveTabs: {
     flex: 1,
     borderBottomColor: 'black',
     borderBottomWidth: 5,
     height: 30
   }
 })
+
+export default class Tab extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.props.tabs.map((value) => {
+          return <View
+                  style={value.id === this.props.active ? styles.ActiveTabs : styles.tabsContainer}
+                  >
+            <TouchableOpacity onPress={this.props.onChangeTab.bind(this, value.id)}>
+              <Text>{value.name}</Text>
+            </TouchableOpacity>
+          </View>
+        })}
+      </View>
+
+    )
+  }
+}
+
+// Tab.propTyeps = {
+
+// }

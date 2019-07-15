@@ -1,49 +1,51 @@
-import React, { Component } from 'react';
-import { 
-  StyleSheet,
-  Text,
+import React, { Component } from 'react'
+import {
   View,
-  ScrollView,
+  Text,
   Image,
-  TouchableOpacity,
-  TouchableHighlight,
-  Dimensions,
-  Linking,
-  FlatList
-} from 'react-native';
+  StyleSheet,
+  Dimensions
+} from 'react-native'
+import Swiper from 'react-native-swiper'
 
+const styles = StyleSheet.create({
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  },
+  hr: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1
+  }
+})
+const title1 = '實景照片'
+const title2 = '潛點介紹'
 
-export default class SearchSpot extends React.Component {
-
+export default class ShopDetail extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      spotName: '',
-      spotLevel: '',
-      array:[]
-
     }
   }
-  keyExtractor = (item, index) => item.id;
-
-  renderItem = ({item}) => (
-    <MyListItem
-      id={item.id}
-      onPressItem={this._onPressItem}
-      selected={!!this.state.selected.get(item.id)}
-      title={item.title}
-    />
-  );
 
   render() {
     return (
 
-      <View>        
-      <FlatList 
-        data={this.state.array}
-        renderItem={this.renderItem}
-        keyExtractor = {this.keyExtractor}
-      />
+      <View>
+        <Text>{title1}</Text>
+        <View style={ styles.hr }/>
+        <Swiper showsButtons={true} autoplay={true}>
+          <Image style={styles.slide} source={require('../assets/1.png')} />
+          <Image style={styles.slide} source={require('../assets/1.png')} />
+          <Image style={styles.slide} source={require('../assets/1.png')} />
+        </Swiper>
+        <Text>{title2}</Text>
+        <View style={ styles.hr }/>
+        />
+        <Text/>
       </View>
     )
   }
