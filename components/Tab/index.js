@@ -11,24 +11,31 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    flexDirection: 'row'
-
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 30,
+    alignItems: 'center',
+    marginBottom: 35,
+    marginTop: 35
   },
-
-  tabsContainer: {
+  tabs: {
     flex: 1,
     borderBottomColor: 'transparent',
-    borderBottomWidth: 5,
-    height: 30
+    borderBottomWidth: 1,
+    height: 30,
+   justifyContent: 'center',
+   alignItems: 'center'
   },
-
-  ActiveTabs: {
+  activeTabs: {
     flex: 1,
-    borderBottomColor: 'black',
-    borderBottomWidth: 5,
-    height: 30
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
+    height: 30,
+    justifyContent: 'center',
+   alignItems: 'center'
+  },
+  tabTxt: {
+    color: 'white'
   }
 })
 
@@ -36,18 +43,16 @@ export default class Tab extends React.Component {
   constructor(props) {
     super(props)
   }
-  
+
   render() {
     return (
       <View style={styles.container}>
         {this.props.tabs.map((value) => {
-          return <View
-                  style={value.id === this.props.active ? styles.ActiveTabs : styles.tabsContainer}
-                  >
-            <TouchableOpacity onPress={this.props.onChangeTab.bind(this, value.id)}>
-              <Text>{value.name}</Text>
-            </TouchableOpacity>
-          </View>
+          return <TouchableOpacity
+                   style={value.id === this.props.active ? styles.activeTabs : styles.tabs}
+                   onPress={this.props.onChangeTab.bind(this, value.id)}>
+            <Text style={styles.tabTxt}>{value.name}</Text>
+          </TouchableOpacity>
         })}
       </View>
 

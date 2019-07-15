@@ -6,7 +6,8 @@ import {
   ScrollView,
   Button,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity
 } from 'react-native'
 
 import homeSpot from '../components/image'
@@ -31,7 +32,7 @@ export default class Home extends React.Component {
           img3: homeSpot.recImg,
           name1: '藍波潛水'
         },
-        
+
       ]
 
 
@@ -40,12 +41,12 @@ export default class Home extends React.Component {
 
   render() {
     return (
-        <ImageBackground source={require('../assets/homeBg.png')} style={styles.bgImg}>
-          {this.state.Object.map((value) => {
-            return <View>
-              <Text style={styles.title}>{value.title}</Text>
-              <View style={styles.hr} />
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ImageBackground source={require('../assets/homeBg.png')} style={styles.bgImg}>
+        {this.state.Object.map((value) => {
+          return <View>
+            <Text style={styles.title}>{value.title}</Text>
+            <View style={styles.hr} />
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={value.img1} />
                 <Text style={styles.name}>{value.name1}</Text>
@@ -54,11 +55,15 @@ export default class Home extends React.Component {
                 <Image style={styles.image} source={value.img3} />
                 <Text style={styles.name}>{value.name1}</Text>
               </View>
-              </ScrollView>
-              </View>
-          })}
-          <Button style={styles.btn} title='想去哪裡?' />
-        </ImageBackground>
+            </ScrollView>
+          </View>
+        })}
+        <View style={styles.btnWrapper}> 
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btnTxt}>想去哪裡?</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     )
   }
 }
@@ -110,7 +115,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 3, height: 3 },
     shadowRadius: 6,
     borderRadius: 24,
-    marginBottom: 10
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  btnTxt: {
+    color: 'white',
+  },
+  btnWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   bgImg: {
     width: '100%',
