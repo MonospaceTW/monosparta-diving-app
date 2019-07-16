@@ -1,55 +1,49 @@
 import React, { Component } from 'react'
 import {
   View,
-  FlatList
+  Text,
+  FlatList,
+  Image,
+  StyleSheet
 } from 'react-native'
 
+const styles = StyleSheet.create({
+  spotImg: {
+    width : '100%',
+    height: 200
+  },
+
+})
 
 export default class SpotList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      data: []
-
-    }
   }
 
-  componentDidMount() {
-    this.getSpot()
-  }
+  keyExtractor = (item, index) => {return index.toString()};
 
-  getSpot() {
-    return fetch('http://e6d63ea9.ngrok.io/api/sites/search/')
-      .then((res) => { return res.json() })
-      .then((responseJson) => {
-        this.setState({
-          data: responseJson.data
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-      .done()
-  }
-
-  renderItem = (item) => {
+  renderItem = ({item}) => {
     return (
       <View>
-        <Image
-          source/>
-        <Text>{item.spotName}{item.spotLevel}</Text>
+        <Image 
+        style={styles.spotImg}
+        source={{uri: item.spot_img}}
+        />
+        <Text>{item.viewName}{item.level}</Text>
       </View>
     )
   };
+
+
 
   render() {
     return (
 
       <View>
         <FlatList
-          data={this.state.data}
+          data={this.props.navigation.state.params.data}
           renderItem={this.renderItem}
-          keyExtractor={(item) => { return item.id }}
+          keyExtractor={this.keyExtractor}
         />
       </View>
     )

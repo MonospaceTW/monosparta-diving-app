@@ -8,9 +8,11 @@ import {
 
 } from 'react-native'
 
-import { Container, Header, Content, Tab, Tabs } from 'native-base';
+import {
+ Container, Header, Content, Tab, Tabs 
+} from 'native-base'
 
-import SearchBtn from '../components/searchBtn/index'
+import Btn from '../components/button/index'
 import ShopTab from '../components/shopTab/index'
 import SpotTab from '../components/spotTab/index'
 
@@ -39,8 +41,10 @@ export default class Search extends React.Component {
           { label: '飲食', value: 'food' },
           { label: '住宿', value: 'sleep' }]
       },
-      selLocation: [],
-      selLvl: []
+      press: false,
+      selLocation: '',
+      selLevel: '',
+      selService: ''
 
     }
   }
@@ -50,7 +54,11 @@ export default class Search extends React.Component {
     const locationLength = this.state.spot.location.length
 
     for (let i = 0; i < locationLength; i += 1) {
-      array.push(<SearchBtn text={this.state.spot.location[i].label} />)
+      array.push(<Btn
+        text={this.state.spot.location[i].label}
+        onChangeState={this.onLocationChange.bind(this, this.state.spot.location[i].value)}
+        press={this.state.press}
+      />)
     }
     return array
   }
@@ -60,7 +68,11 @@ export default class Search extends React.Component {
     const levelLength = this.state.spot.level.length
 
     for (let i = 0; i < levelLength; i += 1) {
-      array.push(<SearchBtn text={this.state.spot.level[i].label} />)
+      array.push(<Btn
+        text={this.state.spot.level[i].label}
+        onChangeState={this.onLevelChange.bind(this, this.state.spot.level[i].value)}
+        press={this.state.press}
+      />)
     }
     return array
   }
@@ -70,9 +82,77 @@ export default class Search extends React.Component {
     const serviceLength = this.state.shop.service.length
 
     for (let i = 0; i < serviceLength; i += 1) {
-      array.push(<SearchBtn text={this.state.shop.service[i].label} />)
+      array.push(<Btn
+        text={this.state.shop.service[i].label}
+        onChangeState={this.onServiceChange.bind(this, this.state.shop.service[i].value)}
+        press={this.state.press}
+      />)
     }
     return array
+  }
+
+  onChangeState = (value) => {
+    console.log(value)
+    this.setState({
+      press: !this.state.press
+    })
+  }
+
+  onLocationChange = (value) => {
+    console.log(value)
+    this.setState({
+      selLocation: value
+    })
+  }
+
+  onLevelChange = (value) => {
+    console.log(value)
+    this.setState({
+      selLevel: value
+    })
+  }
+
+  onServiceChange = (value) => {
+    console.log(value)
+    this.setState({
+      selService: value
+    })
+  }
+
+  onChangePage = () => {
+    const { navigate } = this.props.navigation;
+    const url = `http://e03d16df.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    fetch(url)
+      .then((response) => { return response.json() })
+      .then((responseValue) =>
+      {
+        return this.setState({
+          responseValue
+        })
+      }
+      )
+      // .then(()=> console.log(this.state.responseValue))
+      .then(() => { navigate('spotList', { data: this.state.responseValue.item }) })
+      .catch((error) => {
+        console.log(error)
+      })
+      .done()
+    // fetch('http://e03d16df.ngrok.io/api/sites/search/' + resultSelect[0])
+    //   .then((response) => { return response.json() })
+    //   .then((users) =>
+    //   {
+    //     return this.setState({
+    //       users
+    //     })
+    //   }
+    //   )
+    //   // .then(() => { return console.log(this.state.users.item[0].viewName) })
+    //   .then(() => { navigate('spotList', { data: this.state.users.item }) })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
+    //   .done()
+
   }
 
   render() {
@@ -84,6 +164,9 @@ export default class Search extends React.Component {
             <SpotTab
               onGetLocation={this.onGetLocation()}
               onGetLevel={this.onGetLevel()}
+              selLocation={this.state.selLocation}
+              selLevel={this.state.selLevel}
+              onChangePage={this.onChangePage}
             />
           </Tab>
           <Tab heading="找潛店">
@@ -93,7 +176,7 @@ export default class Search extends React.Component {
             />
           </Tab>
         </Tabs>
-      </Container>    
+      </Container>
 
     )
   }

@@ -42,20 +42,19 @@ export default class Btn extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      press: false
+      
+      selLocation: '',
+      selLevel: '',
+      selService: ''
     }
   }
 
-  onChangeState = () => {
-    this.setState({
-      press: !this.state.press
-    })
-  }
+  
 
   render() {
     return (
-      <TouchableHighlight style={this.state.press ? styles.btnPress : styles.btn} onPress={this.onChangeState}>
-        <Text style={this.state.press ? styles.btnTxtPress : styles.btnTxt}>{this.props.text}</Text>
+      <TouchableHighlight style={this.props.press ? styles.btnPress : styles.btn} onPress={this.props.onChangeState}>
+        <Text style={this.props.press ? styles.btnTxtPress : styles.btnTxt}>{this.props.text}</Text>
       </TouchableHighlight>
     )
   }
