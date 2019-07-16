@@ -7,7 +7,7 @@ import {
   createBottomTabNavigator
 } from 'react-navigation'
 import Home from '../container/home'
-import SearchPage from '../container/search'
+import Search from '../container/search'
 
 
 export default class Pages extends Component {
@@ -28,10 +28,10 @@ const homeNavigator = createStackNavigator({
 
 
 const searchNavigator = createStackNavigator({
-  SearchPage: { screen: SearchPage }
+  Search: { screen: Search }
 
 }, {
-  initialRouteName: 'SearchPage'
+  initialRouteName: 'Search'
 })
 
 
