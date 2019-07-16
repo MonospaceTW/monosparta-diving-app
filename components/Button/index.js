@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
-  View,
-  TouchableHighlight,
+  TouchableHighlight
 } from 'react-native'
 
 const styles = StyleSheet.create({
   btn: {
-    flexWrap: "wrap",
-    flexDirection: "row",
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     margin: 15,
     width: 80,
     height: 30,
@@ -20,8 +19,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   btnPress: {
-    flexWrap: "wrap",
-    flexDirection: "row",
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     margin: 15,
     width: 80,
     height: 30,
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
   btnTxt: {
     color: 'white',
     fontSize: 14
-   
   },
   btnTxtPress: {
     color: '#031F4B',
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
 export default class Btn extends React.Component {
   constructor(props) {
     super(props)
-    this.state= {
+    this.state = {
       press: false
     }
   }
