@@ -6,26 +6,6 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-
-export default class GoBtn extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <View style={styles.btnWrapper}>
-      <TouchableOpacity
-        style={styles.goBtn}
-        disabled={(this.props.selLocation == '' && this.props.selLvl == '')}
-      >
-        <Text style={styles.btnTxt}>{this.props.btnTxt}</Text>
-      </TouchableOpacity>
-      </View>
-    )
-  }
-}
-
 const styles = StyleSheet.create({
   goBtn: {
     width: 150,
@@ -52,3 +32,24 @@ const styles = StyleSheet.create({
   },
 
 })
+
+export default class GoBtn extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <View style={styles.btnWrapper}>
+      <TouchableOpacity
+        style={styles.goBtn}
+        onPress={this.props.onClick}
+      >
+        <Text style={styles.btnTxt}>{this.props.btnTxt}</Text>
+      </TouchableOpacity>
+      </View>
+    )
+  }
+}
+
+

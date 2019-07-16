@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   bgImg: {
     width: '100%',
     height: '100%'
-  },
+  }
 
 
 })
@@ -53,9 +53,12 @@ export default class SpotTab extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      btnTxt: '出發！'
+      btnTxt: '出發！',
+      responseValue: []
     }
   }
+
+  
 
   render() {
     return (
@@ -66,9 +69,11 @@ export default class SpotTab extends React.Component {
         <Text style={styles.title}>難度</Text>
         <View style={styles.hr2} />
         <View style={styles.btnWrapper}>{this.props.onGetLevel}</View>
-        <GoBtn btnTxt={this.state.btnTxt}/>
+        <GoBtn
+          btnTxt={this.state.btnTxt}
+          onClick={this.props.onChangePage}
+        />
       </ImageBackground>
     )
   }
 }
-
