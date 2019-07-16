@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 
 import homeSpot from '../components/image'
+import GoBtn from '../components/goBtn/index'
+
 
 const styles = StyleSheet.create({
   title: {
@@ -67,11 +69,6 @@ const styles = StyleSheet.create({
   btnTxt: {
     color: 'white'
   },
-  btnWrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   bgImg: {
     width: '100%',
     height: '100%'
@@ -96,8 +93,8 @@ export default class Home extends React.Component {
           img3: homeSpot.recImg,
           name1: '藍波潛水'
         }
-
-      ]
+      ],
+      btnTxt: '想去哪裡？'
     }
   }
 
@@ -120,11 +117,7 @@ export default class Home extends React.Component {
             </ScrollView>
           </View>
         })}
-        <View style={styles.btnWrapper}>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnTxt}>想去哪裡?</Text>
-          </TouchableOpacity>
-        </View>
+        <GoBtn btnTxt={this.state.btnTxt} />
       </ImageBackground>
     )
   }
