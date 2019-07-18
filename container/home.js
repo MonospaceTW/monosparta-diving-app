@@ -5,8 +5,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  ImageBackground,
-  TouchableOpacity
+  ImageBackground
 } from 'react-native'
 
 import homeSpot from '../components/image'
@@ -98,10 +97,29 @@ export default class Home extends React.Component {
     }
   }
 
-  onGoSearch = () => {
-    const { navigate } = this.props.navigation;
-    navigate('Search')
+  static navigationOptions = {
+    title: 'LOGO',
+    headerStyle: {
+      backgroundColor: '#3FD2FF'
 
+    },
+    headerTitleStyle: {
+      flex: 1,
+      fontFamily: 'monospace',
+      fontSize: 31,
+      textAlign: 'center',
+      color: '#FFBC02'
+    },
+    headerLeft:
+      (<View />),
+    headerRight:
+      (<View />)
+  };
+
+
+  onGoSearch = () => {
+    const { navigate } = this.props.navigation
+    navigate('Search')
   }
 
   render() {
@@ -113,19 +131,25 @@ export default class Home extends React.Component {
             <View style={styles.hr} />
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
               <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={value.img1} />
-                <Text style={styles.name}>{value.name1}</Text>
-                <Image style={styles.image} source={value.img2} />
-                <Text style={styles.name}>{value.name1}</Text>
-                <Image style={styles.image} source={value.img3} />
-                <Text style={styles.name}>{value.name1}</Text>
+                <View>
+                  <Image style={styles.image} source={value.img1} />
+                  <Text style={styles.name}>{value.name1}</Text>
+                </View>
+                <View>
+                  <Image style={styles.image} source={value.img2} />
+                  <Text style={styles.name}>{value.name1}</Text>
+                </View>
+                <View>
+                  <Image style={styles.image} source={value.img3} />
+                  <Text style={styles.name}>{value.name1}</Text>
+                </View>
               </View>
             </ScrollView>
           </View>
         })}
         <GoBtn
-        btnTxt={this.state.btnTxt}
-        onClick={this.onGoSearch} />
+          btnTxt={this.state.btnTxt}
+          onClick={this.onGoSearch} />
       </ImageBackground>
     )
   }
