@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
+import {
+  StyleSheet,
+  Text,
   View,
 } from 'react-native';
 
 
-export default class App extends React.Component {
+// export default class App extends React.Component {
 
-  render () {
-    return (
+//   render() {
+//     return (
+//     );
+//   }
 
-    );
-  }
-
-}
+// }

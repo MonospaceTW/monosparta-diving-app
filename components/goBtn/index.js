@@ -29,15 +29,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-
+  }
 })
 
 export default class GoBtn extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <View style={styles.btnWrapper}>

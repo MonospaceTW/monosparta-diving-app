@@ -60,7 +60,6 @@ export default class SpotTab extends React.Component {
   }
 
 
-
   render() {
     return (
       <ImageBackground key={this.props.key} source={homeSpot.searchBg} style={styles.bgImg}>

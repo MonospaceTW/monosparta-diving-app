@@ -6,12 +6,12 @@ import {
   } from 'react-native';
 
 
-export default class App extends React.Component {
+// export default class App extends React.Component {
 
-  render () {
-    return (
+//   render () {
+//     return (
 
-    );
-  }
+//     );
+//   }
 
-}
+// }

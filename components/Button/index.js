@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   Text,
@@ -39,16 +39,15 @@ const styles = StyleSheet.create({
 })
 
 export default class Btn extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-
-
   render() {
     return (
-      <TouchableHighlight style={this.props.select === this.props.value ? styles.btnPress : styles.btn} onPress={this.props.onChangeState}>
-        <Text style={this.props.select === this.props.value ? styles.btnTxtPress : styles.btnTxt}>{this.props.text}</Text>
+      <TouchableHighlight
+        style={this.props.select === this.props.value ? styles.btnPress : styles.btn}
+        onPress={this.props.onChangeState}
+      >
+        <Text style={this.props.select === this.props.value ? styles.btnTxtPress : styles.btnTxt}>
+          {this.props.text}
+        </Text>
       </TouchableHighlight>
     )
   }
