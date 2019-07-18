@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 const styles = StyleSheet.create({
-  btn: {   
+  btn: {
     margin: 15,
     width: 80,
     height: 30,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  btnPress: {    
+  btnPress: {
     margin: 15,
     width: 80,
     height: 30,
@@ -41,20 +41,14 @@ const styles = StyleSheet.create({
 export default class Btn extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      
-      selLocation: '',
-      selLevel: '',
-      selService: ''
-    }
   }
 
-  
+
 
   render() {
     return (
-      <TouchableHighlight style={this.props.press ? styles.btnPress : styles.btn} onPress={this.props.onChangeState}>
-        <Text style={this.props.press ? styles.btnTxtPress : styles.btnTxt}>{this.props.text}</Text>
+      <TouchableHighlight style={this.props.select === this.props.value ? styles.btnPress : styles.btn} onPress={this.props.onChangeState}>
+        <Text style={this.props.select === this.props.value ? styles.btnTxtPress : styles.btnTxt}>{this.props.text}</Text>
       </TouchableHighlight>
     )
   }

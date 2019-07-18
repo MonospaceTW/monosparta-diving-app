@@ -98,6 +98,12 @@ export default class Home extends React.Component {
     }
   }
 
+  onGoSearch = () => {
+    const { navigate } = this.props.navigation;
+    navigate('Search')
+
+  }
+
   render() {
     return (
       <ImageBackground source={require('../assets/homeBg.png')} style={styles.bgImg}>
@@ -117,7 +123,9 @@ export default class Home extends React.Component {
             </ScrollView>
           </View>
         })}
-        <GoBtn btnTxt={this.state.btnTxt} />
+        <GoBtn
+        btnTxt={this.state.btnTxt}
+        onClick={this.onGoSearch} />
       </ImageBackground>
     )
   }

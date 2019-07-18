@@ -1,8 +1,8 @@
 // import React, { Component } from 'react';
-// import { 
+// import {
 //   StyleSheet,
-//   Text, 
-//   View, 
+//   Text,
+//   View,
 // } from 'react-native';
 
 

@@ -58,7 +58,7 @@ export default class SpotTab extends React.Component {
     }
   }
 
-  
+
 
   render() {
     return (

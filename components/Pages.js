@@ -30,10 +30,10 @@ const homeNavigator = createStackNavigator({
 
 const searchNavigator = createStackNavigator({
   Search: { screen: Search },
-  spotList: {screen: spotList}
+  spotList: { screen: spotList }
 
 }, {
-  initialRouteName: 'Search'
+  initialRouteName: 'Search',
 })
 
 
@@ -53,36 +53,36 @@ const TabNavigator = createBottomTabNavigator({
   // },
 
   Search:
-    {
-      screen: searchNavigator,
-      navigationOptions: {
-        tabBarLabel: 'Search',
-        tabBarIcon: ({ focused }) => {
-          return (
-                <Icon
-                    name={focused ? 'md-search' : 'md-search'}
-                    size={24}
-                />
-          )
-        }
-      }
-    },
-
-  Home:
-    {
-      screen: homeNavigator,
-      navigationOptions: {
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ focused }) => {
-          return (
-                <Icon
-                    name={focused ? 'md-home' : 'md-home'}
-                    size={24}
-                />
-          )
-        }
+  {
+    screen: searchNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Search',
+      tabBarIcon: ({ focused }) => {
+        return (
+          <Icon
+            name={focused ? 'md-search' : 'md-search'}
+            size={24}
+          />
+        )
       }
     }
+  },
+
+  Home:
+  {
+    screen: homeNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ focused }) => {
+        return (
+          <Icon
+            name={focused ? 'md-home' : 'md-home'}
+            size={24}
+          />
+        )
+      }
+    }
+  }
 
   // page4:
   // {
@@ -118,7 +118,7 @@ const TabNavigator = createBottomTabNavigator({
     inactiveTintColor: '#FFFFFF',
     activeTintColor: '#444444',
     labelStyle: {
-      fontSize: 12
+      fontSize: 14
     },
     activeBackgroundColor: '#E8E7E7'
   }

@@ -51,5 +51,3 @@ export default class GoBtn extends React.Component {
     )
   }
 }
-
-

@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
+
 import {
-  StyleSheet,
-  Text,
   View,
-  ImageBackground,
-  TouchableOpacity
-
+  Alert
 } from 'react-native'
-
 import {
- Container, Header, Content, Tab, Tabs 
+  Container,
+  Tab,
+  Tabs
 } from 'native-base'
 
 import Btn from '../components/button/index'
@@ -29,9 +27,9 @@ export default class Search extends React.Component {
           { label: '東部', value: 'east' },
           { label: '離島', value: 'outer' }],
         level: [
-          { label: '高階', value: 'hard' },
+          { label: '初階', value: 'easy' },
           { label: '中階', value: 'medium' },
-          { label: '低階', value: 'easy' }]
+          { label: '高階', value: 'hard' }]
       },
       shop: {
         service: [
@@ -41,13 +39,31 @@ export default class Search extends React.Component {
           { label: '飲食', value: 'food' },
           { label: '住宿', value: 'sleep' }]
       },
-      press: false,
       selLocation: '',
       selLevel: '',
       selService: ''
 
     }
   }
+
+  static navigationOptions = {
+    title: 'SearchList',
+    headerStyle: {
+      backgroundColor: '#3FD2FF'
+
+    },
+    headerTitleStyle: {
+      flex: 1,
+      fontFamily: 'monospace',
+      fontSize: 31,
+      textAlign: 'center',
+      color: '#FFBC02'
+    },
+    headerLeft:
+      (<View/>),
+    headerRight:
+      (<View/>)
+  };
 
   onGetLocation = () => {
     const array = []
@@ -57,7 +73,8 @@ export default class Search extends React.Component {
       array.push(<Btn
         text={this.state.spot.location[i].label}
         onChangeState={this.onLocationChange.bind(this, this.state.spot.location[i].value)}
-        press={this.state.press}
+        select={this.state.selLocation}
+        value={this.state.spot.location[i].value}
       />)
     }
     return array
@@ -71,7 +88,8 @@ export default class Search extends React.Component {
       array.push(<Btn
         text={this.state.spot.level[i].label}
         onChangeState={this.onLevelChange.bind(this, this.state.spot.level[i].value)}
-        press={this.state.press}
+        select={this.state.selLevel}
+        value={this.state.spot.level[i].value}
       />)
     }
     return array
@@ -85,7 +103,9 @@ export default class Search extends React.Component {
       array.push(<Btn
         text={this.state.shop.service[i].label}
         onChangeState={this.onServiceChange.bind(this, this.state.shop.service[i].value)}
-        press={this.state.press}
+        select={this.state.selService}
+        value={this.state.shop.service[i].value}
+
       />)
     }
     return array
@@ -99,61 +119,63 @@ export default class Search extends React.Component {
   }
 
   onLocationChange = (value) => {
-    console.log(value)
-    this.setState({
-      selLocation: value
-    })
+    if (this.state.selLocation === value) {
+      this.setState({
+        selLocation: ''
+      })
+    } else {
+      this.setState({
+        selLocation: value
+      })
+    }
   }
 
   onLevelChange = (value) => {
-    console.log(value)
-    this.setState({
-      selLevel: value
-    })
+    if (this.state.selLevel === value) {
+      this.setState({
+        selLevel: ''
+      })
+    } else {
+      this.setState({
+        selLevel: value
+      })
+    }
   }
 
   onServiceChange = (value) => {
-    console.log(value)
-    this.setState({
-      selService: value
-    })
+    if (this.state.selService === value) {
+      this.setState({
+        selService: ''
+      })
+    } else {
+      this.setState({
+        selService: value
+      })
+    }
   }
 
   onChangePage = () => {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
     const url = `http://e03d16df.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
-    fetch(url)
-      .then((response) => { return response.json() })
-      .then((responseValue) =>
-      {
-        return this.setState({
-          responseValue
+    if (this.state.selLocation === '' && this.state.selLevel === '') {
+      Alert.alert('請至少選擇一個區域或難度')
+    } else {
+      fetch(url)
+        .then((response) => { return response.json()})
+        .then((responseValue) => {
+          return this.setState({
+            responseValue
+          })
         })
-      }
-      )
-      // .then(()=> console.log(this.state.responseValue))
-      .then(() => { navigate('spotList', { data: this.state.responseValue.item }) })
-      .catch((error) => {
-        console.log(error)
-      })
-      .done()
-    // fetch('http://e03d16df.ngrok.io/api/sites/search/' + resultSelect[0])
-    //   .then((response) => { return response.json() })
-    //   .then((users) =>
-    //   {
-    //     return this.setState({
-    //       users
-    //     })
-    //   }
-    //   )
-    //   // .then(() => { return console.log(this.state.users.item[0].viewName) })
-    //   .then(() => { navigate('spotList', { data: this.state.users.item }) })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
-    //   .done()
-
+        .then(() => { navigate('spotList', { data: this.state.responseValue.item }) })
+        .catch((error) => {
+          console.log(error)
+        })
+        .done()
+    }
   }
+
+
 
   render() {
     return (
@@ -164,8 +186,6 @@ export default class Search extends React.Component {
             <SpotTab
               onGetLocation={this.onGetLocation()}
               onGetLevel={this.onGetLevel()}
-              selLocation={this.state.selLocation}
-              selLevel={this.state.selLevel}
               onChangePage={this.onChangePage}
             />
           </Tab>
@@ -181,3 +201,22 @@ export default class Search extends React.Component {
     )
   }
 }
+
+onChangePage = () => {
+  const { navigate } = this.props.navigation
+  const url = `http://e03d16df.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
+
+  fetch(url)
+    .then((response) => { return response.json() })
+    .then((responseValue) => {
+      return this.setState({
+        responseValue
+      })
+    })
+    .then(() => { navigate('spotList', { data: this.state.responseValue.item }) })
+    .catch((error) => {
+      console.log(error)
+    })
+    .done()
+}
+

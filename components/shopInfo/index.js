@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
+import {
+  StyleSheet,
+  Text,
   View,
 } from 'react-native';
 
