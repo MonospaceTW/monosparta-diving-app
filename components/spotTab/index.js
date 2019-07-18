@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 
 import GoBtn from '../goBtn/index'
+import homeSpot from '../image'
 
 const styles = StyleSheet.create({
   title: {
@@ -62,7 +63,7 @@ export default class SpotTab extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('../../assets/searchBg.png')} style={styles.bgImg}>
+      <ImageBackground key={this.props.key} source={homeSpot.searchBg} style={styles.bgImg}>
         <Text style={styles.title}>區域</Text>
         <View style={styles.hr} />
         <View style={styles.btnWrapper}>{this.props.onGetLocation}</View>

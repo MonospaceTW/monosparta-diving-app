@@ -60,7 +60,7 @@ export default class ShopTab extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('../../assets/searchBg.png')} style={styles.bgImg}>
+      <ImageBackground key={this.props.key} source={require('../../assets/searchBg.png')} style={styles.bgImg}>
         <Text style={styles.title}>區域</Text>
         <View style={styles.hr} />
         <View style={styles.btnWrapper}>{this.props.onGetLocation}</View>

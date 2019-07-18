@@ -71,6 +71,7 @@ export default class Search extends React.Component {
 
     for (let i = 0; i < locationLength; i += 1) {
       array.push(<Btn
+        key={this.state.spot.location[i].value}
         text={this.state.spot.location[i].label}
         onChangeState={this.onLocationChange.bind(this, this.state.spot.location[i].value)}
         select={this.state.selLocation}
@@ -86,6 +87,7 @@ export default class Search extends React.Component {
 
     for (let i = 0; i < levelLength; i += 1) {
       array.push(<Btn
+        key={this.state.spot.level[i].value}
         text={this.state.spot.level[i].label}
         onChangeState={this.onLevelChange.bind(this, this.state.spot.level[i].value)}
         select={this.state.selLevel}
@@ -101,6 +103,7 @@ export default class Search extends React.Component {
 
     for (let i = 0; i < serviceLength; i += 1) {
       array.push(<Btn
+        key={this.state.shop.service[i].value}
         text={this.state.shop.service[i].label}
         onChangeState={this.onServiceChange.bind(this, this.state.shop.service[i].value)}
         select={this.state.selService}

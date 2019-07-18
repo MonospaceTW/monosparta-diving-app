@@ -124,9 +124,9 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('../assets/homeBg.png')} style={styles.bgImg}>
+      <ImageBackground source={homeSpot.homeBg} style={styles.bgImg}>
         {this.state.Object.map((value) => {
-          return <View>
+          return <View key={value.title}>
             <Text style={styles.title}>{value.title}</Text>
             <View style={styles.hr} />
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
