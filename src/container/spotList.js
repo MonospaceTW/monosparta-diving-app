@@ -28,7 +28,6 @@ export default class SpotList extends React.Component {
     },
     headerTitleStyle: {
       flex: 1,
-      fontFamily: 'monospace',
       fontSize: 31,
       textAlign: 'center',
       color: '#FFBC02'

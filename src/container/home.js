@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   Text,
   View,
@@ -8,13 +9,15 @@ import {
   ImageBackground
 } from 'react-native'
 
-import homeSpot from '../components/image'
+import Color from '../config/color'
+import Image from '../config/'
+
 import GoBtn from '../components/goBtn/index'
 
 
 const styles = StyleSheet.create({
   title: {
-    color: '#FFFFFF',
+    color: Color.white,
     fontSize: 14,
     textShadowColor: 'rgba(0,0,0,.16)',
     textShadowOffset: { width: 3, height: 3 },
@@ -105,7 +108,6 @@ export default class Home extends React.Component {
     },
     headerTitleStyle: {
       flex: 1,
-      fontFamily: 'monospace',
       fontSize: 31,
       textAlign: 'center',
       color: '#FFBC02'
@@ -124,7 +126,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={homeSpot.homeBg} style={styles.bgImg}>
+      <ImageBackground source={Image.homeBg} style={styles.bgImg}>
         {this.state.Object.map((value) => {
           return <View key={value.title}>
             <Text style={styles.title}>{value.title}</Text>

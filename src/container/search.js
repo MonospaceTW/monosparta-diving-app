@@ -54,15 +54,14 @@ export default class Search extends React.Component {
     },
     headerTitleStyle: {
       flex: 1,
-      fontFamily: 'monospace',
       fontSize: 31,
       textAlign: 'center',
       color: '#FFBC02'
     },
     headerLeft:
-      (<View/>),
+      (<View />),
     headerRight:
-      (<View/>)
+      (<View />)
   };
 
   onGetLocation = () => {
@@ -164,7 +163,7 @@ export default class Search extends React.Component {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
       fetch(url)
-        .then((response) => { return response.json()})
+        .then((response) => { return response.json() })
         .then((responseValue) => {
           return this.setState({
             responseValue
