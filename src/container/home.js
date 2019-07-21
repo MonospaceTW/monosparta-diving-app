@@ -10,9 +10,9 @@ import {
 } from 'react-native'
 
 import Color from '../config/color'
-import Image from '../config/'
+import Images from '../config/images'
 
-import GoBtn from '../components/goBtn/index'
+import GoBtn from '../components/goBtn'
 
 
 const styles = StyleSheet.create({
@@ -83,16 +83,16 @@ export default class Home extends React.Component {
       Object: [
         {
           title: '熱門潛點',
-          img1: homeSpot.recImg,
-          img2: homeSpot.recImg,
-          img3: homeSpot.recImg,
+          img1: Images.recImg,
+          img2: Images.recImg,
+          img3: Images.recImg,
           name1: '貓鼻頭'
         },
         {
           title: '熱門潛店',
-          img1: homeSpot.recImg,
-          img2: homeSpot.recImg,
-          img3: homeSpot.recImg,
+          img1: Images.recImg,
+          img2: Images.recImg,
+          img3: Images.recImg,
           name1: '藍波潛水'
         }
       ],
@@ -126,7 +126,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={Image.homeBg} style={styles.bgImg}>
+      <ImageBackground source={Images.homeBg} style={styles.bgImg}>
         {this.state.Object.map((value) => {
           return <View key={value.title}>
             <Text style={styles.title}>{value.title}</Text>

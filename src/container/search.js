@@ -10,9 +10,9 @@ import {
   Tabs
 } from 'native-base'
 
-import Btn from '../components/button/index'
-import ShopTab from '../components/shopTab/index'
-import SpotTab from '../components/spotTab/index'
+import Btn from '../components/button'
+import ShopTab from '../components/shopTab'
+import SpotTab from '../components/spotTab'
 
 export default class Search extends React.Component {
   constructor(props) {

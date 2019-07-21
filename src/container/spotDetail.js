@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 
+
 const styles = StyleSheet.create({
   container: {
 
@@ -23,8 +24,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.3
+    // width: Dimensions.get('window').width,
+    // height: Dimensions.get('window').height * 0.3
   },
   hr: {
     borderBottomColor: 'black',
@@ -44,12 +45,14 @@ export default class SpotDetail extends React.Component {
       <View style={styles.container}>
         <Text>實景照片</Text>
         <View style={styles.hr} />
-        <Swiper style={styles.swiper} showsButtons={true} autoplay={true}>
+        <Swiper style={styles.container} showsButtons={true} autoplay={true}>
           <Image style={styles.slide} source={require('../assets/1.png')} />
           <Image style={styles.slide} source={require('../assets/1.png')} />
           <Image style={styles.slide} source={require('../assets/1.png')} />
         </Swiper>
         <Text>潛點介紹</Text>
+        <View style={styles.hr} />
+        <Text>潛點推薦</Text>
         <View style={styles.hr} />
       </View>
     )

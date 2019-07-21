@@ -6,8 +6,8 @@ import {
   ImageBackground,
 } from 'react-native'
 
-import GoBtn from '../goBtn/index'
-import homeSpot from '../image'
+import GoBtn from '../components/goBtn'
+
 
 
 const styles = StyleSheet.create({
@@ -61,7 +61,7 @@ export default class ShopTab extends React.Component {
 
   render() {
     return (
-      <ImageBackground key={this.props.key} source={homeSpot.searchBg} style = { styles.bgImg } >
+      <ImageBackground key={this.props.key} style = { styles.bgImg } >
         <Text style={styles.title}>區域</Text>
         <View style={styles.hr} />
         <View style={styles.btnWrapper}>{this.props.onGetLocation}</View>

@@ -8,7 +8,8 @@ import {
 } from 'react-navigation'
 import Home from '../container/home'
 import Search from '../container/search'
-import spotList from '../container/spotList'
+import SpotList from '../container/spotList'
+import SpotDetail from '../container/spotDetail'
 
 
 export default class Pages extends Component {
@@ -29,11 +30,12 @@ const homeNavigator = createStackNavigator({
 
 
 const searchNavigator = createStackNavigator({
-  Search: { screen: Search },
-  spotList: { screen: spotList }
+  // Search: { screen: Search },
+  // SpotList: { screen: SpotList },
+  SpotDetail: {screen: SpotDetail}
 
 }, {
-  initialRouteName: 'Search',
+  initialRouteName: 'SpotDetail',
 })
 
 
