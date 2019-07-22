@@ -4,7 +4,8 @@ import {
   Text,
   FlatList,
   Image,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -33,22 +34,37 @@ export default class SpotList extends React.Component {
       color: '#FFBC02'
     },
     headerRight:
-      (<View/>)
+      (<View />)
   };
 
   keyExtractor = (item, index) => { return index.toString() };
 
   renderItem = ({ item }) => {
     return (
-      <View>
+      <TouchableOpacity onPress={this.onGetSpotDetail.bind(this, item.spot_id)}>
         <Image
           style={styles.spotImg}
           source={{ uri: item.spot_img }}
         />
         <Text>{item.viewName}{item.level}</Text>
-      </View>
+      </TouchableOpacity>
     )
   };
+
+  onGetSpotDetail = async (spot_id) => {
+    const { navigate } = this.props.navigation
+    const url = `http://e03d16df.ngrok.io/api/sites/${spot_id}`
+
+    try {
+      let response = await fetch(url);
+      let responseValue = await response.json();
+      console.log(responseValue)
+      let resultList = await navigate('spotDetail', { info: responseValue.item[0] })
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
 
   render() {
     return (
