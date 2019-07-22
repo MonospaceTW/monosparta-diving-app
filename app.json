@@ -11,9 +11,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -25,6 +25,14 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+    "package": "com.DiveApp",
+    "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyC4_FZH90jJ6GqRPXJQTOSmcxKtoqBGLE0"
+      }
+    }
     }
   }
 }

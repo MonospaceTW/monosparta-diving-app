@@ -4,11 +4,11 @@ import {
   Text,
   Image,
   StyleSheet,
-  Dimensions,
-  ScrollView
+  ScrollView,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Images from '../config/images'
+import Map from '../components/map'
 
 
 const styles = StyleSheet.create({
@@ -53,6 +53,11 @@ export default class SpotDetail extends React.Component {
             <Text>潛點介紹</Text>
             <View style={styles.hr} />
             <Text>難度{this.props.navigation.state.params.data.level}{this.props.navigation.state.params.data.viewDescription}</Text>
+          </View>
+          <View style={{ height: 100 }}>
+          <Text>潛點地圖</Text>
+          <View style={styles.hr} />
+            <Map />
           </View>
           <View style={{ flex: 1 }}>
             <Text>潛店推薦</Text>
