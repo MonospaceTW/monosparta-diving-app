@@ -30,12 +30,12 @@ const homeNavigator = createStackNavigator({
 
 
 const searchNavigator = createStackNavigator({
-  // Search: { screen: Search },
-  // SpotList: { screen: SpotList },
-  SpotDetail: {screen: SpotDetail}
+  Search: { screen: Search },
+  spotList: { screen: SpotList },
+  spotDetail: {screen: SpotDetail}
 
 }, {
-  initialRouteName: 'SpotDetail',
+  initialRouteName: 'Search',
 })
 
 

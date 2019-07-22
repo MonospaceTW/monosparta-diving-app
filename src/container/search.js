@@ -204,21 +204,3 @@ export default class Search extends React.Component {
   }
 }
 
-onChangePage = () => {
-  const { navigate } = this.props.navigation
-  const url = `http://e03d16df.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
-
-  fetch(url)
-    .then((response) => { return response.json() })
-    .then((responseValue) => {
-      return this.setState({
-        responseValue
-      })
-    })
-    .then(() => { navigate('spotList', { data: this.state.responseValue.item }) })
-    .catch((error) => {
-      console.log(error)
-    })
-    .done()
-}
-
