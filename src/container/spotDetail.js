@@ -4,10 +4,11 @@ import {
   Text,
   Image,
   StyleSheet,
-  Dimensions,
+  ScrollView,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Images from '../config/images'
+import Map from '../components/map'
 
 
 const styles = StyleSheet.create({
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   wrapper: {
+    height: 200
   },
   slide: {
     flex: 1,
@@ -36,7 +38,8 @@ export default class SpotDetail extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
+
         <Text>實景照片</Text>
         <View style={styles.hr} />
         <Swiper style={styles.wrapper} showsButtons autoplay>
@@ -46,16 +49,27 @@ export default class SpotDetail extends React.Component {
           <Image style={styles.slide} source={Images.recImg} />
           <Image style={styles.slide} source={Images.recImg} />
         </Swiper>
-        <View style={{flex:1}}>
+
+
+        <View style={{height: 200}}>
           <Text>潛點介紹</Text>
           <View style={styles.hr} />
 
         </View>
-        <View style={{flex:1}}>
+
+        <View style={{height: 400}}>
+          <Text>{this.props.navigation.state.params.info.viewName}</Text>
+          <View style={styles.hr} />
+          <Map />
+        </View>
+
+        <View style={{height: 200}}>
           <Text>潛點推薦</Text>
           <View style={styles.hr} />
         </View>
-      </View>
+
+
+      </ScrollView>
     )
   }
 }
