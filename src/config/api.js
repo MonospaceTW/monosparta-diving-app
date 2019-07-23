@@ -1,5 +1,5 @@
 export const apiAction = {
-  
+
   // LOGIN: "LOGIN",
   // LOGOUT: "LOGOUT",
   // FORGOT_PASSWORD: "FORGOT_PASSWORD",
@@ -17,7 +17,7 @@ export const apiAction = {
   // NOTIFICATION_NEWS: "NOTIFICATION_NEWS",
   // NOTIFICATION_READ: "NOTIFICATION_READ"
 
-  
+
 };
 
 export const api = {
@@ -57,14 +57,14 @@ export const api = {
   //   auth: true,
   //   data: {}
   // },
-  
+
   // [apiAction.SERVICES]: {
   //   url: "/api/app/services",
   //   method: "get",
   //   auth: true,
   //   data: {}
   // },
-  
+
   // [apiAction.BANNER]: {
   //   url: "/api/app/marketing/banner",
   //   method: "get",
@@ -84,7 +84,7 @@ export const api = {
   //   auth: true,
   //   data: {}
   // },
-  
+
   // [apiAction.USER_INFO]: {
   //   url: "/api/app/user",
   //   method: "get",

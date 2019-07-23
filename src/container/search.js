@@ -113,13 +113,6 @@ export default class Search extends React.Component {
     return array
   }
 
-  onChangeState = (value) => {
-    console.log(value)
-    this.setState({
-      press: !this.state.press
-    })
-  }
-
   onLocationChange = (value) => {
     if (this.state.selLocation === value) {
       this.setState({
@@ -156,31 +149,9 @@ export default class Search extends React.Component {
     }
   }
 
-  // onChangePage = () => {
-  //   const { navigate } = this.props.navigation
-  //   const url = `http://e03d16df.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
-  //   if (this.state.selLocation === '' && this.state.selLevel === '') {
-  //     Alert.alert('請至少選擇一個區域或難度')
-  //   } else {
-  //     fetch(url)
-  //       .then((response) => { return response.json() })
-  //       .then((responseValue) => {
-  //         return this.setState({
-  //           responseValue
-  //         })
-  //       })
-  //       .then(()=> console.log(this.state.responseValue.item))
-  //       .then(() => { navigate('spotList', { data: this.state.responseValue.item }) })
-  //       .catch((error) => {
-  //         console.log(error)
-  //       })
-  //       .done()
-  //   }
-  // }
-
-  onChangePage = async () => {
+  onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://e03d16df.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = `https://c5d7986d.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -194,6 +165,21 @@ export default class Search extends React.Component {
     }
   }
 
+  onGetShopList = async () => {
+    const { navigate } = this.props.navigation
+    const url = `https://c5d7986d.ngrok.io/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    if (this.state.selLocation === '' && this.state.selService === '') {
+      Alert.alert('請至少選擇一個區域或服務')
+    } else {
+      try {
+        let response = await fetch(url);
+        let responseValue = await response.json();
+        let resultList = await navigate('shopList', { data: responseValue.item })
+      }catch (err) {
+        console.log(err)
+      }
+    }
+  }
 
 
   render() {
@@ -205,13 +191,14 @@ export default class Search extends React.Component {
             <SpotTab
               onGetLocation={this.onGetLocation()}
               onGetLevel={this.onGetLevel()}
-              onChangePage={this.onChangePage}
+              onChangePage={this.onGetSpotList}
             />
           </Tab>
           <Tab heading="找潛店">
             <ShopTab
               onGetLocation={this.onGetLocation()}
               onGetService={this.onGetService()}
+              onChangePage={this.onGetShopList}
             />
           </Tab>
         </Tabs>

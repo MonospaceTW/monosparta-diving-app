@@ -4,12 +4,14 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import {
   createStackNavigator,
   createAppContainer,
-  createBottomTabNavigator
+  createBottomTabNavigator,
 } from 'react-navigation'
 import Home from '../container/home'
 import Search from '../container/search'
 import SpotList from '../container/spotList'
+import ShopList from '../container/shopList'
 import SpotDetail from '../container/spotDetail'
+import ShopDetail from '../container/shopDetail'
 
 
 export default class Pages extends Component {
@@ -20,10 +22,8 @@ export default class Pages extends Component {
   }
 }
 
-
 const homeNavigator = createStackNavigator({
-  Home: { screen: Home }
-
+  Home: { screen: Home },
 }, {
   initialRouteName: 'Home'
 })
@@ -32,8 +32,9 @@ const homeNavigator = createStackNavigator({
 const searchNavigator = createStackNavigator({
   Search: { screen: Search },
   spotList: { screen: SpotList },
-  spotDetail: {screen: SpotDetail}
-
+  spotDetail: {screen: SpotDetail},
+  shopList: {screen: ShopList},
+  shopDetail: {screen: ShopDetail},
 }, {
   initialRouteName: 'Search',
 })

@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   },
   bgImg: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    backgroundColor: 'gray'
   },
 
 
@@ -61,14 +62,17 @@ export default class ShopTab extends React.Component {
 
   render() {
     return (
-      <ImageBackground key={this.props.key} style = { styles.bgImg } >
+      <ImageBackground key={this.props.key} style={styles.bgImg} >
         <Text style={styles.title}>區域</Text>
         <View style={styles.hr} />
         <View style={styles.btnWrapper}>{this.props.onGetLocation}</View>
         <Text style={styles.title}>服務</Text>
         <View style={styles.hr2} />
         <View style={styles.btnWrapper}>{this.props.onGetService}</View>
-        <GoBtn btnTxt={this.state.btnTxt} />
+        <GoBtn
+          btnTxt={this.state.btnTxt}
+          onClick={this.props.onChangePage}
+        />
       </ImageBackground>
     )
   }

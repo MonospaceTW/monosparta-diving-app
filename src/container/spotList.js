@@ -57,8 +57,8 @@ export default class SpotList extends React.Component {
   onGetSpotDetail = async (spot_id) => {
     const {navigate} = this.props.navigation;
     try {
-      let response = await fetch(`http://e03d16df.ngrok.io/api/sites/${spot_id}`);
-      let responseJson = await response.json();     
+      let response = await fetch(`https://c5d7986d.ngrok.io/api/sites/${spot_id}`);
+      let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
     catch (err) {
