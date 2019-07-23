@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 
-import Icon from 'react-native-vector-icons/Ionicons'
+import {
+  FontAwesome,
+} from '@expo/vector-icons'
 import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
 } from 'react-navigation'
+
 import Home from '../container/home'
 import Search from '../container/search'
 import SpotList from '../container/spotList'
@@ -25,19 +28,19 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: { screen: Home },
 }, {
-  initialRouteName: 'Home'
-})
+    initialRouteName: 'Home'
+  })
 
 
 const searchNavigator = createStackNavigator({
   Search: { screen: Search },
   spotList: { screen: SpotList },
-  spotDetail: {screen: SpotDetail},
-  shopList: {screen: ShopList},
-  shopDetail: {screen: ShopDetail},
+  spotDetail: { screen: SpotDetail },
+  shopList: { screen: ShopList },
+  shopDetail: { screen: ShopDetail },
 }, {
-  initialRouteName: 'Search',
-})
+    initialRouteName: 'Search',
+  })
 
 
 const TabNavigator = createBottomTabNavigator({
@@ -62,10 +65,8 @@ const TabNavigator = createBottomTabNavigator({
       tabBarLabel: 'Search',
       tabBarIcon: ({ focused }) => {
         return (
-          <Icon
-            name={focused ? 'md-search' : 'md-search'}
-            size={24}
-          />
+          <FontAwesome name="home" size={24} style={{color : '#0288D1'}} />
+
         )
       }
     }
@@ -78,10 +79,7 @@ const TabNavigator = createBottomTabNavigator({
       tabBarLabel: 'Home',
       tabBarIcon: ({ focused }) => {
         return (
-          <Icon
-            name={focused ? 'md-home' : 'md-home'}
-            size={24}
-          />
+          <FontAwesome name="book" size={24} style={{color : '#0288D1'}} />
         )
       }
     }
@@ -116,16 +114,12 @@ const TabNavigator = createBottomTabNavigator({
   // },
 
 }, {
-  initialRouteName: 'Home',
-  tabBarOptions: {
-    inactiveTintColor: '#FFFFFF',
-    activeTintColor: '#444444',
-    labelStyle: {
-      fontSize: 14
-    },
-    activeBackgroundColor: '#E8E7E7'
-  }
-})
+    initialRouteName: 'Home',
+    tabBarOptions: {
+      showLabel: false,
+      activeBackgroundColor: '#E8E7E7'
+    }
+  })
 
 
 const AppContainer = createAppContainer(TabNavigator)

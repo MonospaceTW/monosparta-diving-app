@@ -5,14 +5,29 @@ import {
   FlatList,
   Image,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native'
 
+import {
+  FontAwesome,
+} from '@expo/vector-icons'
+import { Card, CardItem } from 'native-base';
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  listContainer: {
+    paddingTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
   spotImg: {
-    width: '100%',
-    height: 200
+    width: width * 0.85,
+    height: height * 0.4,
+    borderRadius: 6
   },
 
 })
@@ -25,37 +40,38 @@ export default class SpotList extends React.Component {
   }
 
   static navigationOptions = {
-    title: '潛點列表',
-    headerStyle: {
-      backgroundColor: '#3FD2FF'
+    title: '探索潛點',
 
-    },
     headerTitleStyle: {
       flex: 1,
-      fontSize: 31,
+      fontSize: 20,
       textAlign: 'center',
-      color: '#FFBC02'
+      color: '#545454'
     },
     headerRight:
-      (<View />)
+      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
   };
 
   keyExtractor = (item, index) => { return index.toString() };
 
   renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={this.onGetSpotDetail.bind(this, item.spot_id)}>
-        <Image
-          style={styles.spotImg}
-          source={{ uri: item.spot_img }}
-        />
-        <Text>{item.viewName}{item.level}</Text>
+      <TouchableOpacity style={styles.listContainer} onPress={this.onGetSpotDetail.bind(this, item.spot_id)}>
+        <Card>
+          <CardItem cardBody>
+            <Image source={{ uri: item.img }} style={styles.spotImg} />
+          </CardItem>
+          <CardItem>
+            <Text>{item.viewName} {item.level}</Text>
+          </CardItem>
+        </Card>
       </TouchableOpacity>
+
     )
   };
 
   onGetSpotDetail = async (spot_id) => {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     try {
       let response = await fetch(`https://c5d7986d.ngrok.io/api/sites/${spot_id}`);
       let responseJson = await response.json();

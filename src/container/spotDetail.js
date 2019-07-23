@@ -7,7 +7,6 @@ import {
   ScrollView,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
-import Images from '../config/images'
 import Map from '../components/map'
 
 

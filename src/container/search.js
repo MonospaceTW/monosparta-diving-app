@@ -33,11 +33,11 @@ export default class Search extends React.Component {
       },
       shop: {
         service: [
-          { label: '潛水體驗', value: 'exp' },
-          { label: '證照課程', value: 'course' },
-          { label: '器材銷售', value: 'sale' },
-          { label: '飲食', value: 'food' },
-          { label: '住宿', value: 'sleep' }]
+          { label: '潛水體驗', value: 'ExploreDiving' },
+          { label: '證照課程', value: 'LicenseCourse' },
+          { label: '器材銷售', value: 'EquipmentSale' },
+          { label: '飲食', value: 'Food' },
+          { label: '住宿', value: 'Accommodation' }]
       },
       selLocation: '',
       selLevel: '',
@@ -167,13 +167,14 @@ export default class Search extends React.Component {
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = `https://c5d7986d.ngrok.io/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = `http://84f9d39e.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
       Alert.alert('請至少選擇一個區域或服務')
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
+        console.log(responseValue)
         let resultList = await navigate('shopList', { data: responseValue.item })
       }catch (err) {
         console.log(err)

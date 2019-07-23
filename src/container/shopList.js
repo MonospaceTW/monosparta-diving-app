@@ -5,14 +5,30 @@ import {
   FlatList,
   Image,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native'
 
 
+import {
+  FontAwesome,
+} from '@expo/vector-icons'
+import { Card, CardItem } from 'native-base';
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
+  listContainer: {
+    paddingTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
   spotImg: {
-    width: '100%',
-    height: 200
+    width: width * 0.85,
+    height: height * 0.4,
+    borderRadius: 6
   },
 
 })
@@ -25,40 +41,44 @@ export default class SpotList extends React.Component {
   }
 
   static navigationOptions = {
-    title: '潛點列表',
-    headerStyle: {
-      backgroundColor: '#3FD2FF'
+    title: '探險潛店',
 
-    },
     headerTitleStyle: {
       flex: 1,
-      fontSize: 31,
+      fontSize: 20,
       textAlign: 'center',
-      color: '#FFBC02'
+      color: '#545454'
     },
     headerRight:
-      (<View />)
+      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
   };
 
   keyExtractor = (item, index) => { return index.toString() };
 
   renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={this.onGetShopDetail.bind(this, item.shop_id)}>
-        <Image
-          style={styles.spotImg}
-          // source={{ uri: item.spot_img }}
-        />
-        <Text>{item.shop_id}{item.shop_service}</Text>
+
+      <TouchableOpacity style={styles.listContainer} onPress={this.onGetShopDetail.bind(this, item.shop_id)}>
+        <Card>
+          <CardItem cardBody>
+            <Image
+              source={{ uri: item.img1 }}
+              style={styles.spotImg} />
+          </CardItem>
+          <CardItem>
+            <Text>{item.shop_name} {item.shop_county} {item.shop_dist}</Text>
+          </CardItem>
+        </Card>
       </TouchableOpacity>
     )
   };
 
   onGetShopDetail = async (shop_id) => {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`https://c5d7986d.ngrok.io/api/shops/${shop_id}`);
+      let response = await fetch(`http://84f9d39e.ngrok.io/DivingBackend/public/api/shops/${shop_id}`);
       let responseJson = await response.json();
+      console.log(responseJson.item[0].shop_lat)
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
