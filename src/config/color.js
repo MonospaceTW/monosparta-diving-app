@@ -1,8 +1,8 @@
 export default {
-  mainBlue: '#10B8C9',
+  mainBlue: '#0288D1',
   white: '#FFFFFF',
-  orange: '#FF9100',
-  gray: '#000000'
+  gray: '#545454',
+  lightGray:'#F5F5F5'
   // mainYellow: 'rgb(255, 232, 66)',
   // mainYellowInHex: '#ffe842',
   // voiceWave: '#febd37',
