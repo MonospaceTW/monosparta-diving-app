@@ -26,7 +26,10 @@ export default class Pages extends Component {
 }
 
 const homeNavigator = createStackNavigator({
-  Home: { screen: Home },
+  Home: {
+    screen: Home,
+    navigationOptions: { header: null }
+  },
   spotList: { screen: SpotList },
   spotDetail: {
     screen: SpotDetail, navigationOptions: ({ navigation }) => ({

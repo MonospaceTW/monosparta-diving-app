@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {
   View,
-  Image,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text
 } from 'react-native'
@@ -10,88 +10,51 @@ import { Container, Button } from 'native-base';
 import Color from '../config/color'
 import Images from '../config/images'
 import Styles from '../config/style'
+import ArticleCard from '../components/articleCard'
 import ExploreHome from '../components/exploreHome'
 
 
 const styles = StyleSheet.create({
-  title: {
-    color: Color.white,
+  homeContainer: {
+    justifyContent: 'flex-start',
+    paddingLeft: 23,
+    backgroundColor: Color.lightGray,
+  },
+  welcomeTitle: {
+    fontSize: 25,
+    marginTop: 40
+  },
+  welcomeTxt: {
     fontSize: 14,
-    textShadowColor: 'rgba(0,0,0,.16)',
-    textShadowOffset: { width: 3, height: 3 },
-    textShadowRadius: 6,
-    position: 'relative',
-    margin: 15
+    color: Color.mainBlue
   },
-  imageWrapper: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  image: {
-    width: 200,
-    height: 100,
-    shadowColor: 'rgba(0,0,0,.35)',
-    shadowOffset: { width: 3, height: 3 },
-    shadowRadius: 6,
-    borderRadius: 20,
-    marginLeft: 30,
-    marginBottom: 10,
-    position: 'relative'
-  },
-  name: {
-    position: 'absolute',
-    color: 'white',
-    fontSize: 14,
-    bottom: 20,
-    left: 45
-  },
-  hr: {
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    position: 'absolute',
-    left: 80,
-    top: 22,
-    width: '100%'
-  },
-  btn: {
-    width: 150,
-    height: 40,
-    backgroundColor: '#FF9100',
-    shadowColor: 'rgba(0,0,0,.16)',
-    shadowOffset: { width: 3, height: 3 },
-    shadowRadius: 6,
-    borderRadius: 24,
-    marginBottom: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-
-  },
-  btnTxt: {
-    color: 'white'
-  }
 })
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      exploreSpot: [
-        {
-          title: '熱門潛點',
-          img1: Images.recImg,
-          img2: Images.recImg,
-          img3: Images.recImg,
-          name1: '貓鼻頭'
-        }
-      ],
-      exploreShop: [
-        {
-          title: '熱門潛店',
-          img1: Images.recImg,
-          img2: Images.recImg,
-          img3: Images.recImg,
-          name1: '藍波潛水'
-        }
-      ],
+      exploreSpot:
+      {
+        title: '探險潛點',
+        img1: Images.recImg,
+        img2: Images.recImg,
+        img3: Images.recImg,
+        name1: '貓鼻頭'
+      },
+      exploreShop:
+      {
+        title: '探索潛店',
+        img1: Images.recImg,
+        img2: Images.recImg,
+        img3: Images.recImg,
+        name1: '藍波潛水'
+      },
+      article:
+      {
+        img: Images.recImg,
+        title: '這是一個文章標題',
+        content: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
+      }
     }
   }
 
@@ -116,7 +79,7 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/sites`);
+      let response = await fetch(`http://57c64a59.ngrok.io/DivingBackend/public/api/sites`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
@@ -128,7 +91,7 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/shops`);
+      let response = await fetch(`http://57c64a59.ngrok.io/DivingBackend/public/api/shops`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
     }
@@ -139,12 +102,25 @@ export default class Home extends React.Component {
 
   render() {
     return (
+      <ScrollView>
+        <View style={styles.homeContainer}>
 
-      <Container>
-        <ExploreHome data={this.state.exploreSpot} onClick={this.onGetAllSpot} />
-        <ExploreHome data={this.state.exploreShop} onClick={this.onGetAllShop} />
-        <ExploreHome data={this.state.exploreSpot} />
-      </Container>
+          <StatusBar hidden />
+          <Text style={styles.welcomeTitle}>哈囉！想去哪裡潛水？</Text>
+          <Text style={styles.welcomeTxt}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
+          <ExploreHome data={this.state.exploreSpot} onClick={this.onGetAllSpot} />
+          <ExploreHome data={this.state.exploreShop} onClick={this.onGetAllShop} />
+
+          <Text style={styles.welcomeTitle}>下水前記得做足準備哦！！</Text>
+          <Text style={styles.welcomeTxt}>為您提供精選文章，了解更多潛水小知識！</Text>
+          <ArticleCard
+            img={this.state.article.img}
+            title={this.state.article.title}
+            content={this.state.article.content}
+          />
+
+        </View>
+      </ScrollView>
     )
   }
 }
