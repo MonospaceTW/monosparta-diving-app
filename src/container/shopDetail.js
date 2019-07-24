@@ -41,6 +41,7 @@ export default class SpotDetail extends React.Component {
             <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
             <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
           </Swiper>
+
           <View style={Styles.bodyContent}>
             <View style={Styles.component}>
               <Text style={Styles.title}>服務</Text>

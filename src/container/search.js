@@ -33,11 +33,11 @@ export default class Search extends React.Component {
       },
       shop: {
         service: [
-          { label: '潛水體驗', value: 'exp' },
-          { label: '證照課程', value: 'course' },
-          { label: '器材銷售', value: 'sale' },
-          { label: '飲食', value: 'food' },
-          { label: '住宿', value: 'sleep' }]
+          { label: '潛水體驗', value: 'ExploreDiving' },
+          { label: '證照課程', value: 'LicenseCourse' },
+          { label: '器材銷售', value: 'EquipmentSale' },
+          { label: '飲食', value: 'Food' },
+          { label: '住宿', value: 'Accommodation' }]
       },
       selLocation: '',
       selLevel: '',
@@ -174,6 +174,7 @@ export default class Search extends React.Component {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
+        console.log(responseValue)
         let resultList = await navigate('shopList', { data: responseValue.item })
       }catch (err) {
         console.log(err)
