@@ -5,16 +5,18 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  Dimensions
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Styles from '../config/style'
 import Map from '../components/map'
 
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-
   wrapper: {
-    height: 200
+    height: height*0.35
   },
   slide: {
     flex: 1,
@@ -42,16 +44,20 @@ export default class SpotDetail extends React.Component {
             <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
           </Swiper>
 
+          <View>
+            <Text>{this.props.navigation.state.params.data.name}</Text>
+          </View>
+
           <View style={Styles.bodyContent}>
             <View style={Styles.component}>
               <Text style={Styles.title}>服務</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.shop_service}</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.service}</Text>
               <View style={Styles.hr} />
             </View>
 
             <View style={Styles.component}>
               <Text style={Styles.title}>地址</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.shop_address}</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.address}</Text>
               <View style={Styles.map}>
               <Map />
               </View>

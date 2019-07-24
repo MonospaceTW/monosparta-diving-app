@@ -43,7 +43,7 @@ export default class Btn extends React.Component {
     return (
       <TouchableHighlight
         style={this.props.select === this.props.value ? styles.btnPress : styles.btn}
-        onPress={this.props.onChangeState}
+        onPress={this.props.onPress}
       >
         <Text style={this.props.select === this.props.value ? styles.btnTxtPress : styles.btnTxt}>
           {this.props.text}

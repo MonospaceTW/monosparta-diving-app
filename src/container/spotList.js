@@ -49,7 +49,11 @@ export default class SpotList extends React.Component {
       color: '#545454'
     },
     headerRight:
-      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
+
+      <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />
+
+
+
   };
 
   keyExtractor = (item, index) => { return index.toString() };
@@ -70,10 +74,11 @@ export default class SpotList extends React.Component {
     )
   };
 
+
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/sites/${id}`);
+      let response = await fetch(`http://57c64a59.ngrok.io/DivingBackend/public/api/sites/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
