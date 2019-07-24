@@ -28,24 +28,29 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: { screen: Home },
   spotList: { screen: SpotList },
-  shopList: {screen: ShopList}
+  spotDetail: {
+    screen: SpotDetail, navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.data.name}`,
+    }),
+  },
+  shopList: { screen: ShopList },
+  shopDetail: {
+    screen: ShopDetail, navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.data.name}`,
+    }),
+  }
+
 }, {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
   })
 
-
-const searchNavigator = createStackNavigator({
+const articleNavigator = createStackNavigator({
   Search: { screen: Search },
   spotList: { screen: SpotList },
-
-  spotDetail: {screen: SpotDetail},
-  shopList: {screen: ShopList},
-  shopDetail: {screen: ShopDetail}
-
+  shopList: { screen: ShopList }
 }, {
-    initialRouteName: 'Search',
+    initialRouteName: 'Search'
   })
-
 
 const TabNavigator = createBottomTabNavigator({
   // page1:
@@ -62,20 +67,6 @@ const TabNavigator = createBottomTabNavigator({
   //   }
   // },
 
-  Search:
-  {
-    screen: searchNavigator,
-    navigationOptions: {
-      tabBarLabel: 'Search',
-      tabBarIcon: ({ focused }) => {
-        return (
-          <FontAwesome name="home" size={24} style={{color : '#0288D1'}} />
-
-        )
-      }
-    }
-  },
-
   Home:
   {
     screen: homeNavigator,
@@ -83,7 +74,21 @@ const TabNavigator = createBottomTabNavigator({
       tabBarLabel: 'Home',
       tabBarIcon: ({ focused }) => {
         return (
-          <FontAwesome name="book" size={24} style={{color : '#0288D1'}} />
+          <FontAwesome name="home" size={24} style={{ color: '#0288D1' }} />
+
+        )
+      }
+    }
+  },
+
+  Article:
+  {
+    screen: articleNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Article',
+      tabBarIcon: ({ focused }) => {
+        return (
+          <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
         )
       }
     }

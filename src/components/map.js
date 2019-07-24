@@ -12,8 +12,6 @@ export default class Map extends React.Component {
         scrollEnabled={false}
         zoomEnabled={false}
         initialRegion={{
-          // latitude: Number(this.props.latitude),
-          // longitude: Number(this.props.longitude),
           latitude: 24.148533,
           longitude: 120.673439,
           latitudeDelta: 0.003,

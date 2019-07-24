@@ -151,7 +151,7 @@ export default class Search extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = `https://c5d7986d.ngrok.io/api/sites/search/?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = `http://51457f91.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {

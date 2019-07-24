@@ -58,7 +58,7 @@ export default class SpotList extends React.Component {
   renderItem = ({ item }) => {
     return (
 
-      <TouchableOpacity style={styles.listContainer} onPress={this.onGetShopDetail.bind(this, item.shop_id)}>
+      <TouchableOpacity style={styles.listContainer} onPress={this.onGetShopDetail.bind(this, item.id)}>
         <Card>
           <CardItem cardBody>
             <Image
@@ -66,19 +66,18 @@ export default class SpotList extends React.Component {
               style={styles.spotImg} />
           </CardItem>
           <CardItem>
-            <Text>{item.shop_name} {item.shop_county} {item.shop_dist}</Text>
+            <Text>{item.name} {item.county} {item.district}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>
     )
   };
 
-  onGetShopDetail = async (shop_id) => {
+  onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://84f9d39e.ngrok.io/DivingBackend/public/api/shops/${shop_id}`);
+      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/shops/${id}`);
       let responseJson = await response.json();
-      console.log(responseJson.item[0].shop_lat)
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
