@@ -167,7 +167,7 @@ export default class Search extends React.Component {
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = `https://c5d7986d.ngrok.io/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = `http://84f9d39e.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
       Alert.alert('請至少選擇一個區域或服務')
     } else {

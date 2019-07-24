@@ -7,18 +7,12 @@ import {
   ScrollView,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
-import Images from '../config/images'
+import Styles from '../config/style'
 import Map from '../components/map'
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  hr: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1
-  },
+
   wrapper: {
     height: 200
   },
@@ -39,29 +33,36 @@ export default class SpotDetail extends React.Component {
   render() {
     return (
       <ScrollView>
-        <View style={styles.container}>
-        {/* <Text>實景照片</Text>
-          <View style={styles.hr} />
-          <Swiper style={styles.wrapper} showsButtons autoplay>
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.spot_img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.spot_img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.spot_img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.spot_img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.spot_img }} />
-          </Swiper> */}
-          <View style={{ flex: 1 }}>
-            <Text>潛店介紹</Text>
-            <View style={styles.hr} />
-            <Text>服務{this.props.navigation.state.params.data.shop_service}</Text>
-          </View>
-          <View style={{ height: 100 }}>
-          <Text>潛點地圖</Text>
-          <View style={styles.hr} />
-            <Map />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text>潛店推薦</Text>
-            <View style={styles.hr} />
+        <View style={Styles.container}>
+          <Swiper style={styles.wrapper} showsButtons={false} dotColor="#F5F5F5" activeDotColor="white">
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+          </Swiper>
+          <View style={Styles.bodyContent}>
+            <View style={Styles.component}>
+              <Text style={Styles.title}>服務</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.shop_service}</Text>
+              <View style={Styles.hr} />
+            </View>
+
+            <View style={Styles.component}>
+              <Text style={Styles.title}>地址</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.shop_address}</Text>
+              <Map />
+              <View style={Styles.hr} />
+            </View>
+
+            <View style={Styles.component}>
+              <Text style={Styles.title}>附近潛店</Text>
+              <View style={Styles.hr} />
+            </View>
+
+            <View style={Styles.component}>
+              <Text style={Styles.title}>評論</Text>
+            </View>
 
           </View>
         </View>
