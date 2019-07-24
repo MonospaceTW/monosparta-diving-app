@@ -53,7 +53,7 @@ export default class SpotList extends React.Component {
       color: '#545454'
     },
     headerRight:
-      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} onPress={this.openDrawer} />)
+      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}  />)
   };
 
   keyExtractor = (item, index) => { return index.toString() };
@@ -102,11 +102,7 @@ export default class SpotList extends React.Component {
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
-        <Drawer
-          ref={(ref) => { this._drawer = ref; }}
-          content={<SideBar />} 
-          onClose={() => this.closeDrawer()}
-        />
+        
       </Content>
     )
   }
