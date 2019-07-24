@@ -27,6 +27,8 @@ export default class Pages extends Component {
 
 const homeNavigator = createStackNavigator({
   Home: { screen: Home },
+  spotList: { screen: SpotList },
+  shopList: {screen: ShopList}
 }, {
     initialRouteName: 'Home'
   })
@@ -35,9 +37,11 @@ const homeNavigator = createStackNavigator({
 const searchNavigator = createStackNavigator({
   Search: { screen: Search },
   spotList: { screen: SpotList },
-  spotDetail: { screen: SpotDetail },
-  shopList: { screen: ShopList },
-  shopDetail: { screen: ShopDetail },
+
+  spotDetail: {screen: SpotDetail},
+  shopList: {screen: ShopList},
+  shopDetail: {screen: ShopDetail}
+
 }, {
     initialRouteName: 'Search',
   })

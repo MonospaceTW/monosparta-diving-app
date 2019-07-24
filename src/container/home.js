@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Text,
+
   View,
   Image,
   ScrollView,
-  StyleSheet,
-  ImageBackground
+  StyleSheet
 } from 'react-native'
-
+import { Container, Header, Content, Button, Text } from 'native-base';
 import Color from '../config/color'
 import Images from '../config/images'
 
@@ -70,10 +69,6 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     color: 'white'
-  },
-  bgImg: {
-    width: '100%',
-    height: '100%'
   }
 })
 export default class Home extends React.Component {
@@ -124,35 +119,64 @@ export default class Home extends React.Component {
     navigate('Search')
   }
 
+  // onGetAllSpot = async () => {
+  //   const {navigate} = this.props.navigation;
+  //   try {
+  //     let response = await fetch(`http://e03d16df.ngrok.io/api/sites`);
+  //     let responseJson = await response.json();
+  //     let responseSpot = await navigate('spotList', { data: responseJson.item });
+  //   }
+  //   catch (err) {
+  //     console.log('err:', err)
+  //   }
+  // }
+
+  // onGetAllShop = async () => {
+  //   const {navigate} = this.props.navigation;
+  //   try {
+  //     let response = await fetch(`http://84f9d39e.ngrok.io/DivingBackend/public/api/shops`);
+  //     let responseJson = await response.json();
+  //     let responseShop = await navigate('shopList', { data: responseJson.item });
+  //   }
+  //   catch (err) {
+  //     console.log('err:', err)
+  //   }
+  // }
+
   render() {
     return (
-      <ImageBackground source={Images.homeBg} style={styles.bgImg}>
-        {this.state.Object.map((value) => {
-          return <View key={value.title}>
-            <Text style={styles.title}>{value.title}</Text>
-            <View style={styles.hr} />
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <View style={styles.imageWrapper}>
-                <View>
-                  <Image style={styles.image} source={value.img1} />
-                  <Text style={styles.name}>{value.name1}</Text>
+      <Container>
+        {
+          this.state.Object.map((value) => {
+            return <View key={value.title}>
+              <Text style={styles.title}>{value.title}</Text>
+              <View style={styles.hr} />
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={styles.imageWrapper}>
+                  <Button onPress={this.onGetAllSpot}>
+                    <Text>Click Me!</Text>
+                  </Button>
+                  <View>
+                    <Image style={styles.image} source={value.img1} />
+                    <Text style={styles.name}>{value.name1}</Text>
+                  </View>
+                  <View>
+                    <Image style={styles.image} source={value.img2} />
+                    <Text style={styles.name}>{value.name1}</Text>
+                  </View>
+                  <View>
+                    <Image style={styles.image} source={value.img3} />
+                    <Text style={styles.name}>{value.name1}</Text>
+                  </View>
                 </View>
-                <View>
-                  <Image style={styles.image} source={value.img2} />
-                  <Text style={styles.name}>{value.name1}</Text>
-                </View>
-                <View>
-                  <Image style={styles.image} source={value.img3} />
-                  <Text style={styles.name}>{value.name1}</Text>
-                </View>
-              </View>
-            </ScrollView>
-          </View>
-        })}
+              </ScrollView>
+            </View>
+          })
+        }
         <GoBtn
           btnTxt={this.state.btnTxt}
           onClick={this.onGoSearch} />
-      </ImageBackground>
+      </Container>
     )
   }
 }
