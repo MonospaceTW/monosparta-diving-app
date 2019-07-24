@@ -53,8 +53,8 @@ export default class SpotDetail extends React.Component {
           </Swiper>
           <Content style={Styles.bodyContent}>
             <View style={Styles.component}>
-              <Text style={Styles.title}>{this.props.navigation.state.params.data.viewName} {this.props.navigation.state.params.data.level}</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.viewDescription}</Text>
+              <Text style={Styles.title}>{this.props.navigation.state.params.data.name} {this.props.navigation.state.params.data.level}</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.description}</Text>
               <View style={Styles.hr} />
             </View>
 

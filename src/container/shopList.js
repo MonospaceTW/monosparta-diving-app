@@ -69,7 +69,7 @@ export default class SpotList extends React.Component {
               style={styles.spotImg} />
           </CardItem>
           <CardItem>
-            <Text>{item.name} {item.county} {item.dist}</Text>
+            <Text>{item.name} {item.county} {item.district}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>

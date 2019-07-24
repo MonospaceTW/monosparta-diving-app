@@ -28,34 +28,29 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: { screen: Home },
   spotList: { screen: SpotList },
-  shopList: { screen: ShopList }
-}, {
-    initialRouteName: 'Home'
-  })
-
-
-const searchNavigator = createStackNavigator({
-  Search: { screen: Search },
-  spotList: { screen: SpotList },
-
   spotDetail: {
-    screen: SpotDetail,
-    // navigationOptions: ({ navigation }) => ({
-    //   title: `${navigation.state.params.data.name}`
-    // })
+    screen: SpotDetail, navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.data.name}`,
+    }),
   },
   shopList: { screen: ShopList },
   shopDetail: {
-    screen: ShopDetail,
-    // navigationOptions: ({ navigation }) => ({
-    //   title: `${navigation.state.params.data.name}`
-    // })
+    screen: ShopDetail, navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.data.name}`,
+    }),
   }
 
 }, {
-    initialRouteName: 'Search',
+    initialRouteName: 'Home',
   })
 
+const articleNavigator = createStackNavigator({
+  Search: { screen: Search },
+  spotList: { screen: SpotList },
+  shopList: { screen: ShopList }
+}, {
+    initialRouteName: 'Search'
+  })
 
 const TabNavigator = createBottomTabNavigator({
   // page1:
@@ -72,11 +67,11 @@ const TabNavigator = createBottomTabNavigator({
   //   }
   // },
 
-  Search:
+  Home:
   {
-    screen: searchNavigator,
+    screen: homeNavigator,
     navigationOptions: {
-      tabBarLabel: 'Search',
+      tabBarLabel: 'Home',
       tabBarIcon: ({ focused }) => {
         return (
           <FontAwesome name="home" size={24} style={{ color: '#0288D1' }} />
@@ -86,11 +81,11 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
 
-  Home:
+  Article:
   {
-    screen: homeNavigator,
+    screen: articleNavigator,
     navigationOptions: {
-      tabBarLabel: 'Home',
+      tabBarLabel: 'Article',
       tabBarIcon: ({ focused }) => {
         return (
           <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />

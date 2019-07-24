@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import {
-
   View,
   Image,
   ScrollView,
-  StyleSheet
+  StyleSheet,
+  Text
 } from 'react-native'
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Container, Button } from 'native-base';
 import Color from '../config/color'
 import Images from '../config/images'
-
-import GoBtn from '../components/goBtn'
+import Styles from '../config/style'
+import ExploreHome from '../components/exploreHome'
 
 
 const styles = StyleSheet.create({
@@ -75,14 +74,16 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      Object: [
+      exploreSpot: [
         {
           title: '熱門潛點',
           img1: Images.recImg,
           img2: Images.recImg,
           img3: Images.recImg,
           name1: '貓鼻頭'
-        },
+        }
+      ],
+      exploreShop: [
         {
           title: '熱門潛店',
           img1: Images.recImg,
@@ -91,7 +92,6 @@ export default class Home extends React.Component {
           name1: '藍波潛水'
         }
       ],
-      btnTxt: '想去哪裡？'
     }
   }
 
@@ -113,69 +113,37 @@ export default class Home extends React.Component {
       (<View />)
   };
 
-
-  onGoSearch = () => {
-    const { navigate } = this.props.navigation
-    navigate('Search')
-  }
-
   onGetAllSpot = async () => {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://c5d7986d.ngrok.io/api/sites`);
-      let responseJson = await response.json();
-      let responseSpot = await navigate('spotList', { data: responseJson.item });
+      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/sites`);
+      let responseValue = await response.json();
+      let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
     catch (err) {
       console.log('err:', err)
     }
   }
 
-  // onGetAllShop = async () => {
-  //   const {navigate} = this.props.navigation;
-  //   try {
-  //     let response = await fetch(`http://84f9d39e.ngrok.io/DivingBackend/public/api/shops`);
-  //     let responseJson = await response.json();
-  //     let responseShop = await navigate('shopList', { data: responseJson.item });
-  //   }
-  //   catch (err) {
-  //     console.log('err:', err)
-  //   }
-  // }
+  onGetAllShop = async () => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/shops`);
+      let responseValue = await response.json();
+      let responseShop = await navigate('shopList', { data: responseValue.item });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
 
   render() {
     return (
+
       <Container>
-        {
-          this.state.Object.map((value) => {
-            return <View key={value.title}>
-              <Text style={styles.title}>{value.title}</Text>
-              <View style={styles.hr} />
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                <View style={styles.imageWrapper}>
-                  <Button onPress={this.onGetAllSpot}>
-                    <Text>Click Me!</Text>
-                  </Button>
-                  <View>
-                    <Image style={styles.image} source={value.img1} />
-                    <Text style={styles.name}>{value.name1}</Text>
-                  </View>
-                  <View>
-                    <Image style={styles.image} source={value.img2} />
-                    <Text style={styles.name}>{value.name1}</Text>
-                  </View>
-                  <View>
-                    <Image style={styles.image} source={value.img3} />
-                    <Text style={styles.name}>{value.name1}</Text>
-                  </View>
-                </View>
-              </ScrollView>
-            </View>
-          })
-        }
-        <GoBtn
-          btnTxt={this.state.btnTxt}
-          onClick={this.onGoSearch} />
+        <ExploreHome data={this.state.exploreSpot} onClick={this.onGetAllSpot} />
+        <ExploreHome data={this.state.exploreShop} onClick={this.onGetAllShop} />
+        <ExploreHome data={this.state.exploreSpot} />
       </Container>
     )
   }
