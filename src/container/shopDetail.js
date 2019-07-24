@@ -5,10 +5,11 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-} from 'react-native'
-import Swiper from 'react-native-swiper'
-import Styles from '../config/style'
-import Map from '../components/map'
+} from 'react-native';
+import { Container, Content } from 'native-base';
+import Swiper from 'react-native-swiper';
+import Styles from '../config/style';
+import Map from '../components/map';
 
 
 const styles = StyleSheet.create({
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
   }
 })
 
+
 export default class SpotDetail extends React.Component {
   constructor(props) {
     super(props)
@@ -30,10 +32,19 @@ export default class SpotDetail extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    headerTitleStyle: {
+      flex: 1,
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#545454'
+    }
+  };
+
   render() {
     return (
       <ScrollView>
-        <View style={Styles.container}>
+        <Container style={Styles.container}>
           <Swiper style={styles.wrapper} showsButtons={false} dotColor="#F5F5F5" activeDotColor="white">
             <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
             <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
@@ -42,16 +53,16 @@ export default class SpotDetail extends React.Component {
             <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
           </Swiper>
 
-          <View style={Styles.bodyContent}>
+          <Content style={Styles.bodyContent}>
             <View style={Styles.component}>
               <Text style={Styles.title}>服務</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.shop_service}</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.service}</Text>
               <View style={Styles.hr} />
             </View>
 
             <View style={Styles.component}>
               <Text style={Styles.title}>地址</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.shop_address}</Text>
+              <Text style={Styles.content}>{this.props.navigation.state.params.data.address}</Text>
               <Map />
               <View style={Styles.hr} />
             </View>
@@ -65,8 +76,8 @@ export default class SpotDetail extends React.Component {
               <Text style={Styles.title}>評論</Text>
             </View>
 
-          </View>
-        </View>
+          </Content>
+        </Container>
       </ScrollView>
     )
   }

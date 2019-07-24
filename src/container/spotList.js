@@ -12,7 +12,12 @@ import {
 import {
   FontAwesome,
 } from '@expo/vector-icons'
-import { Card, CardItem } from 'native-base';
+import { Content, Card, CardItem, Drawer } from 'native-base';
+
+import SideBar from '../components/sidebar';
+
+import Colors from '../config/color';
+import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
@@ -56,13 +61,13 @@ export default class SpotList extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.listContainer} onPress={this.onGetSpotDetail.bind(this, item.spot_id)}>
+      <TouchableOpacity style={styles.listContainer} onPress={this.onGetSpotDetail.bind(this, item.id)}>
         <Card>
           <CardItem cardBody>
-            <Image source={{ uri: item.img }} style={styles.spotImg} />
+            <Image source={{ uri: item.img1 }} style={styles.spotImg} />
           </CardItem>
           <CardItem>
-            <Text>{item.viewName} {item.level}</Text>
+            <Text>{item.name} {item.county}{item.district}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>
@@ -70,10 +75,10 @@ export default class SpotList extends React.Component {
     )
   };
 
-  onGetSpotDetail = async (spot_id) => {
+  onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://c5d7986d.ngrok.io/api/sites/${spot_id}`);
+      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/sites/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
@@ -85,13 +90,13 @@ export default class SpotList extends React.Component {
   render() {
     return (
 
-      <View>
+      <Content style={Styles.bodyContent}>
         <FlatList
           data={this.props.navigation.state.params.data}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
-      </View>
+      </Content>
     )
   }
 }

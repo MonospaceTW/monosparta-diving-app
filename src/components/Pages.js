@@ -28,7 +28,7 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: { screen: Home },
   spotList: { screen: SpotList },
-  shopList: {screen: ShopList}
+  shopList: { screen: ShopList }
 }, {
     initialRouteName: 'Home'
   })
@@ -38,9 +38,19 @@ const searchNavigator = createStackNavigator({
   Search: { screen: Search },
   spotList: { screen: SpotList },
 
-  spotDetail: {screen: SpotDetail},
-  shopList: {screen: ShopList},
-  shopDetail: {screen: ShopDetail}
+  spotDetail: {
+    screen: SpotDetail,
+    // navigationOptions: ({ navigation }) => ({
+    //   title: `${navigation.state.params.data.name}`
+    // })
+  },
+  shopList: { screen: ShopList },
+  shopDetail: {
+    screen: ShopDetail,
+    // navigationOptions: ({ navigation }) => ({
+    //   title: `${navigation.state.params.data.name}`
+    // })
+  }
 
 }, {
     initialRouteName: 'Search',
@@ -69,7 +79,7 @@ const TabNavigator = createBottomTabNavigator({
       tabBarLabel: 'Search',
       tabBarIcon: ({ focused }) => {
         return (
-          <FontAwesome name="home" size={24} style={{color : '#0288D1'}} />
+          <FontAwesome name="home" size={24} style={{ color: '#0288D1' }} />
 
         )
       }
@@ -83,7 +93,7 @@ const TabNavigator = createBottomTabNavigator({
       tabBarLabel: 'Home',
       tabBarIcon: ({ focused }) => {
         return (
-          <FontAwesome name="book" size={24} style={{color : '#0288D1'}} />
+          <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
         )
       }
     }

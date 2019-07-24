@@ -119,17 +119,17 @@ export default class Home extends React.Component {
     navigate('Search')
   }
 
-  // onGetAllSpot = async () => {
-  //   const {navigate} = this.props.navigation;
-  //   try {
-  //     let response = await fetch(`http://e03d16df.ngrok.io/api/sites`);
-  //     let responseJson = await response.json();
-  //     let responseSpot = await navigate('spotList', { data: responseJson.item });
-  //   }
-  //   catch (err) {
-  //     console.log('err:', err)
-  //   }
-  // }
+  onGetAllSpot = async () => {
+    const {navigate} = this.props.navigation;
+    try {
+      let response = await fetch(`http://c5d7986d.ngrok.io/api/sites`);
+      let responseJson = await response.json();
+      let responseSpot = await navigate('spotList', { data: responseJson.item });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
 
   // onGetAllShop = async () => {
   //   const {navigate} = this.props.navigation;

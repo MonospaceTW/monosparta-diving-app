@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   bodyContent: {
     marginRight: 15,
     marginLeft: 15,
-    justifyContent: 'center'
+    // justifyContent: 'center'
   },
   component: {
     flex: 1,

@@ -7,13 +7,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions
-} from 'react-native'
+} from 'react-native';
 
 
-import {
-  FontAwesome,
-} from '@expo/vector-icons'
-import { Card, CardItem } from 'native-base';
+import { FontAwesome } from '@expo/vector-icons'
+import { Content, Card, CardItem, Drawer } from 'native-base';
+
+import SideBar from '../components/sidebar';
+
+import Colors from '../config/color';
+import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
@@ -50,7 +53,7 @@ export default class SpotList extends React.Component {
       color: '#545454'
     },
     headerRight:
-      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
+      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} onPress={this.openDrawer} />)
   };
 
   keyExtractor = (item, index) => { return index.toString() };
@@ -58,7 +61,7 @@ export default class SpotList extends React.Component {
   renderItem = ({ item }) => {
     return (
 
-      <TouchableOpacity style={styles.listContainer} onPress={this.onGetShopDetail.bind(this, item.shop_id)}>
+      <TouchableOpacity style={styles.listContainer} onPress={this.onGetShopDetail.bind(this, item.id)}>
         <Card>
           <CardItem cardBody>
             <Image
@@ -66,19 +69,23 @@ export default class SpotList extends React.Component {
               style={styles.spotImg} />
           </CardItem>
           <CardItem>
-            <Text>{item.shop_name} {item.shop_county} {item.shop_dist}</Text>
+            <Text>{item.name} {item.county} {item.dist}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>
     )
   };
 
-  onGetShopDetail = async (shop_id) => {
+  openDrawer = () => { this.drawer._root.open() };
+  closeDrawer = () => {
+    this._drawer._root.close();
+  }
+
+  onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://84f9d39e.ngrok.io/DivingBackend/public/api/shops/${shop_id}`);
+      let response = await fetch(`http://51457f91.ngrok.io/DivingBackend/public/api/shops/${id}`);
       let responseJson = await response.json();
-      console.log(responseJson.item[0].shop_lat)
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
@@ -89,13 +96,18 @@ export default class SpotList extends React.Component {
   render() {
     return (
 
-      <View>
+      <Content style={Styles.bodyContent}>
         <FlatList
           data={this.props.navigation.state.params.data}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
-      </View>
+        <Drawer
+          ref={(ref) => { this._drawer = ref; }}
+          content={<SideBar />} 
+          onClose={() => this.closeDrawer()}
+        />
+      </Content>
     )
   }
 }

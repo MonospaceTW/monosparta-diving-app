@@ -5,11 +5,11 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-} from 'react-native'
-import Swiper from 'react-native-swiper'
-import Images from '../config/images'
-import Styles from '../config/style'
-import Map from '../components/map'
+} from 'react-native';
+import { Container, Content } from 'native-base';
+import Swiper from 'react-native-swiper';
+import Styles from '../config/style';
+import Map from '../components/map';
 
 
 const styles = StyleSheet.create({
@@ -31,18 +31,27 @@ export default class SpotDetail extends React.Component {
     }
   }
 
+  static navigationOptions = {
+    headerTitleStyle: {
+      flex: 1,
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#545454'
+    }
+  }
+
   render() {
     return (
       <ScrollView>
-        <View style={Styles.container}>
+        <Container style={Styles.container}>
           <Swiper style={styles.wrapper} showsButtons={false} dotColor="#F5F5F5">
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
+            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
           </Swiper>
-          <View style={Styles.bodyContent}>
+          <Content style={Styles.bodyContent}>
             <View style={Styles.component}>
               <Text style={Styles.title}>{this.props.navigation.state.params.data.viewName} {this.props.navigation.state.params.data.level}</Text>
               <Text style={Styles.content}>{this.props.navigation.state.params.data.viewDescription}</Text>
@@ -65,8 +74,8 @@ export default class SpotDetail extends React.Component {
             <View style={Styles.component}>
               <Text style={Styles.title}>評論</Text>
             </View>
-          </View>
-        </View>
+          </Content>
+        </Container>
       </ScrollView>
     )
   }
