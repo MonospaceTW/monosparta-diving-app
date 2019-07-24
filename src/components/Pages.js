@@ -15,6 +15,7 @@ import SpotList from '../container/spotList'
 import ShopList from '../container/shopList'
 import SpotDetail from '../container/spotDetail'
 import ShopDetail from '../container/shopDetail'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default class Pages extends Component {
@@ -27,15 +28,28 @@ export default class Pages extends Component {
 
 const homeNavigator = createStackNavigator({
   Home: { screen: Home },
-  spotList: { screen: SpotList },
+  spotList: {
+    screen: SpotList,
+    navigationOptions:{
+      headerRight: <TouchableOpacity onPress={this.openDrawer}><FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} /></TouchableOpacity>
+    }
+   
+  },
   spotDetail: {
-    screen: SpotDetail, navigationOptions: ({ navigation }) => ({
+    screen: SpotDetail,
+    navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
     }),
   },
-  shopList: { screen: ShopList },
+  shopList: {
+    screen: ShopList,
+    // navigationOptions: ({ navigation }) => ({
+    //   headerRight: <MenuButton navigate={navigation.navigate} />,
+    // })
+  },
   shopDetail: {
-    screen: ShopDetail, navigationOptions: ({ navigation }) => ({
+    screen: ShopDetail,
+    navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
     }),
   }

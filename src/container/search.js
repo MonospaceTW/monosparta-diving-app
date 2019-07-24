@@ -8,7 +8,7 @@ import {
   Container,
   Tab,
   Tabs
-} from 'native-base'
+} from 'native-base';
 
 import Btn from '../components/button'
 import ShopTab from '../components/shopTab'
@@ -46,23 +46,6 @@ export default class Search extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'SearchList',
-    headerStyle: {
-      backgroundColor: '#3FD2FF'
-
-    },
-    headerTitleStyle: {
-      flex: 1,
-      fontSize: 31,
-      textAlign: 'center',
-      color: '#FFBC02'
-    },
-    headerLeft:
-      (<View />),
-    headerRight:
-      (<View />)
-  };
 
   onGetLocation = () => {
     const array = []
