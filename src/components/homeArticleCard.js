@@ -13,7 +13,6 @@ import {
   CardItem
 } from 'native-base';
 
-import { Container, Button } from 'native-base';
 import Btn from '../components/button'
 
 const height = Dimensions.get('window').height;
@@ -25,7 +24,6 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     flex: 1,
-    marginBottom: 20
   },
   spotImg: {
     height: height * 0.4,
@@ -44,7 +42,12 @@ const styles = StyleSheet.create({
 })
 
 export default class ArticleCard extends React.Component {
-
+  constructor(props){
+    super(props)
+    this.state = {
+      btnTxt: '顯示更多'
+    }
+  }
   render() {
     return (
       <View style={styles.imageWrapper}>
@@ -61,6 +64,13 @@ export default class ArticleCard extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
+
+        <View style={styles.btnWrapper}>
+          <Btn
+           text={this.state.btnTxt}
+           onPress={this.props.onClick}
+           />
+        </View>
       </View>
     )
   }

@@ -10,7 +10,7 @@ import { Container, Button } from 'native-base';
 import Color from '../config/color'
 import Images from '../config/images'
 import Styles from '../config/style'
-import ArticleCard from '../components/articleCard'
+import HomeArticleCard from '../components/homeArticleCard'
 import ExploreHome from '../components/exploreHome'
 
 
@@ -113,7 +113,7 @@ export default class Home extends React.Component {
 
           <Text style={styles.welcomeTitle}>下水前記得做足準備哦！！</Text>
           <Text style={styles.welcomeTxt}>為您提供精選文章，了解更多潛水小知識！</Text>
-          <ArticleCard
+          <HomeArticleCard
             img={this.state.article.img}
             title={this.state.article.title}
             content={this.state.article.content}
