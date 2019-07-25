@@ -12,13 +12,13 @@ export default class Map extends React.Component {
         scrollEnabled={false}
         zoomEnabled={false}
         initialRegion={{
-          latitude: 24.148533,
-          longitude: 120.673439,
+          latitude: Number(this.props.latitude),
+          longitude: Number(this.props.longitude),
           latitudeDelta: 0.003,
           longitudeDelta: 0.003,
         }}>
         <Marker
-          coordinate={{ latitude: 24.148533, longitude: 120.673439 }}
+          coordinate={{ latitude: Number(this.props.latitude), longitude: Number(this.props.longitude) }}
         />
       </MapView>
     );
