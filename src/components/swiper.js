@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 
 import Swiper from 'react-native-swiper'
+import Color from '../config/color'
 
 const height = Dimensions.get('window').height;
 
@@ -21,12 +22,12 @@ const styles = StyleSheet.create({
   },
 })
 
-export default class ShopSwiper extends React.Component {
+export default class DetailSwiper extends React.Component {
 
 
   render() {
     return (
-      <Swiper style={styles.wrapper} showsButtons={false} dotColor="#F5F5F5" activeDotColor="white">
+      <Swiper style={styles.wrapper} showsButtons={false} dotColor={Color.white} activeDotColor={Color.mainBlue}>
             <Image style={styles.slide} source={{ uri: this.props.img }} />
             <Image style={styles.slide} source={{ uri: this.props.img }} />
             <Image style={styles.slide} source={{ uri: this.props.img }} />

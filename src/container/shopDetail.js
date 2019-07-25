@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
-  Image,
-  StyleSheet,
   ScrollView,
-  Dimensions,
   Linking
 } from 'react-native'
-import {
-  FontAwesome,
-} from '@expo/vector-icons'
-import { Container, Header, Content, Accordion } from "native-base";
 
-import Swiper from 'react-native-swiper'
-import ShopSwiper from '../components/swiper'
+import DetailSwiper from '../components/swiper'
 import ShopDescription from '../components/shopDescription'
 import ShopBusinessHour from '../components/shopBusinessHour'
 import ShopService from '../components/shopService'
@@ -24,62 +15,6 @@ import ShopLocation from '../components/shopLocation'
 import ShopRate from '../components/shopRate'
 import Styles from '../config/style'
 import Color from '../config/color'
-
-const height = Dimensions.get('window').height;
-const width = Dimensions.get('window').width;
-
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: height * 0.35
-  },
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  txt: {
-    fontSize: 12
-  },
-  subTitle: {
-    fontSize: 15
-  },
-  infoContainer: {
-    marginBottom: 30
-  },
-  detailContainer: {
-    marginTop: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  icon: {
-    color: '#0288D1',
-    marginRight: 15
-  },
-  disabledIcon: {
-    color: '#BFBFBF',
-    marginRight: 15
-  },
-  rowFlexDirection: {
-    flexDirection: 'row'
-  },
-  webContainer: {
-    marginTop: 25,
-  },
-  webTxt: {
-    alignItems: 'flex-end'
-  },
-  linkTxt: {
-    color: 'blue',
-  },
-  accordionStyle: {
-    width: width * 0.5
-  }
-
-
-
-})
-
 
 export default class SpotDetail extends React.Component {
   static navigationOptions = {
@@ -111,7 +46,7 @@ export default class SpotDetail extends React.Component {
       <ScrollView>
         <View style={Styles.container}>
 
-          <ShopSwiper img={this.props.navigation.state.params.data.img1} />
+          <DetailSwiper img={this.props.navigation.state.params.data.img1} />
 
           <View style={Styles.bodyContent}>
 
