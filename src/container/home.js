@@ -35,7 +35,7 @@ export default class Home extends React.Component {
     this.state = {
       exploreSpot:
       {
-        title: '探險潛點',
+        title: '探索潛點',
         img1: Images.recImg,
         img2: Images.recImg,
         img3: Images.recImg,

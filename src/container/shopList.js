@@ -65,7 +65,7 @@ export default class SpotList extends React.Component {
   }
 
   static navigationOptions = {
-    title: '探險潛店',
+    title: '探索潛店',
 
     headerTitleStyle: {
       flex: 1,
@@ -116,7 +116,6 @@ export default class SpotList extends React.Component {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
-        console.log(responseValue)
         let resultList = await navigate('shopList', { data: responseValue.item })
       } catch (err) {
         console.log(err)
@@ -185,7 +184,7 @@ export default class SpotList extends React.Component {
               text={this.state.btnTxt1}
             />
             <Btn 
-              onPress={this.onGetSpotList} 
+              onPress={this.onGetShopList} 
               text={this.state.btnTxt2}
             />
               <TouchableOpacity
