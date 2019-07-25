@@ -7,7 +7,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  TouchableHighlight,
   Modal
 } from 'react-native';
 
@@ -15,8 +14,7 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 import { Content, Card, CardItem } from 'native-base';
 
-import Location from '../components/searchLoc';
-import Service from '../components/searchService';
+import Btn from '../components/button';
 
 import Colors from '../config/color';
 import Styles from '../config/style';
@@ -44,7 +42,25 @@ export default class SpotList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalVisible: false
+      modalVisible: false,
+
+      shop: {
+        location: [
+          { label: '北部', value: 'north' },
+          { label: '中部', value: 'mid' },
+          { label: '南部', value: 'south' },
+          { label: '東部', value: 'east' },
+          { label: '離島', value: 'outer' }],
+        service: [
+          { label: '潛水體驗', value: 'ExploreDiving' },
+          { label: '證照課程', value: 'LicenseCourse' },
+          { label: '器材銷售', value: 'EquipmentSale' },
+          { label: '飲食', value: 'Food' },
+          { label: '住宿', value: 'Accommodation' }]
+      },
+      selService: '',
+      btnTxt1:'重設',
+      btnTxt2:'確認'
     }
   }
 
@@ -57,14 +73,40 @@ export default class SpotList extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
-    headerRight:
-      (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
+    // headerRight:
+    //   (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
   };
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+  onGetLocationBtn = () => {
+    const {
+      shop: { location },
+      selLocation,
+    } = this.state;
 
+    return location.map((item, i) => (
+      <Btn
+        key={location[i].value}
+        text={location[i].label}
+        onPress={this.onLocationChange(location[i].value)}
+        select={selLocation}
+        value={location[i].value}
+      />
+    ));
+  }
+  onLocationChange = (value) => () => {
+    if (this.state.selLocation === value) {
+      this.setState({
+        selLocation: ''
+      })
+    } else {
+      this.setState({
+        selLocation: value
+      })
+    }
+  }
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
     const url = `http://e2509bef.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
@@ -120,12 +162,12 @@ export default class SpotList extends React.Component {
     return (
 
       <Content style={Styles.bodyContent}>
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() => {
             this.setModalVisible(true);
           }}>
           <Text>Show Modal</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         <Modal
           animationType="slide"
@@ -134,15 +176,24 @@ export default class SpotList extends React.Component {
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
-          <View style={{ flex: 1, backgroundColor: "#000000" }}>
-            <View style={{ marginTop: 50, backgroundColor: "red", flex: 1 }}>
-              
-              <TouchableHighlight
+          <View style={{ flex: 1}}>
+            <View style={{ marginTop: 100, flex: 1  }}>
+            {this.onGetLocationBtn()}
+
+            <Btn 
+              select={false}
+              text={this.state.btnTxt1}
+            />
+            <Btn 
+              onPress={this.onGetSpotList} 
+              text={this.state.btnTxt2}
+            />
+              <TouchableOpacity
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}>
                 <Text>Hide Modal</Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
 
             </View>
           </View>

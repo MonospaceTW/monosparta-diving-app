@@ -7,14 +7,13 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  TouchableHighlight,
   Modal,
   Alert
 
 } from 'react-native';
 
 import FontAwesome from '@expo/vector-icons';
-import { Content, Card, CardItem, Button } from 'native-base';
+import { Content, Card, CardItem } from 'native-base';
 
 import Btn from '../components/button';
 
@@ -41,8 +40,6 @@ const styles = StyleSheet.create({
 
 })
 
-
-
 export default class SpotList extends React.Component {
   constructor(props) {
     super(props)
@@ -60,18 +57,10 @@ export default class SpotList extends React.Component {
           { label: '中階', value: 'medium' },
           { label: '高階', value: 'hard' }]
       },
-      shop: {
-        service: [
-          { label: '潛水體驗', value: 'ExploreDiving' },
-          { label: '證照課程', value: 'LicenseCourse' },
-          { label: '器材銷售', value: 'EquipmentSale' },
-          { label: '飲食', value: 'Food' },
-          { label: '住宿', value: 'Accommodation' }]
-      },
       selLocation: '',
       selLevel: '',
-      selService: ''
-
+      btnTxt1:'重設',
+      btnTxt2:'確認'
     }
   }
 
@@ -90,41 +79,41 @@ export default class SpotList extends React.Component {
       color: '#545454'
     }
   }
-  onGetLocation = () => {
-    const array = []
-    const locationLength = this.state.spot.location.length
+  onGetLocationBtn = () => {
+    const {
+      spot: { location },
+      selLocation,
+    } = this.state;
 
-    for (let i = 0; i < locationLength; i += 1) {
-      array.push(<Btn
-        key={this.state.spot.location[i].value}
-        text={this.state.spot.location[i].label}
-        onChangeState={this.onLocationChange.bind(this, this.state.spot.location[i].value)}
-        select={this.state.selLocation}
-        value={this.state.spot.location[i].value}
-      />)
-    }
-    return array
+    return location.map((item, i) => (
+      <Btn
+        key={location[i].value}
+        text={location[i].label}
+        onPress={this.onLocationChange(location[i].value)}
+        select={selLocation}
+        value={location[i].value}
+      />
+    ));
+  }
+  onGetLevelBtn = () => {
+    const {
+      spot: { level },
+      selLevel,
+    } = this.state;
+
+    return level.map((item, i) => (
+      <Btn
+        key={level[i].value}
+        text={level[i].label}
+        onChangeState={this.onLevelChange(level[i].value)}
+        select={selLevel}
+        value={level[i].value}
+      />
+
+    ));
   }
 
-
-  onGetLevel = () => {
-    const array = []
-    const levelLength = this.state.spot.level.length
-
-    for (let i = 0; i < levelLength; i += 1) {
-      array.push(<Btn
-        key={this.state.spot.level[i].value}
-        text={this.state.spot.level[i].label}
-        onChangeState={this.onLevelChange.bind(this, this.state.spot.level[i].value)}
-        select={this.state.selLevel}
-        value={this.state.spot.level[i].value}
-      />)
-    }
-    return array
-  }
-
-
-  onLocationChange = (value) => {
+  onLocationChange = (value) => () => {
     if (this.state.selLocation === value) {
       this.setState({
         selLocation: ''
@@ -162,9 +151,7 @@ export default class SpotList extends React.Component {
       }
     }
   }
-  test(){
-    console.log("123")
-  }
+
   keyExtractor = (item, index) => { return index.toString() };
 
   renderItem = ({ item }) => {
@@ -200,18 +187,17 @@ export default class SpotList extends React.Component {
     return (
 
       <Content style={Styles.bodyContent}>
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() => {
             this.setModalVisible(true);
           }}>
           <Text>Show Modal</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
 
         <Modal
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
-          onShow={this.onGetLocation()}
           onRequestClose={() => {
             alert("Modal has been closed.");
           }}
@@ -220,29 +206,23 @@ export default class SpotList extends React.Component {
             <View
               style={{ marginTop: 100, flex: 1 }}
             >
+              {this.onGetLocationBtn()}
 
-              <View>
-              <Text>123</Text>
-              <Button onPress={this.test}>
-              <Text>123</Text>
-              </Button>
-              </View>
-                
-              
-              <Button bordered>
-                <Text>重設</Text>
-              </Button>
-
-              <Button onPress={this.onGetSpotList}>
-                <Text>確定</Text>
-              </Button>
-
-              <TouchableHighlight
+              <Btn 
+                select={false}
+                text={this.state.btnTxt1}
+              />
+              <Btn 
+                onPress={this.onGetSpotList} 
+                text={this.state.btnTxt2}
+              />
+               
+              <TouchableOpacity
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}>
                 <Text>Hide Modal</Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
 
             </View>
           </View>

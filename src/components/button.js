@@ -2,7 +2,7 @@ import React from 'react'
 import {
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   Dimensions
 } from 'react-native'
 import Colors from '../config/color';
@@ -48,14 +48,14 @@ const styles = StyleSheet.create({
 export default class Btn extends React.Component {
   render() {
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         style={this.props.select === this.props.value ? styles.btnPress : styles.btn}
         onPress={this.props.onPress}
       >
         <Text style={this.props.select === this.props.value ? styles.btnTxtPress : styles.btnTxt}>
           {this.props.text}
         </Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }

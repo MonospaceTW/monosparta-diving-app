@@ -61,7 +61,7 @@ export default class SpotDetail extends React.Component {
             <View style={Styles.component}>
               <Text style={Styles.title}>地址</Text>
               <View style={Styles.map}>
-                <Map />
+               
               </View>
               <View style={Styles.hr} />
             </View>
