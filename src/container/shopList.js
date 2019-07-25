@@ -68,7 +68,7 @@ export default class SpotList extends React.Component {
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://57c64a59.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = `http://e2509bef.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
       Alert.alert('請至少選擇一個區域或服務')
     } else {
@@ -108,7 +108,7 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://57c64a59.ngrok.io/DivingBackend/public/api/shops/${id}`);
+      let response = await fetch(`http://e2509bef.ngrok.io/DivingBackend/public/api/shops/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
@@ -137,8 +137,7 @@ export default class SpotList extends React.Component {
           }}>
           <View style={{ flex: 1, backgroundColor: "#000000" }}>
             <View style={{ marginTop: 50, backgroundColor: "red", flex: 1 }}>
-              <Location />
-              <Service />
+              
               <TouchableHighlight
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
