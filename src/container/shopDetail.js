@@ -5,81 +5,159 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-} from 'react-native';
-import { Container, Content } from 'native-base';
-import Swiper from 'react-native-swiper';
-import Styles from '../config/style';
-import Map from '../components/map';
+  Dimensions,
+  Linking
+} from 'react-native'
+import {
+  FontAwesome,
+} from '@expo/vector-icons'
+import { Container, Header, Content, Accordion } from "native-base";
+
+import Swiper from 'react-native-swiper'
+import ShopSwiper from '../components/swiper'
+import ShopDescription from '../components/shopDescription'
+import ShopBusinessHour from '../components/shopBusinessHour'
+import ShopService from '../components/shopService'
+import ShopPhone from '../components/shopPhone'
+import ShopWeb from '../components/shopWeb'
+import ShopLocation from '../components/shopLocation'
+import ShopRate from '../components/shopRate'
+import Styles from '../config/style'
+import Color from '../config/color'
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 
 const styles = StyleSheet.create({
-
   wrapper: {
-    height: 200
+    height: height * 0.35
   },
   slide: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  txt: {
+    fontSize: 12
+  },
+  subTitle: {
+    fontSize: 15
+  },
+  infoContainer: {
+    marginBottom: 30
+  },
+  detailContainer: {
+    marginTop: 25,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  icon: {
+    color: '#0288D1',
+    marginRight: 15
+  },
+  disabledIcon: {
+    color: '#BFBFBF',
+    marginRight: 15
+  },
+  rowFlexDirection: {
+    flexDirection: 'row'
+  },
+  webContainer: {
+    marginTop: 25,
+  },
+  webTxt: {
+    alignItems: 'flex-end'
+  },
+  linkTxt: {
+    color: 'blue',
+  },
+  accordionStyle: {
+    width: width * 0.5
   }
+
+
+
 })
 
 
 export default class SpotDetail extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
-
   static navigationOptions = {
+
     headerTitleStyle: {
       flex: 1,
       fontSize: 20,
       textAlign: 'center',
-      color: '#545454'
-    }
+      color: Color.gray
+    },
+    headerRight: <View />
   };
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      businessHour: [
+        { title: '查看詳細資訊', content: this.props.navigation.state.params.data.bh }
+      ]
+    }
+  }
+
+  onGoWeb = () => {
+    Linking.openURL(this.props.navigation.state.params.data.web1);
+  }
 
   render() {
     return (
       <ScrollView>
-        <Container style={Styles.container}>
-          <Swiper style={styles.wrapper} showsButtons={false} dotColor="#F5F5F5" activeDotColor="white">
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-          </Swiper>
+        <View style={Styles.container}>
 
-          <Content style={Styles.bodyContent}>
-            <View style={Styles.component}>
-              <Text style={Styles.title}>服務</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.service}</Text>
-              <View style={Styles.hr} />
-            </View>
+          <ShopSwiper img={this.props.navigation.state.params.data.img1} />
 
-            <View style={Styles.component}>
-              <Text style={Styles.title}>地址</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.address}</Text>
-              <View style={Styles.map}>
-                <Map />
-              </View>
-              <View style={Styles.hr} />
-            </View>
+          <View style={Styles.bodyContent}>
 
-            <View style={Styles.component}>
-              <Text style={Styles.title}>附近潛店</Text>
-              <View style={Styles.hr} />
-            </View>
+            <ShopDescription
+              name={this.props.navigation.state.params.data.name}
+              description={this.props.navigation.state.params.data.description}
+            />
 
-            <View style={Styles.component}>
-              <Text style={Styles.title}>評論</Text>
-            </View>
+            <ShopBusinessHour
+              businessHour={this.state.businessHour}
+            />
 
-          </Content>
-        </Container>
+            <View style={Styles.hr} />
+
+            <ShopService
+              service={this.props.navigation.state.params.data.service}
+            />
+
+            <View style={Styles.hr} />
+
+            <ShopPhone
+              phone1={this.props.navigation.state.params.data.phone1}
+            />
+
+            <View style={Styles.hr} />
+
+            <ShopWeb
+              web1={this.props.navigation.state.params.data.web1}
+              onClick={this.onGoWeb}
+            />
+
+            <View style={Styles.hr} />
+
+            <ShopLocation
+              county={this.props.navigation.state.params.data.county}
+              district={this.props.navigation.state.params.data.district}
+              address={this.props.navigation.state.params.data.address}
+              latitude={this.props.navigation.state.params.data.latitude}
+              longitude={this.props.navigation.state.params.data.longitude}
+            />
+
+            <View style={Styles.hr} />
+
+            <ShopRate />
+          </View>
+        </View>
       </ScrollView>
     )
   }

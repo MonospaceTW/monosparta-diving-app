@@ -183,6 +183,7 @@ export default class SpotList extends React.Component {
     )
   };
 
+
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {

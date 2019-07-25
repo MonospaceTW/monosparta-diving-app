@@ -27,14 +27,11 @@ export default class Pages extends Component {
 }
 
 const homeNavigator = createStackNavigator({
-  Home: { screen: Home },
-  spotList: {
-    screen: SpotList,
-    navigationOptions:{
-      headerRight: <TouchableOpacity onPress={this.openDrawer}><FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} /></TouchableOpacity>
-    }
-   
+  Home: {
+    screen: Home,
+    navigationOptions: { header: null }
   },
+  spotList: { screen: SpotList },
   spotDetail: {
     screen: SpotDetail,
     navigationOptions: ({ navigation }) => ({

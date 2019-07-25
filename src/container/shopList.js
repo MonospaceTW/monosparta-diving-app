@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-
   spotImg: {
     width: width * 0.85,
     height: height * 0.4,

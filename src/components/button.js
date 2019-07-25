@@ -2,37 +2,44 @@ import React from 'react'
 import {
   StyleSheet,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  Dimensions
 } from 'react-native'
+import Colors from '../config/color';
+
+
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   btn: {
     margin: 15,
-    width: 80,
-    height: 30,
-    borderRadius: 16,
+    width: width * 0.8,
+    height: 40,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: Colors.mainBlue,
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center'
   },
   btnPress: {
     margin: 15,
-    width: 80,
-    height: 30,
-    borderRadius: 16,
+    width: width * 0.8,
+    height: 40,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'white',
-    backgroundColor: 'white',
+    borderColor: Colors.mainBlue,
+    backgroundColor: Colors.mainBlue,
     alignItems: 'center',
     justifyContent: 'center'
   },
   btnTxt: {
-    color: 'white',
+    color: Colors.mainBlue,
     fontSize: 14
   },
   btnTxtPress: {
-    color: '#031F4B',
+    color: Colors.white,
     fontSize: 14
   }
 
@@ -43,7 +50,7 @@ export default class Btn extends React.Component {
     return (
       <TouchableHighlight
         style={this.props.select === this.props.value ? styles.btnPress : styles.btn}
-        onPress={this.props.onChangeState}
+        onPress={this.props.onPress}
       >
         <Text style={this.props.select === this.props.value ? styles.btnTxtPress : styles.btnTxt}>
           {this.props.text}
