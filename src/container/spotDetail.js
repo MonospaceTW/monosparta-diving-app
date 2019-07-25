@@ -19,7 +19,6 @@ export default class SpotDetail extends React.Component {
   }
 
   static navigationOptions = {
-
     headerTitleStyle: {
       flex: 1,
       fontSize: 20,

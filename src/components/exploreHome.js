@@ -59,6 +59,7 @@ export default class ExploreHome extends React.Component {
           <Btn
            text={this.state.btnTxt}
            onPress={this.props.onClick}
+           select={false}
            />
         </View>
       </View>

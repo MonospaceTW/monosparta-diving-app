@@ -8,7 +8,7 @@ import {
   Container,
   Tab,
   Tabs
-} from 'native-base'
+} from 'native-base';
 
 import Btn from '../components/button'
 import ShopTab from '../components/shopTab'
@@ -46,23 +46,6 @@ export default class Search extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'SearchList',
-    headerStyle: {
-      backgroundColor: '#3FD2FF'
-
-    },
-    headerTitleStyle: {
-      flex: 1,
-      fontSize: 31,
-      textAlign: 'center',
-      color: '#FFBC02'
-    },
-    headerLeft:
-      (<View />),
-    headerRight:
-      (<View />)
-  };
 
   onGetLocation = () => {
     const array = []
@@ -151,7 +134,7 @@ export default class Search extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://51457f91.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = `http://e2509bef.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -167,7 +150,7 @@ export default class Search extends React.Component {
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://84f9d39e.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = `http://e2509bef.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
       Alert.alert('請至少選擇一個區域或服務')
     } else {

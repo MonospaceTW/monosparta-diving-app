@@ -91,7 +91,6 @@ export default class SpotDetail extends React.Component {
             <View style={Styles.hr} />
 
             <ShopRate />
-
           </View>
         </View>
       </ScrollView>
