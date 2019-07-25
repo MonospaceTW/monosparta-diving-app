@@ -1,28 +1,15 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
-  Image,
-  StyleSheet,
   ScrollView,
 } from 'react-native'
-import Swiper from 'react-native-swiper'
-import Images from '../config/images'
+import DetailSwiper from '../components/swiper'
+import SpotDescription from '../components/spotDescription';
+import NearShop from '../components/nearShop'
+import SpotLocation from '../components/spotLocation'
+import SpotRate from '../components/spotRate'
 import Styles from '../config/style'
-import Map from '../components/map'
-
-
-const styles = StyleSheet.create({
-
-  wrapper: {
-    height: 200
-  },
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+import Color from '../config/color'
 
 export default class SpotDetail extends React.Component {
   constructor(props) {
@@ -31,40 +18,49 @@ export default class SpotDetail extends React.Component {
     }
   }
 
+  static navigationOptions = {
+
+    headerTitleStyle: {
+      flex: 1,
+      fontSize: 20,
+      textAlign: 'center',
+      color: Color.gray
+    },
+    headerRight: <View />
+  };
+
   render() {
     return (
       <ScrollView>
         <View style={Styles.container}>
-          <Swiper style={styles.wrapper} showsButtons={false} dotColor="#F5F5F5">
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-            <Image style={styles.slide} source={{ uri: this.props.navigation.state.params.data.img1 }} />
-          </Swiper>
+
+          <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+
           <View style={Styles.bodyContent}>
-            <View style={Styles.component}>
-              <Text style={Styles.title}>{this.props.navigation.state.params.data.name} {this.props.navigation.state.params.data.level}</Text>
-              <Text style={Styles.content}>{this.props.navigation.state.params.data.description}</Text>
-              <View style={Styles.hr} />
-            </View>
 
-            <View style={Styles.component}>
-              <Text style={Styles.title}>地址</Text>
-              <View style={Styles.map}>
-                <Map />
-              </View>
-              <View style={Styles.hr} />
-            </View>
+            <SpotDescription
+              name={this.props.navigation.state.params.data.name}
+              level={this.props.navigation.state.params.data.level}
+              description={this.props.navigation.state.params.data.description}
+            />
 
-            <View style={Styles.component}>
-              <Text style={Styles.title}>附近潛店</Text>
-              <View style={Styles.hr} />
-            </View>
+            <View style={Styles.hr} />
 
-            <View style={Styles.component}>
-              <Text style={Styles.title}>評論</Text>
-            </View>
+            <NearShop />
+
+            <View style={Styles.hr} />
+
+            <SpotLocation
+              county={this.props.navigation.state.params.data.county}
+              district={this.props.navigation.state.params.data.district}
+              latitude={this.props.navigation.state.params.data.latitude}
+              longitude={this.props.navigation.state.params.data.longitude}
+            />
+
+            <View style={Styles.hr} />
+
+            <SpotRate />
+
           </View>
         </View>
       </ScrollView>

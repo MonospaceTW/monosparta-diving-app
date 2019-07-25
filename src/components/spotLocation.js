@@ -5,11 +5,9 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native'
-import {
-  FontAwesome,
-} from '@expo/vector-icons'
 
 import Map from '../components/map'
+import Styles from '../config/style'
 
 const height = Dimensions.get('window').height;
 
@@ -25,16 +23,12 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 15
   },
-  icon: {
-    color: '#0288D1',
-    marginRight: 15
-  },
   mapSize: {
     height: height * 0.35
   }
 })
 
-export default class ShopLocation extends React.Component {
+export default class SpotLocation extends React.Component {
 
 
   render() {
@@ -42,11 +36,10 @@ export default class ShopLocation extends React.Component {
       <View>
         <View style={styles.detailContainer}>
           <View style={styles.rowFlexDirection}>
-            <FontAwesome name="map-marker" size={24} style={styles.icon} />
-            <Text style={styles.subTitle}>所在位置</Text>
+            <Text style={Styles.title}>所在位置</Text>
           </View>
           <View>
-            <Text>{this.props.county}{this.props.district}{this.props.address}</Text>
+            <Text>{this.props.county}　{this.props.district}</Text>
           </View>
         </View>
         <View style={styles.mapSize}>

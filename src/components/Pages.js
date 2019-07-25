@@ -10,7 +10,7 @@ import {
 } from 'react-navigation'
 
 import Home from '../container/home'
-import Search from '../container/search'
+import Article from '../container/article'
 import SpotList from '../container/spotList'
 import ShopList from '../container/shopList'
 import SpotDetail from '../container/spotDetail'
@@ -50,11 +50,9 @@ const homeNavigator = createStackNavigator({
   })
 
 const articleNavigator = createStackNavigator({
-  Search: { screen: Search },
-  spotList: { screen: SpotList },
-  shopList: { screen: ShopList }
+  Article: { screen: Article },
 }, {
-    initialRouteName: 'Search'
+    initialRouteName: 'Article'
   })
 
 const TabNavigator = createBottomTabNavigator({
