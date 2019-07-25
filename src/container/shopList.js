@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-
   spotImg: {
     width: width * 0.85,
     height: height * 0.4,
@@ -76,7 +75,7 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://57c64a59.ngrok.io/DivingBackend/public/api/shops/${id}`);
+      let response = await fetch(`http://e2509bef.ngrok.io/DivingBackend/public/api/shops/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }

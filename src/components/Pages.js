@@ -32,13 +32,15 @@ const homeNavigator = createStackNavigator({
   },
   spotList: { screen: SpotList },
   spotDetail: {
-    screen: SpotDetail, navigationOptions: ({ navigation }) => ({
+    screen: SpotDetail,
+    navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
     }),
   },
   shopList: { screen: ShopList },
   shopDetail: {
-    screen: ShopDetail, navigationOptions: ({ navigation }) => ({
+    screen: ShopDetail,
+    navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
     }),
   }
