@@ -67,9 +67,9 @@ export default class Article extends React.Component {
         <View style={styles.homeContainer}>
 
           <View style={styles.btnWrapper}>
-            <Btn text={this.state.title[0].label} />
-            <Btn text={this.state.title[1].label} />
-            <Btn text={this.state.title[2].label} />
+            <Btn text={this.state.title[0].label} select={false}/>
+            <Btn text={this.state.title[1].label} select={false}/>
+            <Btn text={this.state.title[2].label} select={false}/>
           </View>
 
           <ArticleCard
