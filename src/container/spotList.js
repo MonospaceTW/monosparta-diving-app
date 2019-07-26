@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
   spotImg: {
     width: width * 0.85,
-    height: height * 0.4,
+    height: height * 0.3,
     borderRadius: 6
   },
 
@@ -78,6 +78,7 @@ export default class SpotList extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
+<<<<<<< HEAD
     headerRight: 
       <TouchableOpacity
           onPress={() => ()=>{
@@ -87,6 +88,10 @@ export default class SpotList extends React.Component {
          
         </TouchableOpacity>
     
+=======
+    headerRight:
+      (<View />)
+>>>>>>> 03bb44163fa2fcdfb6450601677b965eb3022a03
   }
   onGetLocationBtn = () => {
     const {
@@ -199,9 +204,15 @@ export default class SpotList extends React.Component {
         <TouchableOpacity
           onPress={() => {
             this.setModalVisible(true);
+<<<<<<< HEAD
           }}>
           <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
          
+=======
+          }}
+          >
+          <Text style={{fontSize: 20}}>Show Modal</Text>
+>>>>>>> 03bb44163fa2fcdfb6450601677b965eb3022a03
         </TouchableOpacity>
 
         <Modal
@@ -219,15 +230,15 @@ export default class SpotList extends React.Component {
               {this.onGetLocationBtn()}
               {this.onGetLevelBtn()}
 
-              <Btn 
+              <Btn
                 select={false}
                 text={this.state.btnTxt1}
               />
-              <Btn 
-                onPress={this.onGetSpotList} 
+              <Btn
+                onPress={this.onGetSpotList}
                 text={this.state.btnTxt2}
               />
-               
+
               <TouchableOpacity
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);

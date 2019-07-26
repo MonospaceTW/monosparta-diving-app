@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   spotImg: {
     width: width * 0.85,
-    height: height * 0.4,
+    height: height * 0.3,
     borderRadius: 6
   },
 
@@ -73,8 +73,8 @@ export default class SpotList extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
-    // headerRight:
-    //   (<FontAwesome name="filter" size={24} style={{ color: '#0288D1' }} />)
+    headerRight:
+      (<View />)
   };
 
   setModalVisible(visible) {
@@ -165,7 +165,8 @@ export default class SpotList extends React.Component {
           onPress={() => {
             this.setModalVisible(true);
           }}>
-          <Text>Show Modal</Text>
+          <Text
+          style={{fontSize: 20}}>Show Modal</Text>
         </TouchableOpacity>
 
         <Modal
@@ -179,12 +180,12 @@ export default class SpotList extends React.Component {
             <View style={{ marginTop: 100, flex: 1  }}>
             {this.onGetLocationBtn()}
 
-            <Btn 
+            <Btn
               select={false}
               text={this.state.btnTxt1}
             />
-            <Btn 
-              onPress={this.onGetShopList} 
+            <Btn
+              onPress={this.onGetShopList}
               text={this.state.btnTxt2}
             />
               <TouchableOpacity
