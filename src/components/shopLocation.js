@@ -52,9 +52,10 @@ export default class ShopLocation extends React.Component {
           <Map
             latitude={this.props.latitude}
             longitude={this.props.longitude}
+            onPress={this.props.onGoMap}
           />
         </View>
-      </View >
+      </View>
     );
   }
 

@@ -46,6 +46,7 @@ export default class SpotLocation extends React.Component {
           <Map
             latitude={this.props.latitude}
             longitude={this.props.longitude}
+            onPress={this.props.onGoMap}
           />
         </View>
       </View >

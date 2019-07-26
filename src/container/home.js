@@ -12,6 +12,7 @@ import Images from '../config/images'
 import Btn from '../components/button'
 import ArticleCard from '../components/articleCard'
 import ExploreHome from '../components/exploreHome'
+import { Linking } from 'expo';
 
 
 const styles = StyleSheet.create({
@@ -116,7 +117,7 @@ export default class Home extends React.Component {
       <ScrollView>
         <View style={styles.homeContainer}>
 
-          <StatusBar hidden />
+
           <Text style={styles.welcomeTitle}>哈囉！想去哪裡潛水？</Text>
           <Text style={styles.welcomeTxt}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
           <ExploreHome data={this.state.exploreSpot} />

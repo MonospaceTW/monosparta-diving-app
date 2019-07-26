@@ -12,7 +12,7 @@ import {
 
 } from 'react-native';
 
-import FontAwesome from '@expo/vector-icons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Content, Card, CardItem } from 'native-base';
 
 import Btn from '../components/button';
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
   spotImg: {
     width: width * 0.85,
-    height: height * 0.3,
+    height: height * 0.4,
     borderRadius: 6
   },
 
@@ -79,7 +79,14 @@ export default class SpotList extends React.Component {
       color: '#545454'
     },
     headerRight:
-      (<View />)
+      <TouchableOpacity
+          onPress={() =>{
+            this.setModalVisible(true);
+          }}>
+          <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
+
+        </TouchableOpacity>
+
   }
   onGetLocationBtn = () => {
     const {
@@ -126,7 +133,7 @@ export default class SpotList extends React.Component {
       })
     }
   }
-  onLevelChange = (value) => {
+  onLevelChange = (value) => () => {
     if (this.state.selLevel === value) {
       this.setState({
         selLevel: ''
@@ -192,9 +199,9 @@ export default class SpotList extends React.Component {
         <TouchableOpacity
           onPress={() => {
             this.setModalVisible(true);
-          }}
-          >
-          <Text style={{fontSize: 20}}>Show Modal</Text>
+          }}>
+          <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
+
         </TouchableOpacity>
 
         <Modal
@@ -210,6 +217,7 @@ export default class SpotList extends React.Component {
               style={{ marginTop: 100, flex: 1 }}
             >
               {this.onGetLocationBtn()}
+              {this.onGetLevelBtn()}
 
               <Btn
                 select={false}
