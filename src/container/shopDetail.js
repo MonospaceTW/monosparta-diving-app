@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {
   View,
   ScrollView,
-  Linking
+  Linking,
+  Platform,
+  Alert
 } from 'react-native'
 
 import DetailSwiper from '../components/swiper'
@@ -40,6 +42,20 @@ export default class SpotDetail extends React.Component {
   onGoWeb = () => {
     Linking.openURL(this.props.navigation.state.params.data.web1);
   }
+  onGoMap = () => {
+    var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
+    var url = scheme + `${this.props.navigation.state.params.data.latitude},${this.props.navigation.state.params.data.longitude}`;
+    Alert.alert(
+      '開啟地圖',
+      '',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'OK', onPress: () => Linking.openURL(url) },
+      ],
+      { cancelable: false }
+    )
+  }
+
 
   render() {
     return (
@@ -86,6 +102,7 @@ export default class SpotDetail extends React.Component {
               address={this.props.navigation.state.params.data.address}
               latitude={this.props.navigation.state.params.data.latitude}
               longitude={this.props.navigation.state.params.data.longitude}
+              onGoMap={this.onGoMap}
             />
 
             <View style={Styles.hr} />

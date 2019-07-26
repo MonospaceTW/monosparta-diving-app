@@ -12,6 +12,7 @@ import Images from '../config/images'
 import Btn from '../components/button'
 import ArticleCard from '../components/articleCard'
 import ExploreHome from '../components/exploreHome'
+import { Linking } from 'expo';
 
 
 const styles = StyleSheet.create({
@@ -80,7 +81,7 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites`);
+      let response = await fetch(`http://9330ffa5.ngrok.io/DivingBackend/public/api/sites`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
@@ -92,7 +93,7 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/shops`);
+      let response = await fetch(`http://9330ffa5.ngrok.io/DivingBackend/public/api/shops`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
     }
@@ -104,7 +105,7 @@ export default class Home extends React.Component {
   onGetAllArticle = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/articles`);
+      let response = await fetch(`http://9330ffa5.ngrok.io/DivingBackend/public/api/articles`);
       let responseValue = await response.json();
       let responseArticle = await navigate('Article', { data: responseValue.item });
     }
@@ -118,7 +119,7 @@ export default class Home extends React.Component {
       <ScrollView>
         <View style={styles.homeContainer}>
 
-          <StatusBar hidden />
+
           <Text style={styles.welcomeTitle}>哈囉！想去哪裡潛水？</Text>
           <Text style={styles.welcomeTxt}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
           <ExploreHome data={this.state.exploreSpot} />
