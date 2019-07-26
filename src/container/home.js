@@ -9,8 +9,8 @@ import {
 import { Container, Button } from 'native-base';
 import Color from '../config/color'
 import Images from '../config/images'
-import Styles from '../config/style'
-import HomeArticleCard from '../components/homeArticleCard'
+import Btn from '../components/button'
+import ArticleCard from '../components/articleCard'
 import ExploreHome from '../components/exploreHome'
 
 
@@ -54,7 +54,8 @@ export default class Home extends React.Component {
         img: Images.recImg,
         title: '這是一個文章標題',
         content: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
-      }
+      },
+      btnTxt: '顯示更多'
     }
   }
 
@@ -79,7 +80,7 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://e2509bef.ngrok.io/DivingBackend/public/api/sites`);
+      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
@@ -91,9 +92,21 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://e2509bef.ngrok.io/DivingBackend/public/api/shops`);
+      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/shops`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
+  onGetAllArticle = async () => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/articles`);
+      let responseValue = await response.json();
+      let responseArticle = await navigate('Article', { data: responseValue.item });
     }
     catch (err) {
       console.log('err:', err)
@@ -108,15 +121,30 @@ export default class Home extends React.Component {
           <StatusBar hidden />
           <Text style={styles.welcomeTitle}>哈囉！想去哪裡潛水？</Text>
           <Text style={styles.welcomeTxt}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
-          <ExploreHome data={this.state.exploreSpot} onClick={this.onGetAllSpot} />
-          <ExploreHome data={this.state.exploreShop} onClick={this.onGetAllShop} />
-
+          <ExploreHome data={this.state.exploreSpot} />
+          <Btn
+            text={this.state.btnTxt}
+            onPress={this.onGetAllSpot}
+            select={false}
+          />
+          <ExploreHome data={this.state.exploreShop} />
+          <Btn
+            text={this.state.btnTxt}
+            onPress={this.onGetAllShop}
+            select={false}
+          />
           <Text style={styles.welcomeTitle}>下水前記得做足準備哦！！</Text>
           <Text style={styles.welcomeTxt}>為您提供精選文章，了解更多潛水小知識！</Text>
-          <HomeArticleCard
+          <ArticleCard
             img={this.state.article.img}
             title={this.state.article.title}
             content={this.state.article.content}
+            onClick={this.onGetAllArticle}
+          />
+          <Btn
+            text={this.state.btnTxt}
+            onPress={this.onGetAllArticle}
+            select={false}
           />
 
         </View>

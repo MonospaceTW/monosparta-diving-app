@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
   spotImg: {
     width: width * 0.85,
-    height: height * 0.4,
+    height: height * 0.3,
     borderRadius: 6
   },
 
@@ -77,7 +77,9 @@ export default class SpotList extends React.Component {
       fontSize: 20,
       textAlign: 'center',
       color: '#545454'
-    }
+    },
+    headerRight:
+      (<View />)
   }
   onGetLocationBtn = () => {
     const {
@@ -138,7 +140,7 @@ export default class SpotList extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://e2509bef.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = `http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -174,7 +176,7 @@ export default class SpotList extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://e2509bef.ngrok.io/DivingBackend/public/api/sites/${id}`);
+      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
@@ -190,8 +192,9 @@ export default class SpotList extends React.Component {
         <TouchableOpacity
           onPress={() => {
             this.setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
+          }}
+          >
+          <Text style={{fontSize: 20}}>Show Modal</Text>
         </TouchableOpacity>
 
         <Modal
@@ -208,15 +211,15 @@ export default class SpotList extends React.Component {
             >
               {this.onGetLocationBtn()}
 
-              <Btn 
+              <Btn
                 select={false}
                 text={this.state.btnTxt1}
               />
-              <Btn 
-                onPress={this.onGetSpotList} 
+              <Btn
+                onPress={this.onGetSpotList}
                 text={this.state.btnTxt2}
               />
-               
+
               <TouchableOpacity
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);

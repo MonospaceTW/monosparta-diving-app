@@ -2,34 +2,50 @@ import React, { Component } from 'react'
 import {
   View,
   ScrollView,
-  StatusBar,
+  FlatList,
   StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions,
   Text
 } from 'react-native'
+import {
+  Card,
+  CardItem
+} from 'native-base';
+
 import Color from '../config/color'
 import Btn from '../components/button'
 import Images from '../config/images'
 import ArticleCard from '../components/articleCard'
 
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   homeContainer: {
-    justifyContent: 'flex-start',
-    paddingLeft: 23,
+    justifyContent: 'center',
     backgroundColor: Color.lightGray,
-  },
-  welcomeTitle: {
-    fontSize: 25,
-    marginTop: 40
-  },
-  welcomeTxt: {
-    fontSize: 14,
-    color: Color.mainBlue
   },
   btnWrapper: {
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  cardContainer: {
+    marginBottom: 20,
+  },
+  articleTxt: {
+    fontSize: 20
+  },
+  spotImg: {
+    height: height * 0.4,
+    width: null,
+    flex: 1,
+    borderRadius: 6
+
+
   },
 })
 export default class Article extends React.Component {
@@ -51,7 +67,7 @@ export default class Article extends React.Component {
   }
 
   static navigationOptions = {
-    title: '探險文章',
+    title: '探索文章',
 
     headerTitleStyle: {
       flex: 1,
@@ -59,6 +75,30 @@ export default class Article extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
+    headerRight:
+      (<View />)
+  };
+
+  keyExtractor = (item, index) => { return index.toString() };
+
+  renderItem = ({ item }) => {
+    return (
+
+        <TouchableOpacity style={styles.cardContainer}>
+          <Card>
+            <CardItem cardBody>
+              <Image source={{ uri: item.imgs }} style={styles.spotImg} />
+            </CardItem>
+            <CardItem>
+              <Text style={styles.articleTxt}>{item.title}</Text>
+            </CardItem>
+            <CardItem>
+              <Text numberOfLines={2}>{item.content}</Text>
+            </CardItem>
+          </Card>
+        </TouchableOpacity>
+
+    )
   };
 
   render() {
@@ -67,21 +107,17 @@ export default class Article extends React.Component {
         <View style={styles.homeContainer}>
 
           <View style={styles.btnWrapper}>
-            <Btn text={this.state.title[0].label} />
-            <Btn text={this.state.title[1].label} />
-            <Btn text={this.state.title[2].label} />
+            <Btn text={this.state.title[0].label} select={false} />
+            <Btn text={this.state.title[1].label} select={false} />
+            <Btn text={this.state.title[2].label} select={false} />
           </View>
 
-          <ArticleCard
-            img={this.state.article.img}
-            title={this.state.article.title}
-            content={this.state.article.content}
+          <FlatList
+            data={this.props.navigation.state.params.data}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
           />
-          <ArticleCard
-            img={this.state.article.img}
-            title={this.state.article.title}
-            content={this.state.article.content}
-          />
+
         </View>
       </ScrollView>
     )
