@@ -17,6 +17,7 @@ import {
 import Color from '../config/color'
 import Btn from '../components/button'
 import Images from '../config/images'
+import Api from '../config/api'
 import ArticleCard from '../components/articleCard'
 
 const height = Dimensions.get('window').height;
@@ -62,7 +63,7 @@ export default class Article extends React.Component {
         { label: '旅遊', value: 'trip' },
         { label: '知識', value: 'knowledge' },
         { label: '證照', value: 'license' },
-      ]
+      ],
     }
   }
 
@@ -75,9 +76,20 @@ export default class Article extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
-    headerRight:
-      (<View />)
   };
+
+  componentDidMount= async () => {
+    try {
+      let response = await fetch( Api.url + `articles`);
+      let responseValue = await response.json();
+      this.setState({
+        responseValue : responseValue.item
+      })
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
 
   keyExtractor = (item, index) => { return index.toString() };
 
@@ -113,7 +125,7 @@ export default class Article extends React.Component {
           </View>
 
           <FlatList
-            data={this.props.navigation.state.params.data}
+            data={this.state.responseValue}
             renderItem={this.renderItem}
             keyExtractor={this.keyExtractor}
           />

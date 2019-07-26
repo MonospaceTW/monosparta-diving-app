@@ -10,13 +10,10 @@ import {
   Modal
 } from 'react-native';
 
-
-import { FontAwesome } from '@expo/vector-icons';
 import { Content, Card, CardItem } from 'native-base';
 
 import Btn from '../components/button';
-
-import Colors from '../config/color';
+import Api from '../config/api'
 import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
@@ -35,8 +32,6 @@ const styles = StyleSheet.create({
   },
 
 })
-
-
 
 export default class SpotList extends React.Component {
   constructor(props) {
@@ -58,28 +53,36 @@ export default class SpotList extends React.Component {
           { label: '飲食', value: 'Food' },
           { label: '住宿', value: 'Accommodation' }]
       },
+      selLocation: '',
       selService: '',
-      btnTxt1:'重設',
-      btnTxt2:'確認'
+      btnTxt1: '重設',
+      btnTxt2: '確認'
     }
   }
 
   static navigationOptions = {
     title: '探索潛店',
-
     headerTitleStyle: {
       flex: 1,
       fontSize: 20,
       textAlign: 'center',
       color: '#545454'
     },
-    headerRight:
-      (<View />)
   };
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      showModal: this.showModal.bind(this)
+    });
+  }
+  showModal = () => {
+    this.setModalVisible(true)
+  }
+
   onGetLocationBtn = () => {
     const {
       shop: { location },
@@ -96,6 +99,24 @@ export default class SpotList extends React.Component {
       />
     ));
   }
+
+
+  onGetServiceBtn = () => {
+    const {
+      shop: { service },
+      selService,
+    } = this.state;
+
+    return service.map((item, i) => (
+      <Btn
+        key={service[i].value}
+        text={service[i].label}
+        onPress={this.onServiceChange(service[i].value)}
+        select={selService}
+        value={service[i].value}
+      />
+    ));
+  }
   onLocationChange = (value) => () => {
     if (this.state.selLocation === value) {
       this.setState({
@@ -107,16 +128,33 @@ export default class SpotList extends React.Component {
       })
     }
   }
+
+  onServiceChange = (value) => () => {
+    if (this.state.selService === value) {
+      this.setState({
+        selService: ''
+      })
+    } else {
+      this.setState({
+        selService: value
+      })
+    }
+  }
+
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://8b4e3ab4.ngrok.io/DivingBackend/public/api/shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = Api.url + `shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
-      Alert.alert('請至少選擇一個區域或服務')
+      let response = await fetch( Api.url + `shops`);
+      let responseValue = await response.json();
+      let responseShop = await navigate('shopList', { data: responseValue.item });
+      let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
         let resultList = await navigate('shopList', { data: responseValue.item })
+        let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         console.log(err)
       }
@@ -148,7 +186,7 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/shops/${id}`);
+      let response = await fetch( Api.url + `shops/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
@@ -161,40 +199,23 @@ export default class SpotList extends React.Component {
     return (
 
       <Content style={Styles.bodyContent}>
-        <TouchableOpacity
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <Text
-          style={{fontSize: 20}}>Show Modal</Text>
-        </TouchableOpacity>
-
         <Modal
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{ flex: 1}}>
-            <View style={{ marginTop: 100, flex: 1  }}>
-            {this.onGetLocationBtn()}
-
-            <Btn
-              select={false}
-              text={this.state.btnTxt1}
-            />
+          >
+          <View style={{ flex: 1 }}>
             <Btn
               onPress={this.onGetShopList}
               text={this.state.btnTxt2}
             />
-              <TouchableOpacity
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableOpacity>
-
+            <View style={{ marginTop: 100, flex: 1 }}>
+              {this.onGetLocationBtn()}
+              {this.onGetServiceBtn()}
+              <Btn
+                select={false}
+                text={this.state.btnTxt1}
+              />
             </View>
           </View>
         </Modal>

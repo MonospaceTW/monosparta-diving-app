@@ -1,26 +1,9 @@
-export const apiAction = {
-
-  // LOGIN: "LOGIN",
-  // LOGOUT: "LOGOUT",
-  // FORGOT_PASSWORD: "FORGOT_PASSWORD",
-  // VALIDATE_CODE: "VALIDATE_CODE",
-  // USER_PASSWORD: "USER_PASSWORD",
-  // UPDATE_PASSWORD_BY_OLD: "UPDATE_PASSWORD_BY_OLD",
-  // SERVICES: "SERVICES",
-  // BANNER: "BANNER",
-  // APPLICATION: "APPLICATION",
-  // USER_INFO: "USER_INFO",
-  // PROGRESS: "PROGRESS",
-  // FRIEND_RECOMMENDATION: "FRIEND_RECOMMENDATION",
-  // NOTIFICATION_UNREAD: "NOTIFICATION_UNREAD",
-  // NOTIFICATION_APPLICATION: "NOTIFICATION_APPLICATION",
-  // NOTIFICATION_NEWS: "NOTIFICATION_NEWS",
-  // NOTIFICATION_READ: "NOTIFICATION_READ"
-
-
-};
+export default {
+  url : `http://9330ffa5.ngrok.io/DivingBackend/public/api/`
+}
 
 export const api = {
+
   // [apiAction.LOGIN]: {
   //   url: "/api/auth/local",
   //   method: "post",

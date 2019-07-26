@@ -4,10 +4,10 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text
+  Text,
 } from 'react-native'
-import { Container, Button } from 'native-base';
 import Color from '../config/color'
+import Api from '../config/api'
 import Images from '../config/images'
 import Btn from '../components/button'
 import ArticleCard from '../components/articleCard'
@@ -80,7 +80,7 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites`);
+      let response = await fetch( Api.url + `sites`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
@@ -92,7 +92,7 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/shops`);
+      let response = await fetch( Api.url + `shops`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
     }
@@ -104,9 +104,7 @@ export default class Home extends React.Component {
   onGetAllArticle = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/articles`);
-      let responseValue = await response.json();
-      let responseArticle = await navigate('Article', { data: responseValue.item });
+      let responseArticle = await navigate('article');
     }
     catch (err) {
       console.log('err:', err)
@@ -146,7 +144,6 @@ export default class Home extends React.Component {
             onPress={this.onGetAllArticle}
             select={false}
           />
-
         </View>
       </ScrollView>
     )

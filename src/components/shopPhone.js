@@ -4,9 +4,8 @@ import {
   Text,
   StyleSheet,
 } from 'react-native'
-import {
-  FontAwesome,
-} from '@expo/vector-icons'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
+
 
 
 const styles = StyleSheet.create({

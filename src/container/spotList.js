@@ -16,7 +16,7 @@ import FontAwesome from '@expo/vector-icons';
 import { Content, Card, CardItem } from 'native-base';
 
 import Btn from '../components/button';
-
+import Api from '../config/api'
 
 import Colors from '../config/color';
 import Styles from '../config/style';
@@ -140,7 +140,7 @@ export default class SpotList extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = Api.url + `sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -176,7 +176,7 @@ export default class SpotList extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://8b4e3ab4.ngrok.io/DivingBackend/public/api/sites/${id}`);
+      let response = await fetch( Api.url + `sites/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
