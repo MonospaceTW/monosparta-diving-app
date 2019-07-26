@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
-import {
-  FontAwesome,
-} from '@expo/vector-icons'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
+
 import {
   createStackNavigator,
   createAppContainer,
@@ -40,9 +39,17 @@ const homeNavigator = createStackNavigator({
   },
   shopList: {
     screen: ShopList,
-    // navigationOptions: ({ navigation }) => ({
-    //   headerRight: <MenuButton navigate={navigation.navigate} />,
-    // })
+    navigationOptions: ({ navigation }) => ({
+      headerRight:
+      <TouchableOpacity
+      style={{marginRight: 10}}
+      >
+        <FontAwesome
+        name="filter"
+        size={30}
+        onPress={() => navigation.state.params.showModal()} />
+      </TouchableOpacity>
+    })
   },
   shopDetail: {
     screen: ShopDetail,
@@ -50,17 +57,16 @@ const homeNavigator = createStackNavigator({
       title: `${navigation.state.params.data.name}`,
     }),
   },
-  Article: { screen: Article },
 
 }, {
     initialRouteName: 'Home',
   })
 
-// const articleNavigator = createStackNavigator({
-//   Article: { screen: Article },
-// }, {
-//     initialRouteName: 'Article'
-//   })
+const articleNavigator = createStackNavigator({
+  article: { screen: Article },
+}, {
+    initialRouteName: 'article'
+  })
 
 const TabNavigator = createBottomTabNavigator({
   // page1:
@@ -91,18 +97,18 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
 
-  // Article:
-  // {
-  //   screen: articleNavigator,
-  //   navigationOptions: {
-  //     tabBarLabel: 'Article',
-  //     tabBarIcon: ({ focused }) => {
-  //       return (
-  //         <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
-  //       )
-  //     }
-  //   }
-  // }
+  Article:
+  {
+    screen: articleNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Article',
+      tabBarIcon: ({ focused }) => {
+        return (
+          <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
+        )
+      }
+    }
+  }
 
   // page4:
   // {

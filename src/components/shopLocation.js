@@ -5,9 +5,8 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native'
-import {
-  FontAwesome,
-} from '@expo/vector-icons'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
+
 
 import Map from '../components/map'
 

@@ -16,7 +16,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Content, Card, CardItem } from 'native-base';
 
 import Btn from '../components/button';
-
+import Api from '../config/api'
 
 import Colors from '../config/color';
 import Styles from '../config/style';
@@ -78,15 +78,15 @@ export default class SpotList extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
-    headerRight: 
+    headerRight:
       <TouchableOpacity
           onPress={() =>{
             this.setModalVisible(true);
           }}>
           <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
-         
+
         </TouchableOpacity>
-    
+
   }
   onGetLocationBtn = () => {
     const {
@@ -147,7 +147,7 @@ export default class SpotList extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = `http://9330ffa5.ngrok.io/DivingBackend/public/api/sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = Api.url + `sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -183,7 +183,7 @@ export default class SpotList extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(`http://9330ffa5.ngrok.io/DivingBackend/public/api/sites/${id}`);
+      let response = await fetch( Api.url + `sites/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
@@ -201,7 +201,7 @@ export default class SpotList extends React.Component {
             this.setModalVisible(true);
           }}>
           <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
-         
+
         </TouchableOpacity>
 
         <Modal
@@ -219,15 +219,15 @@ export default class SpotList extends React.Component {
               {this.onGetLocationBtn()}
               {this.onGetLevelBtn()}
 
-              <Btn 
+              <Btn
                 select={false}
                 text={this.state.btnTxt1}
               />
-              <Btn 
-                onPress={this.onGetSpotList} 
+              <Btn
+                onPress={this.onGetSpotList}
                 text={this.state.btnTxt2}
               />
-               
+
               <TouchableOpacity
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
