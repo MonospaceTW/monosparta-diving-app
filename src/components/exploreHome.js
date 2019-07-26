@@ -54,14 +54,6 @@ export default class ExploreHome extends React.Component {
             <ExploreCard info={this.props.data} />
           </ScrollView>
         </View>
-
-        <View style={styles.btnWrapper}>
-          <Btn
-           text={this.state.btnTxt}
-           onPress={this.props.onClick}
-           select={false}
-           />
-        </View>
       </View>
     )
   }

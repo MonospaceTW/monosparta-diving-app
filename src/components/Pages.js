@@ -49,17 +49,18 @@ const homeNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
     }),
-  }
+  },
+  Article: { screen: Article },
 
 }, {
     initialRouteName: 'Home',
   })
 
-const articleNavigator = createStackNavigator({
-  Article: { screen: Article },
-}, {
-    initialRouteName: 'Article'
-  })
+// const articleNavigator = createStackNavigator({
+//   Article: { screen: Article },
+// }, {
+//     initialRouteName: 'Article'
+//   })
 
 const TabNavigator = createBottomTabNavigator({
   // page1:
@@ -90,18 +91,18 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
 
-  Article:
-  {
-    screen: articleNavigator,
-    navigationOptions: {
-      tabBarLabel: 'Article',
-      tabBarIcon: ({ focused }) => {
-        return (
-          <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
-        )
-      }
-    }
-  }
+  // Article:
+  // {
+  //   screen: articleNavigator,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Article',
+  //     tabBarIcon: ({ focused }) => {
+  //       return (
+  //         <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
+  //       )
+  //     }
+  //   }
+  // }
 
   // page4:
   // {
