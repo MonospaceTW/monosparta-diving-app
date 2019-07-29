@@ -197,13 +197,13 @@ export default class SpotList extends React.Component {
     if (this.state.selLocation === '' && this.state.selService === '') {
       let response = await fetch(Api.url + `shops`);
       let responseValue = await response.json();
-      let responseShop = await navigate('shopList', { data: responseValue.item });
+      let responseShop = await navigate('shopList', { shopData: responseValue.item });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
-        let resultList = await navigate('shopList', { data: responseValue.item })
+        let resultList = await navigate('shopList', { shopData: responseValue.item })
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         console.log(err)
@@ -238,7 +238,7 @@ export default class SpotList extends React.Component {
     try {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { shopDetailData: responseJson.item[0] });
+      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
       console.log('err:', err)
@@ -259,11 +259,11 @@ export default class SpotList extends React.Component {
               <View style={{ flex: 1 }}>
                 {this.onGetLocationBtn()}
                 {this.onGetServiceBtn()}
-                <Btn
+                <SmallBtn
                   select={false}
                   text={this.state.btnTxt1}
                 />
-                <Btn
+                <SmallBtn
                   onPress={this.onGetShopList}
                   text={this.state.btnTxt2}
                 />

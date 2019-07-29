@@ -33,9 +33,8 @@ export default class SpotDetail extends React.Component {
   };
 
   onGoMap = () => {
-    const {spotDetailData} = this.props.navigation.state.params
     var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
-    var url = scheme + `${spotDetailData.latitude},${spotDetailData.longitude}`;
+    var url = scheme + `${this.props.navigation.state.params.data.latitude},${this.props.navigation.state.params.data.longitude}`;
     Alert.alert(
       '開啟地圖',
       '',
@@ -48,20 +47,20 @@ export default class SpotDetail extends React.Component {
   }
 
   render() {
-    const {spotDetailData} = this.props.navigation.state.params
+
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView>
           <View style={Styles.container}>
 
-          <DetailSwiper img={spotDetailData.img1} />
+          <DetailSwiper img={this.props.navigation.state.params.data.img1} />
 
             <View style={Styles.bodyContent}>
 
             <SpotDescription
-              name={spotDetailData.name}
-              level={spotDetailData.level}
-              description={spotDetailData.description}
+              name={this.props.navigation.state.params.data.name}
+              level={this.props.navigation.state.params.data.level}
+              description={this.props.navigation.state.params.data.description}
             />
 
               <View style={Styles.hr} />
@@ -71,10 +70,10 @@ export default class SpotDetail extends React.Component {
               <View style={Styles.hr} />
 
             <SpotLocation
-              county={spotDetailData.county}
-              district={spotDetailData.district}
-              latitude={spotDetailData.latitude}
-              longitude={spotDetailData.longitude}
+              county={this.props.navigation.state.params.data.county}
+              district={this.props.navigation.state.params.data.district}
+              latitude={this.props.navigation.state.params.data.latitude}
+              longitude={this.props.navigation.state.params.data.longitude}
               onGoMap={this.onGoMap}
             />
 

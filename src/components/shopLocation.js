@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
     marginRight: 15
   },
   mapSize: {
-    height: height * 0.35,
-    marginTop: 10
+    height: height * 0.35
   }
 })
 
@@ -42,9 +41,8 @@ export default class ShopLocation extends React.Component {
 
   render() {
     return (
-      <View style={styles.content}>
-
-        <View>
+      <View>
+        <View style={styles.content}>
           <View style={styles.titleWrapper}>
             <FontAwesome name="map-marker" size={24} style={Styles.icon} />
             <Text style={styles.subtitle}>所在位置</Text>
