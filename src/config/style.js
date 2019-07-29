@@ -28,8 +28,7 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     letterSpacing: 2,
     paddingTop: 5,
-    lineHeight: 40,
-    textAlign: 'justify',
+    lineHeight: 40
   },
   bodyContent: {
     marginRight: 15,
@@ -50,7 +49,10 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 8,
     marginTop: 20,
-
+  },
+  icon: {
+    color: Colors.mainBlue,
+    marginRight: 15
   }
 
 });

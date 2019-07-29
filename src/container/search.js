@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 import {
-  View,
-  Alert
+  Alert,
+  SafeAreaView
 } from 'react-native'
 import {
   Container,
@@ -142,7 +142,7 @@ export default class Search extends React.Component {
         let response = await fetch(url);
         let responseValue = await response.json();
         let resultList = await navigate('spotList', { data: responseValue.item })
-      }catch (err) {
+      } catch (err) {
         console.log(err)
       }
     }
@@ -159,7 +159,7 @@ export default class Search extends React.Component {
         let responseValue = await response.json();
         console.log(responseValue)
         let resultList = await navigate('shopList', { data: responseValue.item })
-      }catch (err) {
+      } catch (err) {
         console.log(err)
       }
     }
@@ -168,26 +168,26 @@ export default class Search extends React.Component {
 
   render() {
     return (
-
-      <Container>
-        <Tabs>
-          <Tab heading="找潛點">
-            <SpotTab
-              onGetLocation={this.onGetLocation()}
-              onGetLevel={this.onGetLevel()}
-              onChangePage={this.onGetSpotList}
-            />
-          </Tab>
-          <Tab heading="找潛店">
-            <ShopTab
-              onGetLocation={this.onGetLocation()}
-              onGetService={this.onGetService()}
-              onChangePage={this.onGetShopList}
-            />
-          </Tab>
-        </Tabs>
-      </Container>
-
+      <SafeAreaView style={{ flex: 1 }}>
+        <Container>
+          <Tabs>
+            <Tab heading="找潛點">
+              <SpotTab
+                onGetLocation={this.onGetLocation()}
+                onGetLevel={this.onGetLevel()}
+                onChangePage={this.onGetSpotList}
+              />
+            </Tab>
+            <Tab heading="找潛店">
+              <ShopTab
+                onGetLocation={this.onGetLocation()}
+                onGetService={this.onGetService()}
+                onChangePage={this.onGetShopList}
+              />
+            </Tab>
+          </Tabs>
+        </Container>
+      </SafeAreaView>
     )
   }
 }

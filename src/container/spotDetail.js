@@ -4,7 +4,8 @@ import {
   ScrollView,
   Platform,
   Alert,
-  Linking
+  Linking,
+  SafeAreaView
 } from 'react-native'
 import DetailSwiper from '../components/swiper'
 import SpotDescription from '../components/spotDescription';
@@ -49,12 +50,13 @@ export default class SpotDetail extends React.Component {
   render() {
     const {spotDetailData} = this.props.navigation.state.params
     return (
-      <ScrollView>
-        <View style={Styles.container}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView>
+          <View style={Styles.container}>
 
           <DetailSwiper img={spotDetailData.img1} />
 
-          <View style={Styles.bodyContent}>
+            <View style={Styles.bodyContent}>
 
             <SpotDescription
               name={spotDetailData.name}
@@ -62,11 +64,11 @@ export default class SpotDetail extends React.Component {
               description={spotDetailData.description}
             />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
-            <NearShop />
+              <NearShop />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
             <SpotLocation
               county={spotDetailData.county}
@@ -76,13 +78,14 @@ export default class SpotDetail extends React.Component {
               onGoMap={this.onGoMap}
             />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
-            <SpotRate />
+              <SpotRate />
 
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 }

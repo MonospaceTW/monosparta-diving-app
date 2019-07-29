@@ -4,29 +4,24 @@ import {
   Text,
   StyleSheet,
 } from 'react-native'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Styles from '../config/style';
+import Colors from '../config/color';
 
 
 const styles = StyleSheet.create({
-  webContainer: {
-    marginTop: 25,
-  },
-  rowFlexDirection: {
-    flexDirection: 'row'
-  },
-  subTitle: {
-    fontSize: 15
-  },
-  icon: {
-    color: '#0288D1',
-    marginRight: 15
-  },
-  webTxt: {
+  content: {
+    marginTop: 20,
+    
+    flexDirection: 'row',
     alignItems: 'flex-end'
   },
-  linkTxt: {
-    color: 'blue',
+  subtitle: {
+    fontSize: 15
   },
+  web: {
+    color: Colors.mainBlue
+  }
 })
 
 export default class ShopWeb extends React.Component {
@@ -34,13 +29,11 @@ export default class ShopWeb extends React.Component {
 
   render() {
     return (
-      <View style={styles.webContainer}>
-        <View style={styles.rowFlexDirection}>
-          <FontAwesome name="globe" size={24} style={styles.icon} />
-          <Text style={styles.subTitle}>網站連結</Text>
-        </View>
-        <View style={styles.webTxt}>
-          <Text onPress={this.props.onClick} style={styles.linkTxt}>{this.props.web1}</Text>
+      <View style={styles.content}>
+        <FontAwesome name="globe" size={24} style={Styles.icon} />
+        <Text style={styles.subtitle}>網站連結</Text>
+        <View style={{ alignItems: 'flex-end' }}>
+          <Text onPress={this.props.onClick} style={styles.web}>網址1</Text>
         </View>
       </View>
     );

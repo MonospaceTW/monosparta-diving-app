@@ -4,7 +4,8 @@ import {
   ScrollView,
   Linking,
   Platform,
-  Alert
+  Alert,
+  SafeAreaView
 } from 'react-native'
 
 import DetailSwiper from '../components/swiper'
@@ -62,42 +63,43 @@ export default class SpotDetail extends React.Component {
   render() {
     const {shopDetailData} = this.props.navigation.state.params
     return (
-      <ScrollView>
-        <View style={Styles.container}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView>
+          <View style={Styles.container}>
 
           <DetailSwiper img={shopDetailData.img1} />
 
-          <View style={Styles.bodyContent}>
+            <View style={Styles.bodyContent}>
 
             <ShopDescription
               name={shopDetailData.name}
               description={shopDetailData.description}
             />
 
-            <ShopBusinessHour
-              businessHour={this.state.businessHour}
-            />
+              <ShopBusinessHour
+                businessHour={this.state.businessHour}
+              />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
             <ShopService
               service={shopDetailData.service}
             />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
             <ShopPhone
               phone1={shopDetailData.phone1}
             />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
             <ShopWeb
               web1={shopDetailData.web1}
               onClick={this.onGoWeb}
             />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
             <ShopLocation
               county={shopDetailData.county}
@@ -108,12 +110,13 @@ export default class SpotDetail extends React.Component {
               onGoMap={this.onGoMap}
             />
 
-            <View style={Styles.hr} />
+              <View style={Styles.hr} />
 
-            <ShopRate />
+              <ShopRate />
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 }

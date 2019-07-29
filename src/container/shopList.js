@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Modal,
+  SafeAreaView
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -246,46 +247,29 @@ export default class SpotList extends React.Component {
 
   render() {
     return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <Content style={Styles.bodyContent}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+          >
+            <View style={{ flex: 1 }}>
 
-      <Content style={Styles.bodyContent}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert("Modal has been closed.");
-          }}
-        >
-          <View style={{ flex: 1, flexDirection: 'row'}}>
-            <TouchableOpacity style={styles.outerContainer} onPress={() => this.setModalVisible(!this.state.modalVisible)}>
-              <View />
-            </TouchableOpacity>
-            <View style={styles.modalWrapper}>
-
-              <View style={styles.modalContent}>
-                <Text style={[Styles.title, styles.title]}>篩選潛店</Text>
-
-                <Text style={[Styles.title, styles.subtitle]}>地區</Text>
-                <View style={styles.locationBtnWrapper}>{this.onGetLocationBtn()}</View>
-
-                <Text style={[Styles.title, styles.subtitle]}>服務</Text>
-                <View style={styles.locationBtnWrapper}>{this.onGetServiceBtn()}</View>
-
-                <View style={styles.btnWrapper}>
-                  <SmallBtn
-                    select={false}
-                    onPress={this.clearBtn}
-                    text={this.state.btnTxt1}
-                  />
-                  <SmallBtn
-                    onPress={this.onGetSpotList}
-                    text={this.state.btnTxt2}
-                  />
-                </View>
+              <View style={{ flex: 1 }}>
+                {this.onGetLocationBtn()}
+                {this.onGetServiceBtn()}
+                <Btn
+                  select={false}
+                  text={this.state.btnTxt1}
+                />
+                <Btn
+                  onPress={this.onGetShopList}
+                  text={this.state.btnTxt2}
+                />
               </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
 
         <FlatList
           data={this.props.navigation.state.params.shopData}
@@ -293,7 +277,8 @@ export default class SpotList extends React.Component {
           keyExtractor={this.keyExtractor}
         />
 
-      </Content>
+        </Content>
+      </SafeAreaView>
     )
   }
 }

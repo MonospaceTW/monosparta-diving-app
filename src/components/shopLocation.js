@@ -5,7 +5,9 @@ import {
   Dimensions,
   StyleSheet,
 } from 'react-native'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Styles from '../config/style';
+import Colors from '../config/color';
 
 
 import Map from '../components/map'
@@ -13,15 +15,16 @@ import Map from '../components/map'
 const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
-  detailContainer: {
+  content: {
     marginTop: 25,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  rowFlexDirection: {
-    flexDirection: 'row'
+  titleWrapper: {
+    flexDirection: 'row',
+    alignItems: 'baseline'
   },
-  subTitle: {
+  subtitle: {
     fontSize: 15
   },
   icon: {
@@ -29,7 +32,8 @@ const styles = StyleSheet.create({
     marginRight: 15
   },
   mapSize: {
-    height: height * 0.35
+    height: height * 0.35,
+    marginTop: 10
   }
 })
 
@@ -38,16 +42,16 @@ export default class ShopLocation extends React.Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.detailContainer}>
-          <View style={styles.rowFlexDirection}>
-            <FontAwesome name="map-marker" size={24} style={styles.icon} />
-            <Text style={styles.subTitle}>所在位置</Text>
+      <View style={styles.content}>
+
+        <View>
+          <View style={styles.titleWrapper}>
+            <FontAwesome name="map-marker" size={24} style={Styles.icon} />
+            <Text style={styles.subtitle}>所在位置</Text>
           </View>
-          <View>
-            <Text>{this.props.county}{this.props.district}{this.props.address}</Text>
-          </View>
+          <Text>{this.props.county}{this.props.district}{this.props.address}</Text>
         </View>
+
         <View style={styles.mapSize}>
           <Map
             latitude={this.props.latitude}
@@ -55,6 +59,7 @@ export default class ShopLocation extends React.Component {
             onPress={this.props.onGoMap}
           />
         </View>
+
       </View>
     );
   }

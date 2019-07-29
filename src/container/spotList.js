@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   Dimensions,
   Modal,
-  Alert
+  Alert,
+  SafeAreaView
+
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginLeft: 20,
+    marginTop: 20,
     marginBottom: 20
   }
 })
@@ -101,17 +104,6 @@ export default class SpotList extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: '探索潛點',
-
-    headerTitleStyle: {
-      flex: 1,
-      fontSize: 20,
-      textAlign: 'center',
-      color: '#545454'
-    }
-  }
-
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
@@ -122,6 +114,18 @@ export default class SpotList extends React.Component {
   }
   showModal = () => {
     this.setModalVisible(true)
+  }
+
+  //header
+  static navigationOptions = {
+    title: '探索潛點',
+
+    headerTitleStyle: {
+      flex: 1,
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#545454'
+    }
   }
 
   onGetLocationBtn = () => {
@@ -240,7 +244,7 @@ export default class SpotList extends React.Component {
 
   render() {
     return (
-
+<SafeAreaView style={{ flex: 1 }}>
       <Content style={Styles.bodyContent}>
 
         <Modal
@@ -288,6 +292,7 @@ export default class SpotList extends React.Component {
           keyExtractor={this.keyExtractor}
         />
       </Content>
+      </SafeAreaView>
 
     )
   }
