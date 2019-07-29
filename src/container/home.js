@@ -73,7 +73,7 @@ export default class Home extends React.Component {
         content1: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
       },
       btnTxt: '顯示更多',
-      text: ''    
+      text: ''
     }
   }
 
@@ -97,9 +97,9 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(Api.url + `spot`);
+      let response = await fetch( Api.url + `spot`);
       let responseValue = await response.json();
-      let responseSpot = await navigate('spotList', { data: responseValue.item });
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item });
     }
     catch (err) {
       console.log('err:', err)
@@ -109,9 +109,9 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(Api.url + `shop`);
+      let response = await fetch( Api.url + `shop`);
       let responseValue = await response.json();
-      let responseShop = await navigate('shopList', { data: responseValue.item });
+      let responseShop = await navigate('shopList', { shopData: responseValue.item });
     }
     catch (err) {
       console.log('err:', err)
@@ -145,9 +145,11 @@ export default class Home extends React.Component {
               style={styles.inputTxt}
               value={this.state.text}
               onChangeText={this.onTextChange}
+              onSubmitEditing={this.clear}
             />
-            <Icon name='search' style={styles.icon} onPress={this.clear} />
+            <Icon name='search' style={styles.icon} onPress={this.clear}/>
           </Item>
+
           <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
           <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
           <ExploreHome data={this.state.exploreSpot} />

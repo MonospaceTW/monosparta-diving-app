@@ -13,8 +13,10 @@ import {
 
 import { Content, Card, CardItem } from 'native-base';
 
-import Btn from '../components/button';
+import SmallBtn from '../components/smallButton';
 import Api from '../config/api'
+
+import Colors from '../config/color';
 import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
@@ -26,12 +28,53 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+
   spotImg: {
     width: width * 0.85,
-    height: height * 0.3,
+    height: height * 0.4,
     borderRadius: 6
   },
-
+  outerContainer: {
+    width: width * 0.2,
+    backgroundColor: 'rgba(0,0,0,.5)',
+  },
+  modalWrapper: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,.5)',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+  modalContent: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    width: width * 0.8,
+    position: 'relative',
+  },
+  locationBtnWrapper:{
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginLeft: 20
+  },
+  btnWrapper: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: 30,
+    left: 60
+  },
+  title: {
+    marginBottom: 20,
+    marginLeft: 20,
+    fontSize: 25
+  },
+  subtitle: {
+    marginLeft: 20,
+    marginBottom: 20
+  }
 })
 
 export default class SpotList extends React.Component {
@@ -91,7 +134,7 @@ export default class SpotList extends React.Component {
     } = this.state;
 
     return location.map((item, i) => (
-      <Btn
+      <SmallBtn
         key={location[i].value}
         text={location[i].label}
         onPress={this.onLocationChange(location[i].value)}
@@ -101,7 +144,6 @@ export default class SpotList extends React.Component {
     ));
   }
 
-
   onGetServiceBtn = () => {
     const {
       shop: { service },
@@ -109,7 +151,7 @@ export default class SpotList extends React.Component {
     } = this.state;
 
     return service.map((item, i) => (
-      <Btn
+      <SmallBtn
         key={service[i].value}
         text={service[i].label}
         onPress={this.onServiceChange(service[i].value)}
@@ -142,19 +184,26 @@ export default class SpotList extends React.Component {
     }
   }
 
+  clearBtn = () => {
+    this.setState({
+      selLocation: '',
+      selService: ''
+    })
+  }
+
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
     const url = Api.url + `shop/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
       let response = await fetch(Api.url + `shops`);
       let responseValue = await response.json();
-      let responseShop = await navigate('shopList', { data: responseValue.item });
+      let responseShop = await navigate('shopList', { shopData: responseValue.item });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
-        let resultList = await navigate('shopList', { data: responseValue.item })
+        let resultList = await navigate('shopList', { shopData: responseValue.item })
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         console.log(err)
@@ -211,11 +260,11 @@ export default class SpotList extends React.Component {
               <View style={{ flex: 1 }}>
                 {this.onGetLocationBtn()}
                 {this.onGetServiceBtn()}
-                <Btn
+                <SmallBtn
                   select={false}
                   text={this.state.btnTxt1}
                 />
-                <Btn
+                <SmallBtn
                   onPress={this.onGetShopList}
                   text={this.state.btnTxt2}
                 />
@@ -224,14 +273,16 @@ export default class SpotList extends React.Component {
             </SafeAreaView>
           </Modal>
 
-          <FlatList
-            data={this.props.navigation.state.params.data}
-            renderItem={this.renderItem}
-            keyExtractor={this.keyExtractor}
-          />
+        <FlatList
+          data={this.props.navigation.state.params.shopData}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+        />
 
         </Content>
       </SafeAreaView>
     )
   }
 }
+
+

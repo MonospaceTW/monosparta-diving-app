@@ -24,7 +24,6 @@ import Styles from '../config/style';
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
-
 const styles = StyleSheet.create({
   listContainer: {
     paddingTop: 30,
@@ -37,6 +36,10 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     borderRadius: 6
   },
+  outerContainer: {
+    width: width * 0.2,
+    backgroundColor: 'rgba(0,0,0,.5)',
+  },
   modalWrapper: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,.5)',
@@ -46,17 +49,26 @@ const styles = StyleSheet.create({
   modalContent: {
     flex: 1,
     backgroundColor: Colors.white,
-    width: '70%',
+    width: width * 0.8,
     position: 'relative',
-
+  },
+  locationBtnWrapper: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginLeft: 20
   },
   btnWrapper: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
     position: 'absolute',
     bottom: 30,
-    left: 20
+    left: 60
   },
   title: {
-    marginTop: 30,
     marginBottom: 20,
     marginLeft: 20,
     fontSize: 25
@@ -173,16 +185,26 @@ export default class SpotList extends React.Component {
     }
   }
 
+  clearBtn = () => {
+    this.setState({
+      selLocation: '',
+      selLevel: ''
+    })
+  }
+
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
     const url = Api.url + `spot/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
-      Alert.alert('請至少選擇一個區域或難度')
+      let response = await fetch(Api.url + `spot`);
+      let responseValue = await response.json();
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item });
+      let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
-        let resultList = await navigate('spotList', { data: responseValue.item });
+        let resultList = await navigate('spotList', { spotData: responseValue.item });
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         console.log(err)
@@ -208,7 +230,6 @@ export default class SpotList extends React.Component {
     )
   };
 
-
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
@@ -228,39 +249,45 @@ export default class SpotList extends React.Component {
 
           <Modal
             animationType="slide"
-            transparent={false}
+            transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => {
               alert("Modal has been closed.");
             }}
           >
-            <View style={styles.modalWrapper}>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <TouchableOpacity style={styles.outerContainer} onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+                <View />
+              </TouchableOpacity>
+              <View style={styles.modalWrapper}>
 
-              <View style={styles.modalContent}>
-                <Text style={[Styles.title, styles.title]}>篩選潛點</Text>
+                <View style={styles.modalContent}>
+                  <Text style={[Styles.title, styles.title]}>篩選潛點</Text>
 
-                <Text style={[Styles.title, styles.subtitle]}>地區</Text>
-                <View style={{ marginLeft: 20 }}>{this.onGetLocationBtn()}</View>
+                  <Text style={[Styles.title, styles.subtitle]}>地區</Text>
+                  <View style={styles.locationBtnWrapper}>{this.onGetLocationBtn()}</View>
 
-                <Text style={[Styles.title, styles.subtitle]}>難度</Text>
-                <View style={{ marginLeft: 20 }}>{this.onGetLevelBtn()}</View>
+                  <Text style={[Styles.title, styles.subtitle]}>難度</Text>
+                  <View style={styles.locationBtnWrapper}>{this.onGetLevelBtn()}</View>
 
-                <View style={styles.btnWrapper}>
-                  <SmallBtn
-                    select={false}
-                    text={this.state.btnTxt1}
-                  />
-                  <SmallBtn
-                    onPress={this.onGetSpotList}
-                    text={this.state.btnTxt2}
-                  />
+                  <View style={styles.btnWrapper}>
+                    <SmallBtn
+                      select={false}
+                      onPress={this.clearBtn}
+                      text={this.state.btnTxt1}
+                    />
+                    <SmallBtn
+                      onPress={this.onGetSpotList}
+                      text={this.state.btnTxt2}
+                    />
+                  </View>
                 </View>
               </View>
             </View>
           </Modal>
 
           <FlatList
-            data={this.props.navigation.state.params.data}
+            data={this.props.navigation.state.params.spotData}
             renderItem={this.renderItem}
             keyExtractor={this.keyExtractor}
           />
