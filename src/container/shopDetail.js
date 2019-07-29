@@ -34,17 +34,19 @@ export default class SpotDetail extends React.Component {
     super(props)
     this.state = {
       businessHour: [
-        { title: '查看詳細資訊', content: this.props.navigation.state.params.data.bh }
+        { title: '查看詳細資訊', content: this.props.navigation.state.params.shopDetailData.bh }
       ]
     }
   }
 
   onGoWeb = () => {
-    Linking.openURL(this.props.navigation.state.params.data.web1);
+    const {shopDetailData} = this.props.navigation.state.params
+    Linking.openURL(shopDetailData.web1);
   }
   onGoMap = () => {
+    const {shopDetailData} = this.props.navigation.state.params
     var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
-    var url = scheme + `${this.props.navigation.state.params.data.latitude},${this.props.navigation.state.params.data.longitude}`;
+    var url = scheme + `${shopDetailData.latitude},${shopDetailData.longitude}`;
     Alert.alert(
       '開啟地圖',
       '',
@@ -58,18 +60,18 @@ export default class SpotDetail extends React.Component {
 
 
   render() {
-    // const {data} = this.props.navigation.state.params
+    const {shopDetailData} = this.props.navigation.state.params
     return (
       <ScrollView>
         <View style={Styles.container}>
 
-          <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+          <DetailSwiper img={shopDetailData.img1} />
 
           <View style={Styles.bodyContent}>
 
             <ShopDescription
-              name={this.props.navigation.state.params.data.name}
-              description={this.props.navigation.state.params.data.description}
+              name={shopDetailData.name}
+              description={shopDetailData.description}
             />
 
             <ShopBusinessHour
@@ -79,30 +81,30 @@ export default class SpotDetail extends React.Component {
             <View style={Styles.hr} />
 
             <ShopService
-              service={this.props.navigation.state.params.data.service}
+              service={shopDetailData.service}
             />
 
             <View style={Styles.hr} />
 
             <ShopPhone
-              phone1={this.props.navigation.state.params.data.phone1}
+              phone1={shopDetailData.phone1}
             />
 
             <View style={Styles.hr} />
 
             <ShopWeb
-              web1={this.props.navigation.state.params.data.web1}
+              web1={shopDetailData.web1}
               onClick={this.onGoWeb}
             />
 
             <View style={Styles.hr} />
 
             <ShopLocation
-              county={this.props.navigation.state.params.data.county}
-              district={this.props.navigation.state.params.data.district}
-              address={this.props.navigation.state.params.data.address}
-              latitude={this.props.navigation.state.params.data.latitude}
-              longitude={this.props.navigation.state.params.data.longitude}
+              county={shopDetailData.county}
+              district={shopDetailData.district}
+              address={shopDetailData.address}
+              latitude={shopDetailData.latitude}
+              longitude={shopDetailData.longitude}
               onGoMap={this.onGoMap}
             />
 

@@ -5,7 +5,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import ArticleCard from './exploreCard';
+import ArticleCard from './articleCard';
 import Styles from '../config/style';
 
 
