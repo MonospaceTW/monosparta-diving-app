@@ -36,12 +36,7 @@ export default class ShopService extends React.Component {
     super(props)
   }
 
-  showToast = () => {
-
-    Toast.show({
-      text: '潛水體驗'
-    })
-  }
+  
 
   render() {
     return (
@@ -55,7 +50,12 @@ export default class ShopService extends React.Component {
         <View> 
           <Root>
           <View style={{flexDirection: 'row',}}>
-            <TouchableOpacity onPress={this.showToast}>
+            <TouchableOpacity onPress={() => {
+              Toast.show({
+                text: '潛水體驗',
+                position: "bottom"
+              })
+            }}>
               <FontAwesome
                 name="child"
                 size={24}
@@ -63,7 +63,12 @@ export default class ShopService extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
+            <TouchableOpacity onPress={() => {
+              Toast.show({
+                text: '證照課程',
+                position: "bottom"
+              })
+            }}>
               <FontAwesome
                 name="id-card"
                 size={24}
@@ -71,7 +76,12 @@ export default class ShopService extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
+            <TouchableOpacity onPress={() => {
+              Toast.show({
+                text: '吃吃喝喝',
+                position: "bottom"
+              })
+            }}>
               <FontAwesome
                 name="cutlery"
                 size={24}
@@ -79,7 +89,12 @@ export default class ShopService extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
+            <TouchableOpacity onPress={() => {
+              Toast.show({
+                text: '住宿服務',
+                position: "bottom"
+              })
+            }}>
               <FontAwesome
                 name="bed"
                 size={24}
@@ -87,7 +102,12 @@ export default class ShopService extends React.Component {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
+            <TouchableOpacity onPress={() => {
+              Toast.show({
+                text: '裝備販售',
+                position: "bottom"
+              })
+            }}>
               <FontAwesome
                 name="shopping-cart"
                 size={24}
