@@ -1,5 +1,6 @@
 export default {
   // logo:require('../assets/'),
+  "BT_logo": require('../assets/bluetrend_logo.png'),
 
   //icon
   // home: require('../assets/home.svg'),

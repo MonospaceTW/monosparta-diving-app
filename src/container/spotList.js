@@ -9,13 +9,11 @@ import {
   Dimensions,
   Modal,
   Alert
-
 } from 'react-native';
 
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Content, Card, CardItem } from 'native-base';
 
-import Btn from '../components/button';
+import SmallBtn from '../components/smallButton';
 import Api from '../config/api'
 
 import Colors from '../config/color';
@@ -23,7 +21,6 @@ import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
-
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -37,7 +34,47 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     borderRadius: 6
   },
-
+  outerContainer: {
+    width: width * 0.2,
+    backgroundColor: 'rgba(0,0,0,.5)',
+  },
+  modalWrapper: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,.5)',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+  modalContent: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    width: width * 0.8,
+    position: 'relative',
+  },
+  locationBtnWrapper: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginLeft: 20
+  },
+  btnWrapper: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: 30,
+    left: 60
+  },
+  title: {
+    marginBottom: 20,
+    marginLeft: 20,
+    fontSize: 25
+  },
+  subtitle: {
+    marginLeft: 20,
+    marginBottom: 20
+  }
 })
 
 export default class SpotList extends React.Component {
@@ -59,16 +96,11 @@ export default class SpotList extends React.Component {
       },
       selLocation: '',
       selLevel: '',
-      btnTxt1:'重設',
-      btnTxt2:'確認'
+      btnTxt1: '重設',
+      btnTxt2: '確認'
     }
   }
 
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
-  }
-
-  //header
   static navigationOptions = {
     title: '探索潛點',
 
@@ -77,17 +109,21 @@ export default class SpotList extends React.Component {
       fontSize: 20,
       textAlign: 'center',
       color: '#545454'
-    },
-    headerRight:
-      <TouchableOpacity
-          onPress={() =>{
-            this.setModalVisible(true);
-          }}>
-          <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
-
-        </TouchableOpacity>
-
+    }
   }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+  componentDidMount() {
+    this.props.navigation.setParams({
+      showModal: this.showModal.bind(this)
+    });
+  }
+  showModal = () => {
+    this.setModalVisible(true)
+  }
+
   onGetLocationBtn = () => {
     const {
       spot: { location },
@@ -95,7 +131,7 @@ export default class SpotList extends React.Component {
     } = this.state;
 
     return location.map((item, i) => (
-      <Btn
+      <SmallBtn
         key={location[i].value}
         text={location[i].label}
         onPress={this.onLocationChange(location[i].value)}
@@ -111,7 +147,7 @@ export default class SpotList extends React.Component {
     } = this.state;
 
     return level.map((item, i) => (
-      <Btn
+      <SmallBtn
         key={level[i].value}
         text={level[i].label}
         onPress={this.onLevelChange(level[i].value)}
@@ -145,16 +181,27 @@ export default class SpotList extends React.Component {
     }
   }
 
+  clearBtn = () => {
+    this.setState({
+      selLocation: '',
+      selLevel: ''
+    })
+  }
+
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = Api.url + `site/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = Api.url + `spot/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
-      Alert.alert('請至少選擇一個區域或難度')
+      let response = await fetch(Api.url + `spot`);
+      let responseValue = await response.json();
+      let responseSpot = await navigate('spotList', { data: responseValue.item });
+      let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
-        let resultList = await navigate('spotList', { data: responseValue.item })
+        let resultList = await navigate('spotList', { data: responseValue.item });
+        let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         console.log(err)
       }
@@ -179,13 +226,12 @@ export default class SpotList extends React.Component {
     )
   };
 
-
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `site/${id}`);
+      let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
+      let responseDetail = await navigate('spotDetail', { spotDetailData: responseJson.item[0] });
     }
     catch (err) {
       console.log('err:', err)
@@ -196,51 +242,48 @@ export default class SpotList extends React.Component {
     return (
 
       <Content style={Styles.bodyContent}>
-        <TouchableOpacity
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <FontAwesome name="filter" size={24} style={{ color: '#0288D1' }}/>
-
-        </TouchableOpacity>
 
         <Modal
           animationType="slide"
-          transparent={false}
+          transparent={true}
           visible={this.state.modalVisible}
           onRequestClose={() => {
             alert("Modal has been closed.");
           }}
         >
-          <View style={{ flex: 1 }}>
-            <View
-              style={{ marginTop: 100, flex: 1 }}
-            >
-              {this.onGetLocationBtn()}
-              {this.onGetLevelBtn()}
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <TouchableOpacity style={styles.outerContainer} onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+              <View />
+            </TouchableOpacity>
+            <View style={styles.modalWrapper}>
 
-              <Btn
-                select={false}
-                text={this.state.btnTxt1}
-              />
-              <Btn
-                onPress={this.onGetSpotList}
-                text={this.state.btnTxt2}
-              />
+              <View style={styles.modalContent}>
+                <Text style={[Styles.title, styles.title]}>篩選潛點</Text>
 
-              <TouchableOpacity
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableOpacity>
+                <Text style={[Styles.title, styles.subtitle]}>地區</Text>
+                <View style={styles.locationBtnWrapper}>{this.onGetLocationBtn()}</View>
 
+                <Text style={[Styles.title, styles.subtitle]}>難度</Text>
+                <View style={styles.locationBtnWrapper}>{this.onGetLevelBtn()}</View>
+
+                <View style={styles.btnWrapper}>
+                  <SmallBtn
+                    select={false}
+                    onPress={this.clearBtn}
+                    text={this.state.btnTxt1}
+                  />
+                  <SmallBtn
+                    onPress={this.onGetSpotList}
+                    text={this.state.btnTxt2}
+                  />
+                </View>
+              </View>
             </View>
           </View>
         </Modal>
 
         <FlatList
-          data={this.props.navigation.state.params.data}
+          data={this.props.navigation.state.params.spotData}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />

@@ -19,10 +19,17 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5
   },
+  subtitle: {
+    fontSize: 14,
+    color: Colors.mainBlue,
+    marginBottom: 30
+  },
   content: {
     color: Colors.gray,
-    letterSpacing:2,
-    paddingTop: 5
+    letterSpacing: 2,
+    paddingTop: 5,
+    lineHeight: 40,
+    textAlign: 'justify',
   },
   bodyContent: {
     marginRight: 15,
