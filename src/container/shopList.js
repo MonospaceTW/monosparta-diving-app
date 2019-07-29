@@ -205,6 +205,7 @@ export default class SpotList extends React.Component {
             transparent={false}
             visible={this.state.modalVisible}
           >
+          <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1 }}>
 
               <View style={{ flex: 1 }}>
@@ -220,6 +221,7 @@ export default class SpotList extends React.Component {
                 />
               </View>
             </View>
+            </SafeAreaView>
           </Modal>
 
           <FlatList

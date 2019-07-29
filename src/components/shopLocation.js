@@ -27,10 +27,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 15
   },
-  icon: {
-    color: '#0288D1',
-    marginRight: 15
-  },
   mapSize: {
     height: height * 0.35,
     marginTop: 10

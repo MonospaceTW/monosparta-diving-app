@@ -33,11 +33,9 @@ const styles = StyleSheet.create({
 
 export default class ShopService extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      btnTxt: '我要評論'
-    }
+    super(props)
   }
+
   showToast = () => {
 
     Toast.show({
@@ -54,13 +52,14 @@ export default class ShopService extends React.Component {
           <Text style={styles.subtitle}>提供服務</Text>
         </View>
         
-        <View style={{ flexDirection: 'row' }}> 
+        <View> 
           <Root>
+          <View style={{flexDirection: 'row',}}>
             <TouchableOpacity onPress={this.showToast}>
               <FontAwesome
                 name="child"
                 size={24}
-                style={this.props.service.indexOf('ExploreDiving') < 0 ? styles.disabledIcon : styles.icon}
+                style={this.props.service.indexOf('ExploreDiving') < 0 ? styles.disabledIcon : Styles.icon}
               />
             </TouchableOpacity>
 
@@ -68,7 +67,7 @@ export default class ShopService extends React.Component {
               <FontAwesome
                 name="id-card"
                 size={24}
-                style={this.props.service.indexOf('LicenseCourse') < 0 ? styles.disabledIcon : styles.icon}
+                style={this.props.service.indexOf('LicenseCourse') < 0 ? styles.disabledIcon : Styles.icon}
               />
             </TouchableOpacity>
 
@@ -76,7 +75,7 @@ export default class ShopService extends React.Component {
               <FontAwesome
                 name="cutlery"
                 size={24}
-                style={this.props.service.indexOf('Food') < 0 ? styles.disabledIcon : styles.icon}
+                style={this.props.service.indexOf('Food') < 0 ? styles.disabledIcon : Styles.icon}
               />
             </TouchableOpacity>
 
@@ -84,7 +83,7 @@ export default class ShopService extends React.Component {
               <FontAwesome
                 name="bed"
                 size={24}
-                style={this.props.service.indexOf('Accommodation') < 0 ? styles.disabledIcon : styles.icon}
+                style={this.props.service.indexOf('Accommodation') < 0 ? styles.disabledIcon : Styles.icon}
               />
             </TouchableOpacity>
 
@@ -92,13 +91,14 @@ export default class ShopService extends React.Component {
               <FontAwesome
                 name="shopping-cart"
                 size={24}
-                style={this.props.service.indexOf('EquipmentSale') < 0 ? styles.disabledIcon : styles.icon}
+                style={this.props.service.indexOf('EquipmentSale') < 0 ? styles.disabledIcon : Styles.icon}
               />
             </TouchableOpacity>
+            </View>
           </Root>
 
         </View>
-        
+
       </View>
     );
   }
