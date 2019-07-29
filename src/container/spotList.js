@@ -114,7 +114,7 @@ export default class SpotList extends React.Component {
       <Btn
         key={level[i].value}
         text={level[i].label}
-        onChangeState={this.onLevelChange(level[i].value)}
+        onPress={this.onLevelChange(level[i].value)}
         select={selLevel}
         value={level[i].value}
       />
@@ -147,7 +147,7 @@ export default class SpotList extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = Api.url + `sites/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = Api.url + `site/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -183,7 +183,7 @@ export default class SpotList extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `sites/${id}`);
+      let response = await fetch( Api.url + `site/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }

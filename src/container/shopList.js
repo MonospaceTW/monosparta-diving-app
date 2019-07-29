@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Modal
+  Modal,
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
     height: height * 0.3,
     borderRadius: 6
   },
+  outerContainer: {
+    flex: 1,
+    width: width*0.2,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
+  }
 
 })
 
@@ -143,9 +150,9 @@ export default class SpotList extends React.Component {
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = Api.url + `shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = Api.url + `shop/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
-      let response = await fetch( Api.url + `shops`);
+      let response = await fetch(Api.url + `shops`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
@@ -186,7 +193,7 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `shops/${id}`);
+      let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
@@ -199,27 +206,36 @@ export default class SpotList extends React.Component {
     return (
 
       <Content style={Styles.bodyContent}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
+        <View>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.modalVisible}
           >
-          <View style={{ flex: 1 }}>
-            <Btn
-              onPress={this.onGetShopList}
-              text={this.state.btnTxt2}
-            />
-            <View style={{ marginTop: 100, flex: 1 }}>
-              {this.onGetLocationBtn()}
-              {this.onGetServiceBtn()}
-              <Btn
-                select={false}
-                text={this.state.btnTxt1}
-              />
-            </View>
-          </View>
-        </Modal>
+            <View style={{ flex: 1, flexDirection: 'row'}}>
+              <TouchableOpacity style={styles.outerContainer} onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+                <View />
+              </TouchableOpacity>
 
+              <View style={{ flex: 4, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+                <View style={{ height: height, width: width * 0.8, backgroundColor: 'white' }}>
+                  <Btn
+                    onPress={this.onGetShopList}
+                    text={this.state.btnTxt2}
+                  />
+
+                  {this.onGetLocationBtn()}
+                  {this.onGetServiceBtn()}
+                  <Btn
+                    select={false}
+                    text={this.state.btnTxt1}
+                  />
+                </View>
+              </View>
+            </View>
+
+          </Modal>
+        </View>
         <FlatList
           data={this.props.navigation.state.params.data}
           renderItem={this.renderItem}
@@ -230,3 +246,5 @@ export default class SpotList extends React.Component {
     )
   }
 }
+
+

@@ -81,7 +81,7 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `sites`);
+      let response = await fetch( Api.url + `site`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
@@ -93,7 +93,7 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `shops`);
+      let response = await fetch( Api.url + `shop`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
     }

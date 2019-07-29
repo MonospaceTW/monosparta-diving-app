@@ -43,11 +43,11 @@ const homeNavigator = createStackNavigator({
       headerRight:
       <TouchableOpacity
       style={{marginRight: 10}}
+      onPress={() => navigation.state.params.showModal()}
       >
         <FontAwesome
         name="filter"
-        size={30}
-        onPress={() => navigation.state.params.showModal()} />
+        size={30} />
       </TouchableOpacity>
     })
   },

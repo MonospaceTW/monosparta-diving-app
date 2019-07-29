@@ -58,6 +58,7 @@ export default class SpotDetail extends React.Component {
 
 
   render() {
+    // const {data} = this.props.navigation.state.params
     return (
       <ScrollView>
         <View style={Styles.container}>

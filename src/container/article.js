@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginBottom: 20,
+    marginRight: 25,
+    marginLeft: 25,
   },
   articleTxt: {
     fontSize: 20
@@ -80,7 +82,7 @@ export default class Article extends React.Component {
 
   componentDidMount= async () => {
     try {
-      let response = await fetch( Api.url + `articles`);
+      let response = await fetch( Api.url + `article`);
       let responseValue = await response.json();
       this.setState({
         responseValue : responseValue.item
