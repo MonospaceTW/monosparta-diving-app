@@ -16,7 +16,7 @@ const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-  cardContainer:{
+  cardContainer: {
     marginRight: 25,
     width: width * 0.75,
   },
@@ -35,13 +35,13 @@ export default class ExploreCard extends React.Component {
   render() {
     return (
       <View style={styles.imageWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPress}>
           <Card style={styles.cardContainer}>
             <CardItem cardBody>
-              <Image source={this.props.info.img1} style={styles.spotImg} />
+              <Image source={{ uri: this.props.data.img1 }} style={styles.spotImg} />
             </CardItem>
             <CardItem>
-              <Text>{this.props.info.name1}</Text>
+              <Text>{this.props.data.name}　{this.props.data.county} {this.props.data.district}</Text>
             </CardItem>
           </Card>
         </TouchableOpacity>

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   Linking,
+  FlatList,
   SafeAreaView
 } from 'react-native';
 import { Item, Input, Icon } from 'native-base';
@@ -17,6 +18,7 @@ import Btn from '../components/button';
 import ArticleHome from '../components/articleHome';
 import ExploreHome from '../components/exploreHome';
 
+import ExploreCard from '../components/exploreCard';
 
 
 const styles = StyleSheet.create({
@@ -73,7 +75,9 @@ export default class Home extends React.Component {
         content1: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
       },
       btnTxt: '顯示更多',
-      text: ''
+      text: '',
+      randomSpot: [],
+      randomShop: []
     }
   }
 
@@ -94,10 +98,30 @@ export default class Home extends React.Component {
       (<View />)
   };
 
+  componentDidMount = async () => {
+    try {
+      let responseSpot = await fetch(Api.url + `spot/random`);
+      let randomSpot = await responseSpot.json();
+      let responseShop = await fetch(Api.url + `shop/random`);
+      let randomShop = await responseShop.json();
+      let responseArticle = await fetch(Api.url + `article/random`);
+      let randomArticle = await responseArticle.json();
+      this.setState({
+        randomSpot: randomSpot.item,
+        randomShop: randomShop.item,
+        randomArticle: randomArticle.item
+      })
+      console.log(this.state.randomSpot)
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `spot`);
+      let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { spotData: responseValue.item });
     }
@@ -109,7 +133,7 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `shop`);
+      let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { shopData: responseValue.item });
     }
@@ -127,6 +151,31 @@ export default class Home extends React.Component {
       console.log('err:', err)
     }
   }
+
+  onGetSpotDetail = async (id) => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(Api.url + `spot/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
+  onGetShopDetail = async (id) => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(Api.url + `shop/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
   onTextChange = (text) => {
     this.setState({ text })
   }
@@ -134,53 +183,97 @@ export default class Home extends React.Component {
     this.setState({ text: '' })
   }
 
+  renderSpotRandom() {
+    return this.state.randomSpot.map((item) => {
+      return (
+        <ExploreCard
+          key={item.id}
+          data={item}
+          onPress={this.onGetSpotDetail.bind(this, item.id)}
+        />
+      )
+    })
+  }
+
+  renderShopRandom() {
+    return this.state.randomShop.map((item) => {
+      return (
+        <ExploreCard
+          key={item.id}
+          data={item}
+          onPress={this.onGetShopDetail.bind(this, item.id)}
+        />
+      )
+    })
+  }
+
   render() {
     return (
-      <SafeAreaView  style={{flex: 1}}>
-      <ScrollView style={Styles.container}>
-        <View style={Styles.bodyContent}>
-          <Item rounded style={styles.input}>
-            <Input
-              placeholder='試試野柳？'
-              style={styles.inputTxt}
-              value={this.state.text}
-              onChangeText={this.onTextChange}
-              onSubmitEditing={this.clear}
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView style={Styles.container}>
+          <View style={Styles.bodyContent}>
+            <Item rounded style={styles.input}>
+              <Input
+                placeholder='試試野柳？'
+                style={styles.inputTxt}
+                value={this.state.text}
+                onChangeText={this.onTextChange}
+                onSubmitEditing={this.clear}
+              />
+              <Icon name='search' style={styles.icon} onPress={this.clear} />
+            </Item>
+
+            <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
+            <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
+
+            {/* <ExploreHome
+              data={this.state.randomSpot}
+              title={this.state.exploreSpot.title}
+            /> */}
+
+            <ScrollView horizontal={true}>
+              {this.renderSpotRandom()}
+            </ScrollView>
+
+            <Btn
+              text={this.state.btnTxt}
+              onPress={this.onGetAllSpot}
+              select={false}
             />
-            <Icon name='search' style={styles.icon} onPress={this.clear}/>
-          </Item>
 
-          <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
-          <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
-          <ExploreHome data={this.state.exploreSpot} />
-          <Btn
-            text={this.state.btnTxt}
-            onPress={this.onGetAllSpot}
-            select={false}
-          />
+            {/* <ExploreHome
+              data={this.state.randomShop}
+              title={this.state.exploreShop.title}
+            /> */}
 
-          <ExploreHome data={this.state.exploreShop} />
-          <Btn
-            text={this.state.btnTxt}
-            onPress={this.onGetAllShop}
-            select={false}
-          />
+            <ScrollView horizontal={true}>
+              {this.renderShopRandom()}
+            </ScrollView>
 
-          <Text style={[Styles.title, styles.h1]}>下水前記得做足準備哦！！</Text>
-          <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
-          <ArticleHome data={this.state.article} />
-          <Btn
-            text={this.state.btnTxt}
-            onPress={this.onGetAllArticle}
-            select={false}
-          />
+            <Btn
+              text={this.state.btnTxt}
+              onPress={this.onGetAllShop}
+              select={false}
+            />
 
-          <View style={styles.footer}>
-            <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{marginBottom:10}}>monosparta1.0@gmail.com</Text>
-            <Text>APP版本V1.0</Text>
+            <Text style={[Styles.title, styles.h1]}>下水前記得做足準備哦！！</Text>
+            <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
+            <ArticleHome
+              data={this.state.randomArticle}
+              title={this.state.article.title}
+            />
+            <Btn
+              text={this.state.btnTxt}
+              onPress={this.onGetAllArticle}
+              select={false}
+            />
+
+            <View style={styles.footer}>
+              <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ marginBottom: 10 }}>monosparta1.0@gmail.com</Text>
+              <Text>APP版本V1.0</Text>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     )
   }
