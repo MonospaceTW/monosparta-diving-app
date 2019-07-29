@@ -1,71 +1,63 @@
 import React, { Component } from 'react';
 import {
- View,
- ScrollView,
- FlatList,
- StyleSheet,
- TouchableOpacity,
- Image,
- Dimensions,
- Text
+  View,
+  ScrollView,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Text
 } from 'react-native';
 import {
- Card,
- CardItem,
- Tab,
- Tabs
+  Card,
+  CardItem,
+  Tab,
+  Tabs
 } from 'native-base';
+import ArticleCard from './articleCard';
+import Api from '../config/api'
 
-export default class KnowTab extends React.Component {
- constructor(props) {
-  super(props)
-  this.state = {
+export default class TravelTab extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
   }
- }
- keyExtractor = (item, index) => { return index.toString() };
- componentDidMount = async () => {
-  try {
-    let response = await fetch(Api.url + `article`);
-    let responseValue = await response.json();
-    this.setState({
-      responseValue: responseValue.item
-    })
+
+  componentDidMount = async () => {
+    try {
+      let response = await fetch(Api.url + `article/category/knowledge`);
+      let responseValue = await response.json();
+
+      this.setState({
+        responseValue: responseValue.item
+      })
+      console.log(this.state.responseValue)
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
   }
-  catch (err) {
-    console.log('err:', err)
+
+  keyExtractor = (item, index) => { return index.toString() };
+
+  renderItem = ({ item }) => {
+    return (
+      <ArticleCard
+      articleInfo={item}
+      />
+    )
+  };
+
+
+  render() {
+    return (
+      <FlatList
+        data={this.state.responseValue}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+      />
+    )
   }
-}
-
-
- renderItem = ({ item }) => {
-   return (
-
-     <TouchableOpacity style={styles.cardContainer}>
-       <Card>
-         <CardItem cardBody>
-           <Image source={{ uri: item.imgs }} style={styles.spotImg} />
-         </CardItem>
-         <CardItem>
-           <Text style={styles.articleTxt}>{item.title}</Text>
-         </CardItem>
-         <CardItem>
-           <Text numberOfLines={2}>{item.content}</Text>
-         </CardItem>
-       </Card>
-     </TouchableOpacity>
-
-   )
- };
-
- render() {
-  return (
-   <View>
-    <FlatList
-     data={this.state.responseValue}
-     renderItem={this.renderItem}
-     keyExtractor={this.keyExtractor}
-    />
-   </View>
-  )
- }
 }
