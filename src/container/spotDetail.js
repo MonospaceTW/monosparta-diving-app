@@ -47,20 +47,21 @@ export default class SpotDetail extends React.Component {
   }
 
   render() {
+
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView>
           <View style={Styles.container}>
 
-            <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+          <DetailSwiper img={this.props.navigation.state.params.data.img1} />
 
             <View style={Styles.bodyContent}>
 
-              <SpotDescription
-                name={this.props.navigation.state.params.data.name}
-                level={this.props.navigation.state.params.data.level}
-                description={this.props.navigation.state.params.data.description}
-              />
+            <SpotDescription
+              name={this.props.navigation.state.params.data.name}
+              level={this.props.navigation.state.params.data.level}
+              description={this.props.navigation.state.params.data.description}
+            />
 
               <View style={Styles.hr} />
 
@@ -68,13 +69,13 @@ export default class SpotDetail extends React.Component {
 
               <View style={Styles.hr} />
 
-              <SpotLocation
-                county={this.props.navigation.state.params.data.county}
-                district={this.props.navigation.state.params.data.district}
-                latitude={this.props.navigation.state.params.data.latitude}
-                longitude={this.props.navigation.state.params.data.longitude}
-                onGoMap={this.onGoMap}
-              />
+            <SpotLocation
+              county={this.props.navigation.state.params.data.county}
+              district={this.props.navigation.state.params.data.district}
+              latitude={this.props.navigation.state.params.data.latitude}
+              longitude={this.props.navigation.state.params.data.longitude}
+              onGoMap={this.onGoMap}
+            />
 
               <View style={Styles.hr} />
 

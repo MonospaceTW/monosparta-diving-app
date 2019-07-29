@@ -15,8 +15,9 @@ const styles = StyleSheet.create({
   btn: {
 
     marginBottom: 10,
-    width: width * 0.5,
+    width: width * 0.3,
     height: 35,
+    marginRight:5,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: Colors.mainBlue,
@@ -26,8 +27,9 @@ const styles = StyleSheet.create({
   },
   btnPress: {
     marginBottom: 10,
-    width: width * 0.5,
+    width: width * 0.3,
     height: 35,
+    marginRight:5,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: Colors.mainBlue,
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
 
 })
 
-export default class SmallBtn extends React.Component {
+export default class LocationBtn extends React.Component {
   render() {
     return (
       <TouchableOpacity

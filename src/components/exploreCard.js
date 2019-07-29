@@ -18,6 +18,7 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   cardContainer:{
     marginRight: 25,
+    width: width * 0.75,
   },
   imageWrapper: {
     flex: 1,

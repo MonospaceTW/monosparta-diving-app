@@ -22,14 +22,15 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 25,
+    width: width * 0.75
   },
   imageWrapper: {
     flex: 1,
-    flexDirection: 'row'
   },
   spotImg: {
     height: height * 0.3,
-    width: width * 0.75,
+    width: null,
+    flex: 1,
     borderRadius: 6,
   },
   articleTxt: {
@@ -48,7 +49,7 @@ export default class ArticleCard extends React.Component {
                 <Image source={this.props.info.img1} style={styles.spotImg} />
               </CardItem>
               <CardItem>
-                <Text style={styles.articleTxt}>{this.props.name1}</Text>
+                <Text style={styles.articleTxt}>{this.props.info.name1}</Text>
               </CardItem>
               <CardItem>
                 <Text numberOfLines={2}>{this.props.info.content1}</Text>

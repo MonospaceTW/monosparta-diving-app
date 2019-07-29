@@ -53,8 +53,8 @@ export default class ShopService extends React.Component {
           <FontAwesome name="clock-o" size={24} style={Styles.icon} />
           <Text style={styles.subtitle}>提供服務</Text>
         </View>
-        
-        <View style={{ flexDirection: 'row' }}> 
+
+        <View style={{ flexDirection: 'row' }}>
           <Root>
             <TouchableOpacity onPress={this.showToast}>
               <FontAwesome
@@ -98,7 +98,7 @@ export default class ShopService extends React.Component {
           </Root>
 
         </View>
-        
+
       </View>
     );
   }

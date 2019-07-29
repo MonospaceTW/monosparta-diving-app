@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 import {
+  View,
+  Image,
+  TouchableOpacity
+} from 'react-native';
+
+import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
@@ -15,7 +21,6 @@ import SpotList from '../container/spotList';
 import ShopList from '../container/shopList';
 import SpotDetail from '../container/spotDetail';
 import ShopDetail from '../container/shopDetail';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../config/color';
 
 
@@ -43,7 +48,7 @@ const homeNavigator = createStackNavigator({
           <FontAwesome
             name="filter"
             size={30}
-            style={ {color:Colors.mainBlue}}
+            style={{ color: Colors.mainBlue }}
           />
         </TouchableOpacity>
     })
@@ -65,7 +70,7 @@ const homeNavigator = createStackNavigator({
           <FontAwesome
             name="filter"
             size={30}
-            style={ {color:Colors.mainBlue}}
+            style={{ color: Colors.mainBlue }}
           />
         </TouchableOpacity>
     })
@@ -81,8 +86,8 @@ const homeNavigator = createStackNavigator({
   })
 
 const articleNavigator = createStackNavigator({
-  article: { 
-    screen: Article 
+  article: {
+    screen: Article
   },
   articleDetail: {
     screen: ArticleDetail
@@ -97,13 +102,12 @@ const TabNavigator = createBottomTabNavigator({
   {
     screen: homeNavigator,
     navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarIcon: ({ focused }) => {
-        return (
-          <FontAwesome name="home" size={24} style={{ color: '#0288D1' }} />
-
-        )
-      }
+      tabBarLabel: '首頁',
+      tabBarIcon: ({ focused }) => (
+        focused ?
+          <Image style={{ width: 30, height: 30 }} source={require('../assets/fishFocus.png')} /> :
+          <Image style={{ width: 30, height: 30 }} source={require('../assets/fish.png')} />
+      )
     }
   },
 
@@ -111,22 +115,23 @@ const TabNavigator = createBottomTabNavigator({
   {
     screen: articleNavigator,
     navigationOptions: {
-      tabBarLabel: 'Article',
-      tabBarIcon: ({ focused }) => {
-        return (
-          <FontAwesome name="book" size={24} style={{ color: '#0288D1' }} />
-        )
-      }
+      tabBarLabel: '知識',
+      tabBarIcon: ({ focused }) => (
+        focused ?
+          <Image style={{ width: 30, height: 30 }} source={require('../assets/bookFocus.png')} /> :
+          <Image style={{ width: 30, height: 30 }} source={require('../assets/book.png')} />
+      )
     }
   }
-
-
 }, {
     initialRouteName: 'Home',
     tabBarOptions: {
-      showLabel: false,
       activeBackgroundColor: '#E8E7E7'
-    }
+    },
+    labelStyle: {
+      fontSize: 12,
+      fontWeight: 'bold'
+    },
   })
 
 

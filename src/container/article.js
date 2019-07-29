@@ -38,6 +38,10 @@ export default class Article extends React.Component {
   static navigationOptions = {
     title: '探索知識',
 
+    headerStyle: {
+      borderBottomWidth:0,
+      elevation: 0
+    },
     headerTitleStyle: {
       flex: 1,
       fontSize: 20,
