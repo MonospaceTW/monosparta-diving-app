@@ -8,28 +8,24 @@ import {
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 import { Accordion } from "native-base";
+import Styles from '../config/style';
+
 
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-  detailContainer: {
-    marginTop: 25,
+  content: {
+    paddingTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  rowFlexDirection: {
-    flexDirection: 'row'
+  titleWrapper: {
+    flexDirection: 'row',
+    alignItems: 'baseline'
   },
-  subTitle: {
+  subtitle: {
     fontSize: 15
-  },
-  accordionStyle: {
-    width: width * 0.5
-  },
-  icon: {
-    color: '#0288D1',
-    marginRight: 15
-  },
+  }
 })
 
 export default class ShopBusinessHour extends React.Component {
@@ -37,15 +33,23 @@ export default class ShopBusinessHour extends React.Component {
 
   render() {
     return (
-      <View style={styles.detailContainer}>
-              <View style={styles.rowFlexDirection}>
-                <FontAwesome name="clock-o" size={24} style={styles.icon} />
-                <Text style={styles.subTitle}>營業時間</Text>
-              </View>
-              <View style={{ flexDirection: 'row', bottom: 10 }}>
-                <Accordion dataArray={this.props.businessHour} expanded={1} headerStyle={styles.accordionStyle} />
-              </View>
-            </View>
+      <View style={styles.content}>
+
+        <View style={styles.titleWrapper}>
+          <FontAwesome name="clock-o" size={24} style={Styles.icon} />
+          <Text style={styles.subtitle}>營業時間</Text>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <Accordion
+            dataArray={this.props.businessHour}
+            expanded={1}
+            headerStyle={{ width: width * 0.5, borderWidth: 0 }}
+            style={{ borderWidth: 0 }}
+          />
+        </View>
+
+      </View>
     );
   }
 

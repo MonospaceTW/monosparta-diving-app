@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Modal,
-  Alert
+  Alert,
+  SafeAreaView
 
 } from 'react-native';
 
@@ -174,7 +175,7 @@ export default class SpotList extends React.Component {
 
   onGetSpotList = async () => {
     const { navigate } = this.props.navigation
-    const url = Api.url + `site/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    const url = Api.url + `spot/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       Alert.alert('請至少選擇一個區域或難度')
     } else {
@@ -211,7 +212,7 @@ export default class SpotList extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(Api.url + `site/${id}`);
+      let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
     }
@@ -222,48 +223,49 @@ export default class SpotList extends React.Component {
 
   render() {
     return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <Content style={Styles.bodyContent}>
 
-      <Content style={Styles.bodyContent}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              alert("Modal has been closed.");
+            }}
+          >
+            <View style={styles.modalWrapper}>
 
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.modalWrapper}>
+              <View style={styles.modalContent}>
+                <Text style={[Styles.title, styles.title]}>篩選潛點</Text>
 
-            <View style={styles.modalContent}>
-              <Text style={[Styles.title, styles.title]}>篩選潛點</Text>
+                <Text style={[Styles.title, styles.subtitle]}>地區</Text>
+                <View style={{ marginLeft: 20 }}>{this.onGetLocationBtn()}</View>
 
-              <Text style={[Styles.title, styles.subtitle]}>地區</Text>
-              <View style={{marginLeft:20}}>{this.onGetLocationBtn()}</View>
+                <Text style={[Styles.title, styles.subtitle]}>難度</Text>
+                <View style={{ marginLeft: 20 }}>{this.onGetLevelBtn()}</View>
 
-              <Text style={[Styles.title, styles.subtitle]}>難度</Text>
-              <View style={{marginLeft:20}}>{this.onGetLevelBtn()}</View>
-
-              <View style={styles.btnWrapper}>
-                <SmallBtn
-                  select={false}
-                  text={this.state.btnTxt1}
-                />
-                <SmallBtn
-                  onPress={this.onGetSpotList}
-                  text={this.state.btnTxt2}
-                />
+                <View style={styles.btnWrapper}>
+                  <SmallBtn
+                    select={false}
+                    text={this.state.btnTxt1}
+                  />
+                  <SmallBtn
+                    onPress={this.onGetSpotList}
+                    text={this.state.btnTxt2}
+                  />
+                </View>
               </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
 
-        <FlatList
-          data={this.props.navigation.state.params.data}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-        />
-      </Content>
+          <FlatList
+            data={this.props.navigation.state.params.data}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+          />
+        </Content>
+      </SafeAreaView>
 
     )
   }

@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   View,
   ScrollView,
   StyleSheet,
   Text,
-  Linking
+  Linking,
+  SafeAreaView
 } from 'react-native';
 import { Item, Input, Icon } from 'native-base';
+
 import Colors from '../config/color';
 import Styles from '../config/style';
 import Api from '../config/api';
@@ -24,7 +26,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: Colors.mainBlue,
-    marginTop: 50,
+    marginTop: 30,
   },
   inputTxt: {
     paddingLeft: 15
@@ -34,11 +36,11 @@ const styles = StyleSheet.create({
     paddingRight: 15
   },
   footer: {
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     color: Colors.gray,
-    marginTop:20,
-    marginBottom:20
+    marginTop: 20,
+    marginBottom: 20
   }
 })
 export default class Home extends React.Component {
@@ -71,7 +73,7 @@ export default class Home extends React.Component {
         content1: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
       },
       btnTxt: '顯示更多',
-      text:''
+      text: ''    
     }
   }
 
@@ -95,7 +97,7 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch(Api.url + `site`);
+      let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
       let responseSpot = await navigate('spotList', { data: responseValue.item });
     }
@@ -134,19 +136,18 @@ export default class Home extends React.Component {
 
   render() {
     return (
+      <SafeAreaView  style={{flex: 1}}>
       <ScrollView style={Styles.container}>
         <View style={Styles.bodyContent}>
-
           <Item rounded style={styles.input}>
-            <Input 
-              placeholder='試試野柳？' 
-              style={styles.inputTxt} 
+            <Input
+              placeholder='試試野柳？'
+              style={styles.inputTxt}
               value={this.state.text}
               onChangeText={this.onTextChange}
             />
-            <Icon name='search' style={styles.icon} onPress={this.clear}/>
+            <Icon name='search' style={styles.icon} onPress={this.clear} />
           </Item>
-
           <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
           <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
           <ExploreHome data={this.state.exploreSpot} />
@@ -173,11 +174,12 @@ export default class Home extends React.Component {
           />
 
           <View style={styles.footer}>
-            <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')}>聯絡我們：monosparta1.0@gmail.com</Text>
+            <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{marginBottom:10}}>monosparta1.0@gmail.com</Text>
             <Text>APP版本V1.0</Text>
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     )
   }
 }

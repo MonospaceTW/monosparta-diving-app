@@ -6,19 +6,20 @@ import {
   Linking,
 } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
-
+import Styles from '../config/style';
 
 
 const styles = StyleSheet.create({
-  detailContainer: {
-    marginTop: 25,
+  content: {
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  rowFlexDirection: {
-    flexDirection: 'row'
+  titleWrapper: {
+    flexDirection: 'row',
+    alignItems: 'baseline'
   },
-  subTitle: {
+  subtitle: {
     fontSize: 15
   },
   icon: {
@@ -38,18 +39,20 @@ export default class ShopPhone extends React.Component {
 
   render() {
     return (
-      <View style={styles.detailContainer}>
-        <View style={styles.rowFlexDirection}>
-          <FontAwesome name="phone" size={24} style={styles.icon} />
-          <Text style={styles.subTitle}>聯絡電話</Text>
+      <View style={styles.content}>
+
+        <View style={styles.titleWrapper}>
+          <FontAwesome name="phone" size={24} style={Styles.icon} />
+          <Text style={styles.subtitle}>聯絡電話</Text>
         </View>
-        <View>
-          <Text
-            style={styles.linkTxt}
-            onPress={this.onPhoneCall}
-          >
-            {this.props.phone1}</Text>
-        </View>
+
+        <Text
+          style={styles.linkTxt}
+          onPress={this.onPhoneCall}
+        >
+          {this.props.phone1}
+        </Text>
+
       </View>
     );
   }

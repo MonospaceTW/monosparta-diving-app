@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Modal
+  Modal,
+  SafeAreaView
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -145,7 +146,7 @@ export default class SpotList extends React.Component {
     const { navigate } = this.props.navigation
     const url = Api.url + `shop/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
-      let response = await fetch( Api.url + `shops`);
+      let response = await fetch(Api.url + `shops`);
       let responseValue = await response.json();
       let responseShop = await navigate('shopList', { data: responseValue.item });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
@@ -186,7 +187,7 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `shop/${id}`);
+      let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
@@ -197,37 +198,38 @@ export default class SpotList extends React.Component {
 
   render() {
     return (
-
-      <Content style={Styles.bodyContent}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
+      <SafeAreaView style={{ flex: 1 }}>
+        <Content style={Styles.bodyContent}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
           >
-          <View style={{ flex: 1 }}>
-           
             <View style={{ flex: 1 }}>
-              {this.onGetLocationBtn()}
-              {this.onGetServiceBtn()}
-              <Btn
-                select={false}
-                text={this.state.btnTxt1}
-              />
-              <Btn
-              onPress={this.onGetShopList}
-              text={this.state.btnTxt2}
-            />
+
+              <View style={{ flex: 1 }}>
+                {this.onGetLocationBtn()}
+                {this.onGetServiceBtn()}
+                <Btn
+                  select={false}
+                  text={this.state.btnTxt1}
+                />
+                <Btn
+                  onPress={this.onGetShopList}
+                  text={this.state.btnTxt2}
+                />
+              </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
 
-        <FlatList
-          data={this.props.navigation.state.params.data}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-        />
+          <FlatList
+            data={this.props.navigation.state.params.data}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+          />
 
-      </Content>
+        </Content>
+      </SafeAreaView>
     )
   }
 }

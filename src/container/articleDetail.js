@@ -8,6 +8,7 @@ import {
   Dimensions,
   Text,
   Button,
+  SafeAreaView
 } from 'react-native';
 import { WebBrowser } from 'expo-web-browser';
 
@@ -71,6 +72,7 @@ export default class Article extends React.Component {
 
   render() {
     return (
+      <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={Styles.container}>
         <View style={Styles.bodyContent}>
           <Image source={Images.recImg} style={styles.img} />
@@ -93,6 +95,7 @@ export default class Article extends React.Component {
 
         </View>
       </ScrollView>
+      </SafeAreaView>
     )
   }
 }
