@@ -22,7 +22,8 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 25,
-    width: width * 0.75
+    width: width * 0.75,
+    height: height * 0.5
   },
   imageWrapper: {
     flex: 1,
@@ -46,13 +47,13 @@ export default class ArticleCard extends React.Component {
           <TouchableOpacity>
             <Card style={styles.cardContainer}>
               <CardItem cardBody>
-                <Image source={this.props.info.img1} style={styles.spotImg} />
+                <Image source={{uri: this.props.articleInfo.img}} style={styles.spotImg} />
               </CardItem>
               <CardItem>
-                <Text style={styles.articleTxt}>{this.props.info.name1}</Text>
+                <Text style={styles.articleTxt}>{this.props.articleInfo.title}</Text>
               </CardItem>
               <CardItem>
-                <Text numberOfLines={2}>{this.props.info.content1}</Text>
+                <Text numberOfLines={2}>{this.props.articleInfo.content}</Text>
               </CardItem>
             </Card>
           </TouchableOpacity>
