@@ -3,19 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Image,
   TouchableOpacity,
   Dimensions
-} from 'react-native'
+} from 'react-native';
 import {
   Card,
   CardItem
 } from 'native-base';
-
-import { Container, Button } from 'native-base';
-import Color from '../config/color'
-import Styles from '../config/style'
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;

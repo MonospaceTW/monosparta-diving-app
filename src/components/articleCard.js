@@ -25,21 +25,15 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     flex: 1,
-    marginBottom: 20
+    flexDirection: 'row'
   },
   spotImg: {
-    height: height * 0.4,
-    width: null,
-    flex: 1,
-    borderRadius: 5,
+    height: height * 0.3,
+    width: width * 0.75,
+    borderRadius: 6,
   },
   articleTxt: {
     fontSize: 20
-  },
-  btnWrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 })
 
@@ -48,19 +42,19 @@ export default class ArticleCard extends React.Component {
   render() {
     return (
       <View style={styles.imageWrapper}>
-        <TouchableOpacity>
-          <Card style={styles.cardContainer}>
-            <CardItem cardBody>
-              <Image source={this.props.img} style={styles.spotImg} />
-            </CardItem>
-            <CardItem>
-              <Text style={styles.articleTxt}>{this.props.title}</Text>
-            </CardItem>
-            <CardItem>
-              <Text numberOfLines={2}>{this.props.content}</Text>
-            </CardItem>
-          </Card>
-        </TouchableOpacity>
+          <TouchableOpacity>
+            <Card style={styles.cardContainer}>
+              <CardItem cardBody>
+                <Image source={this.props.info.img1} style={styles.spotImg} />
+              </CardItem>
+              <CardItem>
+                <Text style={styles.articleTxt}>{this.props.name1}</Text>
+              </CardItem>
+              <CardItem>
+                <Text numberOfLines={2}>{this.props.info.content1}</Text>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
       </View>
     )
   }

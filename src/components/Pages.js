@@ -8,13 +8,15 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation'
 
-import Home from '../container/home'
-import Article from '../container/article'
-import SpotList from '../container/spotList'
-import ShopList from '../container/shopList'
-import SpotDetail from '../container/spotDetail'
-import ShopDetail from '../container/shopDetail'
+import Home from '../container/home';
+import Article from '../container/article';
+import ArticleDetail from '../container/articleDetail';
+import SpotList from '../container/spotList';
+import ShopList from '../container/shopList';
+import SpotDetail from '../container/spotDetail';
+import ShopDetail from '../container/shopDetail';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Colors from '../config/color';
 
 
 export default class Pages extends Component {
@@ -30,25 +32,42 @@ const homeNavigator = createStackNavigator({
     screen: Home,
     navigationOptions: { header: null }
   },
-  spotList: { screen: SpotList },
+  spotList: {
+    screen: SpotList,
+    navigationOptions: ({ navigation }) => ({
+      headerRight:
+        <TouchableOpacity
+          style={{ marginRight: 10 }}
+          onPress={() => navigation.state.params.showModal()}
+        >
+          <FontAwesome
+            name="filter"
+            size={30}
+            style={ {color:Colors.mainBlue}}
+          />
+        </TouchableOpacity>
+    })
+  },
   spotDetail: {
     screen: SpotDetail,
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.data.name}`,
+      title: `${navigation.state.params.data.name}`
     }),
   },
   shopList: {
     screen: ShopList,
     navigationOptions: ({ navigation }) => ({
       headerRight:
-      <TouchableOpacity
-      style={{marginRight: 10}}
-      >
-        <FontAwesome
-        name="filter"
-        size={30}
-        onPress={() => navigation.state.params.showModal()} />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{ marginRight: 10 }}
+          onPress={() => navigation.state.params.showModal()}
+        >
+          <FontAwesome
+            name="filter"
+            size={30}
+            style={ {color:Colors.mainBlue}}
+          />
+        </TouchableOpacity>
     })
   },
   shopDetail: {
@@ -57,31 +76,22 @@ const homeNavigator = createStackNavigator({
       title: `${navigation.state.params.data.name}`,
     }),
   },
-
 }, {
     initialRouteName: 'Home',
   })
 
 const articleNavigator = createStackNavigator({
-  article: { screen: Article },
+  article: { 
+    screen: Article 
+  },
+  articleDetail: {
+    screen: ArticleDetail
+  }
 }, {
     initialRouteName: 'article'
   })
 
 const TabNavigator = createBottomTabNavigator({
-  // page1:
-  // {
-  //   screen: FirstPage,
-  //   navigationOptions: {
-  //     tabBarLabel: "People",
-  //     tabBarIcon: ({focused, tintColor}) => (
-  //              <Icon
-  //                  name={focused? 'md-people' : 'md-people' }
-  //                  size={24}
-  //              />
-  //          ),
-  //   }
-  // },
 
   Home:
   {
@@ -110,33 +120,6 @@ const TabNavigator = createBottomTabNavigator({
     }
   }
 
-  // page4:
-  // {
-  //   screen: FourthPage,
-  //   navigationOptions: {
-  //     tabBarLabel: "Notifications",
-  //     tabBarIcon: ({focused, tintColor}) => (
-  //              <Icon
-  //                  name={focused? 'md-notifications' : 'md-notifications' }
-  //                  size={24}
-  //              />
-  //          ),
-  //   }
-  // },
-
-  // page5:
-  // {
-  //   screen: FifthPage,
-  //   navigationOptions: {
-  //     tabBarLabel: "Person",
-  //     tabBarIcon: ({focused, tintColor}) => (
-  //              <Icon
-  //                  name={focused? 'md-person' : 'md-person' }
-  //                  size={24}
-  //              />
-  //          ),
-  //   }
-  // },
 
 }, {
     initialRouteName: 'Home',

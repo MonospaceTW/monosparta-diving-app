@@ -143,7 +143,7 @@ export default class SpotList extends React.Component {
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
-    const url = Api.url + `shops/search?location=${this.state.selLocation}&service=${this.state.selService}`
+    const url = Api.url + `shop/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
       let response = await fetch( Api.url + `shops`);
       let responseValue = await response.json();
@@ -186,7 +186,7 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
-      let response = await fetch( Api.url + `shops/${id}`);
+      let response = await fetch( Api.url + `shop/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
@@ -205,17 +205,18 @@ export default class SpotList extends React.Component {
           visible={this.state.modalVisible}
           >
           <View style={{ flex: 1 }}>
-            <Btn
-              onPress={this.onGetShopList}
-              text={this.state.btnTxt2}
-            />
-            <View style={{ marginTop: 100, flex: 1 }}>
+           
+            <View style={{ flex: 1 }}>
               {this.onGetLocationBtn()}
               {this.onGetServiceBtn()}
               <Btn
                 select={false}
                 text={this.state.btnTxt1}
               />
+              <Btn
+              onPress={this.onGetShopList}
+              text={this.state.btnTxt2}
+            />
             </View>
           </View>
         </Modal>
