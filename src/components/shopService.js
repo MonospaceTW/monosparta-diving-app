@@ -36,9 +36,6 @@ export default class ShopService extends React.Component {
     super(props)
   }
 
-
-
-
   render() {
     return (
       <View style={styles.content}>
@@ -90,6 +87,7 @@ export default class ShopService extends React.Component {
                   style={this.props.service.indexOf('EquipmentSale') < 0 ? styles.disabledIcon : Styles.icon}
                 />
               </TouchableOpacity>
+
             </View>
 
 
