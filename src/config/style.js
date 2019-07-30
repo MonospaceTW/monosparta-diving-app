@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
   icon: {
     color: Colors.mainBlue,
     marginRight: 15
-  }
+  },
+
 
 });
 
