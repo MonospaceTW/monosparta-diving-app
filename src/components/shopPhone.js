@@ -4,8 +4,8 @@ import {
   Text,
   StyleSheet,
   Linking,
-} from 'react-native'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+} from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Styles from '../config/style';
 import Colors from '../config/color';
 

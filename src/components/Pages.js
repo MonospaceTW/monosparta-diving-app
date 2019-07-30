@@ -86,14 +86,14 @@ const homeNavigator = createStackNavigator({
   })
 
 const articleNavigator = createStackNavigator({
-  article: {
-    screen: Article
-  },
+  // article: {
+  //   screen: Article
+  // },
   articleDetail: {
     screen: ArticleDetail
   }
 }, {
-    initialRouteName: 'article'
+    initialRouteName: 'articleDetail'
   })
 
 const TabNavigator = createBottomTabNavigator({
