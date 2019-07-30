@@ -31,7 +31,7 @@ export default class RoundedBtn extends React.Component {
         style={styles.btn}
       >
         <Text style={styles.btnTxt}>
-          #知識
+          {this.props.text}
         </Text>
       </TouchableOpacity>
     )
