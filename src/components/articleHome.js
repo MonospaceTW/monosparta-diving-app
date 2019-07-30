@@ -1,35 +1,61 @@
 import React, { Component } from 'react'
 import {
+  StyleSheet,
   Text,
   View,
-  FlatList
-} from 'react-native';
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Dimensions
+} from 'react-native'
+import {
+  Card,
+  CardItem
+} from 'native-base';
 
-import ArticleCard from './articleCard';
-import Styles from '../config/style';
+import { Container, Button } from 'native-base';
+import Btn from '../components/button'
 
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
+const styles = StyleSheet.create({
+  cardContainer: {
+    marginRight: 25,
+    width: width * 0.75,
+    height: height * 0.45,
+    borderRadius: 6
+  },
+  imageWrapper: {
+    flex: 1,
+  },
+  spotImg: {
+    height: height * 0.3,
+    width: null,
+    flex: 1,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6
+  },
+  articleTxt: {
+    fontSize: 20
+  }
+})
 
-export default class ArticleHome extends React.Component {
-
-  keyExtractor = (item, index) => { return index.toString() };
-
-  renderItem = ({ item }) => {
-    return (
-      <ArticleCard articleInfo={item} />
-    )
-  };
+export default class ArticleCard extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={Styles.title}>{this.props.title}</Text>
-        <FlatList
-          data={this.props.data}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-          horizontal={true}
-        />
+      <View style={styles.imageWrapper}>
+          <TouchableOpacity>
+            <Card style={styles.cardContainer}>
+              <CardItem cardBody>
+                <Image source={{uri: this.props.data.img}} style={styles.spotImg} />
+              </CardItem>
+              <CardItem>
+                <Text style={styles.articleTxt}>{this.props.data.title}</Text>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
       </View>
     )
   }

@@ -47,7 +47,7 @@ export default class SpotLocation extends React.Component {
           />
         </View>
 
-      </View >
+      </View>
     );
   }
 

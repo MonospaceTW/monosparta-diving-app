@@ -1,22 +1,34 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text
-} from 'react-native'
+  Text,
+  StyleSheet
+} from 'react-native';
 
-import Styles from '../config/style'
+import Styles from '../config/style';
 
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    marginTop: 20
+  },
+  title: {
+    marginBottom: 20
+  },
+  text: {
+    marginBottom: 10
+  }
+})
 
 export default class ShopDescription extends React.Component {
 
 
   render() {
     return (
-      <View>
-          <Text style={Styles.title}>{this.props.name}</Text>
-        <View style={Styles.content}>
-          <Text>{this.props.description}</Text>
-        </View>
+
+      <View style={styles.content}>
+        <Text style={[Styles.title, styles.title]}>{this.props.name}</Text>
+        <Text style={[Styles.text, styles.text]}>{this.props.description}</Text>
       </View>
     );
   }

@@ -5,19 +5,36 @@ import {
   Linking,
   Platform,
   Alert,
+  StyleSheet,
   SafeAreaView
-} from 'react-native'
+} from 'react-native';
+import { Root, Toast } from 'native-base';
 
-import DetailSwiper from '../components/swiper'
-import ShopDescription from '../components/shopDescription'
-import ShopBusinessHour from '../components/shopBusinessHour'
-import ShopService from '../components/shopService'
-import ShopPhone from '../components/shopPhone'
-import ShopWeb from '../components/shopWeb'
-import ShopLocation from '../components/shopLocation'
-import ShopRate from '../components/shopRate'
-import Styles from '../config/style'
-import Color from '../config/color'
+import DetailSwiper from '../components/swiper';
+import ShopDescription from '../components/shopDescription';
+import ShopBusinessHour from '../components/shopBusinessHour';
+import ShopService from '../components/shopService';
+import ShopPhone from '../components/shopPhone';
+import ShopWeb from '../components/shopWeb';
+import ShopLocation from '../components/shopLocation';
+import ShopRate from '../components/shopRate';
+
+import Styles from '../config/style';
+import Color from '../config/color';
+
+const styles = StyleSheet.create({
+  toast: {
+    width: 100,
+    alignSelf: 'center',
+    borderRadius: 30,
+  },
+  toastTxt: {
+    textAlign: 'center',
+    fontSize: 18,
+  }
+})
+
+
 
 export default class SpotDetail extends React.Component {
   static navigationOptions = {
@@ -59,64 +76,133 @@ export default class SpotDetail extends React.Component {
     )
   }
 
+  onShowExploreDiving = () => {
+    Toast.show({
+      text: '潛水體驗',
+      style: {
+        ...styles.toast
+      },
+      textStyle: {
+        ...styles.toastTxt
+      }
+    })
+  }
+
+  onShowLicenseCourse = () => {
+    Toast.show({
+      text: '證照課程',
+      style: {
+        ...styles.toast
+      },
+      textStyle: {
+        ...styles.toastTxt
+      }
+    })
+  }
+
+  onShowFood = () => {
+    Toast.show({
+      text: '飲食',
+      style: {
+        ...styles.toast
+      },
+      textStyle: {
+        ...styles.toastTxt
+      }
+    })
+  }
+
+  onShowAccommodation = () => {
+    Toast.show({
+      text: '住宿',
+      style: {
+        ...styles.toast
+      },
+      textStyle: {
+        ...styles.toastTxt
+      }
+    })
+  }
+
+  onShowEquipmentSale = () => {
+    Toast.show({
+      text: '器材銷售',
+      style: {
+        ...styles.toast
+      },
+      textStyle: {
+        ...styles.toastTxt
+      }
+    })
+  }
 
   render() {
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView>
-          <View style={Styles.container}>
+      <Root>
+        <SafeAreaView style={{ flex: 1 }}>
+          <ScrollView>
+            <View style={Styles.container}>
 
-          <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+              <DetailSwiper img={this.props.navigation.state.params.data.img1} />
 
-            <View style={Styles.bodyContent}>
+              <View style={Styles.bodyContent}>
 
-            <ShopDescription
-              name={this.props.navigation.state.params.data.name}
-              description={this.props.navigation.state.params.data.description}
-            />
+                <ShopDescription
+                  name={this.props.navigation.state.params.data.name}
+                  description={this.props.navigation.state.params.data.description}
+                />
 
-              <ShopBusinessHour
-                businessHour={this.state.businessHour}
-              />
+                <ShopBusinessHour
+                  businessHour={this.state.businessHour}
+                />
 
-              <View style={Styles.hr} />
+                <View style={Styles.hr} />
 
-            <ShopService
-              service={this.props.navigation.state.params.data.service}
-            />
 
-              <View style={Styles.hr} />
+                <ShopService
+                  service={this.props.navigation.state.params.data.service}
+                  onShowExploreDiving={this.onShowExploreDiving}
+                  onShowLicenseCourse={this.onShowLicenseCourse}
+                  onShowFood={this.onShowFood}
+                  onShowAccommodation={this.onShowAccommodation}
+                  onShowEquipmentSale={this.onShowEquipmentSale}
+                />
 
-            <ShopPhone
-              phone1={this.props.navigation.state.params.data.phone1}
-            />
 
-              <View style={Styles.hr} />
+                <View style={Styles.hr} />
 
-            <ShopWeb
-              web1={this.props.navigation.state.params.data.web1}
-              onClick={this.onGoWeb}
-            />
+                <ShopPhone
+                  phone1={this.props.navigation.state.params.data.phone1}
+                />
 
-              <View style={Styles.hr} />
+                <View style={Styles.hr} />
 
-            <ShopLocation
-              county={this.props.navigation.state.params.data.county}
-              district={this.props.navigation.state.params.data.district}
-              address={this.props.navigation.state.params.data.address}
-              latitude={this.props.navigation.state.params.data.latitude}
-              longitude={this.props.navigation.state.params.data.longitude}
-              onGoMap={this.onGoMap}
-            />
+                <ShopWeb
+                  web1={this.props.navigation.state.params.data.web1}
+                  onClick={this.onGoWeb}
+                />
 
-              <View style={Styles.hr} />
+                <View style={Styles.hr} />
 
-              <ShopRate />
+                <ShopLocation
+                  county={this.props.navigation.state.params.data.county}
+                  district={this.props.navigation.state.params.data.district}
+                  address={this.props.navigation.state.params.data.address}
+                  latitude={this.props.navigation.state.params.data.latitude}
+                  longitude={this.props.navigation.state.params.data.longitude}
+                  onGoMap={this.onGoMap}
+                />
+
+                <View style={Styles.hr} />
+
+                <ShopRate />
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          </ScrollView>
+        </SafeAreaView>
+
+      </Root>
     )
   }
 }

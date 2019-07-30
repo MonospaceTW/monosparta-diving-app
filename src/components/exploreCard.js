@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 25,
     width: width * 0.75,
+    borderRadius: 6
   },
   imageWrapper: {
     flex: 1,
@@ -27,8 +28,17 @@ const styles = StyleSheet.create({
   spotImg: {
     width: width * 0.75,
     height: height * 0.3,
-    borderRadius: 6
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6
   },
+  title: {
+    flexDirection: 'row'
+  },
+  titleTxt: {
+    fontWeight: 'bold'
+  },
+
+
 })
 
 export default class ExploreCard extends React.Component {
@@ -41,7 +51,8 @@ export default class ExploreCard extends React.Component {
               <Image source={{ uri: this.props.data.img1 }} style={styles.spotImg} />
             </CardItem>
             <CardItem>
-              <Text>{this.props.data.name}　{this.props.data.county} {this.props.data.district}</Text>
+              <Text style={styles.titleTxt}>{this.props.data.name}　</Text>
+              <Text>{this.props.data.county}{this.props.data.district}</Text>
             </CardItem>
           </Card>
         </TouchableOpacity>

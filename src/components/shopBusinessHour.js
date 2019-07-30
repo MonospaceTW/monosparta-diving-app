@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  Dimensions,
-  StyleSheet,
+  Dimensions
 } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 
@@ -13,34 +12,19 @@ import Styles from '../config/style';
 
 const width = Dimensions.get('window').width;
 
-const styles = StyleSheet.create({
-  content: {
-    paddingTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  titleWrapper: {
-    flexDirection: 'row',
-    alignItems: 'baseline'
-  },
-  subtitle: {
-    fontSize: 15
-  }
-})
-
 export default class ShopBusinessHour extends React.Component {
 
 
   render() {
     return (
-      <View style={styles.content}>
+      <View style={Styles.component}>
 
-        <View style={styles.titleWrapper}>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
           <FontAwesome name="clock-o" size={24} style={Styles.icon} />
-          <Text style={styles.subtitle}>營業時間</Text>
+          <Text style={Styles.subtitleGray}>營業時間</Text>
         </View>
 
-        <View style={{ flexDirection: 'row' }}>
+        <View>
           <Accordion
             dataArray={this.props.businessHour}
             expanded={1}

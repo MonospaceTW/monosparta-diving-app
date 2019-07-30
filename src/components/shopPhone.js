@@ -7,27 +7,12 @@ import {
 } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Styles from '../config/style';
+import Colors from '../config/color';
 
 
 const styles = StyleSheet.create({
-  content: {
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  titleWrapper: {
-    flexDirection: 'row',
-    alignItems: 'baseline'
-  },
-  subtitle: {
-    fontSize: 15
-  },
-  icon: {
-    color: '#0288D1',
-    marginRight: 15
-  },
   linkTxt: {
-    color: 'blue',
+    color: Colors.mainBlue
   },
 })
 
@@ -39,11 +24,11 @@ export default class ShopPhone extends React.Component {
 
   render() {
     return (
-      <View style={styles.content}>
+      <View style={Styles.component}>
 
-        <View style={styles.titleWrapper}>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
           <FontAwesome name="phone" size={24} style={Styles.icon} />
-          <Text style={styles.subtitle}>聯絡電話</Text>
+          <Text style={Styles.subtitleGray}>聯絡電話</Text>
         </View>
 
         <Text
