@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import {
-  View,
   Text,
   FlatList,
   Image,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Modal,
-  Alert,
   SafeAreaView
 
 } from 'react-native';
@@ -16,9 +13,9 @@ import {
 import { Content, Card, CardItem } from 'native-base';
 
 import SmallBtn from '../components/smallButton';
-import Api from '../config/api'
+import ListModal from '../components/listModal'
 
-import Colors from '../config/color';
+import Api from '../config/api'
 import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
@@ -38,47 +35,6 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6
-  },
-  outerContainer: {
-    width: width * 0.2,
-    backgroundColor: 'rgba(0,0,0,.5)',
-  },
-  modalWrapper: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,.5)',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
-  },
-  modalContent: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    width: width * 0.8,
-    position: 'relative',
-  },
-  locationBtnWrapper: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    marginLeft: 20
-  },
-  btnWrapper: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    bottom: 30,
-    right: 10
-  },
-  title: {
-    marginBottom: 20,
-    marginLeft: 20,
-    fontSize: 25
-  },
-  subtitle: {
-    marginLeft: 20,
-    marginBottom: 20
   }
 })
 
@@ -101,8 +57,22 @@ export default class SpotList extends React.Component {
       },
       selLocation: '',
       selLevel: '',
+      modalTitle: '篩選潛點',
+      modalLocationTitle: '地區',
+      modalLevelTitle: '難度',
       btnTxt1: '重設',
       btnTxt2: '確認'
+    }
+  }
+
+  static navigationOptions = {
+    title: '探索潛點',
+
+    headerTitleStyle: {
+      flex: 1,
+      fontSize: 20,
+      textAlign: 'center',
+      color: '#545454'
     }
   }
 
@@ -116,18 +86,6 @@ export default class SpotList extends React.Component {
   }
   showModal = () => {
     this.setModalVisible(true)
-  }
-
-  //header
-  static navigationOptions = {
-    title: '探索潛點',
-
-    headerTitleStyle: {
-      flex: 1,
-      fontSize: 20,
-      textAlign: 'center',
-      color: '#545454'
-    }
   }
 
   onGetLocationBtn = () => {
@@ -232,6 +190,10 @@ export default class SpotList extends React.Component {
     )
   };
 
+  onSetModalVisible = () => {
+    this.setModalVisible(!this.state.modalVisible)
+  }
+
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
@@ -249,44 +211,19 @@ export default class SpotList extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Content style={Styles.bodyContent}>
 
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              alert("Modal has been closed.");
-            }}
-          >
-            <View style={{ flex: 1, flexDirection: 'row' }}>
-              <TouchableOpacity style={styles.outerContainer} onPress={() => this.setModalVisible(!this.state.modalVisible)}>
-                <View />
-              </TouchableOpacity>
-              <View style={styles.modalWrapper}>
-
-                <View style={styles.modalContent}>
-                  <Text style={[Styles.title, styles.title]}>篩選潛點</Text>
-
-                  <Text style={[Styles.title, styles.subtitle]}>地區</Text>
-                  <View style={styles.locationBtnWrapper}>{this.onGetLocationBtn()}</View>
-
-                  <Text style={[Styles.title, styles.subtitle]}>難度</Text>
-                  <View style={styles.locationBtnWrapper}>{this.onGetLevelBtn()}</View>
-
-                  <View style={styles.btnWrapper}>
-                    <SmallBtn
-                      select={false}
-                      onPress={this.clearBtn}
-                      text={this.state.btnTxt1}
-                    />
-                    <SmallBtn
-                      onPress={this.onGetSpotList}
-                      text={this.state.btnTxt2}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-          </Modal>
+        <ListModal
+            modalVisible={this.state.modalVisible}
+            onPress={this.onSetModalVisible}
+            onPressReset={this.clearBtn}
+            onPressSubmit={this.onGetSpotList}
+            title={this.state.modalTitle}
+            subtitle1={this.state.modalLocationTitle}
+            subtitle2={this.state.modalLevelTitle}
+            onGetFirstBtn={this.onGetLocationBtn()}
+            onGetSecondBtn={this.onGetLevelBtn()}
+            btnTxt1={this.state.btnTxt1}
+            btnTxt2={this.state.btnTxt2}
+          />
 
           <FlatList
             data={this.props.navigation.state.params.spotData}

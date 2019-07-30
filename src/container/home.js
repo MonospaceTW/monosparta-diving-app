@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   Linking,
-  FlatList,
   SafeAreaView
 } from 'react-native';
 import { Item, Input, Icon } from 'native-base';
@@ -13,11 +12,8 @@ import { Item, Input, Icon } from 'native-base';
 import Colors from '../config/color';
 import Styles from '../config/style';
 import Api from '../config/api';
-import Images from '../config/images';
 import Btn from '../components/button';
 import ArticleHome from '../components/articleHome';
-import ExploreHome from '../components/exploreHome';
-
 import ExploreCard from '../components/exploreCard';
 
 
@@ -216,10 +212,6 @@ export default class Home extends React.Component {
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
             <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
 
-            {/* <ExploreHome
-              data={this.state.randomSpot}
-              title={this.state.exploreSpot.title}
-            /> */}
             <Text style={Styles.title}>{this.state.exploreSpotTitle}</Text>
             <ScrollView horizontal={true}>
               {this.renderSpotRandom()}
@@ -231,10 +223,6 @@ export default class Home extends React.Component {
               select={false}
             />
 
-            {/* <ExploreHome
-              data={this.state.randomShop}
-              title={this.state.exploreShop.title}
-            /> */}
             <Text style={Styles.title}>{this.state.exploreShopTitle}</Text>
             <ScrollView horizontal={true}>
               {this.renderShopRandom()}
@@ -248,10 +236,7 @@ export default class Home extends React.Component {
 
             <Text style={[Styles.title, styles.h1]}>下水前記得做足準備哦！！</Text>
             <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
-            {/* <ArticleHome
-              data={this.state.randomArticle}
-              title={this.state.article.title}
-            /> */}
+
             <Text style={Styles.title}>{this.state.articleTitle}</Text>
             <ScrollView horizontal={true}>
               {this.renderArticleRandom()}
