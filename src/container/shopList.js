@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import {
-  View,
   Text,
   FlatList,
   Image,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Modal,
   SafeAreaView
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
 
 import SmallBtn from '../components/smallButton';
-import Api from '../config/api'
+import ListModal from '../components/listModal'
 
-import Colors from '../config/color';
+import Api from '../config/api'
 import Styles from '../config/style';
 
 const height = Dimensions.get('window').height;
@@ -28,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  cardContainer:{
+  cardContainer: {
     borderRadius: 6
   },
   spotImg: {
@@ -36,47 +34,6 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6
-  },
-  outerContainer: {
-    width: width * 0.2,
-    backgroundColor: 'rgba(0,0,0,.5)',
-  },
-  modalWrapper: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,.5)',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
-  },
-  modalContent: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    width: width * 0.8,
-    position: 'relative',
-  },
-  locationBtnWrapper: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    marginLeft: 20
-  },
-  btnWrapper: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    position: 'absolute',
-    bottom: 30,
-    left: 60
-  },
-  title: {
-    marginBottom: 20,
-    marginLeft: 20,
-    fontSize: 25
-  },
-  subtitle: {
-    marginLeft: 20,
-    marginBottom: 20
   }
 })
 
@@ -102,6 +59,9 @@ export default class SpotList extends React.Component {
       },
       selLocation: '',
       selService: '',
+      modalTitle: '篩選潛店',
+      modalLocationTitle: '地區',
+      modalServiceTitle: '服務',
       btnTxt1: '重設',
       btnTxt2: '確認'
     }
@@ -234,7 +194,9 @@ export default class SpotList extends React.Component {
     )
   };
 
-
+  onSetModalVisible = () => {
+    this.setModalVisible(!this.state.modalVisible)
+  }
 
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
@@ -252,44 +214,21 @@ export default class SpotList extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <Content style={Styles.bodyContent}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              alert("Modal has been closed.");
-            }}
-          >
-            <View style={{ flex: 1, flexDirection: 'row' }}>
-              <TouchableOpacity style={styles.outerContainer} onPress={() => this.setModalVisible(!this.state.modalVisible)}>
-                <View />
-              </TouchableOpacity>
-              <View style={styles.modalWrapper}>
 
-                <View style={styles.modalContent}>
-                  <Text style={[Styles.title, styles.title]}>篩選潛店</Text>
+          <ListModal
+            modalVisible={this.state.modalVisible}
+            onPress={this.onSetModalVisible}
+            onPressReset={this.clearBtn}
+            onPressSubmit={this.onGetShopList}
+            title={this.state.modalTitle}
+            subtitle1={this.state.modalLocationTitle}
+            subtitle2={this.state.modalServiceTitle}
+            onGetFirstBtn={this.onGetLocationBtn()}
+            onGetSecondBtn={this.onGetServiceBtn()}
+            btnTxt1={this.state.btnTxt1}
+            btnTxt2={this.state.btnTxt2}
+          />
 
-                  <Text style={[Styles.title, styles.subtitle]}>地區</Text>
-                  <View style={styles.locationBtnWrapper}>{this.onGetLocationBtn()}</View>
-
-                  <Text style={[Styles.title, styles.subtitle]}>服務</Text>
-                  <View style={styles.locationBtnWrapper}>{this.onGetServiceBtn()}</View>
-
-                  <View style={styles.btnWrapper}>
-                    <SmallBtn
-                      select={false}
-                      onPress={this.clearBtn}
-                      text={this.state.btnTxt1}
-                    />
-                    <SmallBtn
-                      onPress={this.onGetShopList}
-                      text={this.state.btnTxt2}
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-          </Modal>
           <FlatList
             data={this.props.navigation.state.params.shopData}
             renderItem={this.renderItem}
