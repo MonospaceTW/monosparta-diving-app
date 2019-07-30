@@ -16,13 +16,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     color: Colors.gray,
-    paddingTop: 5,
-    paddingBottom: 5
+    marginTop: 5,
+    marginBottom: 5
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 15,
     color: Colors.mainBlue,
     marginBottom: 30
+  },
+  subtitleGray: {
+    fontSize: 15,
+    color: Colors.gray,
+    fontWeight: '500'
+  },
+  text: {
+    fontSize: 15,
+    color: Colors.gray,
   },
   content: {
     color: Colors.gray,
@@ -37,7 +46,10 @@ const styles = StyleSheet.create({
   },
   component: {
     flex: 1,
-    padding: 5
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline'
   },
   hr: {
     borderBottomColor: Colors.lineGray,

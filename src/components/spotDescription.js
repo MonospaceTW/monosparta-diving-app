@@ -2,18 +2,31 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-} from 'react-native'
+  StyleSheet
+} from 'react-native';
 
-import Styles from '../config/style'
+import Styles from '../config/style';
+
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    marginTop: 20
+  },
+  title: {
+    marginBottom: 20
+  },
+  text: {
+    marginBottom: 10
+  }
+})
 
 export default class SpotDescription extends React.Component {
 
-
   render() {
     return (
-      <View style={Styles.component}>
-        <Text style={Styles.title}>{this.props.name}　{this.props.level}</Text>
-        <Text style={Styles.content}>{this.props.description}</Text>
+      <View style={styles.content}>
+        <Text style={[Styles.title, styles.title]}>{this.props.name}</Text>
+        <Text style={[Styles.text, styles.text]}>{this.props.description}</Text>
       </View>
     );
   }

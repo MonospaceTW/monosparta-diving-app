@@ -111,7 +111,6 @@ export default class Home extends React.Component {
         randomShop: randomShop.item,
         randomArticle: randomArticle.item
       })
-      console.log(this.state.randomSpot)
     }
     catch (err) {
       console.log('err:', err)

@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     position: 'absolute',
     bottom: 30,
-    left: 60
+    right: 10
   },
   title: {
     marginBottom: 20,

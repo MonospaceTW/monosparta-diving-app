@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   btn: {
 
     marginBottom: 10,
-    width: width * 0.3,
+    width: width * 0.35,
     height: 35,
     marginRight:5,
     borderRadius: 8,
@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
   },
   btnPress: {
     marginBottom: 10,
-    width: width * 0.3,
+    width: width * 0.35,
     height: 35,
     marginRight:5,
-    borderRadius: 8,
+    borderRadius: 6,
     borderWidth: 1,
     borderColor: Colors.mainBlue,
     backgroundColor: Colors.mainBlue,
