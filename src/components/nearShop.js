@@ -21,7 +21,7 @@ export default class NearShop extends React.Component {
     return (
       <View style={Styles.component}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-          <FontAwesome name="ship" size={24} style={Styles.icon} />
+          <FontAwesome name="ship" size={18} style={Styles.icon} />
           <Text style={Styles.subtitleGray}>附近潛店</Text>
         </View>
       </View>
