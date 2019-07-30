@@ -199,6 +199,20 @@ export default class Home extends React.Component {
     })
   }
 
+  onSearch = async () => {
+    // const { navigate } = this.props.navigation;
+    const keyword =  encodeURIComponent(this.state.text) 
+    try {
+      let response = await fetch(Api.url + `keyword/${keyword}`);
+      let responseJson = await response.json();
+      console.log(responseJson)
+      // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -212,7 +226,7 @@ export default class Home extends React.Component {
                 onChangeText={this.onTextChange}
                 onSubmitEditing={this.clear}
               />
-              <Icon name='search' style={styles.icon} onPress={this.clear} />
+              <Icon name='search' style={styles.icon} onPress={this.onSearch} />
             </Item>
 
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
