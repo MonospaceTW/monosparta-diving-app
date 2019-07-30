@@ -12,7 +12,7 @@ import Colors from '../config/color';
 const styles = StyleSheet.create({
   content: {
     marginTop: 20,
-    
+
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
@@ -29,11 +29,13 @@ export default class ShopWeb extends React.Component {
 
   render() {
     return (
-      <View style={styles.content}>
-        <FontAwesome name="globe" size={24} style={Styles.icon} />
-        <Text style={styles.subtitle}>網站連結</Text>
-        <View style={{ alignItems: 'flex-end' }}>
-          <Text onPress={this.props.onClick} style={styles.web}>網址1</Text>
+      <View style={Styles.component}>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+          <FontAwesome name="globe" size={24} style={Styles.icon} />
+          <Text style={Styles.subtitleGray}>網站連結</Text>
+        </View>
+        <View>
+          <Text onPress={this.props.onClick} style={styles.web}>網址</Text>
         </View>
       </View>
     );

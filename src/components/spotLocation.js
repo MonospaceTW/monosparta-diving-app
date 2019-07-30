@@ -4,27 +4,23 @@ import {
   Text,
   Dimensions,
   StyleSheet,
-} from 'react-native'
+} from 'react-native';
 
-import Map from '../components/map'
-import Styles from '../config/style'
+import Map from '../components/map';
+import Styles from '../config/style';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
-  detailContainer: {
-    marginTop: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  rowFlexDirection: {
-    flexDirection: 'row'
-  },
-  subTitle: {
-    fontSize: 15
-  },
   mapSize: {
     height: height * 0.35
+  },
+  subtitle: {
+    marginBottom: 10
+  },
+  text: {
+    marginBottom: 20
   }
 })
 
@@ -34,14 +30,15 @@ export default class SpotLocation extends React.Component {
   render() {
     return (
       <View>
-        <View style={styles.detailContainer}>
-          <View style={styles.rowFlexDirection}>
-            <Text style={Styles.title}>所在位置</Text>
-          </View>
-          <View>
-            <Text>{this.props.county}　{this.props.district}</Text>
+
+        <View style={Styles.component}>
+          <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+            <FontAwesome name="map-marker" size={24} style={Styles.icon} />
+            <Text style={[Styles.subtitleGray, styles.subtitle]}>所在位置</Text>
           </View>
         </View>
+        <Text style={[Styles.text, styles.text]}>       {this.props.county}{this.props.district}</Text>
+
         <View style={styles.mapSize}>
           <Map
             latitude={this.props.latitude}
@@ -49,7 +46,8 @@ export default class SpotLocation extends React.Component {
             onPress={this.props.onGoMap}
           />
         </View>
-      </View >
+
+      </View>
     );
   }
 

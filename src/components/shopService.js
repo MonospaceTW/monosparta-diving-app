@@ -13,18 +13,6 @@ import Styles from '../config/style';
 
 
 const styles = StyleSheet.create({
-  content: {
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  titleWrapper: {
-    flexDirection: 'row',
-    alignItems: 'baseline'
-  },
-  subtitle: {
-    fontSize: 15
-  },
   disabledIcon: {
     color: '#BFBFBF',
     marginRight: 15
@@ -38,11 +26,11 @@ export default class ShopService extends React.Component {
 
   render() {
     return (
-      <View style={styles.content}>
+      <View style={Styles.component}>
 
-        <View style={styles.titleWrapper}>
-          <FontAwesome name="clock-o" size={24} style={Styles.icon} />
-          <Text style={styles.subtitle}>提供服務</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+          <FontAwesome name="ship" size={18} style={Styles.icon} />
+          <Text style={Styles.subtitleGray}>提供服務</Text>
         </View>
 
         <View>
