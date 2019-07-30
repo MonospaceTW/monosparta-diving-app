@@ -18,6 +18,14 @@ import {
 import ArticleCard from './articleCard';
 import Api from '../config/api'
 
+const styles = StyleSheet.create({
+  cardListContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
+
+
 export default class TravelTab extends React.Component {
   constructor(props) {
     super(props)
@@ -33,7 +41,6 @@ export default class TravelTab extends React.Component {
       this.setState({
         responseValue: responseValue.item
       })
-      console.log(this.state.responseValue)
     }
     catch (err) {
       console.log('err:', err)
@@ -45,7 +52,7 @@ export default class TravelTab extends React.Component {
   renderItem = ({ item }) => {
     return (
       <ArticleCard
-      articleInfo={item}
+        articleInfo={item}
       />
     )
   };
@@ -53,11 +60,13 @@ export default class TravelTab extends React.Component {
 
   render() {
     return (
-      <FlatList
-        data={this.state.responseValue}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-      />
+      <View style={styles.cardListContainer}>
+        <FlatList
+          data={this.state.responseValue}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+        />
+      </View>
     )
   }
 }

@@ -36,12 +36,8 @@ export default class ShopService extends React.Component {
     super(props)
   }
 
-  showToast = () => {
 
-    Toast.show({
-      text: '潛水體驗'
-    })
-  }
+
 
   render() {
     return (
@@ -51,51 +47,51 @@ export default class ShopService extends React.Component {
           <FontAwesome name="clock-o" size={24} style={Styles.icon} />
           <Text style={styles.subtitle}>提供服務</Text>
         </View>
-        
-        <View> 
-          <Root>
-          <View style={{flexDirection: 'row',}}>
-            <TouchableOpacity onPress={this.showToast}>
-              <FontAwesome
-                name="child"
-                size={24}
-                style={this.props.service.indexOf('ExploreDiving') < 0 ? styles.disabledIcon : Styles.icon}
-              />
-            </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
-              <FontAwesome
-                name="id-card"
-                size={24}
-                style={this.props.service.indexOf('LicenseCourse') < 0 ? styles.disabledIcon : Styles.icon}
-              />
-            </TouchableOpacity>
+        <View>
 
-            <TouchableOpacity onPress={this.showToast}>
-              <FontAwesome
-                name="cutlery"
-                size={24}
-                style={this.props.service.indexOf('Food') < 0 ? styles.disabledIcon : Styles.icon}
-              />
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity onPress={this.props.onShowExploreDiving}>
+                <FontAwesome
+                  name="child"
+                  size={24}
+                  style={this.props.service.indexOf('ExploreDiving') < 0 ? styles.disabledIcon : Styles.icon}
+                />
+              </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
-              <FontAwesome
-                name="bed"
-                size={24}
-                style={this.props.service.indexOf('Accommodation') < 0 ? styles.disabledIcon : Styles.icon}
-              />
-            </TouchableOpacity>
+              <TouchableOpacity onPress={this.props.onShowLicenseCourse}>
+                <FontAwesome
+                  name="id-card"
+                  size={24}
+                  style={this.props.service.indexOf('LicenseCourse') < 0 ? styles.disabledIcon : Styles.icon}
+                />
+              </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.showToast}>
-              <FontAwesome
-                name="shopping-cart"
-                size={24}
-                style={this.props.service.indexOf('EquipmentSale') < 0 ? styles.disabledIcon : Styles.icon}
-              />
-            </TouchableOpacity>
+              <TouchableOpacity onPress={this.props.onShowFood}>
+                <FontAwesome
+                  name="cutlery"
+                  size={24}
+                  style={this.props.service.indexOf('Food') < 0 ? styles.disabledIcon : Styles.icon}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={this.props.onShowAccommodation}>
+                <FontAwesome
+                  name="bed"
+                  size={24}
+                  style={this.props.service.indexOf('Accommodation') < 0 ? styles.disabledIcon : Styles.icon}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={this.props.onShowEquipmentSale}>
+                <FontAwesome
+                  name="shopping-cart"
+                  size={24}
+                  style={this.props.service.indexOf('EquipmentSale') < 0 ? styles.disabledIcon : Styles.icon}
+                />
+              </TouchableOpacity>
             </View>
-          </Root>
+
 
         </View>
 

@@ -49,35 +49,14 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      exploreSpot:
-      {
-        title: '探索潛點',
-        img1: Images.recImg,
-        img2: Images.recImg,
-        img3: Images.recImg,
-        name1: '貓鼻頭'
-      },
-      exploreShop:
-      {
-        title: '探索潛店',
-        img1: Images.recImg,
-        img2: Images.recImg,
-        img3: Images.recImg,
-        name1: '藍波潛水'
-      },
-      article:
-      {
-        title: '探索知識',
-        img1: Images.recImg,
-        img2: Images.recImg,
-        img3: Images.recImg,
-        name1: '這是一個文章標題',
-        content1: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
-      },
+      exploreSpotTitle: '探索潛點',
+      exploreShopTitle: '探索潛店',
+      articleTitle: '探索知識',
       btnTxt: '顯示更多',
       text: '',
       randomSpot: [],
-      randomShop: []
+      randomShop: [],
+      randomArticle: []
     }
   }
 
@@ -111,7 +90,6 @@ export default class Home extends React.Component {
         randomShop: randomShop.item,
         randomArticle: randomArticle.item
       })
-      console.log(this.state.randomSpot)
     }
     catch (err) {
       console.log('err:', err)
@@ -207,6 +185,18 @@ export default class Home extends React.Component {
     })
   }
 
+  renderArticleRandom() {
+    return this.state.randomArticle.map((item) => {
+      return (
+        <ArticleHome
+          key={item.id}
+          data={item}
+          onPress={this.onGetShopDetail.bind(this, item.id)}
+        />
+      )
+    })
+  }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -230,7 +220,7 @@ export default class Home extends React.Component {
               data={this.state.randomSpot}
               title={this.state.exploreSpot.title}
             /> */}
-
+            <Text style={Styles.title}>{this.state.exploreSpotTitle}</Text>
             <ScrollView horizontal={true}>
               {this.renderSpotRandom()}
             </ScrollView>
@@ -245,7 +235,7 @@ export default class Home extends React.Component {
               data={this.state.randomShop}
               title={this.state.exploreShop.title}
             /> */}
-
+            <Text style={Styles.title}>{this.state.exploreShopTitle}</Text>
             <ScrollView horizontal={true}>
               {this.renderShopRandom()}
             </ScrollView>
@@ -258,10 +248,15 @@ export default class Home extends React.Component {
 
             <Text style={[Styles.title, styles.h1]}>下水前記得做足準備哦！！</Text>
             <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
-            <ArticleHome
+            {/* <ArticleHome
               data={this.state.randomArticle}
               title={this.state.article.title}
-            />
+            /> */}
+            <Text style={Styles.title}>{this.state.articleTitle}</Text>
+            <ScrollView horizontal={true}>
+              {this.renderArticleRandom()}
+            </ScrollView>
+
             <Btn
               text={this.state.btnTxt}
               onPress={this.onGetAllArticle}

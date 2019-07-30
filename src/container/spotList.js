@@ -30,11 +30,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-
+  cardContainer:{
+    borderRadius: 6
+  },
   spotImg: {
     width: width * 0.85,
     height: height * 0.4,
-    borderRadius: 6
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6
   },
   outerContainer: {
     width: width * 0.2,
@@ -216,7 +219,7 @@ export default class SpotList extends React.Component {
   renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.listContainer} onPress={this.onGetSpotDetail.bind(this, item.id)}>
-        <Card>
+        <Card style={styles.cardContainer}>
           <CardItem cardBody>
             <Image source={{ uri: item.img1 }} style={styles.spotImg} />
           </CardItem>
