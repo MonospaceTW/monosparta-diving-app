@@ -7,19 +7,20 @@ import {
   Alert,
   StyleSheet,
   SafeAreaView
-} from 'react-native'
+} from 'react-native';
 import { Root, Toast } from 'native-base';
 
-import DetailSwiper from '../components/swiper'
-import ShopDescription from '../components/shopDescription'
-import ShopBusinessHour from '../components/shopBusinessHour'
-import ShopService from '../components/shopService'
-import ShopPhone from '../components/shopPhone'
-import ShopWeb from '../components/shopWeb'
-import ShopLocation from '../components/shopLocation'
-import ShopRate from '../components/shopRate'
-import Styles from '../config/style'
-import Color from '../config/color'
+import DetailSwiper from '../components/swiper';
+import ShopDescription from '../components/shopDescription';
+import ShopBusinessHour from '../components/shopBusinessHour';
+import ShopService from '../components/shopService';
+import ShopPhone from '../components/shopPhone';
+import ShopWeb from '../components/shopWeb';
+import ShopLocation from '../components/shopLocation';
+import ShopRate from '../components/shopRate';
+
+import Styles from '../config/style';
+import Color from '../config/color';
 
 const styles = StyleSheet.create({
   toast: {

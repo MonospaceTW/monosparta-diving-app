@@ -15,20 +15,14 @@ import Map from '../components/map'
 const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
-  content: {
-    marginTop: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  titleWrapper: {
-    flexDirection: 'row',
-    alignItems: 'baseline'
-  },
-  subtitle: {
-    fontSize: 15
-  },
   mapSize: {
     height: height * 0.35
+  },
+  subtitle: {
+    marginBottom: 10
+  },
+  text: {
+    marginBottom: 20
   }
 })
 
@@ -38,13 +32,14 @@ export default class ShopLocation extends React.Component {
   render() {
     return (
       <View>
-        <View style={styles.content}>
-          <View style={styles.titleWrapper}>
+        <View style={Styles.component}>
+          <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
             <FontAwesome name="map-marker" size={24} style={Styles.icon} />
-            <Text style={styles.subtitle}>所在位置</Text>
+            <Text style={[Styles.subtitleGray, styles.subtitle]}>所在位置</Text>
           </View>
-          <Text>{this.props.county}{this.props.district}{this.props.address}</Text>
-        </View>
+          </View>
+
+          <Text style={[Styles.text, styles.text]}>       {this.props.district}{this.props.address}</Text>
 
         <View style={styles.mapSize}>
           <Map
@@ -53,7 +48,6 @@ export default class ShopLocation extends React.Component {
             onPress={this.props.onGoMap}
           />
         </View>
-
       </View>
     );
   }
