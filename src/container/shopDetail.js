@@ -9,6 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { Root, Toast } from 'native-base';
+import { WebBrowser } from 'expo';
 
 import DetailSwiper from '../components/swiper';
 import ShopDescription from '../components/shopDescription';
@@ -59,7 +60,7 @@ export default class SpotDetail extends React.Component {
 
   onGoWeb = () => {
 
-    Linking.openURL(this.props.navigation.state.params.data.web1);
+    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.web1);
   }
   onGoMap = () => {
 

@@ -29,6 +29,7 @@ export default class TravelTab extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      responseValue: []
     }
   }
 
@@ -36,10 +37,22 @@ export default class TravelTab extends React.Component {
     try {
       let response = await fetch(Api.url + `article/category/knowledge`);
       let responseValue = await response.json();
-
       this.setState({
         responseValue: responseValue.item
       })
+      console.log(this.state.responseValue)
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
+  onGetArticleDetail = async (id) => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(Api.url + `article/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
       console.log('err:', err)
@@ -52,6 +65,7 @@ export default class TravelTab extends React.Component {
     return (
       <ArticleCard
         articleInfo={item}
+        onPress={this.onGetArticleDetail.bind(this, item.id)}
       />
     )
   };

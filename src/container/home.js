@@ -151,9 +151,16 @@ export default class Home extends React.Component {
     }
   }
 
-  onGetArticleDetail = () => {
+  onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
-    let test = navigate('articleDetail');
+    try {
+      let response = await fetch(Api.url + `article/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
   }
 
   onTextChange = (text) => {
@@ -193,7 +200,7 @@ export default class Home extends React.Component {
         <ArticleHome
           key={item.id}
           data={item}
-          onPress={this.onGetArticleDetail}
+          onPress={this.onGetArticleDetail.bind(this, item.id)}
         />
       )
     })
