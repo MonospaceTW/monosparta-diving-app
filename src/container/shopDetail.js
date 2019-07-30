@@ -6,7 +6,7 @@ import {
   Platform,
   Alert,
   StyleSheet,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import { Root, Toast } from 'native-base';
 
@@ -143,7 +143,6 @@ export default class SpotDetail extends React.Component {
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
             <View style={Styles.container}>
-
               <DetailSwiper img={this.props.navigation.state.params.data.img1} />
 
               <View style={Styles.bodyContent}>
