@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { Textarea, Form } from "native-base";
 
@@ -51,7 +51,7 @@ export default class ShopRate extends React.Component {
           fullStarColor='#0288D1'
           halfStarEnabled
           starSize={30}
-          containerStyle={{width:'50%'}}
+          containerStyle={{ width: '50%' }}
         />
         <Form style={{ marginTop: 20, marginBottom: 20 }}>
           <Textarea
@@ -61,14 +61,13 @@ export default class ShopRate extends React.Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>
-        <View style={{ flexDirection: 'row' ,justifyContent:'space-between'}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <SmallBtn
             text="先不要"
             select={false}
           />
           <SmallBtn text="寫好了" />
         </View>
-
       </View>
     );
   }

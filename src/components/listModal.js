@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   View,
+  SafeAreaView,
   Text,
   StyleSheet,
   TouchableOpacity,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     position: 'absolute',
     bottom: 30,
-    left: 60
+    right: 10
   },
 
 })
@@ -72,36 +73,39 @@ export default class ListModal extends React.Component {
           alert("Modal has been closed.");
         }}
       >
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          <TouchableOpacity style={styles.outerContainer} onPress={this.props.onPress}>
-            <View />
-          </TouchableOpacity>
-          <View style={styles.modalWrapper}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <TouchableOpacity style={styles.outerContainer} onPress={this.props.onPress}>
+              <View />
+            </TouchableOpacity>
+            <View style={styles.modalWrapper}>
 
-            <View style={styles.modalContent}>
-              <Text style={[Styles.title, styles.title]}>{this.props.title}</Text>
+              <View style={styles.modalContent}>
+                <Text style={[Styles.title, styles.title]}>{this.props.title}</Text>
 
-              <Text style={[Styles.title, styles.subtitle]}>{this.props.subtitle1}</Text>
-              <View style={styles.locationBtnWrapper}>{this.props.onGetFirstBtn}</View>
+                <Text style={[Styles.title, styles.subtitle]}>{this.props.subtitle1}</Text>
+                <View style={styles.locationBtnWrapper}>{this.props.onGetFirstBtn}</View>
 
-              <Text style={[Styles.title, styles.subtitle]}>{this.props.subtitle2}</Text>
-              <View style={styles.locationBtnWrapper}>{this.props.onGetSecondBtn}</View>
+                <Text style={[Styles.title, styles.subtitle]}>{this.props.subtitle2}</Text>
+                <View style={styles.locationBtnWrapper}>{this.props.onGetSecondBtn}</View>
 
-              <View style={styles.btnWrapper}>
-                <SmallBtn
-                  select={false}
-                  onPress={this.props.onPressReset}
-                  text={this.props.btnTxt1}
-                />
-                <SmallBtn
-                  onPress={this.props.onPressSubmit}
-                  text={this.props.btnTxt2}
-                />
+                <View style={styles.btnWrapper}>
+                  <SmallBtn
+                    select={false}
+                    onPress={this.props.onPressReset}
+                    text={this.props.btnTxt1}
+                  />
+                  <SmallBtn
+                    onPress={this.props.onPressSubmit}
+                    text={this.props.btnTxt2}
+                  />
+                </View>
               </View>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
+
     )
   }
 }

@@ -151,6 +151,11 @@ export default class Home extends React.Component {
     }
   }
 
+  onGetArticleDetail = () => {
+    const { navigate } = this.props.navigation;
+    let test = navigate('articleDetail');
+  }
+
   onTextChange = (text) => {
     this.setState({ text })
   }
@@ -188,7 +193,7 @@ export default class Home extends React.Component {
         <ArticleHome
           key={item.id}
           data={item}
-          onPress={this.onGetShopDetail.bind(this, item.id)}
+          onPress={this.onGetArticleDetail}
         />
       )
     })
