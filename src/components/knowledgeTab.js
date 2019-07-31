@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import {
-  Text
+  Text,
+  View,
 } from 'react-native'
 import {
   List,
@@ -15,13 +16,21 @@ export default class Search extends React.Component {
     }
   }
 
+  onShowArticleResult = () => {
+    return this.props.articleData.map((item) => {
+      return (
+        <ListItem>
+          <Text>{item.title}</Text>
+        </ListItem>
+      )
+    })
+  }
+
   render() {
     return (
-      <List>
-        <ListItem>
-          <Text>Simon Mignolet</Text>
-        </ListItem>
-      </List>
+      <View>
+         {this.onShowArticleResult()}
+      </View>
     )
   }
 }
