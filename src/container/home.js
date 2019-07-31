@@ -212,7 +212,7 @@ export default class Home extends React.Component {
         <ScrollView style={Styles.container}>
           <View style={Styles.bodyContent}>
             <TouchableOpacity onPress={this.changeSearchPage}>
-              <RoundedBtn title="試試野柳？" />
+              <RoundedBtn text="試試野柳？" />
             </TouchableOpacity>
 
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>

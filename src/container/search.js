@@ -19,10 +19,9 @@ import {
   Input
 } from 'native-base';
 
-import ShopTab from '../components/shopTab';
 import SpotTab from '../components/spotTab';
+import ShopTab from '../components/shopTab';
 import KnowledgeTab from '../components/knowledgeTab';
-
 import Styles from '../config/color';
 import Colors from '../config/color';
 
@@ -61,7 +60,7 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+     
         <Modal
           animationType="none"
           transparent={false}
@@ -70,8 +69,8 @@ export default class Search extends React.Component {
             alert("Modal has been closed.");
           }}
         >
-          <View style={{ marginTop: 22 }}>
-            <View>
+          <View style={{ flex: 1}}>
+            <View style={{ flex: 1}}>
 
               <Header style={{ borderBottomWidth: 0, backgroundColor: 'white' }}>
                 <Left>
@@ -95,15 +94,15 @@ export default class Search extends React.Component {
                   </Button>
                 </Right>
               </Header>
-              <View>
+              
+  
                 <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>
                   <Tab
                     heading="潛點"
                     tabStyle={{ backgroundColor: Colors.white }}
                     activeTabStyle={{ backgroundColor: Colors.white }}
                     textStyle={{ color: Colors.mainBlue }}
-                    activeTextStyle={{ color: Colors.mainBlue }}
-                  >
+                    activeTextStyle={{ color: Colors.mainBlue }}>
                     <SpotTab />
                   </Tab>
                   <Tab
@@ -111,8 +110,7 @@ export default class Search extends React.Component {
                     tabStyle={{ backgroundColor: Colors.white }}
                     activeTabStyle={{ backgroundColor: Colors.white }}
                     textStyle={{ color: Colors.mainBlue }}
-                    activeTextStyle={{ color: Colors.mainBlue }}
-                  >
+                    activeTextStyle={{ color: Colors.mainBlue }}>
                     <ShopTab />
                   </Tab>
                   <Tab
@@ -120,18 +118,17 @@ export default class Search extends React.Component {
                     tabStyle={{ backgroundColor: Colors.white }}
                     activeTabStyle={{ backgroundColor: Colors.white }}
                     textStyle={{ color: Colors.mainBlue }}
-                    activeTextStyle={{ color: Colors.mainBlue }}
-                  >
+                    activeTextStyle={{ color: Colors.mainBlue }}>
                     <KnowledgeTab />
                   </Tab>
                 </Tabs>
               </View>
 
             </View>
-          </View>
+  
         </Modal>
 
-      </SafeAreaView>
+
     )
   }
 }

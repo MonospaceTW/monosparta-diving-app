@@ -100,8 +100,6 @@ export default class Article extends React.Component {
               />
             </Tab>
           </Tabs>
-          <View style={Styles.bodyContent}>
-          </View>
         </View>
       </SafeAreaView>
     )
