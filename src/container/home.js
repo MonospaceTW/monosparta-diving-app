@@ -14,8 +14,10 @@ import Styles from '../config/style';
 import Api from '../config/api';
 
 import Btn from '../components/button';
+import RoundedBtn from '../components/roundedBtn';
 import ArticleHome from '../components/articleHome';
 import ExploreCard from '../components/exploreCard';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const styles = StyleSheet.create({
@@ -50,7 +52,6 @@ export default class Home extends React.Component {
       exploreShopTitle: '探索潛店',
       articleTitle: '探索知識',
       btnTxt: '顯示更多',
-      text: '',
       randomSpot: [],
       randomShop: [],
       randomArticle: []
@@ -156,13 +157,6 @@ export default class Home extends React.Component {
     let test = navigate('articleDetail');
   }
 
-  onTextChange = (text) => {
-    this.setState({ text })
-  }
-  clear = () => {
-    this.setState({ text: '' })
-  }
-
   renderSpotRandom() {
     return this.state.randomSpot.map((item) => {
       return (
@@ -199,35 +193,18 @@ export default class Home extends React.Component {
     })
   }
 
-  onSearch = async () => {
-    // const { navigate } = this.props.navigation;
-    const keyword =  encodeURIComponent(this.state.text) 
-    try {
-      let response = await fetch(Api.url + `keyword/${keyword}`);
-      let responseJson = await response.json();
-      console.log(responseJson)
-      // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
-    }
-    catch (err) {
-      console.log('err:', err)
-    }
+  changeSearchPage = () => {
+    const { navigate } = this.props.navigation;
+    let search = navigate('search');
   }
-
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={Styles.container}>
           <View style={Styles.bodyContent}>
-            <Item rounded style={styles.input}>
-              <Input
-                placeholder='試試野柳？'
-                style={styles.inputTxt}
-                value={this.state.text}
-                onChangeText={this.onTextChange}
-                onSubmitEditing={this.clear}
-              />
-              <Icon name='search' style={styles.icon} onPress={this.onSearch} />
-            </Item>
+            <TouchableOpacity onPress={this.changeSearchPage}>
+              <RoundedBtn title="試試野柳？" />
+            </TouchableOpacity>
 
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
             <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>

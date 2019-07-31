@@ -1,29 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
 import {
-  StyleSheet,
-  
-  View
-} from 'react-native';
+  Text
+} from 'react-native'
 import {
   List,
-  ListItem,
-  Text
+  ListItem
 } from 'native-base';
 
-
-const styles = StyleSheet.create({
-
-
-})
-
-
-export default class SpotTab extends React.Component {
+export default class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
     }
   }
-
 
   render() {
     return (
