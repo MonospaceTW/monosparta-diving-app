@@ -47,7 +47,7 @@ export default class ArticleCard extends React.Component {
   render() {
     return (
       <View style={styles.imageWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPress}>
           <Card style={styles.cardContainer}>
             <CardItem cardBody>
               <Image source={{ uri: this.props.articleInfo.img }} style={styles.spotImg} />

@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Textarea, Form } from "native-base";
 

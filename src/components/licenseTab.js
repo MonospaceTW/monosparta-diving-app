@@ -46,12 +46,25 @@ export default class TravelTab extends React.Component {
     }
   }
 
+  onGetArticleDetail = async (id) => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(Api.url + `article/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
   keyExtractor = (item, index) => { return index.toString() };
 
   renderItem = ({ item }) => {
     return (
       <ArticleCard
         articleInfo={item}
+        onPress={this.onGetArticleDetail.bind(this, item.id)}
       />
     )
   };

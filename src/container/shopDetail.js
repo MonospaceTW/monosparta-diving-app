@@ -7,8 +7,10 @@ import {
   Alert,
   StyleSheet,
   SafeAreaView,
+  KeyboardAvoidingView
 } from 'react-native';
-import { Root, Toast } from 'native-base';
+import { Root, Toast, Item } from 'native-base';
+import { WebBrowser } from 'expo';
 
 import DetailSwiper from '../components/swiper';
 import ShopDescription from '../components/shopDescription';
@@ -34,8 +36,6 @@ const styles = StyleSheet.create({
   }
 })
 
-
-
 export default class SpotDetail extends React.Component {
   static navigationOptions = {
 
@@ -59,7 +59,7 @@ export default class SpotDetail extends React.Component {
 
   onGoWeb = () => {
 
-    Linking.openURL(this.props.navigation.state.params.data.web1);
+    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.web1);
   }
   onGoMap = () => {
 
@@ -141,66 +141,71 @@ export default class SpotDetail extends React.Component {
     return (
       <Root>
         <SafeAreaView style={{ flex: 1 }}>
-          <ScrollView>
-            <View style={Styles.container}>
-              <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+          <KeyboardAvoidingView
+            behavior='padding'
+            keyboardVerticalOffset={80}
+          >
+            <ScrollView>
+              <View style={Styles.container}>
+                <DetailSwiper img={this.props.navigation.state.params.data.img1} />
 
-              <View style={Styles.bodyContent}>
+                <View style={Styles.bodyContent}>
 
-                <ShopDescription
-                  name={this.props.navigation.state.params.data.name}
-                  description={this.props.navigation.state.params.data.description}
-                />
+                  <ShopDescription
+                    name={this.props.navigation.state.params.data.name}
+                    description={this.props.navigation.state.params.data.description}
+                  />
 
-                <ShopBusinessHour
-                  businessHour={this.state.businessHour}
-                />
+                  <ShopBusinessHour
+                    businessHour={this.state.businessHour}
+                  />
 
-                <View style={Styles.hr} />
-
-
-                <ShopService
-                  service={this.props.navigation.state.params.data.service}
-                  onShowExploreDiving={this.onShowExploreDiving}
-                  onShowLicenseCourse={this.onShowLicenseCourse}
-                  onShowFood={this.onShowFood}
-                  onShowAccommodation={this.onShowAccommodation}
-                  onShowEquipmentSale={this.onShowEquipmentSale}
-                />
+                  <View style={Styles.hr} />
 
 
-                <View style={Styles.hr} />
+                  <ShopService
+                    service={this.props.navigation.state.params.data.service}
+                    onShowExploreDiving={this.onShowExploreDiving}
+                    onShowLicenseCourse={this.onShowLicenseCourse}
+                    onShowFood={this.onShowFood}
+                    onShowAccommodation={this.onShowAccommodation}
+                    onShowEquipmentSale={this.onShowEquipmentSale}
+                  />
 
-                <ShopPhone
-                  phone1={this.props.navigation.state.params.data.phone1}
-                />
 
-                <View style={Styles.hr} />
+                  <View style={Styles.hr} />
 
-                <ShopWeb
-                  web1={this.props.navigation.state.params.data.web1}
-                  onClick={this.onGoWeb}
-                />
+                  <ShopPhone
+                    phone1={this.props.navigation.state.params.data.phone1}
+                  />
 
-                <View style={Styles.hr} />
+                  <View style={Styles.hr} />
 
-                <ShopLocation
-                  county={this.props.navigation.state.params.data.county}
-                  district={this.props.navigation.state.params.data.district}
-                  address={this.props.navigation.state.params.data.address}
-                  latitude={this.props.navigation.state.params.data.latitude}
-                  longitude={this.props.navigation.state.params.data.longitude}
-                  onGoMap={this.onGoMap}
-                />
+                  <ShopWeb
+                    web1={this.props.navigation.state.params.data.web1}
+                    onClick={this.onGoWeb}
+                  />
 
-                <View style={Styles.hr} />
+                  <View style={Styles.hr} />
 
-                <ShopRate />
+                  <ShopLocation
+                    county={this.props.navigation.state.params.data.county}
+                    district={this.props.navigation.state.params.data.district}
+                    address={this.props.navigation.state.params.data.address}
+                    latitude={this.props.navigation.state.params.data.latitude}
+                    longitude={this.props.navigation.state.params.data.longitude}
+                    onGoMap={this.onGoMap}
+                  />
+
+                  <View style={Styles.hr} />
+
+                  <ShopRate />
+
+                </View>
               </View>
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </KeyboardAvoidingView>
         </SafeAreaView>
-
       </Root>
     )
   }

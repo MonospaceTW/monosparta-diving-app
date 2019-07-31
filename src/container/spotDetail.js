@@ -21,6 +21,7 @@ export default class SpotDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      level: ''
     }
   }
 
@@ -33,6 +34,22 @@ export default class SpotDetail extends React.Component {
     },
     headerRight: <View />
   };
+
+  componentDidMount = () => {
+    if (this.props.navigation.state.params.data.level === 'easy') {
+      this.setState({
+        level : '初階'
+      })
+    } else if (this.props.navigation.state.params.data.level === 'medium') {
+      this.setState({
+        level : '中階'
+      })
+    } else {
+      this.setState({
+        level : '高階'
+      })
+    }
+  }
 
   onGoMap = () => {
     var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
@@ -65,7 +82,7 @@ export default class SpotDetail extends React.Component {
               />
               <View style={Styles.hr} />
 
-              <SpotLevel level={this.props.navigation.state.params.data.level} />
+              <SpotLevel level={this.state.level} />
               <View style={Styles.hr} />
 
               <NearShop />
