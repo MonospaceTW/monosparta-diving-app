@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import {
+  StyleSheet,
   Text,
   View,
 } from 'react-native'
@@ -12,6 +12,13 @@ import {
 import Api from '../config/api';
 import Styles from '../config/style';
 
+const styles = StyleSheet.create({
+  txt: {
+    fontSize: 16,
+    color: '#969696'
+  }
+  })
+
 export default class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -20,8 +27,13 @@ export default class Search extends React.Component {
   }
 
   onShowKnowledgeResult = () => {
-    if (this.props.knowledgeData === '') {
-      return <View />
+    if (this.props.knowledgeData.length === 0) {
+      return (
+        <View style={{ alignItems: 'center', paddingTop:25}}>
+          <Text style={styles.txt}>找不到結果</Text>
+          <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
+        </View>
+      )
     } else {
       return this.props.knowledgeData.map((item) => {
         return (
@@ -44,7 +56,7 @@ export default class Search extends React.Component {
       console.log('err:', err)
     }
   }
-  
+
   render() {
     return (
       <View style={Styles.container}>

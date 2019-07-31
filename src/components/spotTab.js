@@ -13,7 +13,10 @@ import Styles from '../config/style';
 
 
 const styles = StyleSheet.create({
-
+txt: {
+  fontSize: 16,
+  color: '#969696'
+}
 })
 
 
@@ -26,8 +29,13 @@ export default class SpotTab extends React.Component {
   }
 
   onShowSpotResult = () => {
-    if (this.props.spotData === '') {
-      return <View />
+    if (this.props.spotData.length === 0) {
+      return (
+        <View style={{ alignItems: 'center', paddingTop:25}}>
+          <Text style={styles.txt}>找不到結果</Text>
+          <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
+        </View>
+      )
     } else {
       return this.props.spotData.map((item) => {
         return (

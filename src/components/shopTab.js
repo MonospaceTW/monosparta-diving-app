@@ -13,8 +13,11 @@ import Styles from '../config/style';
 
 
 const styles = StyleSheet.create({
-
-})
+  txt: {
+    fontSize: 16,
+    color: '#969696'
+  }
+  })
 
 
 export default class ShopTab extends React.Component {
@@ -26,8 +29,13 @@ export default class ShopTab extends React.Component {
   }
 
   onShowShopResult = () => {
-    if (this.props.shopData === '') {
-      return <View />
+    if (this.props.shopData.length === 0) {
+      return (
+        <View style={{ alignItems: 'center', paddingTop:25}}>
+          <Text style={styles.txt}>找不到結果</Text>
+          <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
+        </View>
+      )
     } else {
       return this.props.shopData.map((item) => {
         return (

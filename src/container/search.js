@@ -58,9 +58,9 @@ export default class Search extends React.Component {
         spotResult: responseJson.spot,
         shopResult: responseJson.shop,
         knowledgeResult: responseJson.article,
-        text:''
+        text: ''
       })
-      
+
       // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
@@ -84,7 +84,14 @@ export default class Search extends React.Component {
         }}
       >
         <View style={{ flex: 1 }}>
-          <Header style={{ borderBottomWidth: 0, backgroundColor: 'white' }}>
+          <Header
+            style={{
+              borderBottomWidth: 0,
+              borderColor: 'white',
+              backgroundColor: 'white',
+              elevation: 0,
+            }}
+          >
             <Left>
               <TouchableOpacity onPress={this.changePageHome}>
                 <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
@@ -96,12 +103,12 @@ export default class Search extends React.Component {
                 value={this.state.text}
                 onChangeText={this.onTextChange}
                 onSubmitEditing={this.onSearch}
-                style={{width:'100%'}}
+                style={{ width: '100%' }}
               />
             </Body>
             <Right>
               <TouchableOpacity onPress={this.onSearch}>
-                <Icon name='search' style={styles.icon}/>
+                <Icon name='search' style={styles.icon} />
               </TouchableOpacity>
             </Right>
           </Header>
