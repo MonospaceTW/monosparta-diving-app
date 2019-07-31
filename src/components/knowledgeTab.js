@@ -17,13 +17,17 @@ export default class Search extends React.Component {
   }
 
   onShowArticleResult = () => {
-    return this.props.articleData.map((item) => {
-      return (
-        <ListItem>
-          <Text>{item.title}</Text>
-        </ListItem>
-      )
-    })
+    if (this.props.articleData === '') {
+      return <View />
+    } else {
+      return this.props.articleData.map((item) => {
+        return (
+          <ListItem>
+            <Text>{item.title}</Text>
+          </ListItem>
+        )
+      })
+    }
   }
 
   render() {

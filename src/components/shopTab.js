@@ -25,13 +25,17 @@ export default class ShopTab extends React.Component {
   }
 
   onShowShopResult = () => {
-    return this.props.shopData.map((item) => {
-      return (
-        <ListItem>
-          <Text>{item.name}</Text>
-        </ListItem>
-      )
-    })
+    if (this.props.shopData === '') {
+      return <View />
+    } else {
+      return this.props.shopData.map((item) => {
+        return (
+          <ListItem>
+            <Text>{item.name}</Text>
+          </ListItem>
+        )
+      })
+    }
   }
 
   render() {
