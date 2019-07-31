@@ -5,11 +5,12 @@ import {
   View,
 } from 'react-native';
 import {
-  List,
   ListItem
 } from 'native-base';
 
-import Color from '../config/color'
+import Api from '../config/api';
+import Styles from '../config/style';
+
 
 const styles = StyleSheet.create({
 txt: {
@@ -30,7 +31,7 @@ export default class SpotTab extends React.Component {
   onShowSpotResult = () => {
     if (this.props.spotData.length === 0) {
       return (
-        <View style={{ alignItems: 'center'}}>
+        <View style={{ alignItems: 'center', paddingTop:25}}>
           <Text style={styles.txt}>找不到結果</Text>
           <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
         </View>
@@ -38,7 +39,7 @@ export default class SpotTab extends React.Component {
     } else {
       return this.props.spotData.map((item) => {
         return (
-          <ListItem key={item.id}>
+          <ListItem key={item.id} onPress={this.onGetSpotDetail}>
             <Text>{item.name}</Text>
           </ListItem>
         )
@@ -46,9 +47,21 @@ export default class SpotTab extends React.Component {
     }
   }
 
+  onGetSpotDetail = async (id) => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(Api.url + `spot/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
   render() {
     return (
-      <View style={{ backgroundColor: Color.lightGray, flex:1, alignItems: 'center', paddingTop:25}}>
+      <View style={Styles.container}>
         {this.onShowSpotResult()}
       </View>
     )

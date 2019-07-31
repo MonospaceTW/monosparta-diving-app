@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
 import {
-  SafeAreaView,
   Modal,
-  Text,
   TouchableOpacity,
-  View
+  View,
+  StyleSheet
 } from 'react-native'
 import {
   Tab,
@@ -14,7 +13,6 @@ import {
   Left,
   Body,
   Right,
-  Button,
   Icon,
   Input
 } from 'native-base';
@@ -25,6 +23,13 @@ import KnowledgeTab from '../components/knowledgeTab';
 import Api from '../config/api';
 import Styles from '../config/style';
 import Colors from '../config/color';
+const styles = StyleSheet.create({
+  icon: {
+    fontSize: 30,
+    color: Colors.gray,
+    padding: 10
+  }
+})
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -34,7 +39,7 @@ export default class Search extends React.Component {
       modalVisible: true,
       spotResult: [],
       shopResult: [],
-      articleResult: [],
+      knowledgeResult: [],
     }
   }
   setModalVisible(visible) {
@@ -50,11 +55,12 @@ export default class Search extends React.Component {
       let response = await fetch(Api.url + `keyword/${keyword}`);
       let responseJson = await response.json();
       this.setState({
-        spotResult : responseJson.spot,
-        shopResult : responseJson.shop,
-        articleResult: responseJson.article
+        spotResult: responseJson.spot,
+        shopResult: responseJson.shop,
+        knowledgeResult: responseJson.article,
+        text: ''
       })
-      console.log(this.state.spotResult)
+
       // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
@@ -78,24 +84,31 @@ export default class Search extends React.Component {
         }}
       >
         <View style={{ flex: 1 }}>
-          <Header style={{ borderBottomWidth: 0, backgroundColor: 'white' }}>
+          <Header
+            style={{
+              borderBottomWidth: 0,
+              borderColor: 'white',
+              backgroundColor: 'white',
+              elevation: 0,
+            }}
+          >
             <Left>
               <TouchableOpacity onPress={this.changePageHome}>
-                <Icon name='arrow-back' />
+                <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
               </TouchableOpacity>
             </Left>
             <Body>
               <Input
                 placeholder='試試野柳？'
-                // style={styles.inputTxt}
                 value={this.state.text}
                 onChangeText={this.onTextChange}
                 onSubmitEditing={this.onSearch}
+                style={{ width: '100%' }}
               />
             </Body>
             <Right>
               <TouchableOpacity onPress={this.onSearch}>
-                <Icon name='search' />
+                <Icon name='search' style={styles.icon} />
               </TouchableOpacity>
             </Right>
           </Header>
@@ -111,6 +124,7 @@ export default class Search extends React.Component {
             >
               <SpotTab
                 spotData={this.state.spotResult}
+                navigation={this.props.navigation}
               />
             </Tab>
             <Tab
@@ -122,6 +136,7 @@ export default class Search extends React.Component {
             >
               <ShopTab
                 shopData={this.state.shopResult}
+                navigation={this.props.navigation}
               />
             </Tab>
             <Tab
@@ -132,7 +147,8 @@ export default class Search extends React.Component {
               activeTextStyle={{ color: Colors.mainBlue }}
             >
               <KnowledgeTab
-                articleData={this.state.articleResult}
+                knowledgeData={this.state.knowledgeResult}
+                navigation={this.props.navigation}
               />
             </Tab>
           </Tabs>
