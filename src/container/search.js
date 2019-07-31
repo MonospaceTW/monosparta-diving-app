@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   Modal,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native'
 import {
@@ -22,7 +22,8 @@ import {
 import SpotTab from '../components/spotTab';
 import ShopTab from '../components/shopTab';
 import KnowledgeTab from '../components/knowledgeTab';
-import Styles from '../config/color';
+import Api from '../config/api';
+import Styles from '../config/style';
 import Colors from '../config/color';
 
 export default class Search extends React.Component {
@@ -30,7 +31,8 @@ export default class Search extends React.Component {
     super(props)
     this.state = {
       text: '',
-      modalVisible: true
+      modalVisible: true,
+      searchResult: []
     }
   }
   setModalVisible(visible) {
@@ -45,7 +47,10 @@ export default class Search extends React.Component {
     try {
       let response = await fetch(Api.url + `keyword/${keyword}`);
       let responseJson = await response.json();
-      console.log(responseJson)
+      this.setState({
+        searchResult : responseJson
+      })
+      console.log(this.state.searchResult.article)
       // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {
@@ -60,75 +65,78 @@ export default class Search extends React.Component {
 
   render() {
     return (
-     
-        <Modal
-          animationType="none"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert("Modal has been closed.");
-          }}
-        >
-          <View style={{ flex: 1}}>
-            <View style={{ flex: 1}}>
-
-              <Header style={{ borderBottomWidth: 0, backgroundColor: 'white' }}>
-                <Left>
-                  <Button transparent onPress={this.changePageHome}>
-                    <Icon name='arrow-back' />
-                  </Button>
-                </Left>
-                <Body>
-                  <Input
-                    placeholder='試試野柳？'
-                    // style={styles.inputTxt}
-                    value={this.state.text}
-                    onChangeText={this.onTextChange}
-                  // onSubmitEditing={this.clear}
-
-                  />
-                </Body>
-                <Right>
-                  <Button transparent onPress={this.onSearch}>
-                    <Icon name='search' />
-                  </Button>
-                </Right>
-              </Header>
-              
-  
-                <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>
-                  <Tab
-                    heading="潛點"
-                    tabStyle={{ backgroundColor: Colors.white }}
-                    activeTabStyle={{ backgroundColor: Colors.white }}
-                    textStyle={{ color: Colors.mainBlue }}
-                    activeTextStyle={{ color: Colors.mainBlue }}>
-                    <SpotTab />
-                  </Tab>
-                  <Tab
-                    heading="潛店"
-                    tabStyle={{ backgroundColor: Colors.white }}
-                    activeTabStyle={{ backgroundColor: Colors.white }}
-                    textStyle={{ color: Colors.mainBlue }}
-                    activeTextStyle={{ color: Colors.mainBlue }}>
-                    <ShopTab />
-                  </Tab>
-                  <Tab
-                    heading="知識"
-                    tabStyle={{ backgroundColor: Colors.white }}
-                    activeTabStyle={{ backgroundColor: Colors.white }}
-                    textStyle={{ color: Colors.mainBlue }}
-                    activeTextStyle={{ color: Colors.mainBlue }}>
-                    <KnowledgeTab />
-                  </Tab>
-                </Tabs>
-              </View>
-
-            </View>
-  
-        </Modal>
+      <Modal
+        animationType="none"
+        transparent={false}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {
+          alert("Modal has been closed.");
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <Header style={{ borderBottomWidth: 0, backgroundColor: 'white' }}>
+            <Left>
+              <TouchableOpacity onPress={this.changePageHome}>
+                <Icon name='arrow-back' />
+              </TouchableOpacity>
+            </Left>
+            <Body>
+              <Input
+                placeholder='試試野柳？'
+                // style={styles.inputTxt}
+                value={this.state.text}
+                onChangeText={this.onTextChange}
+                onSubmitEditing={this.onSearch}
+              />
+            </Body>
+            <Right>
+              <TouchableOpacity onPress={this.onSearch}>
+                <Icon name='search' />
+              </TouchableOpacity>
+            </Right>
+          </Header>
 
 
+          <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>
+            <Tab
+              heading="潛點"
+              tabStyle={{ backgroundColor: Colors.white }}
+              activeTabStyle={{ backgroundColor: Colors.white }}
+              textStyle={{ color: Colors.mainBlue }}
+              activeTextStyle={{ color: Colors.mainBlue }}
+            >
+              <SpotTab
+                spotData={this.state.searchResult.spot}
+              />
+            </Tab>
+            <Tab
+              heading="潛店"
+              tabStyle={{ backgroundColor: Colors.white }}
+              activeTabStyle={{ backgroundColor: Colors.white }}
+              textStyle={{ color: Colors.mainBlue }}
+              activeTextStyle={{ color: Colors.mainBlue }}
+            >
+              <ShopTab
+                shopData={this.state.searchResult.shop}
+              />
+            </Tab>
+            <Tab
+              heading="知識"
+              tabStyle={{ backgroundColor: Colors.white }}
+              activeTabStyle={{ backgroundColor: Colors.white }}
+              textStyle={{ color: Colors.mainBlue }}
+              activeTextStyle={{ color: Colors.mainBlue }}
+            >
+              <KnowledgeTab
+                articleData={this.state.searchResult.article}
+              />
+            </Tab>
+          </Tabs>
+
+        </View>
+      </Modal>
     )
   }
 }
+
+

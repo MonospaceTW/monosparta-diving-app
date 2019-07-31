@@ -24,12 +24,20 @@ export default class ShopTab extends React.Component {
     }
   }
 
+  onShowShopResult = () => {
+    return this.props.shopData.map((item) => {
+      return (
+        <ListItem>
+          <Text>{item.name}</Text>
+        </ListItem>
+      )
+    })
+  }
+
   render() {
     return (
       <View>
-     
-          <Text>Simon Mignolet</Text>
-       
+        {this.onShowShopResult()}
       </View>
     )
   }
