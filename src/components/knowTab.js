@@ -40,7 +40,6 @@ export default class TravelTab extends React.Component {
       this.setState({
         responseValue: responseValue.item
       })
-      console.log(this.state.responseValue)
     }
     catch (err) {
       console.log('err:', err)
