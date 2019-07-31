@@ -23,8 +23,6 @@ import KnowTab from '../components/knowTab';
 import TravelTab from '../components/travelTab';
 import LicenseTab from '../components/licenseTab';
 
-const height = Dimensions.get('window').height;
-const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
 })
@@ -47,10 +45,6 @@ export default class Article extends React.Component {
       fontSize: 20,
       textAlign: 'center',
       color: '#545454',
-    },
-    headerStyle: {
-      elevation: 0,
-      borderBottomWidth: 0
     }
   };
 

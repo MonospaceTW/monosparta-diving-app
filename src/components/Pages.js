@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import React, { Component } from 'react';
+import { Item, Input, Icon } from 'native-base';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import {
-  View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 import {
@@ -17,13 +17,26 @@ import {
 import Home from '../container/home';
 import Article from '../container/article';
 import ArticleDetail from '../container/articleDetail';
+import Search from '../container/search';
 import SpotList from '../container/spotList';
 import ShopList from '../container/shopList';
 import SpotDetail from '../container/spotDetail';
 import ShopDetail from '../container/shopDetail';
 import Colors from '../config/color';
 
-
+const styles = StyleSheet.create({
+  input: {
+    borderWidth: 0,
+    marginTop: 30,
+  },
+  inputTxt: {
+    paddingLeft: 15
+  },
+  icon: {
+    color: Colors.mainBlue,
+    paddingRight: 15
+  }
+})
 export default class Pages extends Component {
   render() {
     return (
@@ -36,6 +49,9 @@ const homeNavigator = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: { header: null }
+  },
+  search: {
+    screen: Search,
   },
   spotList: {
     screen: SpotList,
