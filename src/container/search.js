@@ -19,8 +19,8 @@ import {
   Input
 } from 'native-base';
 
-import ShopTab from '../components/shopTab';
 import SpotTab from '../components/spotTab';
+import ShopTab from '../components/shopTab';
 import KnowledgeTab from '../components/knowledgeTab';
 import Api from '../config/api';
 import Styles from '../config/style';
