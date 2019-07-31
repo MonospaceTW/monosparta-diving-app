@@ -24,24 +24,24 @@ export default class SpotTab extends React.Component {
     }
   }
 
-  // componentDitMount = () => {
-  //   if (this.props.spotData.map === '')
-  // }
-
-  onShowSpotResult=() => {
-    return this.props.spotData.map((item) => {
-      return (
-        <ListItem>
-          <Text>{item.name}</Text>
-        </ListItem>
-      )
-    })
+  onShowSpotResult = () => {
+    if (this.props.spotData === '') {
+      return <View />
+    } else {
+      return this.props.spotData.map((item) => {
+        return (
+          <ListItem>
+            <Text>{item.name}</Text>
+          </ListItem>
+        )
+      })
+    }
   }
 
   render() {
     return (
       <View>
-         {/* {this.onShowSpotResult()} */}
+        {/* {this.onShowSpotResult()} */}
       </View>
     )
   }

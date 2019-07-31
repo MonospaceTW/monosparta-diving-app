@@ -32,7 +32,9 @@ export default class Search extends React.Component {
     this.state = {
       text: '',
       modalVisible: true,
-      searchResult: []
+      spotResult: [],
+      shopResult: [],
+      articleResult: [],
     }
   }
   setModalVisible(visible) {
@@ -48,7 +50,9 @@ export default class Search extends React.Component {
       let response = await fetch(Api.url + `keyword/${keyword}`);
       let responseJson = await response.json();
       this.setState({
-        searchResult : responseJson
+        spotResult : responseJson.spot,
+        shopResult : responseJson.shop,
+        articleResult: responseJson.article
       })
       console.log(this.state.searchResult.article)
       // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
@@ -106,7 +110,7 @@ export default class Search extends React.Component {
               activeTextStyle={{ color: Colors.mainBlue }}
             >
               <SpotTab
-                spotData={this.state.searchResult.spot}
+                spotData={this.state.spotResult}
               />
             </Tab>
             <Tab
@@ -117,7 +121,7 @@ export default class Search extends React.Component {
               activeTextStyle={{ color: Colors.mainBlue }}
             >
               <ShopTab
-                shopData={this.state.searchResult.shop}
+                shopData={this.state.shopResult}
               />
             </Tab>
             <Tab
@@ -128,7 +132,7 @@ export default class Search extends React.Component {
               activeTextStyle={{ color: Colors.mainBlue }}
             >
               <KnowledgeTab
-                articleData={this.state.searchResult.article}
+                articleData={this.state.articleResult}
               />
             </Tab>
           </Tabs>
