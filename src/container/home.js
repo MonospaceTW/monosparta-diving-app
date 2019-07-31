@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Text,
   Linking,
-  SafeAreaView
+  SafeAreaView,
+  Modal,
+  Button
 } from 'react-native';
 import { Item, Input, Icon } from 'native-base';
 
@@ -53,7 +55,7 @@ export default class Home extends React.Component {
       text: '',
       randomSpot: [],
       randomShop: [],
-      randomArticle: []
+      randomArticle: [],
     }
   }
 

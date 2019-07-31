@@ -55,12 +55,7 @@ export default class Article extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      article:
-      {
-        img: Images.recImg,
-        title: '這是一個文章標題',
-        content: '這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，這是文章內容，如果超出2行將不顯示，'
-      }
+      category: ''
     }
   }
 
@@ -74,8 +69,24 @@ export default class Article extends React.Component {
       color: '#545454'
     },
     headerRight:
-    <View/>
+      <View />
   };
+
+  componentDidMount = () => {
+    if (this.props.navigation.state.params.data.category === 'travel') {
+      this.setState({
+        category: '#旅遊'
+      })
+    } else if (this.props.navigation.state.params.data.category === 'license') {
+      this.setState({
+        category: '#證照'
+      })
+    } else {
+      this.setState({
+        category: '#知識'
+      })
+    }
+  }
 
   onOpenBTWeb = () => {
     WebBrowser.openBrowserAsync('https://bluetrend.media/');
@@ -103,19 +114,25 @@ export default class Article extends React.Component {
             <View style={styles.margin}>
               <Text>文章分類</Text>
               <RoundedBtn
-                text={this.props.navigation.state.params.data.category}
+                text={this.state.category}
               />
             </View>
 
             <View style={styles.margin}>
               <Text>文章傳送門</Text>
-              <Text onPress={this.onOpenWithWebBrowser}>
+              <View
+                style={{ marginTop: 10 }}
+                onPress={this.onOpenWithWebBrowser}>
                 <FontAwesome name="globe" size={24} style={Styles.icon} />
-              </Text>
+              </View>
+
             </View>
 
             <Text>想看更多？試試這裡吧！</Text>
-            <TouchableOpacity onPress={this.onOpenBTWeb}>
+            <TouchableOpacity
+              style={{ marginTop: 10 }}
+              onPress={this.onOpenBTWeb}
+            >
               <Image source={Images.BT_logo} />
             </TouchableOpacity>
 

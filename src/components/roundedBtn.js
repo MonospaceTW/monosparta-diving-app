@@ -11,7 +11,8 @@ import Colors from '../config/color';
 const styles = StyleSheet.create({
   btn: {
     width: '25%',
-    height: 35,
+    height: 40,
+    marginTop:10,
     borderRadius: 35,
     borderWidth: 1,
     borderColor: Colors.gray,
@@ -21,7 +22,8 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     color: Colors.gray,
-    fontSize: 14
+    fontWeight:'bold',
+    fontSize: 16
   }
 })
 export default class RoundedBtn extends React.Component {
