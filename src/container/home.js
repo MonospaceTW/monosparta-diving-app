@@ -208,13 +208,12 @@ export default class Home extends React.Component {
   }
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGray }}>
         <ScrollView style={Styles.container}>
           <View style={Styles.bodyContent}>
-            <TouchableOpacity onPress={this.changeSearchPage}>
-              <RoundedBtn text="試試野柳？" />
-            </TouchableOpacity>
-
+            <View style={{justifyContent:'center',alignItems:'center',marginTop:30}}>
+              <RoundedBtn text="試試野柳？" onPressBtn={this.changeSearchPage} />
+            </View>
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
             <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
 

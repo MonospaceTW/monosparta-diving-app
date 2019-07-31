@@ -5,10 +5,11 @@ import {
   View,
 } from 'react-native';
 import {
-  List,
   ListItem
 } from 'native-base';
 
+import Api from '../config/api';
+import Styles from '../config/style';
 
 
 const styles = StyleSheet.create({
@@ -30,17 +31,28 @@ export default class ShopTab extends React.Component {
     } else {
       return this.props.shopData.map((item) => {
         return (
-          <ListItem>
+          <ListItem key={item.id} onPress={this.onGetShopDetail}>
             <Text>{item.name}</Text>
           </ListItem>
         )
       })
     }
   }
+  onGetShopDetail = async (id) => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response = await fetch(Api.url + `shop/${id}`);
+      let responseJson = await response.json();
+      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
 
   render() {
     return (
-      <View>
+      <View style={Styles.container}>
         {this.onShowShopResult()}
       </View>
     )
