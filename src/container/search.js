@@ -54,7 +54,7 @@ export default class Search extends React.Component {
         shopResult : responseJson.shop,
         articleResult: responseJson.article
       })
-      console.log(this.state.searchResult.article)
+      console.log(this.state.spotResult)
       // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
     }
     catch (err) {

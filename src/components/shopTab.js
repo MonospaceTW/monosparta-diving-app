@@ -30,7 +30,7 @@ export default class ShopTab extends React.Component {
     } else {
       return this.props.shopData.map((item) => {
         return (
-          <ListItem>
+          <ListItem key={item.id}>
             <Text>{item.name}</Text>
           </ListItem>
         )

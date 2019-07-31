@@ -22,7 +22,7 @@ export default class Search extends React.Component {
     } else {
       return this.props.articleData.map((item) => {
         return (
-          <ListItem>
+          <ListItem key={item.id}>
             <Text>{item.title}</Text>
           </ListItem>
         )
