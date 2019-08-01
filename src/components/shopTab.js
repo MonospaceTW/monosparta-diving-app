@@ -39,7 +39,7 @@ export default class ShopTab extends React.Component {
     } else {
       return this.props.shopData.map((item) => {
         return (
-          <ListItem key={item.id} onPress={this.onGetShopDetail}>
+          <ListItem key={item.id} onPress={this.onGetShopDetail.bind(this, item.id)}>
             <Text>{item.name}</Text>
           </ListItem>
         )
@@ -51,7 +51,8 @@ export default class ShopTab extends React.Component {
     try {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { data: responseJson.item });
+      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
+        comment: responseJson.comment });
     }
     catch (err) {
       console.log('err:', err)

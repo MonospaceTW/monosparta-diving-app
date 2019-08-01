@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  cardContainer:{
+  cardContainer: {
     borderRadius: 6
   },
   spotImg: {
@@ -199,7 +199,11 @@ export default class SpotList extends React.Component {
     try {
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item });
+      let responseDetail = await navigate('spotDetail', {
+        data: responseJson.item[0],
+        comment: responseJson.comment,
+        nearShop: responseJson.Nearby
+      });
     }
     catch (err) {
       console.log('err:', err)
@@ -211,7 +215,7 @@ export default class SpotList extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Content style={Styles.bodyContent}>
 
-        <ListModal
+          <ListModal
             modalVisible={this.state.modalVisible}
             onPress={this.onSetModalVisible}
             onPressReset={this.clearBtn}

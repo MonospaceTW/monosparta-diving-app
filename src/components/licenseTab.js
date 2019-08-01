@@ -45,7 +45,7 @@ export default class TravelTab extends React.Component {
     try {
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('articleDetail', { data: responseJson.item});
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
       console.log('err:', err)

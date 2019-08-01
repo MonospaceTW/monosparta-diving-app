@@ -43,6 +43,7 @@ export default class Search extends React.Component {
       knowledgeResult: [],
     }
   }
+
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
@@ -50,7 +51,6 @@ export default class Search extends React.Component {
     this.setState({ text })
   }
   onSearch = async () => {
-    // const { navigate } = this.props.navigation;
     const keyword = encodeURIComponent(this.state.text)
     if (this.state.text === '') {
       return
@@ -64,8 +64,6 @@ export default class Search extends React.Component {
           knowledgeResult: responseJson.article,
           text: ''
         })
-
-        // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
       }
       catch (err) {
         console.log('err:', err)
@@ -88,8 +86,7 @@ export default class Search extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           style={{
-            borderBottomWidth: 0,
-            borderBottomColor: 'white',
+            marginTop: 10,
             backgroundColor: 'white',
             elevation: 0,
           }}
@@ -114,7 +111,6 @@ export default class Search extends React.Component {
             </TouchableOpacity>
           </Right>
         </Header>
-
 
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>

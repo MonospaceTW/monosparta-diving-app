@@ -135,7 +135,9 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item });
+      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0],
+        comment: responseJson.comment,
+        nearShop: responseJson.Nearby });
     }
     catch (err) {
       console.log('err:', err)
@@ -147,7 +149,8 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { data: responseJson.item });
+      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
+        comment: responseJson.comment });
     }
     catch (err) {
       console.log('err:', err)
@@ -159,7 +162,7 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('articleDetail', { data: responseJson.item });
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
       console.log('err:', err)
