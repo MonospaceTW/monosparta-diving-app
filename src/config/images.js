@@ -8,7 +8,7 @@ export default {
   // community: require('../assets/people.svg'),
   // profile: require('../assets/person.svg'),
   // search: require(''),
-  
+
   "recImg": require('../assets/1.png')
 
 };

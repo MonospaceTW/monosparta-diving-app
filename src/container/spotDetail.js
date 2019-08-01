@@ -45,15 +45,15 @@ export default class SpotDetail extends React.Component {
   componentDidMount = () => {
     if (this.props.navigation.state.params.data.level === 'easy') {
       this.setState({
-        level : '初階'
+        level: '初階'
       })
     } else if (this.props.navigation.state.params.data.level === 'medium') {
       this.setState({
-        level : '中階'
+        level: '中階'
       })
     } else {
       this.setState({
-        level : '高階'
+        level: '高階'
       })
     }
   }
@@ -80,8 +80,8 @@ export default class SpotDetail extends React.Component {
           <View style={Styles.container}>
 
             <DetailSwiper
-             img={this.state.imgArray}
-             />
+              img={this.state.imgArray}
+            />
 
             <View style={Styles.bodyContent}>
 
@@ -94,7 +94,10 @@ export default class SpotDetail extends React.Component {
               <SpotLevel level={this.state.level} />
               <View style={Styles.hr} />
 
-              <NearShop />
+              <NearShop
+              nearShop={this.props.navigation.state.params.nearShop}
+              navigation={this.props.navigation}
+              />
               <View style={Styles.hr} />
 
               <SpotLocation
@@ -106,7 +109,9 @@ export default class SpotDetail extends React.Component {
               />
               <View style={Styles.hr} />
 
-              <SpotRate />
+              <SpotRate
+                comment={this.props.navigation.state.params.comment}
+              />
 
             </View>
           </View>

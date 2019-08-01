@@ -37,7 +37,7 @@ export default class Search extends React.Component {
     } else {
       return this.props.knowledgeData.map((item) => {
         return (
-          <ListItem key={item.id} onPress={this.onGetKnowledgeDetail}>
+          <ListItem key={item.id} onPress={this.onGetKnowledgeDetail.bind(this, item.id)}>
             <Text>{item.title}</Text>
           </ListItem>
         )
@@ -50,7 +50,7 @@ export default class Search extends React.Component {
     try {
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('articleDetail', { data: responseJson.item });
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
       console.log('err:', err)

@@ -20,33 +20,36 @@ const styles = StyleSheet.create({
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      starCount: 4
-    }
   }
-  onStarRatingPress = (rating) => {
-    this.setState({
-      starCount: rating
-    });
+
+  onRenderComment = () => {
+    return this.props.comment.map((item) => {
+      return (
+        <View key={item.id} style={{ flexDirection: 'row', marginBottom: 20, width: '80%', alignItems: 'center' }}>
+          <View style={{ marginRight: 15 }}>
+            <Thumbnail source={Images.recImg} />
+          </View>
+          <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+              <Text style={{ marginRight: 10, color: Colors.mainBlue, fontSize: 15 }}></Text>
+              <Star
+                isDisabled
+                starCount={item.rating}
+                size={15}
+                startStyle={{ width: '20%' }}
+              />
+            </View>
+            <Text numberOfLines={15} style={Styles.text}>{item.comment}</Text>
+          </View>
+        </View>
+      )
+    })
   }
+
   render() {
     return (
-      <View style={{ flexDirection: 'row', marginBottom: 10, width: '80%' }}>
-        <View style={{ marginRight: 15 }}>
-          <Thumbnail source={Images.recImg} />
-        </View>
-        <View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-            <Text style={{ marginRight: 10, color: Colors.mainBlue, fontSize: 15 }}></Text>
-            <Star
-              isDisabled
-              starCount={this.state.starCount}
-              size={15}
-              startStyle={{ width: '20%' }}
-            />
-          </View>
-          <Text numberOfLines={15} style={Styles.text}></Text>
-        </View>
+      <View>
+        {this.onRenderComment()}
       </View>
     )
   }
@@ -55,7 +58,7 @@ export default class App extends React.Component {
 
 // componentDidMount = () => {
 
-  
+
 // }
 
 // onGetArticleDetail = async (id) => {

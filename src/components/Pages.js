@@ -101,6 +101,9 @@ const homeNavigator = createStackNavigator({
       title: `${navigation.state.params.data.name}`,
     }),
   },
+  articleDetail: {
+    screen: ArticleDetail
+  }
 }, {
     initialRouteName: 'Home',
   })

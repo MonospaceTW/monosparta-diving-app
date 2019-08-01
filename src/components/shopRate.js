@@ -9,6 +9,7 @@ import { Textarea, Form } from "native-base";
 
 import Styles from '../config/style';
 
+import Comment from './comment'
 import SmallBtn from '../components/smallButton'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Star from '../components/star';
@@ -65,7 +66,8 @@ export default class ShopRate extends React.Component {
           />
           <SmallBtn text="寫好了" />
         </View>
-        <Comment/>
+        <Comment
+          comment={this.props.comment} />
       </View>
     );
   }

@@ -42,7 +42,7 @@ export default class SpotRate extends React.Component {
           <FontAwesome name="star" size={24} style={Styles.icon} />
           <Text style={Styles.subtitleGray}>評論</Text>
         </View>
-       
+
         <Star
           isDisabled={false}
           starCount={this.state.starCount}
@@ -65,7 +65,9 @@ export default class SpotRate extends React.Component {
           />
           <SmallBtn text="寫好了" />
         </View>
-        <Comment/>
+        <Comment
+          comment={this.props.comment}
+        />
 
       </View>
     );
