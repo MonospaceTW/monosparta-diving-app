@@ -37,6 +37,22 @@ const styles = StyleSheet.create({
 })
 
 export default class SpotDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imgArray: [
+        this.props.navigation.state.params.data.img1,
+        this.props.navigation.state.params.data.img2,
+        this.props.navigation.state.params.data.img3,
+        this.props.navigation.state.params.data.img4,
+        this.props.navigation.state.params.data.img5,
+      ],
+      businessHour: [
+        { title: '查看詳細資訊', content: this.props.navigation.state.params.data.bh }
+      ]
+    }
+  }
+
   static navigationOptions = {
 
     headerTitleStyle: {
@@ -47,15 +63,6 @@ export default class SpotDetail extends React.Component {
     },
     headerRight: <View />
   };
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      businessHour: [
-        { title: '查看詳細資訊', content: this.props.navigation.state.params.data.bh }
-      ]
-    }
-  }
 
   onGoWeb = () => {
 
@@ -147,7 +154,9 @@ export default class SpotDetail extends React.Component {
           >
             <ScrollView>
               <View style={Styles.container}>
-                <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+                <DetailSwiper
+                  img={this.state.imgArray}
+                />
 
                 <View style={Styles.bodyContent}>
 
