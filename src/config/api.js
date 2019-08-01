@@ -1,5 +1,5 @@
 export default {
-  url : `http://bb876b22.ngrok.io/DivingBackend/public/api/`
+  url : `http://0e30ea3d.ngrok.io/diveapp/public/api/`
 }
 
 export const api = {

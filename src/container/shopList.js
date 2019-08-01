@@ -203,7 +203,7 @@ export default class SpotList extends React.Component {
     try {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
+      let responseDetail = await navigate('shopDetail', { data: responseJson.item });
     }
     catch (err) {
       console.log('err:', err)

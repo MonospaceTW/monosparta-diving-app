@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
   margin: {
     flex: 1,
     marginBottom: 15
+  },
+  txt: {
+    fontSize:16,
+    marginTop: 10
   }
 })
 export default class Article extends React.Component {
@@ -113,9 +117,7 @@ export default class Article extends React.Component {
 
             <View style={styles.margin}>
               <Text>文章分類</Text>
-              <RoundedBtn
-                text={this.state.category}
-              />
+              <Text style={styles.txt}>{this.state.category}</Text>
             </View>
 
             <View style={styles.margin}>

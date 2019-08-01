@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Button
 } from 'react-native';
 import {
   ListItem
@@ -39,7 +40,7 @@ export default class SpotTab extends React.Component {
     } else {
       return this.props.spotData.map((item) => {
         return (
-          <ListItem key={item.id} onPress={this.onGetSpotDetail}>
+          <ListItem key={item.id} onPress={this.onGetSpotDetail.bind(this, item.id)}>
             <Text>{item.name}</Text>
           </ListItem>
         )
@@ -52,7 +53,8 @@ export default class SpotTab extends React.Component {
     try {
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
+      let responseDetail = await navigate('spotDetail', { data: responseJson.item });
+
     }
     catch (err) {
       console.log('err:', err)
@@ -64,6 +66,7 @@ export default class SpotTab extends React.Component {
       <View style={Styles.container}>
         {this.onShowSpotResult()}
       </View>
+
     )
   }
 }

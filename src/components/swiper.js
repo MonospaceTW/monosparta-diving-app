@@ -4,6 +4,7 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  Button
 } from 'react-native'
 
 import Swiper from 'react-native-swiper'
@@ -23,18 +24,32 @@ const styles = StyleSheet.create({
 })
 
 export default class DetailSwiper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
 
+
+  onRenderImage = () => {
+    let showImg = this.props.img.filter((String) => { return String })
+    return showImg.map((item) => {
+      return (
+        <Image
+          style={styles.slide}
+          key={item}
+          source={{ uri: item }} />
+      )
+    })
+  }
 
   render() {
     return (
-      <Swiper style={styles.wrapper} showsButtons={false} dotColor={Color.white} activeDotColor={Color.mainBlue}>
-            <Image style={styles.slide} source={{ uri: this.props.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.img }} />
-            <Image style={styles.slide} source={{ uri: this.props.img }} />
-      </Swiper>
+      <View>
+        <Swiper style={styles.wrapper} showsButtons={false} dotColor={Color.white} activeDotColor={Color.mainBlue}>
+          {this.onRenderImage()}
+        </Swiper>
+      </View>
     );
   }
-
 }

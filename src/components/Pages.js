@@ -48,10 +48,14 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: { header: null }
+    navigationOptions: { header: null },
   },
   search: {
     screen: Search,
+    navigationOptions: {
+      header: null,
+      tabBarVisible: false
+     }
   },
   spotList: {
     screen: SpotList,
@@ -117,14 +121,14 @@ const TabNavigator = createBottomTabNavigator({
   Home:
   {
     screen: homeNavigator,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       tabBarLabel: '首頁',
       tabBarIcon: ({ focused }) => (
         focused ?
           <Image style={{ width: 30, height: 30 }} source={require('../assets/fishFocus.png')} /> :
           <Image style={{ width: 30, height: 30 }} source={require('../assets/fish.png')} />
       )
-    }
+    })
   },
 
   Article:

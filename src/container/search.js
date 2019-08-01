@@ -4,6 +4,7 @@ import {
   Modal,
   TouchableOpacity,
   View,
+  SafeAreaView,
   StyleSheet
 } from 'react-native'
 import {
@@ -51,20 +52,24 @@ export default class Search extends React.Component {
   onSearch = async () => {
     // const { navigate } = this.props.navigation;
     const keyword = encodeURIComponent(this.state.text)
-    try {
-      let response = await fetch(Api.url + `keyword/${keyword}`);
-      let responseJson = await response.json();
-      this.setState({
-        spotResult: responseJson.spot,
-        shopResult: responseJson.shop,
-        knowledgeResult: responseJson.article,
-        text: ''
-      })
+    if (this.state.text === '') {
+      return
+    } else {
+      try {
+        let response = await fetch(Api.url + `keyword/${keyword}`);
+        let responseJson = await response.json();
+        this.setState({
+          spotResult: responseJson.spot,
+          shopResult: responseJson.shop,
+          knowledgeResult: responseJson.article,
+          text: ''
+        })
 
-      // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
-    }
-    catch (err) {
-      console.log('err:', err)
+        // let responseDetail = await navigate('shopDetail', { data: responseJson.item[0] });
+      }
+      catch (err) {
+        console.log('err:', err)
+      }
     }
   }
 
@@ -73,88 +78,85 @@ export default class Search extends React.Component {
     goBack()
   }
 
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
   render() {
     return (
-      <Modal
-        animationType="none"
-        transparent={false}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {
-          alert("Modal has been closed.");
-        }}
-      >
-        <View style={{ flex: 1 }}>
-          <Header
-            style={{
-              borderBottomWidth: 0,
-              borderColor: 'white',
-              backgroundColor: 'white',
-              elevation: 0,
-            }}
+
+      <SafeAreaView style={{ flex: 1 }}>
+        <Header
+          style={{
+            borderBottomWidth: 0,
+            borderBottomColor: 'white',
+            backgroundColor: 'white',
+            elevation: 0,
+          }}
+        >
+          <Left>
+            <TouchableOpacity onPress={this.changePageHome}>
+              <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
+            </TouchableOpacity>
+          </Left>
+          <Body>
+            <Input
+              placeholder='試試野柳？'
+              value={this.state.text}
+              onChangeText={this.onTextChange}
+              onSubmitEditing={this.onSearch}
+              style={{ width: '100%' }}
+            />
+          </Body>
+          <Right>
+            <TouchableOpacity onPress={this.onSearch} style={{ elevation: 0 }}>
+              <Icon name='search' style={styles.icon} />
+            </TouchableOpacity>
+          </Right>
+        </Header>
+
+
+        <Tabs
+          tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>
+          <Tab
+            heading="潛點"
+            tabStyle={{ backgroundColor: Colors.white }}
+            activeTabStyle={{ backgroundColor: Colors.white }}
+            textStyle={{ color: Colors.mainBlue }}
+            activeTextStyle={{ color: Colors.mainBlue }}
           >
-            <Left>
-              <TouchableOpacity onPress={this.changePageHome}>
-                <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
-              </TouchableOpacity>
-            </Left>
-            <Body>
-              <Input
-                placeholder='試試野柳？'
-                value={this.state.text}
-                onChangeText={this.onTextChange}
-                onSubmitEditing={this.onSearch}
-                style={{ width: '100%' }}
-              />
-            </Body>
-            <Right>
-              <TouchableOpacity onPress={this.onSearch}>
-                <Icon name='search' style={styles.icon} />
-              </TouchableOpacity>
-            </Right>
-          </Header>
+            <SpotTab
+              spotData={this.state.spotResult}
+              navigation={this.props.navigation}
+            />
+          </Tab>
+          <Tab
+            heading="潛店"
+            tabStyle={{ backgroundColor: Colors.white }}
+            activeTabStyle={{ backgroundColor: Colors.white }}
+            textStyle={{ color: Colors.mainBlue }}
+            activeTextStyle={{ color: Colors.mainBlue }}
+          >
+            <ShopTab
+              shopData={this.state.shopResult}
+              navigation={this.props.navigation}
+            />
+          </Tab>
+          <Tab
+            heading="知識"
+            tabStyle={{ backgroundColor: Colors.white }}
+            activeTabStyle={{ backgroundColor: Colors.white }}
+            textStyle={{ color: Colors.mainBlue }}
+            activeTextStyle={{ color: Colors.mainBlue }}
+          >
+            <KnowledgeTab
+              knowledgeData={this.state.knowledgeResult}
+              navigation={this.props.navigation}
+            />
+          </Tab>
+        </Tabs>
 
-
-          <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>
-            <Tab
-              heading="潛點"
-              tabStyle={{ backgroundColor: Colors.white }}
-              activeTabStyle={{ backgroundColor: Colors.white }}
-              textStyle={{ color: Colors.mainBlue }}
-              activeTextStyle={{ color: Colors.mainBlue }}
-            >
-              <SpotTab
-                spotData={this.state.spotResult}
-                navigation={this.props.navigation}
-              />
-            </Tab>
-            <Tab
-              heading="潛店"
-              tabStyle={{ backgroundColor: Colors.white }}
-              activeTabStyle={{ backgroundColor: Colors.white }}
-              textStyle={{ color: Colors.mainBlue }}
-              activeTextStyle={{ color: Colors.mainBlue }}
-            >
-              <ShopTab
-                shopData={this.state.shopResult}
-                navigation={this.props.navigation}
-              />
-            </Tab>
-            <Tab
-              heading="知識"
-              tabStyle={{ backgroundColor: Colors.white }}
-              activeTabStyle={{ backgroundColor: Colors.white }}
-              textStyle={{ color: Colors.mainBlue }}
-              activeTextStyle={{ color: Colors.mainBlue }}
-            >
-              <KnowledgeTab
-                knowledgeData={this.state.knowledgeResult}
-                navigation={this.props.navigation}
-              />
-            </Tab>
-          </Tabs>
-
-        </View>
-      </Modal>
+      </SafeAreaView>
     )
   }
 }
