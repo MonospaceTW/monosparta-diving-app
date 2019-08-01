@@ -21,7 +21,14 @@ export default class SpotDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      level: ''
+      level: '',
+      imgArray: [
+        this.props.navigation.state.params.data.img1,
+        this.props.navigation.state.params.data.img2,
+        this.props.navigation.state.params.data.img3,
+        this.props.navigation.state.params.data.img4,
+        this.props.navigation.state.params.data.img5,
+      ]
     }
   }
 
@@ -72,7 +79,9 @@ export default class SpotDetail extends React.Component {
         <ScrollView>
           <View style={Styles.container}>
 
-            <DetailSwiper img={this.props.navigation.state.params.data.img1} />
+            <DetailSwiper
+             img={this.state.imgArray}
+             />
 
             <View style={Styles.bodyContent}>
 
