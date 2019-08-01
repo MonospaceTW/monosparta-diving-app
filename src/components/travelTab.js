@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import {
   View,
-  ScrollView,
   FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  Text
+  StyleSheet
 } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Tab,
-  Tabs
-} from 'native-base';
+
 import ArticleCard from './articleCard';
-import Api from '../config/api'
+import Api from '../config/api';
+import Colors  from '../config/color';
 
 const styles = StyleSheet.create({
-  cardListContainer: {
+  content: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor:Colors.lightGray
   }
 })
 
@@ -73,7 +65,7 @@ export default class TravelTab extends React.Component {
 
   render() {
     return (
-      <View style={styles.cardListContainer}>
+      <View style={styles.content}>
         <FlatList
           data={this.state.responseValue}
           renderItem={this.renderItem}

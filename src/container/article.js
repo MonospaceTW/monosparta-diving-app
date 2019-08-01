@@ -15,9 +15,7 @@ import {
 
 import Colors from '../config/color';
 import Styles from '../config/style';
-import Api from '../config/api'
-
-import ArticleCard from '../components/articleCard'
+import Api from '../config/api';
 
 import KnowTab from '../components/knowTab';
 import TravelTab from '../components/travelTab';
