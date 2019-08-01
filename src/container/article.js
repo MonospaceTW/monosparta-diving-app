@@ -15,9 +15,7 @@ import {
 
 import Colors from '../config/color';
 import Styles from '../config/style';
-import Api from '../config/api'
-
-import ArticleCard from '../components/articleCard'
+import Api from '../config/api';
 
 import KnowTab from '../components/knowTab';
 import TravelTab from '../components/travelTab';
@@ -53,7 +51,7 @@ export default class Article extends React.Component {
     try {
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item });
     }
     catch (err) {
       console.log('err:', err)

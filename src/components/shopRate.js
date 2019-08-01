@@ -11,7 +11,7 @@ import Styles from '../config/style';
 
 import SmallBtn from '../components/smallButton'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import StarRating from 'react-native-star-rating';
+import Star from '../components/star';
 
 const styles = StyleSheet.create({
   content: {
@@ -43,16 +43,12 @@ export default class ShopRate extends React.Component {
           <FontAwesome name="star" size={24} style={Styles.icon} />
           <Text style={Styles.subtitleGray}>評論</Text>
         </View>
-        <StarRating
-          disabled={false}
-          maxStars={5}
-          rating={this.state.starCount}
-          selectedStar={(rating) => this.onStarRatingPress(rating)}
-          emptyStarColor='#0288D1'
-          fullStarColor='#0288D1'
-          halfStarEnabled
-          starSize={30}
-          containerStyle={{ width: '50%' }}
+        <Star
+          isDisabled={false}
+          starCount={this.state.starCount}
+          size={30}
+          onStarRatingPress={(rating) => this.onStarRatingPress(rating)}
+          startStyle={{width: '50%'}}
         />
         <Form style={{ marginTop: 20, marginBottom: 20 }}>
           <Textarea
@@ -69,6 +65,7 @@ export default class ShopRate extends React.Component {
           />
           <SmallBtn text="寫好了" />
         </View>
+        <Comment/>
       </View>
     );
   }

@@ -50,7 +50,7 @@ export default class Search extends React.Component {
     try {
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
+      let responseDetail = await navigate('articleDetail', { data: responseJson.item });
     }
     catch (err) {
       console.log('err:', err)

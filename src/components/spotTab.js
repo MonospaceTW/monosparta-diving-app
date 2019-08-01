@@ -52,7 +52,7 @@ export default class SpotTab extends React.Component {
     try {
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0] });
+      let responseDetail = await navigate('spotDetail', { data: responseJson.item });
     }
     catch (err) {
       console.log('err:', err)
