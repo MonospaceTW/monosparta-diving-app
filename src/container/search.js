@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
   SafeAreaView,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 import {
   Tab,
@@ -86,7 +86,7 @@ export default class Search extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           style={{
-            marginTop: 10,
+            marginTop: 15,
             backgroundColor: 'white',
             elevation: 0,
           }}

@@ -122,11 +122,11 @@ export default class Article extends React.Component {
 
             <View style={styles.margin}>
               <Text>文章傳送門</Text>
-              <View
+              <TouchableOpacity
                 style={{ marginTop: 10 }}
                 onPress={this.onOpenWithWebBrowser}>
                 <FontAwesome name="globe" size={24} style={Styles.icon} />
-              </View>
+              </TouchableOpacity>
 
             </View>
 

@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
   }
 })
 
+
+
 export default class SpotDetail extends React.Component {
   constructor(props) {
     super(props);
