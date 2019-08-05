@@ -10,6 +10,7 @@ import { Textarea, Form } from "native-base";
 import Styles from '../config/style';
 
 import Comment from './comment'
+import Api from '../config/api'
 import SmallBtn from '../components/smallButton'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Star from '../components/star';
@@ -27,7 +28,8 @@ export default class ShopRate extends React.Component {
     super(props)
     this.state = {
       text: '',
-      starCount: 1
+      starCount: 1,
+      commentResult: [...this.props.comment]
     }
   }
 
@@ -35,6 +37,37 @@ export default class ShopRate extends React.Component {
     this.setState({
       starCount: rating
     });
+  }
+
+  addComment = async (id) => {
+    try {
+      let response = await fetch(Api.url + `comment`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "comment": this.state.text,
+          "rating": this.state.starCount,
+          "commentable_id": id,
+          "commentable_type": "App\\Shop"
+        }),
+      });
+      let responseJson = await response.json();
+      this.setState({
+        text: '',
+        starCount: 4,
+        commentResult: this.state.commentResult.concat(responseJson.comment)
+       })
+    }
+    catch (err) {
+      console.log('err:', err)
+    }
+  }
+
+  clearComment = () => {
+    this.setState({ text: '', starCount: 4 })
   }
 
   render() {
@@ -63,11 +96,12 @@ export default class ShopRate extends React.Component {
           <SmallBtn
             text="先不要"
             select={false}
+            onPress={this.clearComment}
           />
-          <SmallBtn text="寫好了" />
+          <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
         </View>
         <Comment
-          comment={this.props.comment} />
+          comment={this.state.commentResult} />
       </View>
     );
   }

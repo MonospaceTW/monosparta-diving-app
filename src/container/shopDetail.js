@@ -211,7 +211,9 @@ export default class SpotDetail extends React.Component {
                   <View style={Styles.hr} />
 
                   <ShopRate
-                  comment={this.props.navigation.state.params.comment} />
+                    comment={this.props.navigation.state.params.comment}
+                    id={this.props.navigation.state.params.data.id}
+                  />
 
                 </View>
               </View>
