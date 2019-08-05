@@ -7,7 +7,8 @@ import {
   Linking,
   SafeAreaView,
   Modal,
-  Button
+  ActivityIndicator,
+  Image
 } from 'react-native';
 import { Item, Input, Icon } from 'native-base';
 
@@ -44,6 +45,11 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     marginTop: 20,
     marginBottom: 20
+  },
+  loadContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 export default class Home extends React.Component {
@@ -135,9 +141,11 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0],
+      let responseDetail = await navigate('spotDetail', {
+        data: responseJson.item[0],
         comment: responseJson.comment,
-        nearShop: responseJson.Nearby });
+        nearShop: responseJson.Nearby
+      });
     }
     catch (err) {
       console.log('err:', err)
@@ -149,8 +157,10 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
-        comment: responseJson.comment });
+      let responseDetail = await navigate('shopDetail', {
+        data: responseJson.item[0],
+        comment: responseJson.comment
+      });
     }
     catch (err) {
       console.log('err:', err)
@@ -210,11 +220,19 @@ export default class Home extends React.Component {
     let search = navigate('search');
   }
   render() {
+    if (this.state.randomSpot.length === 0) {
+      return (
+          <View style={styles.loadContainer}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+      )
+    }
     return (
+
       <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGray }}>
         <ScrollView style={Styles.container}>
           <View style={Styles.bodyContent}>
-            <View style={{justifyContent:'center',alignItems:'center',marginTop:30}}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
               <RoundedBtn text="試試野柳？" onPressBtn={this.changeSearchPage} />
             </View>
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
@@ -263,6 +281,8 @@ export default class Home extends React.Component {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+
     )
   }
 }
