@@ -33,30 +33,30 @@ const styles = StyleSheet.create({
     padding: 10
   },
   activeBadge: {
-    width: 16,
-    height: 16,
+    width: 19,
+    height: 19,
     backgroundColor: Colors.mainBlue,
-    borderRadius: 8,
+    borderRadius: 9.5,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 5
   },
   activeText: {
     color: Colors.white,
-    fontSize: 12
+    fontSize: 10
   },
   badge: {
-    width: 16,
-    height: 16,
+    width: 19,
+    height: 19,
     backgroundColor: '#969696',
-    borderRadius: 8,
+    borderRadius: 9.5,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 5
   },
   badgeText: {
     color: Colors.white,
-    fontSize: 12
+    fontSize: 10
   }
 })
 
@@ -120,7 +120,7 @@ export default class Search extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           style={{
-            marginTop: 10,
+            marginTop: 15,
             backgroundColor: 'white',
             elevation: 0,
           }}
@@ -151,9 +151,9 @@ export default class Search extends React.Component {
           <Tab
             heading={
               <TabHeading style={{ backgroundColor: Colors.white }}>
-                <Text style={{ color: Colors.mainBlue, fontSize: 15 }}>潛點</Text>
+                <Text style={{ color: Colors.mainBlue, fontSize: 17 }}>潛點</Text>
                 <View style={this.state.spotTotal > 0 ? styles.activeBadge : styles.badge}>
-                  <Text style={this.state.spotTotal > 0 ? styles.activeText : styles.badgeText}>{this.state.spotTotal}</Text>
+                  <Text style={this.state.spotTotal > 0 ? styles.activeText : styles.badgeText}>{this.state.spotTotal > 99 ? '99+' : this.state.spotTotal}</Text>
                 </View>
               </TabHeading>
             }
@@ -166,10 +166,15 @@ export default class Search extends React.Component {
             />
           </Tab>
           <Tab
-            heading="潛店"
+            heading={
+              <TabHeading style={{ backgroundColor: Colors.white }}>
+                <Text style={{ color: Colors.mainBlue, fontSize: 17 }}>潛店</Text>
+                <View style={this.state.shopTotal > 0 ? styles.activeBadge : styles.badge}>
+                  <Text style={this.state.shopTotal > 0 ? styles.activeText : styles.badgeText}>{this.state.shopTotal > 99 ? '99+' : this.state.shopTotal}</Text>
+                </View>
+              </TabHeading>
+            }
             tabStyle={{ backgroundColor: Colors.white }}
-            activeTabStyle={{ backgroundColor: Colors.white }}
-            textStyle={{ color: Colors.mainBlue }}
             activeTextStyle={{ color: Colors.mainBlue }}
           >
             <ShopTab
@@ -178,10 +183,15 @@ export default class Search extends React.Component {
             />
           </Tab>
           <Tab
-            heading="知識"
+            heading={
+              <TabHeading style={{ backgroundColor: Colors.white }}>
+                <Text style={{ color: Colors.mainBlue, fontSize: 17 }}>知識</Text>
+                <View style={this.state.articleTotal > 0 ? styles.activeBadge : styles.badge}>
+                  <Text style={this.state.articleTotal > 0 ? styles.activeText : styles.badgeText}>{this.state.articleTotal > 99 ? '99+' : this.state.articleTotal}</Text>
+                </View>
+              </TabHeading>
+            }
             tabStyle={{ backgroundColor: Colors.white }}
-            activeTabStyle={{ backgroundColor: Colors.white }}
-            textStyle={{ color: Colors.mainBlue }}
             activeTextStyle={{ color: Colors.mainBlue }}
           >
             <KnowledgeTab

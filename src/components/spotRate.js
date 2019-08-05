@@ -27,7 +27,8 @@ export default class SpotRate extends React.Component {
     super(props)
     this.state = {
       text: '',
-      starCount: 4
+      starCount: 4,
+      commentResult: [...this.props.comment]
     }
   }
 
@@ -53,13 +54,17 @@ export default class SpotRate extends React.Component {
         }),
       });
       let responseJson = await response.json();
-      this.setState({ text: '', starCount: 4 })
-      // console.log(responseJson)
+      this.setState({
+        text: '',
+        starCount: 4,
+        commentResult: this.state.commentResult.concat(responseJson.comment)
+       })
     }
     catch (err) {
       console.log('err:', err)
     }
   }
+
   clearComment = () => {
     this.setState({ text: '', starCount: 4 })
   }
@@ -99,7 +104,7 @@ export default class SpotRate extends React.Component {
           <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
         </View>
         <Comment
-          comment={this.props.comment}
+          comment={this.state.commentResult}
         />
 
       </View>
