@@ -58,7 +58,7 @@ export default class SpotRate extends React.Component {
         text: '',
         starCount: 4,
         commentResult: this.state.commentResult.concat(responseJson.comment)
-       })
+      })
     }
     catch (err) {
       console.log('err:', err)
@@ -71,13 +71,15 @@ export default class SpotRate extends React.Component {
 
   render() {
     return (
-      <View style={Styles.component}>
-        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-          <FontAwesome name="star" size={24} style={Styles.icon} />
-          <Text style={Styles.subtitleGray}>評論</Text>
-        </View>
-        <View>
-          <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
+      <View>
+        <View style={Styles.component}>
+          <View style={styles.content}>
+            <FontAwesome name="star" size={24} style={Styles.icon} />
+            <Text style={Styles.subtitleGray}>評論</Text>
+          </View>
+          <View>
+            <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
+          </View>
         </View>
 
         <Star
