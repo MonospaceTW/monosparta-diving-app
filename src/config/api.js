@@ -1,5 +1,5 @@
 export default {
-  url : `http://e5ec9f40.ngrok.io/diveapp/public/api/`
+  url : `http://80c7f548.ngrok.io/diveapp/public/api/`
 }
 
 export const api = {

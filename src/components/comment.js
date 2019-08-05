@@ -56,20 +56,7 @@ export default class App extends React.Component {
 
 }
 
-// componentDidMount = () => {
 
 
-// }
 
-// onGetArticleDetail = async (id) => {
-//   try {
-//     let response = await fetch(Api.url + `comment`);
-//     let responseJson = await response.json();
-//     // let responseDetail = await navigate('articleDetail', { data: responseJson.item });
-//     console.log(responseJson)
-//   }
-//   catch (err) {
-//     console.log('err:', err)
-//   }
-// }
-// http://0a157e71.ngrok.io/DivingBackend/public/api/comment
+
