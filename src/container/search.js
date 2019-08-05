@@ -6,6 +6,7 @@ import {
   View,
   SafeAreaView,
   StyleSheet,
+  Text
 } from 'react-native'
 import {
   Tab,
@@ -15,7 +16,8 @@ import {
   Body,
   Right,
   Icon,
-  Input
+  Input,
+  TabHeading
 } from 'native-base';
 
 import SpotTab from '../components/spotTab';
@@ -29,6 +31,32 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: Colors.gray,
     padding: 10
+  },
+  activeBadge: {
+    width: 16,
+    height: 16,
+    backgroundColor: Colors.mainBlue,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 5
+  },
+  activeText: {
+    color: Colors.white,
+    fontSize: 12
+  },
+  badge: {
+    width: 16,
+    height: 16,
+    backgroundColor: '#969696',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 5
+  },
+  badgeText: {
+    color: Colors.white,
+    fontSize: 12
   }
 })
 
@@ -41,6 +69,9 @@ export default class Search extends React.Component {
       spotResult: [],
       shopResult: [],
       knowledgeResult: [],
+      spotTotal: 0,
+      shopTotal: 0,
+      articleTotal: 0
     }
   }
 
@@ -62,7 +93,10 @@ export default class Search extends React.Component {
           spotResult: responseJson.spot,
           shopResult: responseJson.shop,
           knowledgeResult: responseJson.article,
-          text: ''
+          text: '',
+          spotTotal: responseJson.spotTotal,
+          shopTotal: responseJson.shopTotal,
+          articleTotal: responseJson.articleTotal
         })
       }
       catch (err) {
@@ -115,10 +149,15 @@ export default class Search extends React.Component {
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}>
           <Tab
-            heading="潛點"
+            heading={
+              <TabHeading style={{ backgroundColor: Colors.white }}>
+                <Text style={{ color: Colors.mainBlue, fontSize: 15 }}>潛點</Text>
+                <View style={this.state.spotTotal > 0 ? styles.activeBadge : styles.badge}>
+                  <Text style={this.state.spotTotal > 0 ? styles.activeText : styles.badgeText}>{this.state.spotTotal}</Text>
+                </View>
+              </TabHeading>
+            }
             tabStyle={{ backgroundColor: Colors.white }}
-            activeTabStyle={{ backgroundColor: Colors.white }}
-            textStyle={{ color: Colors.mainBlue }}
             activeTextStyle={{ color: Colors.mainBlue }}
           >
             <SpotTab
