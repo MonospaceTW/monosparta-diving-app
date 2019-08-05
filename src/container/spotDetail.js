@@ -112,6 +112,7 @@ export default class SpotDetail extends React.Component {
               <SpotRate
                 comment={this.props.navigation.state.params.comment}
                 id={this.props.navigation.state.params.data.id}
+                avg={this.props.navigation.state.params.data.avg_rate}
               />
 
             </View>

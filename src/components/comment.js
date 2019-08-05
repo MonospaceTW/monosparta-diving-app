@@ -30,14 +30,15 @@ export default class App extends React.Component {
             <Thumbnail source={Images.recImg} />
           </View>
           <View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <Text style={{ marginRight: 10, color: Colors.mainBlue, fontSize: 15 }}></Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10,justifyContent:'space-between' }}>
+              <Text style={{ marginRight: 10, color: Colors.mainBlue, fontSize: 15 }}>快樂熱帶魚</Text>
               <Star
                 isDisabled
                 starCount={item.rating}
                 size={15}
                 startStyle={{ width: '20%' }}
               />
+              <Text style={{fontSize:10,color:Colors.gray}}>{item.created_at}</Text>
             </View>
             <Text numberOfLines={15} style={Styles.text}>{item.comment}</Text>
           </View>

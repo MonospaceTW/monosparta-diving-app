@@ -4,11 +4,12 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
-import { Textarea, Form } from "native-base";
+import { Textarea, Form, Item } from "native-base";
 
 import Styles from '../config/style';
 import Comment from '../components/comment';
-import Api from '../config/api'
+import Api from '../config/api';
+import Colors from '../config/color';
 import SmallBtn from '../components/smallButton';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Star from '../components/star';
@@ -65,10 +66,13 @@ export default class SpotRate extends React.Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.content}>
+      <View style={Styles.component}>
+        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
           <FontAwesome name="star" size={24} style={Styles.icon} />
           <Text style={Styles.subtitleGray}>評論</Text>
+        </View>
+        <View>
+          <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
         </View>
 
         <Star
