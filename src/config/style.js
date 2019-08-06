@@ -37,12 +37,10 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     letterSpacing: 2,
     paddingTop: 5,
-    lineHeight: 40
   },
   bodyContent: {
     marginRight: 15,
     marginLeft: 15,
-    // justifyContent: 'center'
   },
   component: {
     flex: 1,

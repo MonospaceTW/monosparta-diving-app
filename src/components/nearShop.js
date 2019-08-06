@@ -36,8 +36,10 @@ export default class NearShop extends React.Component {
     try {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
-        comment: responseJson.comment });
+      let responseDetail = await navigate('shopDetail', {
+        data: responseJson.item[0],
+        comment: responseJson.comment
+      });
     }
     catch (err) {
       console.log('err:', err)
@@ -47,14 +49,16 @@ export default class NearShop extends React.Component {
   render() {
     return (
       <View>
-        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-          <FontAwesome name="ship" size={18} style={Styles.icon} />
-          <Text style={Styles.subtitleGray}>附近潛店</Text>
+        <View style={Styles.component}>
+          <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 15 }}>
+            <FontAwesome name="ship" size={18} style={Styles.icon} />
+            <Text style={Styles.subtitleGray}>附近潛店</Text>
+          </View>
         </View>
 
         <ScrollView horizontal={true}>
-              {this.renderNearShop()}
-            </ScrollView>
+          {this.renderNearShop()}
+        </ScrollView>
 
       </View>
     );

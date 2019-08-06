@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
-  ScrollView,
   StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Text,
   SafeAreaView
 } from 'react-native';
 import {
@@ -31,21 +27,6 @@ export default class Article extends React.Component {
     }
   }
 
-  static navigationOptions = {
-    title: '探索知識',
-
-    headerStyle: {
-      borderBottomWidth: 0,
-      elevation: 0
-    },
-    headerTitleStyle: {
-      flex: 1,
-      fontSize: 20,
-      textAlign: 'center',
-      color: '#545454',
-    }
-  };
-
   onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
@@ -61,7 +42,7 @@ export default class Article extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, marginTop: 40 }}>
         <View style={Styles.container}>
           <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }} >
             <Tab

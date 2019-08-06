@@ -13,7 +13,7 @@ import { View } from 'native-base';
 
 const styles = StyleSheet.create({
   btn: {
-    width: '75%',
+    width: '100%',
     height: 40,
     marginTop: 10,
     borderRadius: 35,
