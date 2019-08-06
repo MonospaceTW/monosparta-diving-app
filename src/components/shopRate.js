@@ -61,6 +61,7 @@ export default class ShopRate extends React.Component {
        })
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
