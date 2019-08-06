@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-  Modal,
   TouchableOpacity,
   View,
   SafeAreaView,
@@ -24,7 +23,6 @@ import SpotTab from '../components/spotTab';
 import ShopTab from '../components/shopTab';
 import KnowledgeTab from '../components/knowledgeTab';
 import Api from '../config/api';
-import Styles from '../config/style';
 import Colors from '../config/color';
 const styles = StyleSheet.create({
   icon: {
@@ -64,20 +62,16 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: '',
-      modalVisible: true,
-      spotResult: [],
-      shopResult: [],
-      knowledgeResult: [],
-      spotTotal: 0,
-      shopTotal: 0,
-      articleTotal: 0
+      text: this.props.navigation.state.params.txt,
+      spotResult: this.props.navigation.state.params.spotResult,
+      shopResult: this.props.navigation.state.params.shopResult,
+      knowledgeResult: this.props.navigation.state.params.knowledgeResult,
+      spotTotal: this.props.navigation.state.params.spotTotal,
+      shopTotal: this.props.navigation.state.params.shopTotal,
+      articleTotal: this.props.navigation.state.params.articleTotal
     }
   }
 
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
-  }
   onTextChange = (text) => {
     this.setState({ text })
   }
@@ -93,7 +87,6 @@ export default class Search extends React.Component {
           spotResult: responseJson.spot,
           shopResult: responseJson.shop,
           knowledgeResult: responseJson.article,
-          text: '',
           spotTotal: responseJson.spotTotal,
           shopTotal: responseJson.shopTotal,
           articleTotal: responseJson.articleTotal

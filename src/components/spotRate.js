@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 import { Textarea, Form, Item } from "native-base";
 
@@ -89,6 +90,7 @@ export default class SpotRate extends React.Component {
           onStarRatingPress={(rating) => this.onStarRatingPress(rating)}
           startStyle={{ width: '50%' }}
         />
+
         <Form style={{ marginTop: 20, marginBottom: 20 }}>
           <Textarea
             rowSpan={5}

@@ -69,10 +69,22 @@ export default class SpotDetail extends React.Component {
     headerRight: <View />
   };
 
-  onGoWeb = () => {
+  onGoWeb1 = () => {
+    if (this.props.navigation.state.params.data.web1 === null) {
+      return
+    }
 
     WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.web1);
   }
+
+  onGoWeb2 = () => {
+    if (this.props.navigation.state.params.data.web2 === null) {
+      return
+    }
+
+    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.web2);
+  }
+
   onGoMap = () => {
 
     var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
@@ -197,7 +209,9 @@ export default class SpotDetail extends React.Component {
 
                   <ShopWeb
                     web1={this.props.navigation.state.params.data.web1}
-                    onClick={this.onGoWeb}
+                    web2={this.props.navigation.state.params.data.web2}
+                    onGoWeb1={this.onGoWeb1}
+                    onGoWeb2={this.onGoWeb2}
                   />
 
                   <View style={Styles.hr} />

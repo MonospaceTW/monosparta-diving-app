@@ -119,11 +119,6 @@ export default class Article extends React.Component {
             </View>
 
             <View style={styles.margin}>
-              <Text>文章分類</Text>
-              <Text style={styles.txt}>{this.state.category}</Text>
-            </View>
-
-            <View style={styles.margin}>
               <Text>文章傳送門</Text>
               <TouchableOpacity
                 style={{ marginTop: 10 }}
@@ -132,14 +127,6 @@ export default class Article extends React.Component {
               </TouchableOpacity>
 
             </View>
-
-            <Text>想看更多？試試這裡吧！</Text>
-            <TouchableOpacity
-              style={{ marginTop: 10 }}
-              onPress={this.onOpenBTWeb}
-            >
-              <Image source={Images.BT_logo} />
-            </TouchableOpacity>
 
           </View>
         </ScrollView>

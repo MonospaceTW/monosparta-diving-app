@@ -7,14 +7,15 @@ import {
   Linking,
   SafeAreaView,
   ActivityIndicator,
+  TouchableOpacity
 } from 'react-native';
+import {Input, Icon } from 'native-base';
 
 import Colors from '../config/color';
 import Styles from '../config/style';
 import Api from '../config/api';
 
 import Btn from '../components/button';
-import RoundedBtn from '../components/roundedBtn';
 import ArticleHome from '../components/articleHome';
 import ExploreCard from '../components/exploreCard';
 
@@ -46,6 +47,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  searchBar: {
+    marginTop: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 40
   }
 })
 export default class Home extends React.Component {
@@ -59,6 +69,13 @@ export default class Home extends React.Component {
       randomSpot: [],
       randomShop: [],
       randomArticle: [],
+      text: '',
+      spotResult: [],
+      shopResult: [],
+      knowledgeResult: [],
+      spotTotal: 0,
+      shopTotal: 0,
+      articleTotal: 0
     }
   }
 
@@ -211,10 +228,43 @@ export default class Home extends React.Component {
     })
   }
 
-  changeSearchPage = () => {
-    const { navigate } = this.props.navigation;
-    let search = navigate('search');
+  onTextChange = (text) => {
+    this.setState({ text })
   }
+
+  onSearch = async () => {
+    const { navigate } = this.props.navigation;
+    const keyword = encodeURIComponent(this.state.text)
+    if (this.state.text === '') {
+      return
+    } else {
+      try {
+        let response = await fetch(Api.url + `keyword/${keyword}`);
+        let responseJson = await response.json();
+        this.setState({
+          spotResult: responseJson.spot,
+          shopResult: responseJson.shop,
+          knowledgeResult: responseJson.article,
+          spotTotal: responseJson.spotTotal,
+          shopTotal: responseJson.shopTotal,
+          articleTotal: responseJson.articleTotal
+        })
+        let responseSearch = await navigate('search', {
+          txt: this.state.text,
+          spotResult: this.state.spotResult,
+          shopResult: this.state.shopResult,
+          knowledgeResult: this.state.knowledgeResult,
+          spotTotal: this.state.spotTotal,
+          shopTotal: this.state.shopTotal,
+          articleTotal: this.state.articleTotal
+        });
+      }
+      catch (err) {
+        console.log('err:', err)
+      }
+    }
+  }
+
   render() {
     if (this.state.randomSpot.length === 0) {
       return (
@@ -228,9 +278,22 @@ export default class Home extends React.Component {
       <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGray }}>
         <ScrollView style={Styles.container}>
           <View style={Styles.bodyContent}>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
-              <RoundedBtn text="試試野柳？" onPressBtn={this.changeSearchPage} />
+            <View style={styles.searchBar}>
+              <Input
+                placeholder='試試野柳？'
+                value={this.state.text}
+                onChangeText={this.onTextChange}
+                onSubmitEditing={this.onSearch}
+                style={{
+                  width: '100%',
+                  marginLeft:15
+                }}
+              />
+              <TouchableOpacity onPress={this.onSearch} style={{ elevation: 0 }}>
+                <Icon name='search' style={styles.icon} />
+              </TouchableOpacity>
             </View>
+
             <Text style={[Styles.title, styles.h1]}>哈囉！想去哪裡潛水？</Text>
             <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
 
@@ -277,8 +340,6 @@ export default class Home extends React.Component {
           </View>
         </ScrollView>
       </SafeAreaView>
-
-
     )
   }
 }
