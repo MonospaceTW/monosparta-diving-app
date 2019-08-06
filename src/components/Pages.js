@@ -48,7 +48,9 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: { header: null },
+    navigationOptions: { 
+      header: null 
+    }   
   },
   search: {
     screen: Search,
@@ -103,9 +105,21 @@ const homeNavigator = createStackNavigator({
   articleDetail: {
     screen: ArticleDetail
   }
-}, {
-    initialRouteName: 'Home',
-  })
+}, 
+{
+  initialRouteName: 'Home',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: 'white',
+    },
+    headerTintColor: '#0288D1',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+},
+}
+
+)
 
 const articleNavigator = createStackNavigator({
   article: {

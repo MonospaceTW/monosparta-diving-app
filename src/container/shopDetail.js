@@ -63,6 +63,9 @@ export default class SpotDetail extends React.Component {
       textAlign: 'center',
       color: Color.gray
     },
+    headerStyle: {
+      backgroundColor: 'white',
+    },
     headerRight: <View />
   };
 

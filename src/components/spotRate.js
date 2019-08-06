@@ -99,16 +99,14 @@ export default class SpotRate extends React.Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>
-
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <SmallBtn
-              text="先不要"
-              select={false}
-              onPress={this.clearComment}
-            />
-            <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
-          </View>
-
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginBottom:30 }}>
+          <SmallBtn
+            text="先不要"
+            select={false}
+            onPress={this.clearComment}
+          />
+          <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
+        </View>
         <Comment
           comment={this.state.commentResult}
         />

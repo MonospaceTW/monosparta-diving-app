@@ -298,7 +298,7 @@ export default class Home extends React.Component {
             <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
 
             <Text style={Styles.title}>{this.state.exploreSpotTitle}</Text>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderSpotRandom()}
             </ScrollView>
 
@@ -309,7 +309,7 @@ export default class Home extends React.Component {
             />
 
             <Text style={Styles.title}>{this.state.exploreShopTitle}</Text>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderShopRandom()}
             </ScrollView>
 
@@ -323,7 +323,7 @@ export default class Home extends React.Component {
             <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
 
             <Text style={Styles.title}>{this.state.articleTitle}</Text>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderArticleRandom()}
             </ScrollView>
 
@@ -334,8 +334,8 @@ export default class Home extends React.Component {
             />
 
             <View style={styles.footer}>
-              <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ marginBottom: 10 }}>聯絡我們</Text>
-              <Text>APP版本V1.0</Text>
+              <Text style={{ marginBottom: 10 }}>APP版本V1.0</Text>
+              <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ textDecorationLine: 'underline' }}>聯絡我們</Text>
             </View>
           </View>
         </ScrollView>

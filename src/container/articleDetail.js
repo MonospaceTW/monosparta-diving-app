@@ -72,6 +72,9 @@ export default class Article extends React.Component {
       textAlign: 'center',
       color: '#545454'
     },
+    headerStyle: {
+      backgroundColor: 'white',
+    },
     headerRight:
       <View />
   };
