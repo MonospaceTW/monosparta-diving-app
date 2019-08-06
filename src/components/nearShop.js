@@ -42,6 +42,7 @@ export default class NearShop extends React.Component {
       });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }

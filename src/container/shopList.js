@@ -169,6 +169,7 @@ export default class SpotList extends React.Component {
         let resultList = await navigate('shopList', { shopData: responseValue.item })
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
+        navigate('errorPage')
         console.log(err)
       }
     }
@@ -207,6 +208,7 @@ export default class SpotList extends React.Component {
         comment: responseJson.comment });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }

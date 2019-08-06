@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  SafeAreaView
+  SafeAreaView,
+  Platform
 } from 'react-native';
 import {
   Tab,
@@ -36,16 +37,19 @@ export default class Article extends React.Component {
       let responseDetail = await navigate('articleDetail', { data: responseJson.item });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
 
-
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, marginTop: 40 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <View style={Styles.container}>
-          <Tabs style={{marginTop: Constants.statusBarHeight}} tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }} >
+          <Tabs
+            style={{ marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}
+            tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }}
+          >
             <Tab
               heading="知識"
               tabStyle={{ backgroundColor: Colors.white }}

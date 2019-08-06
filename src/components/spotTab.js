@@ -59,6 +59,7 @@ export default class SpotTab extends React.Component {
 
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }

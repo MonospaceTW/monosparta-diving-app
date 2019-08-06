@@ -93,6 +93,7 @@ export default class Search extends React.Component {
         })
       }
       catch (err) {
+        navigate('errorPage')
         console.log('err:', err)
       }
     }
