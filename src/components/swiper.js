@@ -46,7 +46,13 @@ export default class DetailSwiper extends React.Component {
   render() {
     return (
       <View>
-        <Swiper style={styles.wrapper} showsButtons={false} dotColor={Color.white} activeDotColor={Color.mainBlue}>
+        <Swiper
+          style={styles.wrapper}
+          showsButtons={false}
+          dot={
+            <View style={{backgroundColor:'white', width: 5, height: 5,borderRadius: 4, marginLeft: 4, marginRight: 4, marginTop: 4, marginBottom:4}}/>
+          }
+        >
           {this.onRenderImage()}
         </Swiper>
       </View>

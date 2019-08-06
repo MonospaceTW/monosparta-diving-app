@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  StyleSheet,
-  KeyboardAvoidingView
+  StyleSheet
 } from 'react-native';
 import { Textarea, Form } from "native-base";
 
 import Styles from '../config/style';
 
-import Comment from './comment'
-import Api from '../config/api'
-import SmallBtn from '../components/smallButton'
+import Comment from './comment';
+import Api from '../config/api';
+import SmallBtn from '../components/smallButton';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Star from '../components/star';
 
@@ -28,7 +27,7 @@ export default class ShopRate extends React.Component {
     super(props)
     this.state = {
       text: '',
-      starCount: 1,
+      starCount: 4,
       commentResult: [...this.props.comment]
     }
   }
@@ -82,7 +81,7 @@ export default class ShopRate extends React.Component {
           starCount={this.state.starCount}
           size={30}
           onStarRatingPress={(rating) => this.onStarRatingPress(rating)}
-          startStyle={{width: '50%'}}
+          startStyle={{width: '70%'}}
         />
         <Form style={{ marginTop: 20, marginBottom: 20 }}>
           <Textarea
@@ -92,7 +91,7 @@ export default class ShopRate extends React.Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginBottom:30 }}>
           <SmallBtn
             text="先不要"
             select={false}

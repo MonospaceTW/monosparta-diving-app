@@ -6,11 +6,8 @@ import {
   Text,
   Linking,
   SafeAreaView,
-  Modal,
   ActivityIndicator,
-  Image
 } from 'react-native';
-import { Item, Input, Icon } from 'native-base';
 
 import Colors from '../config/color';
 import Styles from '../config/style';
@@ -20,7 +17,6 @@ import Btn from '../components/button';
 import RoundedBtn from '../components/roundedBtn';
 import ArticleHome from '../components/articleHome';
 import ExploreCard from '../components/exploreCard';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const styles = StyleSheet.create({
@@ -222,9 +218,9 @@ export default class Home extends React.Component {
   render() {
     if (this.state.randomSpot.length === 0) {
       return (
-          <View style={styles.loadContainer}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
+        <View style={styles.loadContainer}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
       )
     }
     return (
@@ -239,7 +235,7 @@ export default class Home extends React.Component {
             <Text style={Styles.subtitle}>蒐集全台最美潛點與優質潛店，發現更多台灣之美！</Text>
 
             <Text style={Styles.title}>{this.state.exploreSpotTitle}</Text>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderSpotRandom()}
             </ScrollView>
 
@@ -250,7 +246,7 @@ export default class Home extends React.Component {
             />
 
             <Text style={Styles.title}>{this.state.exploreShopTitle}</Text>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderShopRandom()}
             </ScrollView>
 
@@ -264,7 +260,7 @@ export default class Home extends React.Component {
             <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
 
             <Text style={Styles.title}>{this.state.articleTitle}</Text>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderArticleRandom()}
             </ScrollView>
 
@@ -275,8 +271,8 @@ export default class Home extends React.Component {
             />
 
             <View style={styles.footer}>
-              <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ marginBottom: 10 }}>monosparta1.0@gmail.com</Text>
-              <Text>APP版本V1.0</Text>
+              <Text style={{ marginBottom: 10 }}>APP版本V1.0</Text>
+              <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ textDecorationLine: 'underline' }}>聯絡我們</Text>
             </View>
           </View>
         </ScrollView>

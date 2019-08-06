@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   text: {
-    marginBottom: 10
+    marginBottom: 10,
+    lineHeight: 25
   }
 })
 

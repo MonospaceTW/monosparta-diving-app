@@ -97,7 +97,7 @@ export default class SpotRate extends React.Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginBottom:30 }}>
           <SmallBtn
             text="先不要"
             select={false}

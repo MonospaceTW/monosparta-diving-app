@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 25,
     width: width * 0.75,
-    borderRadius: 6
+    borderRadius: 6,
+    borderColor: 'transparent',
+    overflow: 'hidden'
   },
   imageWrapper: {
     flex: 1,
@@ -31,14 +33,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6
   },
-  title: {
-    flexDirection: 'row'
-  },
   titleTxt: {
-    fontWeight: 'bold'
-  },
-
-
+    fontWeight: 'bold',
+    fontSize: 16
+  }
 })
 
 export default class ExploreCard extends React.Component {
@@ -52,7 +50,7 @@ export default class ExploreCard extends React.Component {
             </CardItem>
             <CardItem>
               <Text style={styles.titleTxt}>{this.props.data.name}　</Text>
-              <Text>{this.props.data.county}{this.props.data.district}</Text>
+              <Text style={{fontSize:16}}>{this.props.data.county}{this.props.data.district}</Text>
             </CardItem>
           </Card>
         </TouchableOpacity>

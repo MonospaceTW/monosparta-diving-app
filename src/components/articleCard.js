@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: width * 0.9,
     height: height * 0.5,
-    borderRadius: 5
+    borderRadius: 6,
+    borderColor: 'transparent',
+    overflow: 'hidden'
   },
   imageWrapper: {
     flex: 1,
@@ -34,11 +36,12 @@ const styles = StyleSheet.create({
     width: null,
     flex: 1,
     borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
+    borderTopRightRadius: 5,
+    resizeMode: 'cover'
 
   },
   articleTxt: {
-    fontSize: 20
+    fontSize: 16
   }
 })
 
@@ -55,7 +58,7 @@ export default class ArticleCard extends React.Component {
             <CardItem>
               <Text style={styles.articleTxt}>{this.props.articleInfo.title}</Text>
             </CardItem>
-            <CardItem style={{marginTop: -5}}>
+            <CardItem style={{ marginTop: -5 }}>
               <Text numberOfLines={1}>{this.props.articleInfo.content}</Text>
             </CardItem>
           </Card>

@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Image,
   TouchableOpacity,
   Dimensions
@@ -13,8 +12,6 @@ import {
   CardItem
 } from 'native-base';
 
-import { Container, Button } from 'native-base';
-import Btn from '../components/button'
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
@@ -24,7 +21,9 @@ const styles = StyleSheet.create({
     marginRight: 25,
     width: width * 0.75,
     height: height * 0.45,
-    borderRadius: 6
+    borderRadius: 6,
+    borderColor:'transparent',
+    overflow: 'hidden'
   },
   imageWrapper: {
     flex: 1,
