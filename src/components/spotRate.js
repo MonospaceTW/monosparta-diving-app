@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  ScrollView
 } from 'react-native';
 import { Textarea, Form, Item } from "native-base";
 
@@ -71,7 +72,7 @@ export default class SpotRate extends React.Component {
 
   render() {
     return (
-      <ScrollView keyboardShouldPersistTaps='always'>
+      <View>
         <View style={Styles.component}>
           <View style={styles.content}>
             <FontAwesome name="star" size={24} style={Styles.icon} />
@@ -111,7 +112,8 @@ export default class SpotRate extends React.Component {
         <Comment
           comment={this.state.commentResult}
         />
-      </ScrollView>
+
+      </View>
     );
   }
 

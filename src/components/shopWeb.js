@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity
 } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Styles from '../config/style';
@@ -21,7 +22,11 @@ const styles = StyleSheet.create({
   },
   web: {
     color: Colors.mainBlue
-  }
+  },
+  disabledIcon: {
+    color: '#BFBFBF',
+    marginRight: 15
+  },
 })
 
 export default class ShopWeb extends React.Component {
@@ -34,8 +39,23 @@ export default class ShopWeb extends React.Component {
           <FontAwesome name="globe" size={24} style={Styles.icon} />
           <Text style={Styles.subtitleGray}>網站連結</Text>
         </View>
-        <View>
-          <Text onPress={this.props.onClick} style={styles.web}>網址</Text>
+
+        <View style={{ flexDirection: 'row', }}>
+          <TouchableOpacity onPress={this.props.onGoWeb1}>
+            <FontAwesome
+              name="external-link"
+              size={24}
+              style={this.props.web1 === null ? styles.disabledIcon : Styles.icon}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.props.onGoWeb2}>
+            <FontAwesome
+              name="facebook-square"
+              size={24}
+              style={this.props.web2 === null ? styles.disabledIcon : Styles.icon}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     );

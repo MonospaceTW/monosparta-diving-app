@@ -125,14 +125,6 @@ export default class Article extends React.Component {
 
             </View>
 
-            <Text>想看更多？試試這裡吧！</Text>
-            <TouchableOpacity
-              style={{ marginTop: 10 }}
-              onPress={this.onOpenBTWeb}
-            >
-              <Image source={Images.BT_logo} />
-            </TouchableOpacity>
-
           </View>
         </ScrollView>
       </SafeAreaView>
