@@ -5,7 +5,8 @@ import {
   Platform,
   Alert,
   Linking,
-  SafeAreaView
+  SafeAreaView,
+  KeyboardAvoidingView
 } from 'react-native'
 import DetailSwiper from '../components/swiper';
 import SpotDescription from '../components/spotDescription';
@@ -76,48 +77,53 @@ export default class SpotDetail extends React.Component {
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView>
-          <View style={Styles.container}>
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset={80}
+        >
+          <ScrollView>
+            <View style={Styles.container}>
 
-            <DetailSwiper
-              img={this.state.imgArray}
-            />
-
-            <View style={Styles.bodyContent}>
-
-              <SpotDescription
-                name={this.props.navigation.state.params.data.name}
-                description={this.props.navigation.state.params.data.description}
-              />
-              <View style={Styles.hr} />
-
-              <SpotLevel level={this.state.level} />
-              <View style={Styles.hr} />
-
-              <NearShop
-              nearShop={this.props.navigation.state.params.nearShop}
-              navigation={this.props.navigation}
-              />
-              <View style={Styles.hr} />
-
-              <SpotLocation
-                county={this.props.navigation.state.params.data.county}
-                district={this.props.navigation.state.params.data.district}
-                latitude={this.props.navigation.state.params.data.latitude}
-                longitude={this.props.navigation.state.params.data.longitude}
-                onGoMap={this.onGoMap}
-              />
-              <View style={Styles.hr} />
-
-              <SpotRate
-                comment={this.props.navigation.state.params.comment}
-                id={this.props.navigation.state.params.data.id}
-                avg={this.props.navigation.state.params.data.avg_rate}
+              <DetailSwiper
+                img={this.state.imgArray}
               />
 
+              <View style={Styles.bodyContent}>
+
+                <SpotDescription
+                  name={this.props.navigation.state.params.data.name}
+                  description={this.props.navigation.state.params.data.description}
+                />
+                <View style={Styles.hr} />
+
+                <SpotLevel level={this.state.level} />
+                <View style={Styles.hr} />
+
+                <NearShop
+                  nearShop={this.props.navigation.state.params.nearShop}
+                  navigation={this.props.navigation}
+                />
+                <View style={Styles.hr} />
+
+                <SpotLocation
+                  county={this.props.navigation.state.params.data.county}
+                  district={this.props.navigation.state.params.data.district}
+                  latitude={this.props.navigation.state.params.data.latitude}
+                  longitude={this.props.navigation.state.params.data.longitude}
+                  onGoMap={this.onGoMap}
+                />
+                <View style={Styles.hr} />
+
+                <SpotRate
+                  comment={this.props.navigation.state.params.comment}
+                  id={this.props.navigation.state.params.data.id}
+                  avg={this.props.navigation.state.params.data.avg_rate}
+                />
+
+              </View>
             </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     )
   }

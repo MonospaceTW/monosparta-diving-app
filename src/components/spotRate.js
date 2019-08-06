@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { Textarea, Form, Item } from "native-base";
 
@@ -71,7 +71,7 @@ export default class SpotRate extends React.Component {
 
   render() {
     return (
-      <View>
+      <ScrollView keyboardShouldPersistTaps='always'>
         <View style={Styles.component}>
           <View style={styles.content}>
             <FontAwesome name="star" size={24} style={Styles.icon} />
@@ -89,6 +89,7 @@ export default class SpotRate extends React.Component {
           onStarRatingPress={(rating) => this.onStarRatingPress(rating)}
           startStyle={{ width: '50%' }}
         />
+
         <Form style={{ marginTop: 20, marginBottom: 20 }}>
           <Textarea
             rowSpan={5}
@@ -97,19 +98,20 @@ export default class SpotRate extends React.Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <SmallBtn
-            text="先不要"
-            select={false}
-            onPress={this.clearComment}
-          />
-          <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
-        </View>
+
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <SmallBtn
+              text="先不要"
+              select={false}
+              onPress={this.clearComment}
+            />
+            <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
+          </View>
+
         <Comment
           comment={this.state.commentResult}
         />
-
-      </View>
+      </ScrollView>
     );
   }
 

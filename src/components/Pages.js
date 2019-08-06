@@ -53,8 +53,7 @@ const homeNavigator = createStackNavigator({
   search: {
     screen: Search,
     navigationOptions: {
-      header: null,
-      tabBarVisible: false
+      header: null
      }
   },
   spotList: {
@@ -110,7 +109,10 @@ const homeNavigator = createStackNavigator({
 
 const articleNavigator = createStackNavigator({
   article: {
-    screen: Article
+    screen: Article,
+    navigationOptions: {
+      header: null
+     }
   },
   articleDetail: {
     screen: ArticleDetail

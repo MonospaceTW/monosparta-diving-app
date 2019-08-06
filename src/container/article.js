@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import {
   View,
-  ScrollView,
   StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Text,
   SafeAreaView
 } from 'react-native';
 import {
   Tab,
   Tabs
 } from 'native-base';
+import Constants from 'expo-constants'
 
 import Colors from '../config/color';
 import Styles from '../config/style';
@@ -63,7 +60,7 @@ export default class Article extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <View style={Styles.container}>
-          <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }} >
+          <Tabs style={{marginTop: Constants.statusBarHeight}} tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }} >
             <Tab
               heading="知識"
               tabStyle={{ backgroundColor: Colors.white }}
