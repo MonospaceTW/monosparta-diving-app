@@ -116,11 +116,6 @@ export default class Article extends React.Component {
             </View>
 
             <View style={styles.margin}>
-              <Text>文章分類</Text>
-              <Text style={styles.txt}>{this.state.category}</Text>
-            </View>
-
-            <View style={styles.margin}>
               <Text>文章傳送門</Text>
               <TouchableOpacity
                 style={{ marginTop: 10 }}
