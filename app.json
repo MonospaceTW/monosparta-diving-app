@@ -23,10 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.trunkStudio.DiveInTaiwan"
     },
     "android": {
-    "package": "com.DiveApp",
+    "package": "com.trunkStudio.DiveInTaiwan",
     "config": {
       "googleMaps": {
         "apiKey": "AIzaSyC4_FZH90jJ6GqRPXJQTOSmcxKtoqBGLE0"

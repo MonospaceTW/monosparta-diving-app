@@ -43,7 +43,7 @@ export default class Article extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, marginTop: 40 }}>
+      <SafeAreaView style={{ flex: 1}}>
         <View style={Styles.container}>
           <Tabs style={{marginTop: Constants.statusBarHeight}} tabBarUnderlineStyle={{ backgroundColor: Colors.mainBlue }} >
             <Tab
