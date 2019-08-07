@@ -281,7 +281,7 @@ export default class Home extends React.Component {
       if (this.state.randomSpot.length === 0) {
         navigate('errorPage')
       }
-    }, 10000);
+    }, 7000);
   }
 
   render() {
