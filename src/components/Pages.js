@@ -25,6 +25,9 @@ import ShopDetail from '../container/shopDetail';
 import ErrorPage from '../container/errorPage'
 import Colors from '../config/color';
 
+
+import PageTest from '../container/pageTest'
+
 const styles = StyleSheet.create({
   input: {
     borderWidth: 0,
@@ -111,6 +114,9 @@ const homeNavigator = createStackNavigator({
     navigationOptions: {
       header: null
      }
+    },
+  PageTest: {
+    screen: PageTest
   }
 },
 {

@@ -63,7 +63,7 @@ export default class SpotList extends React.Component {
       modalLocationTitle: '地區',
       modalLevelTitle: '難度',
       btnTxt1: '重設',
-      btnTxt2: '確認'
+      btnTxt2: '確認',
     }
   }
 
@@ -169,6 +169,7 @@ export default class SpotList extends React.Component {
         let resultList = await navigate('spotList', { spotData: responseValue.item });
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
+        this.setModalVisible(!this.state.modalVisible);
         navigate('errorPage')
         console.log(err)
       }

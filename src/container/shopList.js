@@ -172,6 +172,7 @@ export default class SpotList extends React.Component {
         let resultList = await navigate('shopList', { shopData: responseValue.item })
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
+        this.setModalVisible(!this.state.modalVisible);
         navigate('errorPage')
         console.log(err)
       }
