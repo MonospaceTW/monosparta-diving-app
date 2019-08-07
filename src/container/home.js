@@ -6,7 +6,6 @@ import {
   Text,
   Linking,
   SafeAreaView,
-  ActivityIndicator,
   Image,
   TouchableOpacity
 } from 'react-native';
@@ -83,7 +82,7 @@ export default class Home extends React.Component {
   static navigationOptions = {
     title: 'LOGO',
     headerStyle: {
-      backgroundColor: '#3FD2FF'
+      backgroundColor: 'white'
     },
     headerTitleStyle: {
       flex: 1,
@@ -122,7 +121,7 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item });
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data});
     }
     catch (err) {
       navigate('errorPage')
@@ -135,7 +134,7 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
-      let responseShop = await navigate('shopList', { shopData: responseValue.item });
+      let responseShop = await navigate('shopList', { shopData: responseValue.item.data });
     }
     catch (err) {
       navigate('errorPage')
@@ -162,7 +161,8 @@ export default class Home extends React.Component {
       let responseDetail = await navigate('spotDetail', {
         data: responseJson.item[0],
         comment: responseJson.comment,
-        nearShop: responseJson.Nearby
+        nearShop: responseJson.Nearby,
+        commentTotal: responseJson.commentTotal
       });
     }
     catch (err) {
@@ -178,7 +178,8 @@ export default class Home extends React.Component {
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', {
         data: responseJson.item[0],
-        comment: responseJson.comment
+        comment: responseJson.comment,
+        commentTotal: responseJson.commentTotal
       });
     }
     catch (err) {
@@ -279,7 +280,8 @@ export default class Home extends React.Component {
     setTimeout(() => {
       if (this.state.randomSpot.length === 0) {
         navigate('errorPage')
-      }}, 10000);
+      }
+    }, 10000);
   }
 
   render() {

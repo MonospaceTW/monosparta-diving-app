@@ -6,8 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  SafeAreaView
-
+  SafeAreaView,
+  View
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   cardContainer: {
-    borderRadius: 6
+    borderRadius: 6,
+    borderColor: 'transparent',
+    overflow: 'hidden'
   },
   spotImg: {
     width: width * 0.85,
@@ -203,7 +205,8 @@ export default class SpotList extends React.Component {
       let responseDetail = await navigate('spotDetail', {
         data: responseJson.item[0],
         comment: responseJson.comment,
-        nearShop: responseJson.Nearby
+        nearShop: responseJson.Nearby,
+        commentTotal: responseJson.commentTotal
       });
     }
     catch (err) {
@@ -215,28 +218,30 @@ export default class SpotList extends React.Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <Content style={Styles.bodyContent}>
+        <View style={Styles.container}>
+          <Content style={Styles.bodyContent}>
 
-          <ListModal
-            modalVisible={this.state.modalVisible}
-            onPress={this.onSetModalVisible}
-            onPressReset={this.clearBtn}
-            onPressSubmit={this.onGetSpotList}
-            title={this.state.modalTitle}
-            subtitle1={this.state.modalLocationTitle}
-            subtitle2={this.state.modalLevelTitle}
-            onGetFirstBtn={this.onGetLocationBtn()}
-            onGetSecondBtn={this.onGetLevelBtn()}
-            btnTxt1={this.state.btnTxt1}
-            btnTxt2={this.state.btnTxt2}
-          />
+            <ListModal
+              modalVisible={this.state.modalVisible}
+              onPress={this.onSetModalVisible}
+              onPressReset={this.clearBtn}
+              onPressSubmit={this.onGetSpotList}
+              title={this.state.modalTitle}
+              subtitle1={this.state.modalLocationTitle}
+              subtitle2={this.state.modalLevelTitle}
+              onGetFirstBtn={this.onGetLocationBtn()}
+              onGetSecondBtn={this.onGetLevelBtn()}
+              btnTxt1={this.state.btnTxt1}
+              btnTxt2={this.state.btnTxt2}
+            />
 
-          <FlatList
-            data={this.props.navigation.state.params.spotData}
-            renderItem={this.renderItem}
-            keyExtractor={this.keyExtractor}
-          />
-        </Content>
+            <FlatList
+              data={this.props.navigation.state.params.spotData}
+              renderItem={this.renderItem}
+              keyExtractor={this.keyExtractor}
+            />
+          </Content>
+        </View>
       </SafeAreaView>
 
     )
