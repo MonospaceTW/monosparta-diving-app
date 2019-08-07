@@ -23,7 +23,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.trunkStudio.DiveInTaiwan"
     },
     "android": {
     "package": "com.trunkStudio.DiveInTaiwan",

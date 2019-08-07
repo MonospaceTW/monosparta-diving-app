@@ -44,6 +44,7 @@ export default class Article extends React.Component {
 
   render() {
     return (
+
       <SafeAreaView style={{ flex: 1 }}>
         <View style={Styles.container}>
           <Tabs
