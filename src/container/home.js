@@ -122,7 +122,7 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item });
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data });
     }
     catch (err) {
       navigate('errorPage')
@@ -135,7 +135,7 @@ export default class Home extends React.Component {
     try {
       let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
-      let responseShop = await navigate('shopList', { shopData: responseValue.item });
+      let responseShop = await navigate('shopList', { shopData: responseValue.item.data });
     }
     catch (err) {
       navigate('errorPage')

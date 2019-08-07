@@ -40,6 +40,7 @@ export default class SpotRate extends React.Component {
   }
 
   addComment = async (id) => {
+    const { navigate } = this.props.navigation;
     try {
       let response = await fetch(Api.url + `comment`, {
         method: 'POST',
@@ -77,7 +78,7 @@ export default class SpotRate extends React.Component {
         <View style={Styles.component}>
           <View style={styles.content}>
             <FontAwesome name="star" size={24} style={Styles.icon} />
-            <Text style={Styles.subtitleGray}>評論</Text>
+            <Text style={Styles.subtitleGray}>評論 {this.props.commentTotal}</Text>
           </View>
           <View>
             <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
@@ -97,6 +98,7 @@ export default class SpotRate extends React.Component {
             rowSpan={5}
             bordered
             placeholder="太棒了～"
+            placeholderTextColor='#BFBFBF'
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>

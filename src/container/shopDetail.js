@@ -230,6 +230,7 @@ export default class SpotDetail extends React.Component {
                   <ShopRate
                     comment={this.props.navigation.state.params.comment}
                     id={this.props.navigation.state.params.data.id}
+                    navigation={this.props.navigation}
                   />
 
                 </View>

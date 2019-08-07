@@ -39,6 +39,7 @@ export default class ShopRate extends React.Component {
   }
 
   addComment = async (id) => {
+    const { navigate } = this.props.navigation;
     try {
       let response = await fetch(Api.url + `comment`, {
         method: 'POST',

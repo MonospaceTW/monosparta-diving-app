@@ -21,24 +21,8 @@ const styles = StyleSheet.create({
 export default class TravelTab extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
   }
 
-  componentDidMount = async () => {
-    try {
-      let response = await fetch(Api.url + `article/category/travel`);
-      let responseValue = await response.json();
-
-      this.setState({
-        responseValue: responseValue.item
-      })
-    }
-    catch (err) {
-      navigate('errorPage')
-      console.log('err:', err)
-    }
-  }
 
   onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
@@ -69,7 +53,7 @@ export default class TravelTab extends React.Component {
     return (
       <View style={styles.content}>
         <FlatList
-          data={this.state.responseValue}
+          data={this.props.articleResult}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
         />
