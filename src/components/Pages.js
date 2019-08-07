@@ -184,12 +184,15 @@ const TabNavigator = createBottomTabNavigator({
 }, {
     initialRouteName: 'Home',
     tabBarOptions: {
-      activeBackgroundColor: '#E8E7E7'
+      activeBackgroundColor: '#E8E7E7',
+      labelStyle: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color:Colors.mainBlue,
+        padding:3
+      },
     },
-    labelStyle: {
-      fontSize: 12,
-      fontWeight: 'bold'
-    },
+    
   })
 
 
