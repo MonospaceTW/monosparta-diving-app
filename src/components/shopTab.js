@@ -55,6 +55,7 @@ export default class ShopTab extends React.Component {
         comment: responseJson.comment });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }

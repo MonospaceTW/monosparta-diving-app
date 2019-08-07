@@ -53,6 +53,7 @@ export default class Search extends React.Component {
       let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }

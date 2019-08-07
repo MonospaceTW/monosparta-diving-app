@@ -62,6 +62,7 @@ export default class SpotRate extends React.Component {
       })
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }

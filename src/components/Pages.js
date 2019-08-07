@@ -22,6 +22,7 @@ import SpotList from '../container/spotList';
 import ShopList from '../container/shopList';
 import SpotDetail from '../container/spotDetail';
 import ShopDetail from '../container/shopDetail';
+import ErrorPage from '../container/errorPage'
 import Colors from '../config/color';
 
 const styles = StyleSheet.create({
@@ -48,9 +49,9 @@ export default class Pages extends Component {
 const homeNavigator = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: { 
-      header: null 
-    }   
+    navigationOptions: {
+      header: null
+    }
   },
   search: {
     screen: Search,
@@ -104,8 +105,14 @@ const homeNavigator = createStackNavigator({
   },
   articleDetail: {
     screen: ArticleDetail
+  },
+  errorPage: {
+    screen: ErrorPage,
+    navigationOptions: {
+      header: null
+     }
   }
-}, 
+},
 {
   initialRouteName: 'Home',
   defaultNavigationOptions: {
@@ -130,6 +137,12 @@ const articleNavigator = createStackNavigator({
   },
   articleDetail: {
     screen: ArticleDetail
+  },
+  errorPage: {
+    screen: ErrorPage,
+    navigationOptions: {
+      header: null
+     }
   }
 }, {
     initialRouteName: 'article'

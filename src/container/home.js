@@ -7,9 +7,10 @@ import {
   Linking,
   SafeAreaView,
   ActivityIndicator,
+  Image,
   TouchableOpacity
 } from 'react-native';
-import {Input, Icon } from 'native-base';
+import { Input, Icon } from 'native-base';
 
 import Colors from '../config/color';
 import Styles from '../config/style';
@@ -111,6 +112,7 @@ export default class Home extends React.Component {
       })
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -123,6 +125,7 @@ export default class Home extends React.Component {
       let responseSpot = await navigate('spotList', { spotData: responseValue.item });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -135,6 +138,7 @@ export default class Home extends React.Component {
       let responseShop = await navigate('shopList', { shopData: responseValue.item });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -145,6 +149,7 @@ export default class Home extends React.Component {
       let responseArticle = await navigate('article');
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -161,6 +166,7 @@ export default class Home extends React.Component {
       });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -176,6 +182,7 @@ export default class Home extends React.Component {
       });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -188,6 +195,7 @@ export default class Home extends React.Component {
       let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -260,17 +268,28 @@ export default class Home extends React.Component {
         });
       }
       catch (err) {
+        navigate('errorPage')
         console.log('err:', err)
       }
     }
+  }
+
+  onPrepareHome = () => {
+    const { navigate } = this.props.navigation;
+    setTimeout(() => {
+      if (this.state.randomSpot.length === 0) {
+        navigate('errorPage')
+      }}, 10000);
   }
 
   render() {
     if (this.state.randomSpot.length === 0) {
       return (
         <View style={styles.loadContainer}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <Image style={{ height: 125, width: 125 }} source={require('../assets/Loading.gif')} />
+          {this.onPrepareHome()}
         </View>
+
       )
     }
     return (
@@ -286,7 +305,7 @@ export default class Home extends React.Component {
                 onSubmitEditing={this.onSearch}
                 style={{
                   width: '100%',
-                  marginLeft:15
+                  marginLeft: 15
                 }}
               />
               <TouchableOpacity onPress={this.onSearch} style={{ elevation: 0 }}>

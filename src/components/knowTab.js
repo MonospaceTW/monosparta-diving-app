@@ -40,6 +40,7 @@ export default class TravelTab extends React.Component {
       })
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
@@ -52,6 +53,7 @@ export default class TravelTab extends React.Component {
       let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
+      navigate('errorPage')
       console.log('err:', err)
     }
   }
