@@ -73,9 +73,9 @@ export default class Article extends React.Component {
       let responseLicenseArticle = await fetch(Api.url + `article/category/license`);
       let licenseArticleResult = await responseLicenseArticle.json();
       this.setState({
-        knowledgeArticleResult: knowledgeArticleResult.item,
-        travelArticleResult: travelArticleResult.item,
-        licenseArticleResult: licenseArticleResult.item,
+        knowledgeArticleResult: knowledgeArticleResult.item.data,
+        travelArticleResult: travelArticleResult.item.data,
+        licenseArticleResult: licenseArticleResult.item.data,
         knowledgeArticleTotal: knowledgeArticleResult.categoryTotal,
         travelArticleTotal: travelArticleResult.categoryTotal,
         licenseArticleTotal: licenseArticleResult.categoryTotal
