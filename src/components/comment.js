@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
     justifyContent: 'space-between',
-    width: width * 0.85
+    width: width * 0.8
   },
   time: {
     fontSize: 10,
     color: Colors.gray
   },
   text: {
-    width:width*0.85
+    width:width*0.8
   }
 })
 
@@ -49,7 +49,7 @@ export default class App extends React.Component {
 
         <View key={item.id} style={styles.content}>
 
-          <View style={{ width: width * 0.1 }}>
+          <View style={{ width: width * 0.15 }}>
             <Thumbnail source={Images.recImg} />
           </View>
 
