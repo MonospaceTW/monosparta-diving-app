@@ -16,18 +16,13 @@ import Styles from '../config/style';
 const styles = StyleSheet.create({
 txt: {
   fontSize: 16,
-  color: '#969696'
+  color: '#969696',
+  marginBottom:10
 }
 })
 
 
 export default class SpotTab extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
 
   onShowSpotResult = () => {
     if (this.props.spotData.length === 0) {
@@ -55,7 +50,9 @@ export default class SpotTab extends React.Component {
       let responseJson = await response.json();
       let responseDetail = await navigate('spotDetail', { data: responseJson.item[0],
         comment: responseJson.comment,
-        nearShop: responseJson.Nearby });
+        nearShop: responseJson.Nearby,
+        commentTotal: responseJson.commentTotal
+      });
 
     }
     catch (err) {

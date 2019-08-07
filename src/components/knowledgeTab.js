@@ -15,16 +15,12 @@ import Styles from '../config/style';
 const styles = StyleSheet.create({
   txt: {
     fontSize: 16,
-    color: '#969696'
+    color: '#969696',
+    marginBottom:10
   }
   })
 
 export default class Search extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
 
   onShowKnowledgeResult = () => {
     if (this.props.knowledgeData.length === 0) {

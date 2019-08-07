@@ -6,6 +6,7 @@ import {
   Dimensions
 } from 'react-native'
 import Colors from '../config/color';
+import { View } from 'native-base';
 
 
 const height = Dimensions.get('window').height;
@@ -14,7 +15,7 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   btn: {
     margin: 15,
-    width: width * 0.8,
+    width: width *0.95,
     height: 40,
     borderRadius: 8,
     borderWidth: 1,
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
 export default class Btn extends React.Component {
   render() {
     return (
+      <View style={{alignItems: 'center',justifyContent: 'center'}}>
       <TouchableOpacity
         style={this.props.select === this.props.value ? styles.btnPress : styles.btn}
         onPress={this.props.onPress}
@@ -56,6 +58,7 @@ export default class Btn extends React.Component {
           {this.props.text}
         </Text>
       </TouchableOpacity>
+      </View>
     )
   }
 }

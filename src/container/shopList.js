@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  SafeAreaView
+  SafeAreaView,
+  View
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -27,7 +28,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   cardContainer: {
-    borderRadius: 6
+    borderRadius: 6,
+    borderColor: 'transparent',
+    overflow: 'hidden'
   },
   spotImg: {
     width: width * 0.85,
@@ -205,7 +208,9 @@ export default class SpotList extends React.Component {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
-        comment: responseJson.comment });
+        comment: responseJson.comment,
+        commentTotal: responseJson.commentTotal
+       });
     }
     catch (err) {
       navigate('errorPage')
@@ -216,6 +221,7 @@ export default class SpotList extends React.Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
+      <View style={Styles.container}>
         <Content style={Styles.bodyContent}>
 
           <ListModal
@@ -239,6 +245,7 @@ export default class SpotList extends React.Component {
           />
 
         </Content>
+        </View>
       </SafeAreaView>
     )
   }

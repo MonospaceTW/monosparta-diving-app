@@ -15,18 +15,13 @@ import Styles from '../config/style';
 const styles = StyleSheet.create({
   txt: {
     fontSize: 16,
-    color: '#969696'
+    color: '#969696',
+    marginBottom:10
   }
   })
 
 
 export default class ShopTab extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
 
   onShowShopResult = () => {
     if (this.props.shopData.length === 0) {
@@ -52,7 +47,9 @@ export default class ShopTab extends React.Component {
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
-        comment: responseJson.comment });
+        comment: responseJson.comment,
+        commentTotal: responseJson.commentTotal
+       });
     }
     catch (err) {
       navigate('errorPage')

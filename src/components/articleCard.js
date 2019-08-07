@@ -13,9 +13,6 @@ import {
   CardItem
 } from 'native-base';
 
-import { Container, Button } from 'native-base';
-import Btn from '../components/button'
-
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
@@ -41,7 +38,8 @@ const styles = StyleSheet.create({
 
   },
   articleTxt: {
-    fontSize: 16
+    fontSize: 16,
+    fontWeight:'bold'
   }
 })
 

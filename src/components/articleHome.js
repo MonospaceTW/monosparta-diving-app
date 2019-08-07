@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 25,
     width: width * 0.75,
-    height: height * 0.45,
+    height: height * 0.4,
     borderRadius: 6,
     borderColor:'transparent',
     overflow: 'hidden'
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 6
   },
   articleTxt: {
-    fontSize: 20
+    fontSize: 16,
+    fontWeight:'bold'
   }
 })
 
