@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
     marginBottom: 20,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'baseline'
   }
 })
 export default class ShopRate extends React.Component {
