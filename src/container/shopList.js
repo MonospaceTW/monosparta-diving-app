@@ -14,6 +14,7 @@ import { Content, Card, CardItem } from 'native-base';
 
 import SmallBtn from '../components/smallButton';
 import ListModal from '../components/listModal'
+import LoadingModal from '../components/loadingModal';
 
 import Api from '../config/api'
 import Styles from '../config/style';
@@ -66,7 +67,8 @@ export default class SpotList extends React.Component {
       modalLocationTitle: '地區',
       modalServiceTitle: '服務',
       btnTxt1: '重設',
-      btnTxt2: '確認'
+      btnTxt2: '確認',
+      loadingModalVisible: false
     }
   }
 
@@ -161,14 +163,18 @@ export default class SpotList extends React.Component {
     const { navigate } = this.props.navigation
     const url = Api.url + `shop/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseShop = await navigate('shopList', { shopData: responseValue.item.data });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
+        let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(url);
         let responseValue = await response.json();
+        let cancelLoading = this.setLoadingModalVisible(false);
         let resultList = await navigate('shopList', { shopData: responseValue.item.data })
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
@@ -206,14 +212,18 @@ export default class SpotList extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
+      let cancelLoading = this.setLoadingModalVisible(false);
+      let responseDetail = await navigate('shopDetail', {
+        data: responseJson.item[0],
         comment: responseJson.comment,
         commentTotal: responseJson.commentTotal
-       });
+      });
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -222,30 +232,33 @@ export default class SpotList extends React.Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
-      <View style={Styles.container}>
-        <Content style={Styles.bodyContent}>
+        <View style={Styles.container}>
+          <Content style={Styles.bodyContent}>
 
-          <ListModal
-            modalVisible={this.state.modalVisible}
-            onPress={this.onSetModalVisible}
-            onPressReset={this.clearBtn}
-            onPressSubmit={this.onGetShopList}
-            title={this.state.modalTitle}
-            subtitle1={this.state.modalLocationTitle}
-            subtitle2={this.state.modalServiceTitle}
-            onGetFirstBtn={this.onGetLocationBtn()}
-            onGetSecondBtn={this.onGetServiceBtn()}
-            btnTxt1={this.state.btnTxt1}
-            btnTxt2={this.state.btnTxt2}
-          />
+            <ListModal
+              modalVisible={this.state.modalVisible}
+              onPress={this.onSetModalVisible}
+              onPressReset={this.clearBtn}
+              onPressSubmit={this.onGetShopList}
+              title={this.state.modalTitle}
+              subtitle1={this.state.modalLocationTitle}
+              subtitle2={this.state.modalServiceTitle}
+              onGetFirstBtn={this.onGetLocationBtn()}
+              onGetSecondBtn={this.onGetServiceBtn()}
+              btnTxt1={this.state.btnTxt1}
+              btnTxt2={this.state.btnTxt2}
+            />
 
-          <FlatList
-            data={this.props.navigation.state.params.shopData}
-            renderItem={this.renderItem}
-            keyExtractor={this.keyExtractor}
-          />
+            <FlatList
+              data={this.props.navigation.state.params.shopData}
+              renderItem={this.renderItem}
+              keyExtractor={this.keyExtractor}
+            />
 
-        </Content>
+            <LoadingModal
+              loadingModalVisible={this.state.loadingModalVisible}
+            />
+          </Content>
         </View>
       </SafeAreaView>
     )
