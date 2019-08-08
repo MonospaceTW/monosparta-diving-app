@@ -27,7 +27,7 @@ import Colors from '../config/color';
 const styles = StyleSheet.create({
   icon: {
     fontSize: 30,
-    color: Colors.gray,
+    color: Colors.mainBlue,
     padding: 10
   },
   activeBadge: {

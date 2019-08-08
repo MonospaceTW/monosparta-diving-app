@@ -160,13 +160,13 @@ export default class SpotList extends React.Component {
     if (this.state.selLocation === '' && this.state.selLevel === '') {
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item });
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
         let response = await fetch(url);
         let responseValue = await response.json();
-        let resultList = await navigate('spotList', { spotData: responseValue.item });
+        let resultList = await navigate('spotList', { spotData: responseValue.item.data });
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         this.setModalVisible(!this.state.modalVisible);
