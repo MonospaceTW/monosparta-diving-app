@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
-  View,
-  Button
+  ScrollView,
+  View
 } from 'react-native';
 import {
   ListItem
@@ -11,23 +11,29 @@ import {
 
 import Api from '../config/api';
 import Styles from '../config/style';
+import LoadingModal from './loadingModal';
 
 
 const styles = StyleSheet.create({
-txt: {
-  fontSize: 16,
-  color: '#969696',
-  marginBottom:10
-}
+  txt: {
+    fontSize: 16,
+    color: '#969696',
+    marginBottom: 10
+  }
 })
 
 
 export default class SpotTab extends React.Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      loadingModalVisible: false
+    }
+  }
   onShowSpotResult = () => {
     if (this.props.spotData.length === 0) {
       return (
-        <View style={{ alignItems: 'center', paddingTop:25}}>
+        <View style={{ alignItems: 'center', paddingTop: 25 }}>
           <Text style={styles.txt}>找不到結果</Text>
           <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
         </View>
@@ -46,26 +52,36 @@ export default class SpotTab extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
-      let responseDetail = await navigate('spotDetail', { data: responseJson.item[0],
+      let cancelLoading = this.setLoadingModalVisible(false);
+      let responseDetail = await navigate('spotDetail', {
+        data: responseJson.item[0],
         comment: responseJson.comment,
         nearShop: responseJson.Nearby,
         commentTotal: responseJson.commentTotal
       });
-
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
   }
 
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
+  }
+
   render() {
     return (
-      <View style={Styles.container}>
+      <ScrollView style={Styles.container}>
         {this.onShowSpotResult()}
-      </View>
+        <LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
+      </ScrollView>
 
     )
   }

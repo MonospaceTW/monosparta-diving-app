@@ -13,7 +13,8 @@ import {
 import { Content, Card, CardItem } from 'native-base';
 
 import SmallBtn from '../components/smallButton';
-import ListModal from '../components/listModal'
+import ListModal from '../components/listModal';
+import LoadingModal from '../components/loadingModal';
 
 import Api from '../config/api'
 import Styles from '../config/style';
@@ -64,6 +65,7 @@ export default class SpotList extends React.Component {
       modalLevelTitle: '難度',
       btnTxt1: '重設',
       btnTxt2: '確認',
+      loadingModalVisible: false
     }
   }
 
@@ -80,6 +82,9 @@ export default class SpotList extends React.Component {
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
+  }
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
   }
   componentDidMount() {
     this.props.navigation.setParams({
@@ -158,15 +163,19 @@ export default class SpotList extends React.Component {
     const { navigate } = this.props.navigation
     const url = Api.url + `spot/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
     if (this.state.selLocation === '' && this.state.selLevel === '') {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item });
+      let cancelLoading = this.setLoadingModalVisible(false);
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data });
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
     } else {
       try {
+        let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(url);
         let responseValue = await response.json();
-        let resultList = await navigate('spotList', { spotData: responseValue.item });
+        let cancelLoading = this.setLoadingModalVisible(false);
+        let resultList = await navigate('spotList', { spotData: responseValue.item.data });
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
       } catch (err) {
         this.setModalVisible(!this.state.modalVisible);
@@ -194,15 +203,13 @@ export default class SpotList extends React.Component {
     )
   };
 
-  onSetModalVisible = () => {
-    this.setModalVisible(!this.state.modalVisible)
-  }
-
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('spotDetail', {
         data: responseJson.item[0],
         comment: responseJson.comment,
@@ -211,6 +218,7 @@ export default class SpotList extends React.Component {
       });
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -240,6 +248,10 @@ export default class SpotList extends React.Component {
               data={this.props.navigation.state.params.spotData}
               renderItem={this.renderItem}
               keyExtractor={this.keyExtractor}
+            />
+
+            <LoadingModal
+              loadingModalVisible={this.state.loadingModalVisible}
             />
           </Content>
         </View>

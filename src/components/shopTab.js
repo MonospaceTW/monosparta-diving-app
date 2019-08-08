@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
-  View,
+  ScrollView,
+  View
 } from 'react-native';
 import {
   ListItem
@@ -10,6 +11,7 @@ import {
 
 import Api from '../config/api';
 import Styles from '../config/style';
+import LoadingModal from './loadingModal';
 
 
 const styles = StyleSheet.create({
@@ -22,7 +24,12 @@ const styles = StyleSheet.create({
 
 
 export default class ShopTab extends React.Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      loadingModalVisible: false
+    }
+  }
   onShowShopResult = () => {
     if (this.props.shopData.length === 0) {
       return (
@@ -44,24 +51,34 @@ export default class ShopTab extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('shopDetail', { data: responseJson.item[0],
         comment: responseJson.comment,
         commentTotal: responseJson.commentTotal
        });
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
   }
 
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
+  }
+
   render() {
     return (
-      <View style={Styles.container}>
+      <ScrollView style={Styles.container}>
         {this.onShowShopResult()}
-      </View>
+        <LoadingModal
+            loadingModalVisible={this.state.loadingModalVisible}
+          />
+      </ScrollView>
     )
   }
 }

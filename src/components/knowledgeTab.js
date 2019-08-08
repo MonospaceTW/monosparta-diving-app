@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
+  ScrollView,
+  View
 } from 'react-native'
 import {
-  List,
   ListItem
 } from 'native-base';
 
 import Api from '../config/api';
 import Styles from '../config/style';
+import LoadingModal from './loadingModal';
 
 const styles = StyleSheet.create({
   txt: {
@@ -21,7 +22,12 @@ const styles = StyleSheet.create({
   })
 
 export default class Search extends React.Component {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      loadingModalVisible: false
+    }
+  }
   onShowKnowledgeResult = () => {
     if (this.props.knowledgeData.length === 0) {
       return (
@@ -44,21 +50,31 @@ export default class Search extends React.Component {
   onGetKnowledgeDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
   }
 
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
+  }
+
   render() {
     return (
-      <View style={Styles.container}>
+      <ScrollView style={Styles.container}>
          {this.onShowKnowledgeResult()}
-      </View>
+         <LoadingModal
+            loadingModalVisible={this.state.loadingModalVisible}
+          />
+      </ScrollView>
     )
   }
 }

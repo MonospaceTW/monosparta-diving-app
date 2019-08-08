@@ -8,14 +8,15 @@ import {
 
 import ArticleCard from './articleCard';
 import Api from '../config/api';
-import Colors  from '../config/color';
+import Colors from '../config/color';
 import Images from '../config/images';
+import LoadingModal from '../components/loadingModal';
 
 const styles = StyleSheet.create({
   content: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor:Colors.lightGray
+    backgroundColor: Colors.lightGray
   },
   loadContainer: {
     flex: 1,
@@ -28,17 +29,23 @@ const styles = StyleSheet.create({
 export default class TravelTab extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      loadingModalVisible: false
+    }
   }
 
 
   onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -55,6 +62,10 @@ export default class TravelTab extends React.Component {
     )
   };
 
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
+  }
+
 
   render() {
     if (this.props.articleResult.length === 0) {
@@ -70,6 +81,9 @@ export default class TravelTab extends React.Component {
           data={this.props.articleResult}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
+        />
+        <LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
         />
       </View>
     )

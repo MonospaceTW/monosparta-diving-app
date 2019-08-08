@@ -7,7 +7,7 @@ import {
   Linking,
   SafeAreaView,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import { Input, Icon } from 'native-base';
 
@@ -19,6 +19,7 @@ import Images from '../config/images';
 import Btn from '../components/button';
 import ArticleHome from '../components/articleHome';
 import ExploreCard from '../components/exploreCard';
+import LoadingModal from '../components/loadingModal';
 
 
 const styles = StyleSheet.create({
@@ -76,7 +77,8 @@ export default class Home extends React.Component {
       knowledgeResult: [],
       spotTotal: 0,
       shopTotal: 0,
-      articleTotal: 0
+      articleTotal: 0,
+      loadingModalVisible: false
     }
   }
 
@@ -120,11 +122,14 @@ export default class Home extends React.Component {
   onGetAllSpot = async () => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data});
+      let cancelLoading = this.setLoadingModalVisible(false);
+      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data });
     }
     catch (err) {
+      this.setLoadingModalVisible(false);
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -133,11 +138,14 @@ export default class Home extends React.Component {
   onGetAllShop = async () => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseShop = await navigate('shopList', { shopData: responseValue.item.data });
     }
     catch (err) {
+      this.setLoadingModalVisible(false);
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -157,8 +165,10 @@ export default class Home extends React.Component {
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `spot/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('spotDetail', {
         data: responseJson.item[0],
         comment: responseJson.comment,
@@ -167,6 +177,7 @@ export default class Home extends React.Component {
       });
     }
     catch (err) {
+      this.setLoadingModalVisible(false);
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -175,8 +186,10 @@ export default class Home extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('shopDetail', {
         data: responseJson.item[0],
         comment: responseJson.comment,
@@ -184,6 +197,7 @@ export default class Home extends React.Component {
       });
     }
     catch (err) {
+      this.setLoadingModalVisible(false);
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -192,11 +206,14 @@ export default class Home extends React.Component {
   onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `article/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('articleDetail', { data: responseJson.item[0] });
     }
     catch (err) {
+      this.setLoadingModalVisible(false);
       navigate('errorPage')
       console.log('err:', err)
     }
@@ -244,11 +261,12 @@ export default class Home extends React.Component {
 
   onSearch = async () => {
     const { navigate } = this.props.navigation;
-    const keyword = encodeURIComponent(this.state.text)
-    if (this.state.text === '') {
+    const keyword = encodeURIComponent(this.state.text.trim())
+    if (keyword.length === 0) {
       return
     } else {
       try {
+        let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(Api.url + `keyword/${keyword}`);
         let responseJson = await response.json();
         this.setState({
@@ -259,6 +277,7 @@ export default class Home extends React.Component {
           shopTotal: responseJson.shopTotal,
           articleTotal: responseJson.articleTotal
         })
+        let cancelLoading = this.setLoadingModalVisible(false);
         let responseSearch = await navigate('search', {
           txt: this.state.text,
           spotResult: this.state.spotResult,
@@ -270,6 +289,7 @@ export default class Home extends React.Component {
         });
       }
       catch (err) {
+        this.setLoadingModalVisible(false);
         navigate('errorPage')
         console.log('err:', err)
       }
@@ -283,6 +303,10 @@ export default class Home extends React.Component {
         navigate('errorPage')
       }
     }, 7000);
+  }
+
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
   }
 
   render() {
@@ -360,6 +384,10 @@ export default class Home extends React.Component {
               <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ textDecorationLine: 'underline' }}>聯絡我們</Text>
             </View>
           </View>
+
+          <LoadingModal
+            loadingModalVisible={this.state.loadingModalVisible}
+          />
         </ScrollView>
       </SafeAreaView>
     )

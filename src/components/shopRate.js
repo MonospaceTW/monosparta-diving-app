@@ -14,6 +14,7 @@ import Colors from '../config/color';
 import SmallBtn from '../components/smallButton';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Star from '../components/star';
+import LoadingModal from '../components/loadingModal';
 
 const styles = StyleSheet.create({
   content: {
@@ -29,7 +30,8 @@ export default class ShopRate extends React.Component {
     this.state = {
       text: '',
       starCount: 4,
-      commentResult: [...this.props.comment]
+      commentResult: [...this.props.comment],
+      loadingModalVisible: false
     }
   }
 
@@ -43,6 +45,7 @@ export default class ShopRate extends React.Component {
     const { navigate } = this.props.navigation;
     if (this.state.text !== '') {
       try {
+        let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(Api.url + `comment`, {
           method: 'POST',
           headers: {
@@ -57,6 +60,7 @@ export default class ShopRate extends React.Component {
           }),
         });
         let responseJson = await response.json();
+        let cancelLoading = this.setLoadingModalVisible(false);
         this.setState({
           text: '',
           starCount: 4,
@@ -64,6 +68,7 @@ export default class ShopRate extends React.Component {
         })
       }
       catch (err) {
+        this.setLoadingModalVisible(false)
         navigate('errorPage')
         console.log('err:', err)
       }
@@ -72,6 +77,10 @@ export default class ShopRate extends React.Component {
 
   clearComment = () => {
     this.setState({ text: '', starCount: 4 })
+  }
+
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
   }
 
   render() {
@@ -112,6 +121,10 @@ export default class ShopRate extends React.Component {
         </View>
         <Comment
           comment={this.state.commentResult} />
+
+<LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
       </View>
     );
   }
