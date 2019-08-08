@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "深入潛初",
-    "slug": "ReUI",
+    "slug": "diveintaiwan",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
@@ -27,12 +27,13 @@
       "bundleIdentifier": "com.trunkStudio.DiveInTaiwan"
     },
     "android": {
-    "package": "com.trunkStudio.DiveInTaiwan",
-    "config": {
-      "googleMaps": {
-        "apiKey": "AIzaSyC4_FZH90jJ6GqRPXJQTOSmcxKtoqBGLE0"
+      "package": "com.trunkStudio.DiveInTaiwan",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC4_FZH90jJ6GqRPXJQTOSmcxKtoqBGLE0"
+        }
       }
-    }
-    }
+    },
+    "description": ""
   }
 }

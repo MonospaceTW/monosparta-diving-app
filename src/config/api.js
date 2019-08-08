@@ -1,6 +1,7 @@
 export default {
-  // url : `http://8e702c06.ngrok.io/DivingBackend/public/api/`
-  url: `http://dcfbbf03.ngrok.io/diveapp/public/api/`
+
+  url : `http://dcfbbf03.ngrok.io/diveapp/public/api/`
+
 }
 
 export const api = {

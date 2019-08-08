@@ -192,7 +192,8 @@ const TabNavigator = createBottomTabNavigator({
       },
     },
 
-  })
+  }
+  )
 
 
 const AppContainer = createAppContainer(TabNavigator)
