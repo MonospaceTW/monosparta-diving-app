@@ -43,7 +43,8 @@ export default class SpotRate extends React.Component {
 
   addComment = async (id) => {
     const { navigate } = this.props.navigation;
-    if (this.state.text !== '') {
+    let commentTxt = this.state.text.trim()
+    if (commentTxt.length !== 0) {
       try {
         let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(Api.url + `comment`, {
@@ -53,7 +54,7 @@ export default class SpotRate extends React.Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            "comment": this.state.text,
+            "comment": commentTxt,
             "rating": this.state.starCount,
             "commentable_id": id,
             "commentable_type": "App\\Spot"
@@ -113,7 +114,12 @@ export default class SpotRate extends React.Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
         </Form>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginBottom:30 }}>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginBottom: 30,
+          display: this.state.text.length === 0 ? 'none' : 'flex'
+        }}>
           <SmallBtn
             text="先不要"
             select={false}

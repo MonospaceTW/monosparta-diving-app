@@ -64,7 +64,7 @@ export default class Article extends React.Component {
   }
 
   static navigationOptions = {
-    title: '探索知識',
+
 
     headerTitleStyle: {
       flex: 1,
@@ -111,8 +111,8 @@ export default class Article extends React.Component {
             <Image source={{ uri: this.props.navigation.state.params.data.img }} style={styles.img} />
             <Text style={Styles.title}>{this.props.navigation.state.params.data.title}</Text>
             <View style={styles.info}>
-              <Text>by {this.props.navigation.state.params.data.author}</Text>
-              <Text>date:{this.props.navigation.state.params.data.date}</Text>
+              <Text style={{fontWeight:'bold'}}>{this.props.navigation.state.params.data.author}</Text>
+              <Text>{this.props.navigation.state.params.data.date}</Text>
             </View>
             <View style={Styles.content}>
               <Text style={[Styles.text, styles.text]}>{this.props.navigation.state.params.data.content}</Text>

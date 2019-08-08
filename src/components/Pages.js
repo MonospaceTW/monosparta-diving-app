@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Item, Input, Icon } from 'native-base';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import {
   Image,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  View,
+  Text
 } from 'react-native';
 
 import {
@@ -107,7 +108,10 @@ const homeNavigator = createStackNavigator({
     }),
   },
   articleDetail: {
-    screen: ArticleDetail
+    screen: ArticleDetail,
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.data.title}`
+    }),
   },
   errorPage: {
     screen: ErrorPage,
@@ -142,7 +146,10 @@ const articleNavigator = createStackNavigator({
      }
   },
   articleDetail: {
-    screen: ArticleDetail
+    screen: ArticleDetail,
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.data.title}`
+    }),
   },
   errorPage: {
     screen: ErrorPage,
