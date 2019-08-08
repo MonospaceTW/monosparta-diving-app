@@ -38,6 +38,11 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6
+  },
+  txt: {
+    fontSize: 16,
+    color: '#969696',
+    marginBottom: 10
   }
 })
 
@@ -225,11 +230,12 @@ export default class SpotList extends React.Component {
   }
 
   render() {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
+    if (this.props.navigation.state.params.spotData.length === 0) {
+      return (
         <View style={Styles.container}>
-          <Content style={Styles.bodyContent}>
-
+          <View style={{ alignItems: 'center', paddingTop: 25 }}>
+            <Text style={styles.txt}>找不到結果</Text>
+            <Text style={styles.txt}>請調整篩選條件再試試看！</Text>
             <ListModal
               modalVisible={this.state.modalVisible}
               onPress={this.onSetModalVisible}
@@ -243,20 +249,42 @@ export default class SpotList extends React.Component {
               btnTxt1={this.state.btnTxt1}
               btnTxt2={this.state.btnTxt2}
             />
-
-            <FlatList
-              data={this.props.navigation.state.params.spotData}
-              renderItem={this.renderItem}
-              keyExtractor={this.keyExtractor}
-            />
-
-            <LoadingModal
-              loadingModalVisible={this.state.loadingModalVisible}
-            />
-          </Content>
+          </View>
         </View>
-      </SafeAreaView>
+      )
+    } else {
+      return (
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={Styles.container}>
+            <Content style={Styles.bodyContent}>
 
-    )
+              <ListModal
+                modalVisible={this.state.modalVisible}
+                onPress={this.onSetModalVisible}
+                onPressReset={this.clearBtn}
+                onPressSubmit={this.onGetSpotList}
+                title={this.state.modalTitle}
+                subtitle1={this.state.modalLocationTitle}
+                subtitle2={this.state.modalLevelTitle}
+                onGetFirstBtn={this.onGetLocationBtn()}
+                onGetSecondBtn={this.onGetLevelBtn()}
+                btnTxt1={this.state.btnTxt1}
+                btnTxt2={this.state.btnTxt2}
+              />
+
+              <FlatList
+                data={this.props.navigation.state.params.spotData}
+                renderItem={this.renderItem}
+                keyExtractor={this.keyExtractor}
+              />
+
+              <LoadingModal
+                loadingModalVisible={this.state.loadingModalVisible}
+              />
+            </Content>
+          </View>
+        </SafeAreaView>
+      )
+    }
   }
 }

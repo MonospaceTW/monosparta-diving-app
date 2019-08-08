@@ -3,10 +3,11 @@ import {
   View,
   StyleSheet,
   Modal,
-  Image
+  Image,
+  ActivityIndicator
 } from 'react-native';
 
-import Images from '../config/images';
+import Colors from '../config/color';
 
 const styles = StyleSheet.create({
   loadingContainer: {
@@ -14,14 +15,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.5)'
-  },
-  loadingBody: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 150,
-    height: 150,
-    borderRadius: 20,
-    backgroundColor: 'white'
   }
 })
 
@@ -34,9 +27,7 @@ export default class LoadingModal extends React.Component {
         visible={this.props.loadingModalVisible}
       >
         <View style={styles.loadingContainer}>
-          <View style={styles.loadingBody}>
-            <Image style={{ height: 125, width: 125 }} source={Images.loading} />
-          </View>
+            <ActivityIndicator size="large" color={Colors.white} />
         </View>
       </Modal>
 
