@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import {
   View,
   FlatList,
-  StyleSheet
+  StyleSheet,
+  Image,
 } from 'react-native';
 
 import ArticleCard from './articleCard';
 import Api from '../config/api';
 import Colors  from '../config/color';
+import Images from '../config/images';
 
 const styles = StyleSheet.create({
   content: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:Colors.lightGray
+  },
+  loadContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
@@ -50,6 +57,13 @@ export default class TravelTab extends React.Component {
 
 
   render() {
+    if (this.props.articleResult.length === 0) {
+      return (
+        <View style={styles.loadContainer}>
+          <Image style={{ height: 125, width: 125 }} source={Images.loading} />
+        </View>
+      )
+    }
     return (
       <View style={styles.content}>
         <FlatList

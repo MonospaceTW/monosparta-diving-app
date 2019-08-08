@@ -9,6 +9,7 @@ export default {
   // profile: require('../assets/person.svg'),
   // search: require(''),
 
-  "recImg": require('../assets/1.png')
+  "recImg": require('../assets/1.png'),
+  "loading": require('../assets/Loading.gif')
 
 };
