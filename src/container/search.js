@@ -5,7 +5,8 @@ import {
   View,
   SafeAreaView,
   StyleSheet,
-  Text
+  Text,
+  Platform
 } from 'react-native'
 import {
   Tab,
@@ -18,6 +19,7 @@ import {
   Input,
   TabHeading
 } from 'native-base';
+import Constants from 'expo-constants'
 
 import SpotTab from '../components/spotTab';
 import ShopTab from '../components/shopTab';
@@ -77,8 +79,8 @@ export default class Search extends React.Component {
   }
   onSearch = async () => {
     const { navigate } = this.props.navigation;
-    const keyword = encodeURIComponent(this.state.text)
-    if (this.state.text === '') {
+    const keyword = encodeURIComponent(this.state.text.trim())
+    if (keyword.length === 0) {
       return
     } else {
       try {
@@ -117,6 +119,7 @@ export default class Search extends React.Component {
           style={{
             backgroundColor: 'white',
             elevation: 0,
+            marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
           }}
         >
           <Left>

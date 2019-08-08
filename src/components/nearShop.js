@@ -10,6 +10,7 @@ import Styles from '../config/style';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import ExploreCard from '../components/exploreCard';
 import Api from '../config/api';
+import LoadingModal from '../components/loadingModal';
 
 const styles = StyleSheet.create({
   subTitle: {
@@ -18,6 +19,12 @@ const styles = StyleSheet.create({
 })
 
 export default class NearShop extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loadingModalVisible: false
+    }
+  }
 
   renderNearShop = () => {
     return this.props.nearShop.map((item) => {
@@ -34,17 +41,24 @@ export default class NearShop extends React.Component {
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `shop/${id}`);
       let responseJson = await response.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       let responseDetail = await navigate('shopDetail', {
         data: responseJson.item[0],
         comment: responseJson.comment
       });
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
+  }
+
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
   }
 
   render() {
@@ -61,6 +75,9 @@ export default class NearShop extends React.Component {
           {this.renderNearShop()}
         </ScrollView>
 
+        <LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
       </View>
     );
   }
