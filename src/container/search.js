@@ -76,6 +76,7 @@ export default class Search extends React.Component {
     this.setState({ text })
   }
   onSearch = async () => {
+    const { navigate } = this.props.navigation;
     const keyword = encodeURIComponent(this.state.text)
     if (this.state.text === '') {
       return
