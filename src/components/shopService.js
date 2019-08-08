@@ -15,7 +15,7 @@ import Styles from '../config/style';
 const styles = StyleSheet.create({
   disabledIcon: {
     color: '#BFBFBF',
-    marginRight: 15
+    marginRight: 10
   },
 })
 
@@ -35,7 +35,7 @@ export default class ShopService extends React.Component {
 
         <View>
 
-            <View style={{ flexDirection: 'row', }}>
+            <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity onPress={this.props.onShowExploreDiving}>
                 <FontAwesome
                   name="child"

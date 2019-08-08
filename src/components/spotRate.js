@@ -41,30 +41,32 @@ export default class SpotRate extends React.Component {
 
   addComment = async (id) => {
     const { navigate } = this.props.navigation;
-    try {
-      let response = await fetch(Api.url + `comment`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "comment": this.state.text,
-          "rating": this.state.starCount,
-          "commentable_id": id,
-          "commentable_type": "App\\Spot"
-        }),
-      });
-      let responseJson = await response.json();
-      this.setState({
-        text: '',
-        starCount: 4,
-        commentResult: this.state.commentResult.concat(responseJson.comment)
-      })
-    }
-    catch (err) {
-      navigate('errorPage')
-      console.log('err:', err)
+    if (this.state.text !== '') {
+      try {
+        let response = await fetch(Api.url + `comment`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            "comment": this.state.text,
+            "rating": this.state.starCount,
+            "commentable_id": id,
+            "commentable_type": "App\\Spot"
+          }),
+        });
+        let responseJson = await response.json();
+        this.setState({
+          text: '',
+          starCount: 4,
+          commentResult: this.state.commentResult.concat(responseJson.comment)
+        })
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
     }
   }
 
