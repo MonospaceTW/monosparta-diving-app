@@ -54,7 +54,8 @@ const homeNavigator = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      header: null
+      header: null,
+      headerBackTitle: null
     }
   },
   search: {
@@ -82,12 +83,13 @@ const homeNavigator = createStackNavigator({
   spotDetail: {
     screen: SpotDetail,
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.data.name}`
+      title: `${navigation.state.params.data.name}`,
     }),
   },
   shopList: {
     screen: ShopList,
     navigationOptions: ({ navigation }) => ({
+      
       headerRight:
         <TouchableOpacity
           style={{ marginRight: 10 }}
