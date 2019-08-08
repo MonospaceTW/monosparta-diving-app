@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
     justifyContent: 'space-between',
-    width: width * 0.8
+    width: width * 0.7
   },
   time: {
     fontSize: 10,
-    color: Colors.gray
+    color: Colors.gray,
   },
   text: {
-    width:width*0.8
+    width:width*0.7
   }
 })
 
@@ -53,7 +53,7 @@ export default class App extends React.Component {
             <Thumbnail source={Images.recImg} />
           </View>
 
-          <View>
+          <View style={{ marginLeft:15 }}>
             <Text style={styles.user}>快樂熱帶魚</Text>
             <View style={styles.wrapper}>
               <Star

@@ -14,6 +14,7 @@ import { Input, Icon } from 'native-base';
 import Colors from '../config/color';
 import Styles from '../config/style';
 import Api from '../config/api';
+import Images from '../config/images';
 
 import Btn from '../components/button';
 import ArticleHome from '../components/articleHome';
@@ -288,7 +289,7 @@ export default class Home extends React.Component {
     if (this.state.randomSpot.length === 0) {
       return (
         <View style={styles.loadContainer}>
-          <Image style={{ height: 125, width: 125 }} source={require('../assets/Loading.gif')} />
+          <Image style={{ height: 125, width: 125 }} source={Images.loading} />
           {this.onPrepareHome()}
         </View>
 
