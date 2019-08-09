@@ -24,8 +24,10 @@ import Constants from 'expo-constants';
 import SpotTab from '../components/spotTab';
 import ShopTab from '../components/shopTab';
 import KnowledgeTab from '../components/knowledgeTab';
+import LoadingModal from '../components/loadingModal';
 import Api from '../config/api';
 import Colors from '../config/color';
+
 const styles = StyleSheet.create({
   icon: {
     fontSize: 30,
@@ -70,7 +72,8 @@ export default class Search extends React.Component {
       knowledgeResult: this.props.navigation.state.params.knowledgeResult,
       spotTotal: this.props.navigation.state.params.spotTotal,
       shopTotal: this.props.navigation.state.params.shopTotal,
-      articleTotal: this.props.navigation.state.params.articleTotal
+      articleTotal: this.props.navigation.state.params.articleTotal,
+      loadingModalVisible: false
     }
   }
 
@@ -84,8 +87,10 @@ export default class Search extends React.Component {
       return
     } else {
       try {
+        let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(Api.url + `keyword/${keyword}`);
         let responseJson = await response.json();
+        let cancelLoading = this.setLoadingModalVisible(false);
         this.setState({
           spotResult: responseJson.spot,
           shopResult: responseJson.shop,
@@ -96,6 +101,7 @@ export default class Search extends React.Component {
         })
       }
       catch (err) {
+        this.setLoadingModalVisible(false);
         navigate('errorPage')
         console.log('err:', err)
       }
@@ -111,8 +117,8 @@ export default class Search extends React.Component {
     goBack()
   }
 
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
   }
 
   render() {
@@ -137,7 +143,8 @@ export default class Search extends React.Component {
               value={this.state.text}
               onChangeText={this.onTextChange}
               onSubmitEditing={this.onSearch}
-              style={{ width: '100%'}}
+              returnKeyType={'search'}
+              style={{ width: '100%' }}
             />
           </Body>
           <Right>
@@ -201,6 +208,10 @@ export default class Search extends React.Component {
             />
           </Tab>
         </Tabs>
+
+        <LoadingModal
+            loadingModalVisible={this.state.loadingModalVisible}
+          />
 
       </SafeAreaView>
     )

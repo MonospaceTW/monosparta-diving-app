@@ -1,9 +1,8 @@
 export default {
 
-  url : `http://monosparta-api.trunksys.com/api/`
+  url: `https://monosparta-api.trunksys.com/api/`
 
 }
-
 export const api = {
 
   // [apiAction.LOGIN]: {

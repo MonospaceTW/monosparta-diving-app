@@ -20,6 +20,8 @@ import Api from '../config/api';
 import KnowTab from '../components/knowTab';
 import TravelTab from '../components/travelTab';
 import LicenseTab from '../components/licenseTab';
+import LoadingModal from '../components/loadingModal';
+
 
 
 const styles = StyleSheet.create({
@@ -59,19 +61,22 @@ export default class Article extends React.Component {
       licenseArticleTotal: 0,
       knowledgeArticleResult: [],
       travelArticleResult: [],
-      licenseArticleResult: []
+      licenseArticleResult: [],
+      loadingModalVisible: false
     }
   }
 
   componentDidMount = async () => {
     const { navigate } = this.props.navigation;
     try {
+      let showLoading = this.setLoadingModalVisible(true);
       let responseKnowledgeArticle = await fetch(Api.url + `article/category/knowledge`);
       let knowledgeArticleResult = await responseKnowledgeArticle.json();
       let responseTravelArticle = await fetch(Api.url + `article/category/travel`);
       let travelArticleResult = await responseTravelArticle.json();
       let responseLicenseArticle = await fetch(Api.url + `article/category/license`);
       let licenseArticleResult = await responseLicenseArticle.json();
+      let cancelLoading = this.setLoadingModalVisible(false);
       this.setState({
         knowledgeArticleResult: knowledgeArticleResult.item.data,
         travelArticleResult: travelArticleResult.item.data,
@@ -82,9 +87,14 @@ export default class Article extends React.Component {
       })
     }
     catch (err) {
+      this.setLoadingModalVisible(false)
       navigate('errorPage')
       console.log('err:', err)
     }
+  }
+
+  setLoadingModalVisible(visible) {
+    this.setState({ loadingModalVisible: visible });
   }
 
   render() {
@@ -149,6 +159,9 @@ export default class Article extends React.Component {
             </Tab>
           </Tabs>
         </View>
+        <LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
       </SafeAreaView>
     )
   }

@@ -27,7 +27,7 @@ import ErrorPage from '../container/errorPage'
 import Colors from '../config/color';
 
 
-import PageTest from '../container/pageTest'
+import ArticleTest from '../container/articleTest'
 
 const styles = StyleSheet.create({
   input: {
@@ -127,8 +127,8 @@ const homeNavigator = createStackNavigator({
       headerBackTitle: null
      }
     },
-  PageTest: {
-    screen: PageTest
+    ArticleTest: {
+    screen: ArticleTest
   }
 },
 {
