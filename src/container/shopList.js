@@ -13,7 +13,7 @@ import {
 import { Content, Card, CardItem } from 'native-base';
 
 import SmallBtn from '../components/smallButton';
-import ListModal from '../components/listModal'
+import ListModal from '../components/listModal';
 import LoadingModal from '../components/loadingModal';
 
 import Api from '../config/api'
@@ -73,7 +73,10 @@ export default class SpotList extends React.Component {
       modalServiceTitle: '服務',
       btnTxt1: '重設',
       btnTxt2: '確認',
-      loadingModalVisible: false
+      loadingModalVisible: false,
+      shopList: [],
+      currentPage: 0,
+      lastPage: 0,
     }
   }
 
@@ -97,6 +100,12 @@ export default class SpotList extends React.Component {
     this.props.navigation.setParams({
       showModal: this.showModal.bind(this)
     });
+    this.setState({
+      shopList: this.props.navigation.state.params.shopData,
+      currentPage: this.props.navigation.state.params.shopCurrentPage,
+      lastPage: this.props.navigation.state.params.shopLastPage,
+      shopNextPage: this.props.navigation.state.params.shopNextPage
+    })
   }
   showModal = () => {
     this.setModalVisible(true)
@@ -174,16 +183,38 @@ export default class SpotList extends React.Component {
       let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
       let cancelLoading = this.setLoadingModalVisible(false);
-      let responseShop = await navigate('shopList', { shopData: responseValue.item.data });
+      this.setState({
+        shopList: responseValue.item.data,
+        currentPage: responseValue.item.current_page,
+        shopNextPage: responseValue.item.next_page_url
+      })
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
+      if (this.state.shopList.length > 0) {
+        this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+      }
     } else {
       try {
         let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(url);
         let responseValue = await response.json();
         let cancelLoading = this.setLoadingModalVisible(false);
-        let resultList = await navigate('shopList', { shopData: responseValue.item.data })
+        this.setState({
+          shopList: responseValue.item.data,
+          currentPage: responseValue.item.current_page
+        })
+        if (responseValue.item.next_page_url !== null) {
+          this.setState({
+            spotNextPage: responseValue.item.next_page_url
+          })
+        } else {
+          this.setState({
+            spotNextPage: ''
+          })
+        }
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
+        if (this.state.shopList.length > 0) {
+          this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+        }
       } catch (err) {
         this.setModalVisible(!this.state.modalVisible);
         navigate('errorPage')
@@ -191,6 +222,28 @@ export default class SpotList extends React.Component {
       }
     }
   };
+
+  onGetNextPage = async () => {
+    let page = this.state.currentPage + 1
+    const { navigate } = this.props.navigation;
+    if (page <= this.state.lastPage) {
+      try {
+        if (this.state.spotNextPage !== '') {
+          let response = await fetch(this.state.shopNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            shopList: this.state.shopList.concat(responseJson.item.data),
+            currentPage: responseJson.item.current_page,
+            shopNextPage: responseJson.item.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
+  }
 
   keyExtractor = (item, index) => { return index.toString() };
 
@@ -237,7 +290,7 @@ export default class SpotList extends React.Component {
   }
 
   render() {
-    if (this.props.navigation.state.params.shopData.length === 0) {
+    if (this.state.shopList.length === 0) {
       return (
         <View style={Styles.container}>
           <View style={{ alignItems: 'center', paddingTop: 25 }}>
@@ -263,7 +316,7 @@ export default class SpotList extends React.Component {
       return (
         <SafeAreaView style={{ flex: 1 }}>
           <View style={Styles.container}>
-            <Content style={Styles.bodyContent}>
+            <View style={Styles.bodyContent}>
 
               <ListModal
                 modalVisible={this.state.modalVisible}
@@ -280,7 +333,8 @@ export default class SpotList extends React.Component {
               />
 
               <FlatList
-                data={this.props.navigation.state.params.shopData}
+                ref={(ref) => { this.onGoTop = ref; }}
+                data={this.state.shopList}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
               />
@@ -288,7 +342,7 @@ export default class SpotList extends React.Component {
               <LoadingModal
                 loadingModalVisible={this.state.loadingModalVisible}
               />
-            </Content>
+            </View>
           </View>
         </SafeAreaView>
       )

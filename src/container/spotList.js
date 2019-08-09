@@ -70,7 +70,10 @@ export default class SpotList extends React.Component {
       modalLevelTitle: '難度',
       btnTxt1: '重設',
       btnTxt2: '確認',
-      loadingModalVisible: false
+      loadingModalVisible: false,
+      spotList: [],
+      currentPage: 0,
+      lastPage: 0,
     }
   }
 
@@ -91,10 +94,17 @@ export default class SpotList extends React.Component {
   setLoadingModalVisible(visible) {
     this.setState({ loadingModalVisible: visible });
   }
+
   componentDidMount() {
     this.props.navigation.setParams({
       showModal: this.showModal.bind(this)
     });
+    this.setState({
+      spotList: this.props.navigation.state.params.spotData,
+      currentPage: this.props.navigation.state.params.spotCurrentPage,
+      lastPage: this.props.navigation.state.params.spotLastPage,
+      spotNextPage: this.props.navigation.state.params.spotNextPage
+    })
   }
   showModal = () => {
     this.setModalVisible(true)
@@ -172,20 +182,65 @@ export default class SpotList extends React.Component {
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
       let cancelLoading = this.setLoadingModalVisible(false);
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data });
+      this.setState({
+        spotList: responseValue.item.data,
+        currentPage: responseValue.item.current_page,
+        spotNextPage: responseValue.item.next_page_url
+      })
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
+      if (this.state.spotList.length > 0) {
+        this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+      }
     } else {
       try {
         let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(url);
         let responseValue = await response.json();
         let cancelLoading = this.setLoadingModalVisible(false);
-        let resultList = await navigate('spotList', { spotData: responseValue.item.data });
+        this.setState({
+          spotList: responseValue.item.data,
+          currentPage: responseValue.item.current_page,
+        });
+        if (responseValue.item.next_page_url !== null) {
+          this.setState({
+            spotNextPage: responseValue.item.next_page_url
+          })
+        } else {
+          this.setState({
+            spotNextPage: ''
+          })
+        }
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
+        if (this.state.spotList.length > 0) {
+          this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+        }
       } catch (err) {
         this.setModalVisible(!this.state.modalVisible);
         navigate('errorPage')
         console.log(err)
+      }
+    }
+  }
+
+  onGetNextPage = async () => {
+    let page = this.state.currentPage + 1
+    const { navigate } = this.props.navigation;
+    if (page <= this.state.lastPage) {
+      try {
+        if (this.state.spotNextPage !== '') {
+          let response = await fetch(this.state.spotNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            spotList: this.state.spotList.concat(responseJson.item.data),
+            currentPage: responseJson.item.current_page,
+            spotNextPage: responseJson.item.next_page_url
+          })
+        }
+        console.log(this.state.currentPage)
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
       }
     }
   }
@@ -229,8 +284,12 @@ export default class SpotList extends React.Component {
     }
   }
 
+  onSetModalVisible = () => {
+    this.setModalVisible(!this.state.modalVisible)
+  }
+
   render() {
-    if (this.props.navigation.state.params.spotData.length === 0) {
+    if (this.state.spotList.length === 0) {
       return (
         <View style={Styles.container}>
           <View style={{ alignItems: 'center', paddingTop: 25 }}>
@@ -256,7 +315,7 @@ export default class SpotList extends React.Component {
       return (
         <SafeAreaView style={{ flex: 1 }}>
           <View style={Styles.container}>
-            <Content style={Styles.bodyContent}>
+            <View style={Styles.bodyContent}>
 
               <ListModal
                 modalVisible={this.state.modalVisible}
@@ -273,15 +332,18 @@ export default class SpotList extends React.Component {
               />
 
               <FlatList
-                data={this.props.navigation.state.params.spotData}
+                ref={(ref) => { this.onGoTop = ref; }}
+                data={this.state.spotList}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
+                onEndReachedThreshold={0.3}
+                onEndReached={this.onGetNextPage}
               />
 
               <LoadingModal
                 loadingModalVisible={this.state.loadingModalVisible}
               />
-            </Content>
+            </View>
           </View>
         </SafeAreaView>
       )

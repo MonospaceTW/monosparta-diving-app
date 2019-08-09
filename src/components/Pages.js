@@ -27,7 +27,7 @@ import ErrorPage from '../container/errorPage'
 import Colors from '../config/color';
 
 
-import PageTest from '../container/pageTest'
+import ArticleTest from '../container/articleTest'
 
 const styles = StyleSheet.create({
   input: {
@@ -89,7 +89,7 @@ const homeNavigator = createStackNavigator({
   shopList: {
     screen: ShopList,
     navigationOptions: ({ navigation }) => ({
-      
+
       headerRight:
         <TouchableOpacity
           style={{ marginRight: 10 }}
@@ -121,8 +121,8 @@ const homeNavigator = createStackNavigator({
       header: null
      }
     },
-  PageTest: {
-    screen: PageTest
+    ArticleTest: {
+    screen: ArticleTest
   }
 },
 {

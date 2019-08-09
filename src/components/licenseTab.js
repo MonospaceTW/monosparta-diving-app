@@ -3,14 +3,14 @@ import {
   View,
   FlatList,
   StyleSheet,
-  Image,
+  Text
 } from 'react-native';
 
 
 import ArticleCard from './articleCard';
 import Api from '../config/api';
 import Colors from '../config/color';
-import Images from '../config/images';
+import Styles from '../config/style';
 import LoadingModal from '../components/loadingModal';
 
 const styles = StyleSheet.create({
@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  txt: {
+    fontSize: 16,
+    color: '#969696',
+    marginBottom: 10
   }
 })
 
@@ -69,8 +74,11 @@ export default class TravelTab extends React.Component {
   render() {
     if (this.props.articleResult.length === 0) {
       return (
-        <View style={styles.loadContainer}>
-          <Image style={{ height: 125, width: 125 }} source={Images.loading} />
+        <View style={Styles.container}>
+          <View style={{ alignItems: 'center', paddingTop: 25 }}>
+            <Text style={styles.txt}>找不到結果</Text>
+            <Text style={styles.txt}>請調整篩選條件再試試看！</Text>
+          </View>
         </View>
       )
     }

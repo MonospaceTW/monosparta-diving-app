@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  Platform
 } from 'react-native';
 import { Input, Icon } from 'native-base';
 
@@ -126,7 +127,12 @@ export default class Home extends React.Component {
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
       let cancelLoading = this.setLoadingModalVisible(false);
-      let responseSpot = await navigate('spotList', { spotData: responseValue.item.data });
+      let responseSpot = await navigate('spotList', {
+        spotData: responseValue.item.data,
+        spotCurrentPage: responseValue.item.current_page,
+        spotLastPage: responseValue.item.last_page,
+        spotNextPage: responseValue.item.next_page_url
+      });
     }
     catch (err) {
       this.setLoadingModalVisible(false);
@@ -142,7 +148,12 @@ export default class Home extends React.Component {
       let response = await fetch(Api.url + `shop`);
       let responseValue = await response.json();
       let cancelLoading = this.setLoadingModalVisible(false);
-      let responseShop = await navigate('shopList', { shopData: responseValue.item.data });
+      let responseShop = await navigate('shopList', {
+        shopData: responseValue.item.data,
+        shopCurrentPage: responseValue.item.current_page,
+        shopLastPage: responseValue.item.last_page,
+        shopNextPage: responseValue.item.next_page_url
+      });
     }
     catch (err) {
       this.setLoadingModalVisible(false);
@@ -330,6 +341,7 @@ export default class Home extends React.Component {
                 value={this.state.text}
                 onChangeText={this.onTextChange}
                 onSubmitEditing={this.onSearch}
+                returnKeyType={'search'}
                 style={{
                   width: '100%',
                   marginLeft: 15

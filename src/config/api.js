@@ -1,9 +1,9 @@
 export default {
 
-  url : `http://d5aec3e1.ngrok.io/diveapp/public/api/`
+  // url : `http://e6f2f7dd.ngrok.io/test/public/api/`
+  url: `https://monosparta-api.trunksys.com/api/`
 
 }
-
 export const api = {
 
   // [apiAction.LOGIN]: {
