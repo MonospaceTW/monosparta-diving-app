@@ -338,6 +338,8 @@ export default class SpotList extends React.Component {
                 data={this.state.shopList}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
+                onEndReachedThreshold={3}
+                onEndReached={this.onGetNextPage}
               />
 
               <LoadingModal

@@ -110,7 +110,7 @@ export default class ShopRate extends React.Component {
           <Textarea
             rowSpan={5}
             bordered
-            placeholder="太棒了～"
+            placeholder="喜歡這裡嗎？快來留言分享吧！"
             placeholderTextColor="#BFBFBF"
             onChangeText={(text) => this.setState({ text })}
             value={this.state.text} />
