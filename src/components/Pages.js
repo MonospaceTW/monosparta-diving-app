@@ -61,12 +61,14 @@ const homeNavigator = createStackNavigator({
   search: {
     screen: Search,
     navigationOptions: {
-      header: null
+      header: null,
+      headerBackTitle: null
      }
   },
   spotList: {
     screen: SpotList,
     navigationOptions: ({ navigation }) => ({
+      headerBackTitle: null,
       headerRight:
         <TouchableOpacity
           style={{ marginRight: 10 }}
@@ -84,12 +86,13 @@ const homeNavigator = createStackNavigator({
     screen: SpotDetail,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
+      headerBackTitle: null
     }),
   },
   shopList: {
     screen: ShopList,
     navigationOptions: ({ navigation }) => ({
-      
+      headerBackTitle: null,
       headerRight:
         <TouchableOpacity
           style={{ marginRight: 10 }}
@@ -107,18 +110,21 @@ const homeNavigator = createStackNavigator({
     screen: ShopDetail,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.data.name}`,
+      headerBackTitle: null
     }),
   },
   articleDetail: {
     screen: ArticleDetail,
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.data.title}`
+      title: `${navigation.state.params.data.title}`,
+      headerBackTitle: null
     }),
   },
   errorPage: {
     screen: ErrorPage,
     navigationOptions: {
-      header: null
+      header: null,
+      headerBackTitle: null
      }
     },
   PageTest: {
@@ -144,19 +150,22 @@ const articleNavigator = createStackNavigator({
   article: {
     screen: Article,
     navigationOptions: {
-      header: null
+      header: null,
+      headerBackTitle: null
      }
   },
   articleDetail: {
     screen: ArticleDetail,
     navigationOptions: ({ navigation }) => ({
+      headerBackTitle: null,
       title: `${navigation.state.params.data.title}`
     }),
   },
   errorPage: {
     screen: ErrorPage,
     navigationOptions: {
-      header: null
+      header: null,
+      headerBackTitle: null
      }
   }
 }, {

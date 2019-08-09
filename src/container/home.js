@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   icon: {
-    color: Colors.mainBlue,
+    color: Colors.gray,
     paddingRight: 15
   },
   footer: {

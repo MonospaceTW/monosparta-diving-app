@@ -19,7 +19,7 @@ import {
   Input,
   TabHeading
 } from 'native-base';
-import Constants from 'expo-constants'
+import Constants from 'expo-constants';
 
 import SpotTab from '../components/spotTab';
 import ShopTab from '../components/shopTab';
@@ -102,6 +102,10 @@ export default class Search extends React.Component {
     }
   }
 
+  onClose = () => {
+    this.setState({text:''})
+  }
+
   changePageHome = () => {
     const { goBack } = this.props.navigation;
     goBack()
@@ -119,7 +123,7 @@ export default class Search extends React.Component {
           style={{
             backgroundColor: 'white',
             elevation: 0,
-            marginTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+            marginTop: Platform.OS === 'ios' ? -10 : Constants.statusBarHeight
           }}
         >
           <Left>
@@ -127,18 +131,18 @@ export default class Search extends React.Component {
               <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
             </TouchableOpacity>
           </Left>
-          <Body>
+          <Body style={{marginLeft:0 }}>
             <Input
               placeholder='試試野柳？'
               value={this.state.text}
               onChangeText={this.onTextChange}
               onSubmitEditing={this.onSearch}
-              style={{ width: '100%' }}
+              style={{ width: '100%'}}
             />
           </Body>
           <Right>
-            <TouchableOpacity onPress={this.onSearch} style={{ elevation: 0 }}>
-              <Icon name='search' style={styles.icon} />
+            <TouchableOpacity onPress={this.onClose} style={{ elevation: 0 }}>
+              <Icon name='close' style={styles.icon} />
             </TouchableOpacity>
           </Right>
         </Header>
