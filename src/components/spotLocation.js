@@ -37,7 +37,7 @@ export default class SpotLocation extends React.Component {
             <Text style={[Styles.subtitleGray, styles.subtitle]}>所在位置</Text>
           </View>
         </View>
-        <Text style={[Styles.text, styles.text]}>       {this.props.county}{this.props.district}</Text>
+        <Text style={[Styles.text, styles.text]}>       {this.props.county}{this.props.address}</Text>
 
         <View style={styles.mapSize}>
           <Map

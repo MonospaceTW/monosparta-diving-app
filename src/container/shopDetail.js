@@ -69,20 +69,20 @@ export default class SpotDetail extends React.Component {
     headerRight: <View />
   };
 
-  onGoWeb1 = () => {
-    if (this.props.navigation.state.params.data.web1 === null) {
+  onGoWeb = () => {
+    if (this.props.navigation.state.params.data.url === null) {
       return
     }
 
-    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.web1);
+    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.url);
   }
 
-  onGoWeb2 = () => {
-    if (this.props.navigation.state.params.data.web2 === null) {
+  onGoFb = () => {
+    if (this.props.navigation.state.params.data.fb === null) {
       return
     }
 
-    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.web2);
+    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.fb);
   }
 
   onGoMap = () => {
@@ -203,22 +203,22 @@ export default class SpotDetail extends React.Component {
 
                   <ShopPhone
                     phone1={this.props.navigation.state.params.data.phone1}
+                    phone2={this.props.navigation.state.params.data.phone2}
                   />
 
                   <View style={Styles.hr} />
 
                   <ShopWeb
-                    web1={this.props.navigation.state.params.data.web1}
-                    web2={this.props.navigation.state.params.data.web2}
-                    onGoWeb1={this.onGoWeb1}
-                    onGoWeb2={this.onGoWeb2}
+                    url={this.props.navigation.state.params.data.url}
+                    fb={this.props.navigation.state.params.data.fb}
+                    onGoWeb={this.onGoWeb}
+                    onGoFb={this.onGoFb}
                   />
 
                   <View style={Styles.hr} />
 
                   <ShopLocation
                     county={this.props.navigation.state.params.data.county}
-                    district={this.props.navigation.state.params.data.district}
                     address={this.props.navigation.state.params.data.address}
                     latitude={this.props.navigation.state.params.data.latitude}
                     longitude={this.props.navigation.state.params.data.longitude}

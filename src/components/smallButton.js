@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     color: Colors.mainBlue,
-    fontSize: 14
+    fontSize: 15
   },
   btnTxtPress: {
     color: Colors.white,
-    fontSize: 14
+    fontSize: 15
   }
 
 })

@@ -32,7 +32,8 @@ export default class ShopRate extends React.Component {
       text: '',
       starCount: 4,
       commentResult: [...this.props.comment],
-      loadingModalVisible: false
+      loadingModalVisible: false,
+      commentTotal:this.props.commentTotal
     }
   }
 
@@ -57,8 +58,8 @@ export default class ShopRate extends React.Component {
           body: JSON.stringify({
             "comment": commentTxt,
             "rating": this.state.starCount,
-            "commentable_id": id,
-            "commentable_type": "App\\Shop"
+            "user_id": "",
+            "shop_id": id
           }),
         });
         let responseJson = await response.json();
@@ -66,7 +67,8 @@ export default class ShopRate extends React.Component {
         this.setState({
           text: '',
           starCount: 4,
-          commentResult: this.state.commentResult.concat(responseJson.comment)
+          commentResult: this.state.commentResult.concat(responseJson.comment),
+          commentTotal: this.state.commentTotal+1
         })
       }
       catch (err) {
@@ -91,7 +93,7 @@ export default class ShopRate extends React.Component {
         <View style={Styles.component}>
           <View style={styles.content}>
             <FontAwesome name="star" size={24} style={Styles.icon} />
-            <Text style={Styles.subtitleGray}>評論(共{this.props.commentTotal}筆)</Text>
+            <Text style={Styles.subtitleGray}>評論(共{this.state.commentTotal}筆)</Text>
           </View>
           <View>
             <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
@@ -120,11 +122,11 @@ export default class ShopRate extends React.Component {
           display: this.state.text.length === 0 ? 'none' : 'flex'
         }}>
           <SmallBtn
-            text="先不要"
+            text="取消"
             select={false}
             onPress={this.clearComment}
           />
-          <SmallBtn text="寫好了" onPress={this.addComment.bind(this, this.props.id)} />
+          <SmallBtn text="送出" onPress={this.addComment.bind(this, this.props.id)} />
         </View>
         <Comment
           comment={this.state.commentResult} />
