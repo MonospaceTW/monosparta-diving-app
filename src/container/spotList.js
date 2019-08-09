@@ -106,6 +106,7 @@ export default class SpotList extends React.Component {
       spotNextPage: this.props.navigation.state.params.spotNextPage
     })
   }
+
   showModal = () => {
     this.setModalVisible(true)
   }
@@ -255,15 +256,13 @@ export default class SpotList extends React.Component {
             <Image source={{ uri: item.img1 }} style={styles.spotImg} />
           </CardItem>
           <CardItem>
-            <Text style={{fontWeight:'bold',fontSize:16}}>{item.name} 　</Text>
-            <Text style={{fontSize:16}}>{item.county}{item.district}</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.name} 　</Text>
+            <Text style={{ fontSize: 16 }}>{item.county}{item.district}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>
-
     )
   };
-
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
@@ -337,7 +336,7 @@ export default class SpotList extends React.Component {
                 data={this.state.spotList}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}
-                onEndReachedThreshold={0.3}
+                onEndReachedThreshold={3}
                 onEndReached={this.onGetNextPage}
               />
 
@@ -345,6 +344,7 @@ export default class SpotList extends React.Component {
                 loadingModalVisible={this.state.loadingModalVisible}
               />
             </View>
+
           </View>
         </SafeAreaView>
       )

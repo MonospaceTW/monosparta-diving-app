@@ -14,8 +14,8 @@ export default class Map extends React.Component {
         initialRegion={{
           latitude: Number(this.props.latitude),
           longitude: Number(this.props.longitude),
-          latitudeDelta: 0.003,
-          longitudeDelta: 0.003,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
         }}
         onPress={this.props.onPress}>
         <Marker
