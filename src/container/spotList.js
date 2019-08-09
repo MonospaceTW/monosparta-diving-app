@@ -255,7 +255,8 @@ export default class SpotList extends React.Component {
             <Image source={{ uri: item.img1 }} style={styles.spotImg} />
           </CardItem>
           <CardItem>
-            <Text>{item.name} {item.county}{item.district}</Text>
+            <Text style={{fontWeight:'bold',fontSize:16}}>{item.name} 　</Text>
+            <Text style={{fontSize:16}}>{item.county}{item.district}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>

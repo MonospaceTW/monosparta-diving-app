@@ -1,6 +1,5 @@
 export default {
 
-  // url : `http://e6f2f7dd.ngrok.io/test/public/api/`
   url: `https://monosparta-api.trunksys.com/api/`
 
 }

@@ -39,7 +39,7 @@ export default class ShopLocation extends React.Component {
           </View>
           </View>
 
-          <Text style={[Styles.text, styles.text]}>       {this.props.district}{this.props.address}</Text>
+          <Text style={[Styles.text, styles.text]}>      {this.props.county}{this.props.address}</Text>
 
         <View style={styles.mapSize}>
           <Map

@@ -19,8 +19,11 @@ const styles = StyleSheet.create({
 
 export default class ShopPhone extends React.Component {
 
-  onPhoneCall = () => {
+  onMobileCall = () => {
     Linking.openURL(`tel:${this.props.phone1}`)
+  }
+  onTelCall = () => {
+    Linking.openURL(`tel:${this.props.phone2}`)
   }
 
   render() {
@@ -34,10 +37,13 @@ export default class ShopPhone extends React.Component {
 
         <Text
           style={styles.linkTxt}
-          onPress={this.onPhoneCall}
-        >
+          onPress={this.onTelCall}>
           {this.props.phone1}
-        </Text>
+          </Text>
+          <Text style={styles.linkTxt}
+            onPress={this.onMobileCall}>
+               {this.props.phone2}
+          </Text>
 
       </View>
     );

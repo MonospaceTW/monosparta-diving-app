@@ -41,19 +41,19 @@ export default class ShopWeb extends React.Component {
         </View>
 
         <View style={{ flexDirection: 'row', }}>
-          <TouchableOpacity onPress={this.props.onGoWeb1}>
+          <TouchableOpacity onPress={this.props.onGoWeb}>
             <FontAwesome
               name="external-link"
               size={24}
-              style={this.props.web1 === null ? styles.disabledIcon : Styles.icon}
+              style={this.props.url === null ? styles.disabledIcon : Styles.icon}
             />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={this.props.onGoWeb2}>
+          <TouchableOpacity onPress={this.props.onGoFb}>
             <FontAwesome
               name="facebook-square"
               size={24}
-              style={this.props.web2 === null ? styles.disabledIcon : Styles.icon}
+              style={this.props.fb === null ? styles.disabledIcon : Styles.icon}
             />
           </TouchableOpacity>
         </View>
