@@ -33,7 +33,8 @@ export default class ShopRate extends React.Component {
       starCount: 4,
       commentResult: [...this.props.comment],
       loadingModalVisible: false,
-      commentTotal:this.props.commentTotal
+      commentTotal: this.props.commentTotal,
+      newComment: []
     }
   }
 
@@ -63,12 +64,15 @@ export default class ShopRate extends React.Component {
           }),
         });
         let responseJson = await response.json();
+        this.setState({
+          newComment: [responseJson.comment]
+        })
         let cancelLoading = this.setLoadingModalVisible(false);
         this.setState({
           text: '',
           starCount: 4,
-          commentResult: this.state.commentResult.concat(responseJson.comment),
-          commentTotal: this.state.commentTotal+1
+          commentResult: this.state.newComment.concat(this.state.commentResult),
+          commentTotal: this.state.commentTotal + 1
         })
       }
       catch (err) {

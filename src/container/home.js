@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  Platform
+  StatusBar
 } from 'react-native';
 import { Input, Icon } from 'native-base';
 
@@ -400,6 +400,7 @@ export default class Home extends React.Component {
           <LoadingModal
             loadingModalVisible={this.state.loadingModalVisible}
           />
+          
         </ScrollView>
       </SafeAreaView>
     )

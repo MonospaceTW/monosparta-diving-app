@@ -27,6 +27,27 @@ export default class ShopPhone extends React.Component {
     Linking.openURL(`tel:${this.props.phone2}`)
   }
 
+  onShowTelPhone = () => {
+    if (this.props.phone1 !== '') {
+      return (
+        <Text
+          style={styles.linkTxt}
+          onPress={this.onTelCall}>
+          {this.props.phone1}
+        </Text>
+      )
+    }
+  }
+
+  onShowPhone = () => {
+    if (this.props.phone2 !== '') {
+      return (
+        <Text style={styles.linkTxt}
+          onPress={this.onMobileCall}>
+          {this.props.phone2}
+        </Text>)
+    }
+  }
 
   render() {
     return (
@@ -37,15 +58,9 @@ export default class ShopPhone extends React.Component {
           <Text style={Styles.subtitleGray}>聯絡電話</Text>
         </View>
 
-        <Text
-          style={styles.linkTxt}
-          onPress={this.onTelCall}>
-          {this.props.phone1}
-          </Text>
-          <Text style={styles.linkTxt}
-            onPress={this.onMobileCall}>
-               {this.props.phone2}
-          </Text>
+          {this.onShowTelPhone()}
+          {this.onShowPhone()}
+      
 
       </View>
     );

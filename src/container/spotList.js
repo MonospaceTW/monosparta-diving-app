@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
   SafeAreaView,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -16,8 +17,9 @@ import SmallBtn from '../components/smallButton';
 import ListModal from '../components/listModal';
 import LoadingModal from '../components/loadingModal';
 
-import Api from '../config/api'
+import Api from '../config/api';
 import Styles from '../config/style';
+import Colors from '../config/color';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   cardContainer: {
+    width: width * 0.85,
     borderRadius: 6,
     borderColor: 'transparent',
     overflow: 'hidden'
@@ -186,11 +189,12 @@ export default class SpotList extends React.Component {
       this.setState({
         spotList: responseValue.item.data,
         currentPage: responseValue.item.current_page,
-        spotNextPage: responseValue.item.next_page_url
+        spotNextPage: responseValue.item.next_page_url,
+        lastPage: responseValue.item.last_page
       })
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
       if (this.state.spotList.length > 0) {
-        this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+        this.onGoTop.scrollToOffset({ animated: true, y: 0 });
       }
     } else {
       try {
@@ -201,6 +205,7 @@ export default class SpotList extends React.Component {
         this.setState({
           spotList: responseValue.item.data,
           currentPage: responseValue.item.current_page,
+          lastPage: responseValue.item.last_page
         });
         if (responseValue.item.next_page_url !== null) {
           this.setState({
@@ -213,7 +218,7 @@ export default class SpotList extends React.Component {
         }
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
         if (this.state.spotList.length > 0) {
-          this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+          this.onGoTop.scrollToOffset({ animated: true, y: 0 });
         }
       } catch (err) {
         this.setModalVisible(!this.state.modalVisible);
@@ -237,7 +242,6 @@ export default class SpotList extends React.Component {
             spotNextPage: responseJson.item.next_page_url
           })
         }
-        console.log(this.state.currentPage)
       }
       catch (err) {
         navigate('errorPage')
@@ -255,7 +259,7 @@ export default class SpotList extends React.Component {
           <CardItem cardBody>
             <Image source={{ uri: item.img1 }} style={styles.spotImg} />
           </CardItem>
-          <CardItem>
+          <CardItem style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
             <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.name} 　</Text>
             <Text style={{ fontSize: 16 }}>{item.county}{item.district}</Text>
           </CardItem>
@@ -344,7 +348,6 @@ export default class SpotList extends React.Component {
                 loadingModalVisible={this.state.loadingModalVisible}
               />
             </View>
-
           </View>
         </SafeAreaView>
       )

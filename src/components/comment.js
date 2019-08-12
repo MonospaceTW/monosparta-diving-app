@@ -59,7 +59,7 @@ export default class App extends React.Component {
                 size={15}
                 startStyle={{ width: '20%' }}
               />
-              <Text style={styles.time}>{item.created_at}</Text>
+              <Text style={styles.time}>{item.created_at.substring(0, 10)}</Text>
             </View>
             <Text numberOfLines={13} style={[Styles.text,styles.text]}>{item.comment}</Text>
           </View>
