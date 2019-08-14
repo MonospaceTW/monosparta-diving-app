@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default class ArticleCard extends React.Component {
+export default class ArticleHome extends React.Component {
 
   render() {
     return (

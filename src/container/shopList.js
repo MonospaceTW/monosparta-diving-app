@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   cardContainer: {
+    width: width * 0.85,
     borderRadius: 6,
     borderColor: 'transparent',
     overflow: 'hidden'
@@ -186,11 +187,13 @@ export default class SpotList extends React.Component {
       this.setState({
         shopList: responseValue.item.data,
         currentPage: responseValue.item.current_page,
-        shopNextPage: responseValue.item.next_page_url
+        shopNextPage: responseValue.item.next_page_url,
+        lastPage: responseValue.item.last_page
       })
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
       if (this.state.shopList.length > 0) {
-        this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+        this.onGoTop.scrollToOffset({ animated: true, y: 0 });
+        this.onGoTop.scrollToOffset({ animated: true, y: 0 });
       }
     } else {
       try {
@@ -200,20 +203,22 @@ export default class SpotList extends React.Component {
         let cancelLoading = this.setLoadingModalVisible(false);
         this.setState({
           shopList: responseValue.item.data,
-          currentPage: responseValue.item.current_page
+          currentPage: responseValue.item.current_page,
+          lastPage: responseValue.item.last_page
         })
         if (responseValue.item.next_page_url !== null) {
           this.setState({
-            spotNextPage: responseValue.item.next_page_url
+            shopNextPage: responseValue.item.next_page_url
           })
         } else {
           this.setState({
-            spotNextPage: ''
+            shopNextPage: ''
           })
         }
         let closeModal = await this.setModalVisible(!this.state.modalVisible);
         if (this.state.shopList.length > 0) {
-          this.onGoTop.scrollToOffset({ animated: true, offset: 0 });
+          this.onGoTop.scrollToOffset({ animated: true, y: 0 });
+          this.onGoTop.scrollToOffset({ animated: true, y: 0 });
         }
       } catch (err) {
         this.setModalVisible(!this.state.modalVisible);
@@ -257,9 +262,9 @@ export default class SpotList extends React.Component {
               source={{ uri: item.img1 }}
               style={styles.spotImg} />
           </CardItem>
-          <CardItem>
-            <Text style={{fontWeight:'bold',fontSize:16}}>{item.name} </Text>
-            <Text style={{fontSize:16}}>{item.county}{item.district}</Text>
+          <CardItem style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{item.name} </Text>
+            <Text style={{ fontSize: 16 }}>{item.county}{item.district}</Text>
           </CardItem>
         </Card>
       </TouchableOpacity>

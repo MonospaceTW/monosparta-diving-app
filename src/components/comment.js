@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 10
   },
+  report: {
+    color: Colors.mainBlue,
+  },
   wrapper: {
     flexDirection: 'row',
     marginBottom: 10,
@@ -34,11 +37,11 @@ const styles = StyleSheet.create({
     color: Colors.gray,
   },
   text: {
-    width:width*0.7
+    width: width * 0.7
   }
 })
 
-export default class App extends React.Component {
+export default class Comment extends React.Component {
 
   onRenderComment = () => {
     return this.props.comment.map((item) => {
@@ -50,8 +53,11 @@ export default class App extends React.Component {
             <Thumbnail source={Images.recImg} />
           </View>
 
-          <View style={{ marginLeft:15 }}>
-            <Text style={styles.user}>快樂熱帶魚</Text>
+          <View style={{ marginLeft: 15 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={styles.user}>快樂熱帶魚</Text>
+              <Text style={styles.report} onPress={this.props.onReport}>檢舉</Text>
+            </View>
             <View style={styles.wrapper}>
               <Star
                 isDisabled
@@ -59,9 +65,9 @@ export default class App extends React.Component {
                 size={15}
                 startStyle={{ width: '20%' }}
               />
-              <Text style={styles.time}>{item.created_at}</Text>
+              <Text style={styles.time}>{item.created_at.substring(0, 10)}</Text>
             </View>
-            <Text numberOfLines={13} style={[Styles.text,styles.text]}>{item.comment}</Text>
+            <Text numberOfLines={13} style={[Styles.text, styles.text]}>{item.comment}</Text>
           </View>
 
         </View>

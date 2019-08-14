@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from 'react-native';
 import { Textarea, Form, Item } from "native-base";
 
@@ -32,7 +33,8 @@ export default class SpotRate extends React.Component {
       starCount: 4,
       commentResult: [...this.props.comment],
       loadingModalVisible: false,
-      commentTotal:this.props.commentTotal
+      commentTotal: this.props.commentTotal,
+      newComment: [],
     }
   }
 
@@ -62,12 +64,15 @@ export default class SpotRate extends React.Component {
           }),
         });
         let responseJson = await response.json();
+        this.setState({
+          newComment: [responseJson.comment]
+        })
         let cancelLoading = this.setLoadingModalVisible(false);
         this.setState({
           text: '',
           starCount: 4,
-          commentResult: this.state.commentResult.concat(responseJson.comment),
-          commentTotal: this.state.commentTotal+1
+          commentResult: this.state.newComment.concat(this.state.commentResult),
+          commentTotal: this.state.commentTotal + 1
         })
       }
       catch (err) {
@@ -86,6 +91,18 @@ export default class SpotRate extends React.Component {
     this.setState({ loadingModalVisible: visible });
   }
 
+  onReport = () => {
+    Alert.alert(
+      '確定要檢舉這則留言？',
+      '',
+      [
+        { text: '取消', style: 'cancel' },
+        { text: '確定' },
+      ],
+      { cancelable: false }
+    )
+  }
+
   render() {
     return (
       <View>
@@ -95,7 +112,7 @@ export default class SpotRate extends React.Component {
             <Text style={Styles.subtitleGray}>評論(共{this.state.commentTotal}筆)</Text>
           </View>
           <View>
-            <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
+            <Text>平均 <Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
           </View>
         </View>
 
@@ -131,6 +148,7 @@ export default class SpotRate extends React.Component {
         </View>
         <Comment
           comment={this.state.commentResult}
+          onReport={this.onReport}
         />
 
         <LoadingModal
