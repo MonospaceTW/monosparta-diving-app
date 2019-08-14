@@ -48,9 +48,9 @@ export default class ExploreCard extends React.Component {
             <CardItem cardBody>
               <Image source={{ uri: this.props.data.img1 }} style={styles.spotImg} />
             </CardItem>
-            <CardItem>
+            <CardItem style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
               <Text style={styles.titleTxt}>{this.props.data.name}　</Text>
-              <Text style={{fontSize:16}}>{this.props.data.county}{this.props.data.district}</Text>
+              <Text style={{ fontSize: 16 }}>{this.props.data.county}{this.props.data.district}</Text>
             </CardItem>
           </Card>
         </TouchableOpacity>
