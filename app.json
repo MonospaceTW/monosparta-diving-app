@@ -24,10 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.trunkStudio.DiveInTaiwan"
+      "bundleIdentifier": "com.trunk.DiveInTaiwan"
     },
     "android": {
-      "package": "com.trunkStudio.DiveInTaiwan",
+      "package": "com.trunk.DiveInTaiwan",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyC4_FZH90jJ6GqRPXJQTOSmcxKtoqBGLE0"
