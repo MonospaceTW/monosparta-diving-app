@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from 'react-native';
 import { Textarea, Form } from "native-base";
 
@@ -91,6 +92,18 @@ export default class ShopRate extends React.Component {
     this.setState({ loadingModalVisible: visible });
   }
 
+  onReport = () => {
+    Alert.alert(
+      '確定要檢舉這則留言？',
+      '',
+      [
+        { text: '取消', style: 'cancel' },
+        { text: '確定' },
+      ],
+      { cancelable: false }
+    )
+  }
+
   render() {
     return (
       <View>
@@ -100,7 +113,7 @@ export default class ShopRate extends React.Component {
             <Text style={Styles.subtitleGray}>評論(共{this.state.commentTotal}筆)</Text>
           </View>
           <View>
-            <Text>平均<Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
+            <Text>平均 <Text style={{ color: Colors.mainBlue }}>{this.props.avg}</Text></Text>
           </View>
         </View>
         <Star
@@ -133,7 +146,9 @@ export default class ShopRate extends React.Component {
           <SmallBtn text="送出" onPress={this.addComment.bind(this, this.props.id)} />
         </View>
         <Comment
-          comment={this.state.commentResult} />
+          comment={this.state.commentResult}
+          onReport={this.onReport}
+        />
 
         <LoadingModal
           loadingModalVisible={this.state.loadingModalVisible}
