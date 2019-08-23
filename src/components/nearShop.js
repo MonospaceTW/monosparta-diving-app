@@ -71,7 +71,7 @@ export default class NearShop extends React.Component {
           </View>
         </View>
 
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {this.renderNearShop()}
         </ScrollView>
 

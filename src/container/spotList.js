@@ -171,18 +171,8 @@ export default class SpotList extends React.Component {
     }
   }
 
-  clearBtn = () => {
-    this.setState({
-      selLocation: '',
-      selLevel: ''
-    })
-  }
-
-  onGetSpotList = async () => {
-    const { navigate } = this.props.navigation
-    const url = Api.url + `spot/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
-    if (this.state.selLocation === '' && this.state.selLevel === '') {
-      let showLoading = this.setLoadingModalVisible(true);
+  clearBtn = async () => {
+    let showLoading = this.setLoadingModalVisible(true);
       let response = await fetch(Api.url + `spot`);
       let responseValue = await response.json();
       let cancelLoading = this.setLoadingModalVisible(false);
@@ -190,13 +180,22 @@ export default class SpotList extends React.Component {
         spotList: responseValue.item.data,
         currentPage: responseValue.item.current_page,
         spotNextPage: responseValue.item.next_page_url,
-        lastPage: responseValue.item.last_page
+        lastPage: responseValue.item.last_page,
+        selLocation: '',
+        selLevel: ''
       })
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
       if (this.state.spotList.length > 0) {
         this.onGoTop.scrollToOffset({ animated: true, y: 0 });
         this.onGoTop.scrollToOffset({ animated: true, y: 0 });
       }
+  }
+
+  onGetSpotList = async () => {
+    const { navigate } = this.props.navigation
+    const url = Api.url + `spot/search?location=${this.state.selLocation}&level=${this.state.selLevel}`
+    if (this.state.selLocation === '' && this.state.selLevel === '') {
+      let closeModal = await this.setModalVisible(!this.state.modalVisible);  
     } else {
       try {
         let showLoading = this.setLoadingModalVisible(true);

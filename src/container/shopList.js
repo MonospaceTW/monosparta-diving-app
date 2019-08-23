@@ -169,32 +169,31 @@ export default class SpotList extends React.Component {
     }
   }
 
-  clearBtn = () => {
+  clearBtn = async () => {
+    let showLoading = this.setLoadingModalVisible(true);
+    let response = await fetch(Api.url + `shop`);
+    let responseValue = await response.json();
+    let cancelLoading = this.setLoadingModalVisible(false);
     this.setState({
+      shopList: responseValue.item.data,
+      currentPage: responseValue.item.current_page,
+      shopNextPage: responseValue.item.next_page_url,
+      lastPage: responseValue.item.last_page,
       selLocation: '',
       selService: ''
     })
+    let closeModal = await this.setModalVisible(!this.state.modalVisible);
+    if (this.state.shopList.length > 0) {
+      this.onGoTop.scrollToOffset({ animated: true, y: 0 });
+      this.onGoTop.scrollToOffset({ animated: true, y: 0 });
+    }
   }
 
   onGetShopList = async () => {
     const { navigate } = this.props.navigation
     const url = Api.url + `shop/search?location=${this.state.selLocation}&service=${this.state.selService}`
     if (this.state.selLocation === '' && this.state.selService === '') {
-      let showLoading = this.setLoadingModalVisible(true);
-      let response = await fetch(Api.url + `shop`);
-      let responseValue = await response.json();
-      let cancelLoading = this.setLoadingModalVisible(false);
-      this.setState({
-        shopList: responseValue.item.data,
-        currentPage: responseValue.item.current_page,
-        shopNextPage: responseValue.item.next_page_url,
-        lastPage: responseValue.item.last_page
-      })
       let closeModal = await this.setModalVisible(!this.state.modalVisible);
-      if (this.state.shopList.length > 0) {
-        this.onGoTop.scrollToOffset({ animated: true, y: 0 });
-        this.onGoTop.scrollToOffset({ animated: true, y: 0 });
-      }
     } else {
       try {
         let showLoading = this.setLoadingModalVisible(true);

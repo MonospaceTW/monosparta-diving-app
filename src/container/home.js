@@ -313,7 +313,7 @@ export default class Home extends React.Component {
       if (this.state.randomSpot.length === 0) {
         navigate('errorPage')
       }
-    }, 7000);
+    }, 10000);
   }
 
   setLoadingModalVisible(visible) {

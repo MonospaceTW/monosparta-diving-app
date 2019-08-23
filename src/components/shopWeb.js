@@ -45,7 +45,7 @@ export default class ShopWeb extends React.Component {
             <FontAwesome
               name="external-link"
               size={24}
-              style={this.props.url === null ? styles.disabledIcon : Styles.icon}
+              style={this.props.url === '' ? styles.disabledIcon : Styles.icon}
             />
           </TouchableOpacity>
 
@@ -53,7 +53,7 @@ export default class ShopWeb extends React.Component {
             <FontAwesome
               name="facebook-square"
               size={24}
-              style={this.props.fb === null ? styles.disabledIcon : Styles.icon}
+              style={this.props.fb === '' ? styles.disabledIcon : Styles.icon}
             />
           </TouchableOpacity>
         </View>

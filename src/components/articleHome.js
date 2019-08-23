@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     width: width * 0.75,
     height: height * 0.4,
     borderRadius: 6,
-    borderColor:'transparent',
+    borderColor: 'transparent',
     overflow: 'hidden'
   },
   imageWrapper: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   articleTxt: {
     fontSize: 16,
-    fontWeight:'bold'
+    fontWeight: 'bold'
   }
 })
 
@@ -46,16 +46,16 @@ export default class ArticleHome extends React.Component {
   render() {
     return (
       <View style={styles.imageWrapper}>
-          <TouchableOpacity onPress={this.props.onPress}>
-            <Card style={styles.cardContainer}>
-              <CardItem cardBody>
-                <Image source={{uri: this.props.data.img}} style={styles.spotImg} />
-              </CardItem>
-              <CardItem>
-                <Text style={styles.articleTxt}>{this.props.data.title}</Text>
-              </CardItem>
-            </Card>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.onPress}>
+          <Card style={styles.cardContainer}>
+            <CardItem cardBody>
+              <Image source={{ uri: this.props.data.img }} style={styles.spotImg} />
+            </CardItem>
+            <CardItem style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
+              <Text style={styles.articleTxt}>{this.props.data.title}</Text>
+            </CardItem>
+          </Card>
+        </TouchableOpacity>
       </View>
     )
   }

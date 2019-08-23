@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Root, Toast, Item } from 'native-base';
-import { WebBrowser } from 'expo';
+import * as WebBrowser from 'expo-web-browser';
 
 import DetailSwiper from '../components/swiper';
 import ShopDescription from '../components/shopDescription';
@@ -70,7 +70,7 @@ export default class SpotDetail extends React.Component {
   };
 
   onGoWeb = () => {
-    if (this.props.navigation.state.params.data.url === null) {
+    if (this.props.navigation.state.params.data.url === '') {
       return
     }
 
@@ -78,7 +78,7 @@ export default class SpotDetail extends React.Component {
   }
 
   onGoFb = () => {
-    if (this.props.navigation.state.params.data.fb === null) {
+    if (this.props.navigation.state.params.data.fb === '') {
       return
     }
 
@@ -88,7 +88,7 @@ export default class SpotDetail extends React.Component {
   onGoMap = () => {
 
     var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
-    var url = scheme + `${this.props.navigation.state.params.data.latitude},${this.props.navigation.state.params.data.longitude}`;
+    var url = `https://www.google.com/maps/search/?api=1&query=${this.props.navigation.state.params.data.name}` ;
     Alert.alert(
       '開啟地圖',
       '',
@@ -202,8 +202,8 @@ export default class SpotDetail extends React.Component {
                   <View style={Styles.hr} />
 
                   <ShopPhone
-                    phone1={this.props.navigation.state.params.data.phone1}
-                    phone2={this.props.navigation.state.params.data.phone2}
+                    tel={this.props.navigation.state.params.data.tel}
+                    mobile={this.props.navigation.state.params.data.mobile}
                   />
 
                   <View style={Styles.hr} />

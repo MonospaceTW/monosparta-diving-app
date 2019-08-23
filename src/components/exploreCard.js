@@ -18,6 +18,7 @@ const width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   cardContainer: {
     marginRight: 25,
+    height: height * 0.4,
     width: width * 0.75,
     borderRadius: 6,
     borderColor: 'transparent',
@@ -48,7 +49,7 @@ export default class ExploreCard extends React.Component {
             <CardItem cardBody>
               <Image source={{ uri: this.props.data.img1 }} style={styles.spotImg} />
             </CardItem>
-            <CardItem style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+            <CardItem style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
               <Text style={styles.titleTxt}>{this.props.data.name}　</Text>
               <Text style={{ fontSize: 16 }}>{this.props.data.county}{this.props.data.district}</Text>
             </CardItem>
