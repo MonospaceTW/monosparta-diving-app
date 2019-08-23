@@ -75,7 +75,7 @@ export default class Home extends React.Component {
       text: '',
       spotResult: [],
       shopResult: [],
-      knowledgeResult: [],
+      articleResult: [],
       spotTotal: 0,
       shopTotal: 0,
       articleTotal: 0,
@@ -101,6 +101,7 @@ export default class Home extends React.Component {
   };
 
   componentDidMount = async () => {
+    const { navigate } = this.props.navigation;
     try {
       let responseSpot = await fetch(Api.url + `spot/random`);
       let randomSpot = await responseSpot.json();
@@ -281,22 +282,34 @@ export default class Home extends React.Component {
         let response = await fetch(Api.url + `keyword/${keyword}`);
         let responseJson = await response.json();
         this.setState({
-          spotResult: responseJson.spot,
-          shopResult: responseJson.shop,
-          knowledgeResult: responseJson.article,
-          spotTotal: responseJson.spotTotal,
-          shopTotal: responseJson.shopTotal,
-          articleTotal: responseJson.articleTotal
+          spotResult: responseJson.spot.data,
+          shopResult: responseJson.shop.data,
+          articleResult: responseJson.article.data,
+          spotTotal: responseJson.spot.total,
+          shopTotal: responseJson.shop.total,
+          articleTotal: responseJson.article.total
         })
         let cancelLoading = this.setLoadingModalVisible(false);
         let responseSearch = await navigate('search', {
           txt: this.state.text,
           spotResult: this.state.spotResult,
           shopResult: this.state.shopResult,
-          knowledgeResult: this.state.knowledgeResult,
+          articleResult: this.state.articleResult,
           spotTotal: this.state.spotTotal,
           shopTotal: this.state.shopTotal,
-          articleTotal: this.state.articleTotal
+          articleTotal: this.state.articleTotal,
+
+          shopCurrentPage: responseJson.shop.current_page,
+          shopLastPage: responseJson.shop.last_page,
+          shopNextPage: responseJson.shop.next_page_url,
+
+          spotCurrentPage: responseJson.spot.current_page,
+          spotLastPage: responseJson.spot.last_page,
+          spotNextPage: responseJson.spot.next_page_url,
+
+          articleCurrentPage: responseJson.article.current_page,
+          articleLastPage: responseJson.article.last_page,
+          articleNextPage: responseJson.article.next_page_url,
         });
       }
       catch (err) {
@@ -400,7 +413,7 @@ export default class Home extends React.Component {
           <LoadingModal
             loadingModalVisible={this.state.loadingModalVisible}
           />
-          
+
         </ScrollView>
       </SafeAreaView>
     )

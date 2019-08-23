@@ -1,6 +1,7 @@
 export default {
 
   url: `https://monosparta-api.trunksys.com/api/`
+  // url: `http://138def88.ngrok.io/DivingBackend_v1/public/api/`
 
 }
 export const api = {

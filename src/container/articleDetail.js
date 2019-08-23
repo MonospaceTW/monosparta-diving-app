@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
   tabs: {
     backgroundColor: Colors.white
   },
+  title: {
+    fontSize: 20,
+    fontWeight: '500',
+    color: Colors.gray,
+    height: 100,
+  },
   img: {
     width: '100%',
     height: 200,
@@ -36,12 +42,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
     marginBottom: 10,
     fontSize: 15
   },
   text: {
-    marginBottom: 20
+    marginBottom: 20,
+    lineHeight: 30
   },
   logo: {
     width: '50%'
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   txt: {
-    fontSize:16,
+    fontSize: 16,
     marginTop: 10
   }
 })
@@ -109,9 +115,11 @@ export default class Article extends React.Component {
         <ScrollView style={Styles.container}>
           <View style={Styles.bodyContent}>
             <Image source={{ uri: this.props.navigation.state.params.data.img }} style={styles.img} />
-            <Text style={Styles.title}>{this.props.navigation.state.params.data.title}</Text>
+            <View style={{ justifyContent: 'center' }}>
+              <Text style={styles.title}>{this.props.navigation.state.params.data.title}</Text>
+            </View>
             <View style={styles.info}>
-              <Text style={{fontWeight:'bold'}}>{this.props.navigation.state.params.data.author}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{this.props.navigation.state.params.data.author}</Text>
               <Text>{this.props.navigation.state.params.data.date}</Text>
             </View>
             <View style={Styles.content}>

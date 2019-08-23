@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  View
+  View,
+  FlatList
 } from 'react-native'
 import {
   ListItem
@@ -17,37 +18,50 @@ const styles = StyleSheet.create({
   txt: {
     fontSize: 16,
     color: '#969696',
-    marginBottom:10
+    marginBottom: 10
   }
-  })
+})
 
-export default class Search extends React.Component {
+export default class ArticleTab extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       loadingModalVisible: false
     }
   }
-  onShowKnowledgeResult = () => {
-    if (this.props.knowledgeData.length === 0) {
+  onShowArticleResult = () => {
+    if (this.props.articleData.length === 0) {
       return (
-        <View style={{ alignItems: 'center', paddingTop:25}}>
+        <View style={{ alignItems: 'center', paddingTop: 25 }}>
           <Text style={styles.txt}>找不到結果</Text>
           <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
         </View>
       )
     } else {
-      return this.props.knowledgeData.map((item) => {
-        return (
-          <ListItem key={item.id} onPress={this.onGetKnowledgeDetail.bind(this, item.id)}>
-            <Text>{item.title}</Text>
-          </ListItem>
-        )
-      })
+      return (
+        <FlatList
+          data={this.props.articleData}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          onEndReachedThreshold={1}
+          onEndReached={this.props.onGetNextArticlePage}
+        />
+      )
     }
   }
 
-  onGetKnowledgeDetail = async (id) => {
+  keyExtractor = (item, index) => { return index.toString() };
+
+  renderItem = ({ item }) => {
+    return (
+
+      <ListItem onPress={this.onGetArticleDetail.bind(this, item.id)}>
+        <Text>{item.name}</Text>
+      </ListItem>
+    )
+  };
+
+  onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {
       let showLoading = this.setLoadingModalVisible(true);
@@ -70,10 +84,10 @@ export default class Search extends React.Component {
   render() {
     return (
       <ScrollView style={Styles.container}>
-         {this.onShowKnowledgeResult()}
-         <LoadingModal
-            loadingModalVisible={this.state.loadingModalVisible}
-          />
+        {this.onShowArticleResult()}
+        <LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
       </ScrollView>
     )
   }

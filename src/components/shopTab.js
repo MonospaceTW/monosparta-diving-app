@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  View
+  View,
+  FlatList
 } from 'react-native';
 import {
   ListItem
@@ -30,6 +31,7 @@ export default class ShopTab extends React.Component {
       loadingModalVisible: false
     }
   }
+
   onShowShopResult = () => {
     if (this.props.shopData.length === 0) {
       return (
@@ -39,15 +41,30 @@ export default class ShopTab extends React.Component {
         </View>
       )
     } else {
-      return this.props.shopData.map((item) => {
-        return (
-          <ListItem key={item.id} onPress={this.onGetShopDetail.bind(this, item.id)}>
-            <Text>{item.name}</Text>
-          </ListItem>
-        )
-      })
+      return (
+        <FlatList
+          data={this.props.shopData}
+          extraData={this.props}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          onEndReachedThreshold={1}
+          onEndReached={this.props.onGetNextShopPage}
+        />
+      )
     }
   }
+
+  keyExtractor = (item, index) => { return index.toString() };
+
+  renderItem = ({ item }) => {
+    return (
+
+      <ListItem onPress={this.onGetShopDetail.bind(this, item.id)}>
+        <Text>{item.name}</Text>
+      </ListItem>
+    )
+  };
+
   onGetShopDetail = async (id) => {
     const { navigate } = this.props.navigation;
     try {

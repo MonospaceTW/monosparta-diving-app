@@ -23,7 +23,7 @@ import Constants from 'expo-constants';
 
 import SpotTab from '../components/spotTab';
 import ShopTab from '../components/shopTab';
-import KnowledgeTab from '../components/knowledgeTab';
+import ArticleTab from '../components/articleTab';
 import LoadingModal from '../components/loadingModal';
 import Api from '../config/api';
 import Colors from '../config/color';
@@ -69,10 +69,20 @@ export default class Search extends React.Component {
       text: this.props.navigation.state.params.txt,
       spotResult: this.props.navigation.state.params.spotResult,
       shopResult: this.props.navigation.state.params.shopResult,
-      knowledgeResult: this.props.navigation.state.params.knowledgeResult,
+      articleResult: this.props.navigation.state.params.articleResult,
       spotTotal: this.props.navigation.state.params.spotTotal,
       shopTotal: this.props.navigation.state.params.shopTotal,
       articleTotal: this.props.navigation.state.params.articleTotal,
+      shopCurrentPage: this.props.navigation.state.params.shopCurrentPage,
+      shopLastPage: this.props.navigation.state.params.shopLastPage,
+      shopNextPage: this.props.navigation.state.params.shopNextPage,
+      spotCurrentPage: this.props.navigation.state.params.spotCurrentPage,
+      spotLastPage: this.props.navigation.state.params.spotLastPage,
+      spotNextPage: this.props.navigation.state.params.spotNextPage,
+      articleCurrentPage: this.props.navigation.state.params.articleCurrentPage,
+      articleLastPage: this.props.navigation.state.params.articleLastPage,
+      articleNextPage: this.props.navigation.state.params.articleNextPage,
+
       loadingModalVisible: false
     }
   }
@@ -87,17 +97,31 @@ export default class Search extends React.Component {
       return
     } else {
       try {
+        this.setState({
+          spotResult: [],
+          shopResult: [],
+          articleResult: []
+        })
         let showLoading = this.setLoadingModalVisible(true);
         let response = await fetch(Api.url + `keyword/${keyword}`);
         let responseJson = await response.json();
         let cancelLoading = this.setLoadingModalVisible(false);
         this.setState({
-          spotResult: responseJson.spot,
-          shopResult: responseJson.shop,
-          knowledgeResult: responseJson.article,
-          spotTotal: responseJson.spotTotal,
-          shopTotal: responseJson.shopTotal,
-          articleTotal: responseJson.articleTotal
+          spotResult: responseJson.spot.data,
+          shopResult: responseJson.shop.data,
+          articleResult: responseJson.article.data,
+          spotTotal: responseJson.spot.total,
+          shopTotal: responseJson.shop.total,
+          articleTotal: responseJson.article.total,
+          shopCurrentPage: responseJson.shop.current_page,
+          shopLastPage: responseJson.shop.last_page,
+          shopNextPage: responseJson.shop.next_page_url,
+          spotCurrentPage: responseJson.spot.current_page,
+          spotLastPage: responseJson.spot.last_page,
+          spotNextPage: responseJson.spot.next_page_url,
+          articleCurrentPage: responseJson.article.current_page,
+          articleLastPage: responseJson.article.last_page,
+          articleNextPage: responseJson.article.next_page_url,
         })
       }
       catch (err) {
@@ -109,7 +133,7 @@ export default class Search extends React.Component {
   }
 
   onClose = () => {
-    this.setState({text:''})
+    this.setState({ text: '' })
   }
 
   changePageHome = () => {
@@ -119,6 +143,72 @@ export default class Search extends React.Component {
 
   setLoadingModalVisible(visible) {
     this.setState({ loadingModalVisible: visible });
+  }
+
+  onGetNextSpotPage = async () => {
+    let page = this.state.spotCurrentPage + 1
+    const { navigate } = this.props.navigation;
+    if (page <= this.state.spotLastPage) {
+      try {
+        if (this.state.spotNextPage !== '') {
+          let response = await fetch(this.state.spotNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            spotResult: this.state.spotResult.concat(responseJson.spot.data),
+            spotCurrentPage: responseJson.spot.current_page,
+            spotNextPage: responseJson.spot.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
+  }
+
+  onGetNextShopPage = async () => {
+    let page = this.state.shopCurrentPage + 1
+    const { navigate } = this.props.navigation;
+    if (page <= this.state.shopLastPage) {
+      try {
+        if (this.state.shopNextPage !== '') {
+          let response = await fetch(this.state.shopNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            shopResult: this.state.shopResult.concat(responseJson.shop.data),
+            shopCurrentPage: responseJson.shop.current_page,
+            shopNextPage: responseJson.shop.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
+  }
+
+  onGetNextArticlePage = async () => {
+    let page = this.state.articleCurrentPage + 1
+    const { navigate } = this.props.navigation;
+    if (page <= this.state.articleLastPage) {
+      try {
+        if (this.state.articleNextPage !== '') {
+          let response = await fetch(this.state.articleNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            articleResult: this.state.articleResult.concat(responseJson.article.data),
+            articleCurrentPage: responseJson.article.current_page,
+            articleNextPage: responseJson.article.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
   }
 
   render() {
@@ -137,7 +227,7 @@ export default class Search extends React.Component {
               <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
             </TouchableOpacity>
           </Left>
-          <Body style={{marginLeft:0 }}>
+          <Body style={{ marginLeft: 0 }}>
             <Input
               placeholder='試試野柳？'
               value={this.state.text}
@@ -171,6 +261,7 @@ export default class Search extends React.Component {
             <SpotTab
               spotData={this.state.spotResult}
               navigation={this.props.navigation}
+              onGetNextSpotPage={this.onGetNextSpotPage}
             />
           </Tab>
           <Tab
@@ -188,6 +279,7 @@ export default class Search extends React.Component {
             <ShopTab
               shopData={this.state.shopResult}
               navigation={this.props.navigation}
+              onGetNextShopPage={this.onGetNextShopPage}
             />
           </Tab>
           <Tab
@@ -202,16 +294,17 @@ export default class Search extends React.Component {
             tabStyle={{ backgroundColor: Colors.white }}
             activeTextStyle={{ color: Colors.mainBlue }}
           >
-            <KnowledgeTab
-              knowledgeData={this.state.knowledgeResult}
+            <ArticleTab
+              articleData={this.state.articleResult}
               navigation={this.props.navigation}
+              onGetNextArticlePage={this.onGetNextArticlePage}
             />
           </Tab>
         </Tabs>
 
         <LoadingModal
-            loadingModalVisible={this.state.loadingModalVisible}
-          />
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
 
       </SafeAreaView>
     )

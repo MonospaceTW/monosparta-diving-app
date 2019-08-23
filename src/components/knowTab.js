@@ -88,6 +88,8 @@ export default class TravelTab extends React.Component {
           data={this.props.articleResult}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
+          onEndReachedThreshold={3}
+          onEndReached={this.props.onGetNextKnowPage}
         />
         <LoadingModal
           loadingModalVisible={this.state.loadingModalVisible}

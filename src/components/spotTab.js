@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  View
+  View,
+  FlatList
 } from 'react-native';
 import {
   ListItem
@@ -39,15 +40,29 @@ export default class SpotTab extends React.Component {
         </View>
       )
     } else {
-      return this.props.spotData.map((item) => {
-        return (
-          <ListItem key={item.id} onPress={this.onGetSpotDetail.bind(this, item.id)}>
-            <Text>{item.name}</Text>
-          </ListItem>
-        )
-      })
+      return (
+        <FlatList
+          data={this.props.spotData}
+          extraData={this.props}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          onEndReachedThreshold={1}
+          onEndReached={this.props.onGetNextSpotPage}
+        />
+      )
     }
   }
+
+  keyExtractor = (item, index) => { return index.toString() };
+
+  renderItem = ({ item }) => {
+    return (
+
+      <ListItem onPress={this.onGetSpotDetail.bind(this, item.id)}>
+        <Text>{item.name}</Text>
+      </ListItem>
+    )
+  };
 
   onGetSpotDetail = async (id) => {
     const { navigate } = this.props.navigation;
