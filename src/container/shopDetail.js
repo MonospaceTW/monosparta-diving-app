@@ -74,7 +74,7 @@ export default class SpotDetail extends React.Component {
       return
     }
 
-    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.url);
+    await WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.url);
   }
 
   onGoFb = () => {
@@ -82,7 +82,7 @@ export default class SpotDetail extends React.Component {
       return
     }
 
-    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.fb);
+    await WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.fb);
   }
 
   onGoMap = () => {
