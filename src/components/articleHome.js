@@ -51,8 +51,8 @@ export default class ArticleHome extends React.Component {
             <CardItem cardBody>
               <Image source={{ uri: this.props.data.img }} style={styles.spotImg} />
             </CardItem>
-            <CardItem style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-              <Text style={styles.articleTxt}>{this.props.data.title}</Text>
+            <CardItem>
+              <Text numberOfLines={1} style={styles.articleTxt}>{this.props.data.title}</Text>
             </CardItem>
           </Card>
         </TouchableOpacity>
