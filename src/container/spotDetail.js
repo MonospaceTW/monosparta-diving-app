@@ -7,7 +7,8 @@ import {
   Linking,
   SafeAreaView,
   KeyboardAvoidingView
-} from 'react-native'
+} from 'react-native';
+
 import DetailSwiper from '../components/swiper';
 import SpotDescription from '../components/spotDescription';
 import SpotLevel from '../components/spotLevel';

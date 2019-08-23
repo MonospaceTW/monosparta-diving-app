@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { Root, Toast, Item } from 'native-base';
-import { WebBrowser } from 'expo';
+import * as WebBrowser from 'expo-web-browser';
 
 import DetailSwiper from '../components/swiper';
 import ShopDescription from '../components/shopDescription';
@@ -69,20 +69,20 @@ export default class SpotDetail extends React.Component {
     headerRight: <View />
   };
 
-  onGoWeb = () => {
+  onGoWeb = async()  => {
     if (this.props.navigation.state.params.data.url === null) {
       return
     }
 
-    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.url);
+    await WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.url);
   }
 
-  onGoFb = () => {
+  onGoFb = async() => {
     if (this.props.navigation.state.params.data.fb === null) {
       return
     }
 
-    WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.fb);
+    await WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.fb);
   }
 
   onGoMap = () => {
