@@ -381,9 +381,9 @@ export default class Home extends React.Component {
             <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
 
             <Text style={Styles.title}>{this.state.articleTitle}</Text>
-            {/* <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {this.renderArticleRandom()}
-            </ScrollView> */}
+            </ScrollView>
 
             <Btn
               text={this.state.btnTxt}

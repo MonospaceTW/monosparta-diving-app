@@ -69,7 +69,7 @@ export default class SpotDetail extends React.Component {
     headerRight: <View />
   };
 
-  onGoWeb = () => {
+  onGoWeb = async () => {
     if (this.props.navigation.state.params.data.url === '') {
       return
     }
@@ -77,7 +77,7 @@ export default class SpotDetail extends React.Component {
      WebBrowser.openBrowserAsync(this.props.navigation.state.params.data.url);
   }
 
-  onGoFb = () => {
+  onGoFb = async () => {
     if (this.props.navigation.state.params.data.fb === '') {
       return
     }
