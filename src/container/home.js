@@ -377,7 +377,7 @@ export default class Home extends React.Component {
               select={false}
             />
 
-            <Text style={[Styles.title, styles.h1]}>下水前記得做足準備哦！！</Text>
+            {/*<Text style={[Styles.title, styles.h1]}>下水前記得做足準備哦！！</Text>
             <Text style={Styles.subtitle}>為您提供精選文章，了解更多潛水小知識！</Text>
 
             <Text style={Styles.title}>{this.state.articleTitle}</Text>
@@ -389,11 +389,11 @@ export default class Home extends React.Component {
               text={this.state.btnTxt}
               onPress={this.onGetAllArticle}
               select={false}
-            />
+            />*/}
 
             <View style={styles.footer}>
               <Text style={{ marginBottom: 10 }}>APP版本V1.0</Text>
-              <Text onPress={() => Linking.openURL('mailto:monosparta1.0@gmail.com')} style={{ textDecorationLine: 'underline' }}>聯絡我們</Text>
+              <Text onPress={() => Linking.openURL('mailto:DiveInTaiwan@monosparta.com')} style={{ textDecorationLine: 'underline' }}>聯絡我們</Text>
             </View>
           </View>
 

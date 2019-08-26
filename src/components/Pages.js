@@ -146,72 +146,72 @@ const homeNavigator = createStackNavigator({
 
 )
 
-const articleNavigator = createStackNavigator({
-  article: {
-    screen: Article,
-    navigationOptions: {
-      header: null,
-      headerBackTitle: null
-     }
-  },
-  articleDetail: {
-    screen: ArticleDetail,
-    navigationOptions: ({ navigation }) => ({
-      headerBackTitle: null,
-      title: `${navigation.state.params.data.title}`
-    }),
-  },
-  errorPage: {
-    screen: ErrorPage,
-    navigationOptions: {
-      header: null,
-      headerBackTitle: null
-     }
-  }
-}, {
-    initialRouteName: 'article'
-  })
+// const articleNavigator = createStackNavigator({
+//   article: {
+//     screen: Article,
+//     navigationOptions: {
+//       header: null,
+//       headerBackTitle: null
+//      }
+//   },
+//   articleDetail: {
+//     screen: ArticleDetail,
+//     navigationOptions: ({ navigation }) => ({
+//       headerBackTitle: null,
+//       title: `${navigation.state.params.data.title}`
+//     }),
+//   },
+//   errorPage: {
+//     screen: ErrorPage,
+//     navigationOptions: {
+//       header: null,
+//       headerBackTitle: null
+//      }
+//   }
+// }, {
+//     initialRouteName: 'article'
+//   })
 
-const TabNavigator = createBottomTabNavigator({
+// const TabNavigator = createBottomTabNavigator({
 
-  Home:
-  {
-    screen: homeNavigator,
-    navigationOptions: ({ navigation }) => ({
-      tabBarLabel: '首頁',
-      tabBarIcon: ({ focused }) => (
-        focused ?
-          <Image style={{ width: 30, height: 30 }} source={require('../assets/fishFocus.png')} /> :
-          <Image style={{ width: 30, height: 30 }} source={require('../assets/fish.png')} />
-      )
-    })
-  },
+//   Home:
+//   {
+//     screen: homeNavigator,
+//     navigationOptions: ({ navigation }) => ({
+//       tabBarLabel: '首頁',
+//       tabBarIcon: ({ focused }) => (
+//         focused ?
+//           <Image style={{ width: 30, height: 30 }} source={require('../assets/fishFocus.png')} /> :
+//           <Image style={{ width: 30, height: 30 }} source={require('../assets/fish.png')} />
+//       )
+//     })
+//   },
 
-  Article:
-  {
-    screen: articleNavigator,
-    navigationOptions: {
-      tabBarLabel: '知識',
-      tabBarIcon: ({ focused }) => (
-        focused ?
-          <Image style={{ width: 30, height: 30 }} source={require('../assets/bookFocus.png')} /> :
-          <Image style={{ width: 30, height: 30 }} source={require('../assets/book.png')} />
-      )
-    }
-  }
-}, {
-    initialRouteName: 'Home',
-    tabBarOptions: {
-      activeBackgroundColor: '#E8E7E7',
-      labelStyle: {
-        fontSize: 12,
-        fontWeight: 'bold',
-        color:Colors.mainBlue
-      },
-    },
+//   Article:
+//   {
+//     screen: articleNavigator,
+//     navigationOptions: {
+//       tabBarLabel: '知識',
+//       tabBarIcon: ({ focused }) => (
+//         focused ?
+//           <Image style={{ width: 30, height: 30 }} source={require('../assets/bookFocus.png')} /> :
+//           <Image style={{ width: 30, height: 30 }} source={require('../assets/book.png')} />
+//       )
+//     }
+//   }
+// }, {
+//     initialRouteName: 'Home',
+//     tabBarOptions: {
+//       activeBackgroundColor: '#E8E7E7',
+//       labelStyle: {
+//         fontSize: 12,
+//         fontWeight: 'bold',
+//         color:Colors.mainBlue
+//       },
+//     },
 
-  }
-  )
+//   }
+//   )
 
 
-const AppContainer = createAppContainer(TabNavigator)
+const AppContainer = createAppContainer(homeNavigator)
