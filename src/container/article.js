@@ -62,6 +62,17 @@ export default class Article extends React.Component {
       knowledgeArticleResult: [],
       travelArticleResult: [],
       licenseArticleResult: [],
+
+      travelCurrentPage: 0,
+      travelNextPage: '',
+      travelLastPage: 0,
+      knowCurrentPage: 0,
+      knowNextPage: '',
+      knowLastPage: 0,
+      licenseCurrentPage: 0,
+      licenseNextPage: '',
+      licenseLastPage: 0,
+
       loadingModalVisible: false
     }
   }
@@ -81,9 +92,18 @@ export default class Article extends React.Component {
         knowledgeArticleResult: knowledgeArticleResult.item.data,
         travelArticleResult: travelArticleResult.item.data,
         licenseArticleResult: licenseArticleResult.item.data,
-        knowledgeArticleTotal: knowledgeArticleResult.categoryTotal,
-        travelArticleTotal: travelArticleResult.categoryTotal,
-        licenseArticleTotal: licenseArticleResult.categoryTotal
+        knowledgeArticleTotal: knowledgeArticleResult.item.total,
+        travelArticleTotal: travelArticleResult.item.total,
+        licenseArticleTotal: licenseArticleResult.item.total,
+        travelCurrentPage: travelArticleResult.item.current_page,
+        travelNextPage: travelArticleResult.item.next_page_url,
+        travelLastPage: travelArticleResult.item.last_page,
+        knowCurrentPage: knowledgeArticleResult.item.current_page,
+        knowNextPage: knowledgeArticleResult.item.next_page_url,
+        knowLastPage: knowledgeArticleResult.item.last_page,
+        licenseCurrentPage: licenseArticleResult.item.current_page,
+        licenseNextPage: licenseArticleResult.item.next_page_url,
+        licenseLastPage: licenseArticleResult.item.last_page
       })
     }
     catch (err) {
@@ -95,6 +115,69 @@ export default class Article extends React.Component {
 
   setLoadingModalVisible(visible) {
     this.setState({ loadingModalVisible: visible });
+  }
+
+  onGetNextTravelPage = async () => {
+    let page = this.state.travelCurrentPage + 1
+    if (page <= this.state.travelLastPage) {
+      try {
+        if (this.state.travelNextPage !== '') {
+          let response = await fetch(this.state.travelNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            travelArticleResult: this.state.travelArticleResult.concat(responseJson.item.data),
+            travelCurrentPage: responseJson.item.current_page,
+            travelNextPage: responseJson.item.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
+  }
+
+  onGetNextKnowPage = async () => {
+    let page = this.state.knowCurrentPage + 1
+    if (page <= this.state.knowLastPage) {
+      try {
+        if (this.state.knowNextPage !== '') {
+          let response = await fetch(this.state.knowNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            knowledgeArticleResult: this.state.knowledgeArticleResult.concat(responseJson.item.data),
+            knowCurrentPage: responseJson.item.current_page,
+            knowNextPage: responseJson.item.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
+  }
+
+  onGetNextLicensePage = async () => {
+    let page = this.state.licenseCurrentPage + 1
+    if (page <= this.state.licenseLastPage) {
+      try {
+        if (this.state.licenseNextPage !== '') {
+          let response = await fetch(this.state.licenseNextPage);
+          let responseJson = await response.json();
+          this.setState({
+            licenseArticleResult: this.state.licenseArticleResult.concat(responseJson.item.data),
+            licenseCurrentPage: responseJson.item.current_page,
+            licenseNextPage: responseJson.item.next_page_url
+          })
+        }
+      }
+      catch (err) {
+        navigate('errorPage')
+        console.log('err:', err)
+      }
+    }
   }
 
   render() {
@@ -121,6 +204,7 @@ export default class Article extends React.Component {
               <KnowTab
                 navigation={this.props.navigation}
                 articleResult={this.state.knowledgeArticleResult}
+                onGetNextKnowPage={this.onGetNextKnowPage}
               />
             </Tab>
             <Tab
@@ -138,6 +222,7 @@ export default class Article extends React.Component {
               <TravelTab
                 navigation={this.props.navigation}
                 articleResult={this.state.travelArticleResult}
+                onGetNextTravelPage={this.onGetNextTravelPage}
               />
             </Tab>
             <Tab
@@ -155,6 +240,7 @@ export default class Article extends React.Component {
               <LicenseTab
                 navigation={this.props.navigation}
                 articleResult={this.state.licenseArticleResult}
+                onGetNextLicensePage={this.onGetNextLicensePage}
               />
             </Tab>
           </Tabs>
