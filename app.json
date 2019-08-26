@@ -24,7 +24,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.trunk.DiveInTaiwan"
+      "bundleIdentifier": "com.trunk.DiveInTaiwan",
+      "buildNumber": "2"
     },
     "android": {
       "package": "com.trunk.DiveInTaiwan",

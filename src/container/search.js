@@ -190,7 +190,7 @@ export default class Search extends React.Component {
               navigation={this.props.navigation}
             />
           </Tab>
-          <Tab
+         { /*<Tab
             heading={
               <TabHeading style={{ backgroundColor: Colors.white }}>
                 <Text style={{ color: Colors.mainBlue, fontSize: 17 }}>知識</Text>
@@ -206,7 +206,7 @@ export default class Search extends React.Component {
               knowledgeData={this.state.knowledgeResult}
               navigation={this.props.navigation}
             />
-          </Tab>
+          </Tab>*/}
         </Tabs>
 
         <LoadingModal
