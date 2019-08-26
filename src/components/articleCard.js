@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
   },
   articleTxt: {
     fontSize: 16,
-    fontWeight:'bold'
+    fontWeight: 'bold',
+    height: 45
   }
 })
 
@@ -54,7 +55,7 @@ export default class ArticleCard extends React.Component {
               <Image source={{ uri: this.props.articleInfo.img }} style={styles.spotImg} />
             </CardItem>
             <CardItem>
-              <Text style={styles.articleTxt}>{this.props.articleInfo.title}</Text>
+              <Text numberOfLines={2} style={styles.articleTxt}>{this.props.articleInfo.title}</Text>
             </CardItem>
             <CardItem style={{ marginTop: -5 }}>
               <Text numberOfLines={1}>{this.props.articleInfo.content}</Text>

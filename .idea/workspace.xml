@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36b1840a-b452-4c47-ad9b-164c6ac83d73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/articleHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/articleHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/exploreCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/exploreCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/knowledgeTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/knowledgeTab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nearShop.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nearShop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/shopPhone.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shopPhone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/shopWeb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shopWeb.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/shopDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/shopDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/shopList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/shopList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/spotDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/spotDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/spotList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/spotList.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,9 +26,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
