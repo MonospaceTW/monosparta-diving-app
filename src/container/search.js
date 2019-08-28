@@ -82,8 +82,11 @@ export default class Search extends React.Component {
   }
   onSearch = async () => {
     const { navigate } = this.props.navigation;
-    const keyword = encodeURIComponent(this.state.text.trim())
+    const keyword = encodeURIComponent(this.state.text.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\ |\=|\||\\|\[|\]|\{|\}|\;|\:|\”|\’|\,|\<|\.|\>|\/|\?]/g, ' ').trim())
     if (keyword.length === 0) {
+      this.setState({
+        text: ''
+      })
       return
     } else {
       try {
@@ -109,7 +112,7 @@ export default class Search extends React.Component {
   }
 
   onClose = () => {
-    this.setState({text:''})
+    this.setState({ text: '' })
   }
 
   changePageHome = () => {
@@ -137,7 +140,7 @@ export default class Search extends React.Component {
               <Icon ios='ios-arrow-back' android="md-arrow-back" style={styles.icon} />
             </TouchableOpacity>
           </Left>
-          <Body style={{marginLeft:0 }}>
+          <Body style={{ marginLeft: 0 }}>
             <Input
               placeholder='試試野柳？'
               value={this.state.text}
@@ -190,7 +193,7 @@ export default class Search extends React.Component {
               navigation={this.props.navigation}
             />
           </Tab>
-         { /*<Tab
+          { /*<Tab
             heading={
               <TabHeading style={{ backgroundColor: Colors.white }}>
                 <Text style={{ color: Colors.mainBlue, fontSize: 17 }}>知識</Text>
@@ -210,8 +213,8 @@ export default class Search extends React.Component {
         </Tabs>
 
         <LoadingModal
-            loadingModalVisible={this.state.loadingModalVisible}
-          />
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
 
       </SafeAreaView>
     )
