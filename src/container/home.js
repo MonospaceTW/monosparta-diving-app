@@ -272,8 +272,12 @@ export default class Home extends React.Component {
 
   onSearch = async () => {
     const { navigate } = this.props.navigation;
-    const keyword = encodeURIComponent(this.state.text.trim())
+    
+    const keyword = encodeURIComponent(this.state.text.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\ |\=|\||\\|\[|\]|\{|\}|\;|\:|\”|\’|\,|\<|\.|\>|\/|\?]/g,' ').trim())
     if (keyword.length === 0) {
+      this.setState({
+        text: ''
+      })
       return
     } else {
       try {
@@ -307,14 +311,14 @@ export default class Home extends React.Component {
     }
   }
 
-  onPrepareHome = () => {
-    const { navigate } = this.props.navigation;
-    setTimeout(() => {
-      if (this.state.randomSpot.length === 0) {
-        navigate('errorPage')
-      }
-    }, 10000);
-  }
+  // onPrepareHome = () => {
+  //   const { navigate } = this.props.navigation;
+  //   setTimeout(() => {
+  //     if (this.state.randomSpot.length === 0) {
+  //       navigate('errorPage')
+  //     }
+  //   }, 10000);
+  // }
 
   setLoadingModalVisible(visible) {
     this.setState({ loadingModalVisible: visible });
@@ -325,7 +329,7 @@ export default class Home extends React.Component {
       return (
         <View style={styles.loadContainer}>
           <Image style={{ height: 125, width: 125 }} source={Images.loading} />
-          {this.onPrepareHome()}
+          {/* {this.onPrepareHome()} */}
         </View>
 
       )

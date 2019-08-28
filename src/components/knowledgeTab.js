@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
   txt: {
     fontSize: 16,
     color: '#969696',
-    marginBottom:10
+    marginBottom: 10
   }
-  })
+})
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ export default class Search extends React.Component {
   onShowKnowledgeResult = () => {
     if (this.props.knowledgeData.length === 0) {
       return (
-        <View style={{ alignItems: 'center', paddingTop:25}}>
+        <View style={{ alignItems: 'center', paddingTop: 25 }}>
           <Text style={styles.txt}>找不到結果</Text>
           <Text style={styles.txt}>請調整關鍵字再試試看！</Text>
         </View>
@@ -40,7 +40,7 @@ export default class Search extends React.Component {
       return this.props.knowledgeData.map((item) => {
         return (
           <ListItem key={item.id} onPress={this.onGetKnowledgeDetail.bind(this, item.id)}>
-            <Text>{item.title}</Text>
+            <Text numberOfLines={1}>{item.title}</Text>
           </ListItem>
         )
       })
@@ -70,10 +70,10 @@ export default class Search extends React.Component {
   render() {
     return (
       <ScrollView style={Styles.container}>
-         {this.onShowKnowledgeResult()}
-         <LoadingModal
-            loadingModalVisible={this.state.loadingModalVisible}
-          />
+        {this.onShowKnowledgeResult()}
+        <LoadingModal
+          loadingModalVisible={this.state.loadingModalVisible}
+        />
       </ScrollView>
     )
   }
