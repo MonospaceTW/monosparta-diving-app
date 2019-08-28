@@ -126,7 +126,7 @@ export default class Article extends React.Component {
               <Text style={[Styles.text, styles.text]}>{this.props.navigation.state.params.data.content}</Text>
             </View>
 
-            <View style={styles.margin}>
+            {/* <View style={styles.margin}>
               <Text>文章傳送門</Text>
               <TouchableOpacity
                 style={{ marginTop: 10 }}
@@ -134,7 +134,7 @@ export default class Article extends React.Component {
                 <FontAwesome name="globe" size={24} style={Styles.icon} />
               </TouchableOpacity>
 
-            </View>
+            </View> */}
 
           </View>
         </ScrollView>

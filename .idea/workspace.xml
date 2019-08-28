@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36b1840a-b452-4c47-ad9b-164c6ac83d73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/articleHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/articleHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/exploreCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/exploreCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nearShop.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nearShop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/shopPhone.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shopPhone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/shopWeb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/shopWeb.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/shopDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/shopDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/shopList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/shopList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/spotDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/spotDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/spotList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/spotList.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -72,7 +60,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="68" y="20" width="1400" height="784" extended-state="0" />
+    <frame x="68" y="20" width="1400" height="784" extended-state="1" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.3291789" />
