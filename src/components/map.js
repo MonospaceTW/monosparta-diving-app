@@ -9,7 +9,7 @@ export default class Map extends React.Component {
     return (
       <MapView
         style={{ flex: 1 }}
-        provider={PROVIDER_GOOGLE}
+        // provider={PROVIDER_GOOGLE}
         scrollEnabled={false}
         zoomEnabled={false}
         initialRegion={{

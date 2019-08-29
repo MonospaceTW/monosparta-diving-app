@@ -404,6 +404,7 @@ export default class Home extends React.Component {
           <LoadingModal
             loadingModalVisible={this.state.loadingModalVisible}
           />
+
           
         </ScrollView>
       </SafeAreaView>

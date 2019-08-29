@@ -88,7 +88,8 @@ export default class SpotDetail extends React.Component {
   onGoMap = () => {
 
     var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
-    var url = `https://www.google.com/maps/search/?api=1&query=${this.props.navigation.state.params.data.name}` ;
+    // var url = `https://www.google.com/maps/search/?api=1&query=${this.props.navigation.state.params.data.name}` ;
+    var url = `https://www.google.com/maps/search/?api=1&query=${this.props.navigation.state.params.data.latitude},${this.props.navigation.state.params.data.longitude}`;
     Alert.alert(
       '開啟地圖',
       '',
