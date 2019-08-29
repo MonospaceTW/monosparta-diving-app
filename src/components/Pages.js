@@ -27,7 +27,7 @@ import ErrorPage from '../container/errorPage'
 import Colors from '../config/color';
 
 
-import AppIntro from '../container/appIntro'
+import FirstIntro from '../container/firstIntro'
 
 const styles = StyleSheet.create({
   input: {
@@ -127,8 +127,8 @@ const homeNavigator = createStackNavigator({
       headerBackTitle: null
      }
     },
-    appIntro: {
-    screen: AppIntro,
+    firstIntro: {
+    screen: FirstIntro,
     navigationOptions: {
       header: null,
       headerBackTitle: null

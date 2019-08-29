@@ -10,9 +10,9 @@ export default {
 
   "recImg": require('../assets/1.png'),
   "loading": require('../assets/Loading.gif'),
-  "intro1": require('../assets/intro1.jpg'),
-  "intro2": require('../assets/intro2.jpg'),
-  "intro3": require('../assets/intro3.jpg'),
-  "intro4": require('../assets/intro4.jpg')
+  "intro1": require('../assets/intro1.png'),
+  "intro2": require('../assets/intro2.png'),
+  "intro3": require('../assets/intro3.png'),
+  "intro4": require('../assets/intro4.png')
 
 };

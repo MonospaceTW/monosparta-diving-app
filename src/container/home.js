@@ -23,7 +23,7 @@ import Btn from '../components/button';
 import ArticleHome from '../components/articleHome';
 import ExploreCard from '../components/exploreCard';
 import LoadingModal from '../components/loadingModal';
-import AppIntro from '../container/appIntro'
+import FirstIntro from '../container/firstIntro'
 
 
 const styles = StyleSheet.create({
@@ -341,7 +341,7 @@ export default class Home extends React.Component {
   render() {
     if (this.state.showModal) {
       return (
-        <AppIntro
+        <FirstIntro
           modalVisible={this.state.showModal}
           onClick={this.doneIntro}
         />
