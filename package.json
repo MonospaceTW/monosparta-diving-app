@@ -20,7 +20,7 @@
     "react-native-swiper": "^1.5.14",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1",
-    "rn-falcon-app-intro": "^1.2.2"
+    "rn-falcon-app-intro": "^1.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",

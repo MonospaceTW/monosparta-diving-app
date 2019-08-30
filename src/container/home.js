@@ -357,9 +357,10 @@ export default class Home extends React.Component {
       )
     }
     return (
-
+      
       <SafeAreaView style={{ flex: 1, backgroundColor: Colors.lightGray }}>
         <ScrollView style={Styles.container}>
+        <StatusBar barStyle="dark-content" />
           <View style={Styles.bodyContent}>
             <View style={styles.searchBar}>
               <Input
