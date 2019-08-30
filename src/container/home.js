@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  AsyncStorage,
+  Button,
   StatusBar
 } from 'react-native';
 import { Input, Icon } from 'native-base';
@@ -21,6 +23,7 @@ import Btn from '../components/button';
 import ArticleHome from '../components/articleHome';
 import ExploreCard from '../components/exploreCard';
 import LoadingModal from '../components/loadingModal';
+import FirstIntro from '../container/firstIntro'
 
 
 const styles = StyleSheet.create({
@@ -79,7 +82,8 @@ export default class Home extends React.Component {
       spotTotal: 0,
       shopTotal: 0,
       articleTotal: 0,
-      loadingModalVisible: false
+      loadingModalVisible: false,
+      showModal: false,
     }
   }
 
@@ -101,6 +105,9 @@ export default class Home extends React.Component {
   };
 
   componentDidMount = async () => {
+    AsyncStorage.getItem('showIntro').then((value) => {
+      this.setState({ showModal: !value });
+    });
     try {
       let responseSpot = await fetch(Api.url + `spot/random`);
       let randomSpot = await responseSpot.json();
@@ -272,8 +279,8 @@ export default class Home extends React.Component {
 
   onSearch = async () => {
     const { navigate } = this.props.navigation;
-    
-    const keyword = encodeURIComponent(this.state.text.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\ |\=|\||\\|\[|\]|\{|\}|\;|\:|\”|\’|\,|\<|\.|\>|\/|\?]/g,' ').trim())
+
+    const keyword = encodeURIComponent(this.state.text.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\ |\=|\||\\|\[|\]|\{|\}|\;|\:|\”|\’|\,|\<|\.|\>|\/|\?]/g, ' ').trim())
     if (keyword.length === 0) {
       this.setState({
         text: ''
@@ -311,6 +318,13 @@ export default class Home extends React.Component {
     }
   }
 
+  doneIntro = () => {
+    AsyncStorage.setItem('showIntro', 'true')
+    this.setState({
+      showModal: false
+    })
+  }
+
   // onPrepareHome = () => {
   //   const { navigate } = this.props.navigation;
   //   setTimeout(() => {
@@ -325,6 +339,14 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (this.state.showModal) {
+      return (
+        <FirstIntro
+          modalVisible={this.state.showModal}
+          onClick={this.doneIntro}
+        />
+      )
+    }
     if (this.state.randomSpot.length === 0) {
       return (
         <View style={styles.loadContainer}>
@@ -404,7 +426,12 @@ export default class Home extends React.Component {
           <LoadingModal
             loadingModalVisible={this.state.loadingModalVisible}
           />
-          
+
+          <Button title='clear Asyncstorage' onPress={() => {
+            AsyncStorage.removeItem('showIntro')
+          }}
+          />
+
         </ScrollView>
       </SafeAreaView>
     )

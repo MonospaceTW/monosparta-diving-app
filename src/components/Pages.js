@@ -26,6 +26,8 @@ import ShopDetail from '../container/shopDetail';
 import ErrorPage from '../container/errorPage'
 import Colors from '../config/color';
 
+import FirstIntro from '../container/firstIntro'
+
 
 import ArticleTest from '../container/articleTest'
 
@@ -127,8 +129,12 @@ const homeNavigator = createStackNavigator({
       headerBackTitle: null
      }
     },
-    ArticleTest: {
-    screen: ArticleTest
+    FirstIntro: {
+    screen: FirstIntro,
+    navigationOptions: {
+      header: null,
+      headerBackTitle: null
+    }
   }
 },
 {
