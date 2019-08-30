@@ -428,11 +428,6 @@ export default class Home extends React.Component {
             loadingModalVisible={this.state.loadingModalVisible}
           />
 
-          <Button title='clear Asyncstorage' onPress={() => {
-            AsyncStorage.removeItem('showIntro')
-          }}
-          />
-
         </ScrollView>
       </SafeAreaView>
     )
