@@ -2,6 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36b1840a-b452-4c47-ad9b-164c6ac83d73" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/intro1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/intro2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/intro3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/intro4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Pages.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/home.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,9 +32,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
