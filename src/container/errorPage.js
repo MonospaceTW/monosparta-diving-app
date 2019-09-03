@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   ImageBackground,
-  StyleSheet
 } from 'react-native'
 
 export default class ErrorPage extends React.Component {

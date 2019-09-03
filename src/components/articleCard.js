@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Image,
   TouchableOpacity,
   Dimensions
@@ -45,7 +44,6 @@ const styles = StyleSheet.create({
 })
 
 export default class ArticleCard extends React.Component {
-
   render() {
     return (
       <View style={styles.imageWrapper}>

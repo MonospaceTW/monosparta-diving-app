@@ -8,8 +8,6 @@ import {
 import ExploreCard from './exploreCard';
 import Styles from '../config/style';
 
-
-
 export default class ExploreHome extends React.Component {
 
   keyExtractor = (item, index) => { return index.toString() };

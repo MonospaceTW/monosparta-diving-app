@@ -7,8 +7,6 @@ import {
 } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Styles from '../config/style';
-import Colors from '../config/color';
-
 
 import Map from '../components/map'
 
@@ -27,8 +25,6 @@ const styles = StyleSheet.create({
 })
 
 export default class ShopLocation extends React.Component {
-
-
   render() {
     return (
       <View>

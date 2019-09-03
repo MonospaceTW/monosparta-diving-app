@@ -8,7 +8,6 @@ import {
   Dimensions,
   SafeAreaView,
   View,
-  ScrollView
 } from 'react-native';
 
 import { Content, Card, CardItem } from 'native-base';
@@ -19,7 +18,6 @@ import LoadingModal from '../components/loadingModal';
 
 import Api from '../config/api';
 import Styles from '../config/style';
-import Colors from '../config/color';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;

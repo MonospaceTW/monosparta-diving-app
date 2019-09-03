@@ -57,12 +57,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     right: 10
-  },
-
+  }
 })
 
 export default class ListModal extends React.Component {
-
   render() {
     return (
       <Modal

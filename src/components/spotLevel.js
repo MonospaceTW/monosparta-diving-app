@@ -9,8 +9,6 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 export default class SpotDescription extends React.Component {
-
-
   render() {
     return (
       <View style={Styles.component}>

@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
 })
 
 export default class LoadingModal extends React.Component {
-
   render() {
     return (
       <Modal

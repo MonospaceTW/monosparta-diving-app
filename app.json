@@ -29,6 +29,7 @@
     },
     "android": {
       "package": "com.trunk.DiveInTaiwan",
+      "versionCode": 2,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyC4_FZH90jJ6GqRPXJQTOSmcxKtoqBGLE0"

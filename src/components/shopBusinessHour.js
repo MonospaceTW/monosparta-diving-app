@@ -10,12 +10,9 @@ import { Accordion } from "native-base";
 import Styles from '../config/style';
 import Colors from '../config/color';
 
-
 const width = Dimensions.get('window').width;
 
 export default class ShopBusinessHour extends React.Component {
-
-
   render() {
     return (
       <View style={Styles.component}>

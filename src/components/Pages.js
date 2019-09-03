@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import {
-  Image,
   TouchableOpacity,
   StyleSheet,
-  View,
-  Text
 } from 'react-native';
 
 import {
@@ -24,12 +21,11 @@ import ShopList from '../container/shopList';
 import SpotDetail from '../container/spotDetail';
 import ShopDetail from '../container/shopDetail';
 import ErrorPage from '../container/errorPage'
-import Colors from '../config/color';
-
 import FirstIntro from '../container/firstIntro'
 
+import Colors from '../config/color';
 
-import ArticleTest from '../container/articleTest'
+
 
 const styles = StyleSheet.create({
   input: {

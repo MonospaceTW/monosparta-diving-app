@@ -30,7 +30,6 @@ export default class DetailSwiper extends React.Component {
     }
   }
 
-
   onRenderImage = () => {
     let showImg = this.props.img.filter((String) => { return String })
     return showImg.map((item) => {

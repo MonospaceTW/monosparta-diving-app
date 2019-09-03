@@ -6,7 +6,6 @@ import {
   Text
 } from 'react-native';
 
-
 import ArticleCard from './articleCard';
 import Api from '../config/api';
 import Colors from '../config/color';
@@ -69,7 +68,6 @@ export default class TravelTab extends React.Component {
   setLoadingModalVisible(visible) {
     this.setState({ loadingModalVisible: visible });
   }
-
 
   render() {
     if (this.props.articleResult.length === 0) {

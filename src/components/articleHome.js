@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 })
 
 export default class ArticleHome extends React.Component {
-
   render() {
     return (
       <View style={styles.imageWrapper}>

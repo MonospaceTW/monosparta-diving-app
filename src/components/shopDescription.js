@@ -22,11 +22,8 @@ const styles = StyleSheet.create({
 })
 
 export default class ShopDescription extends React.Component {
-
-
   render() {
     return (
-
       <View style={styles.content}>
         <Text style={[Styles.title, styles.title]}>{this.props.name}</Text>
         <Text style={[Styles.text, styles.text]}>{this.props.description}</Text>

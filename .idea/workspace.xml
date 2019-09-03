@@ -3,14 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="36b1840a-b452-4c47-ad9b-164c6ac83d73" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/intro1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/intro2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/intro3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/intro4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/intro4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Pages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/articleCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/articleCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/homeArticleCard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/roundedBtn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/travelTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/travelTab.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/articleDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/articleDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/articleTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/errorPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/errorPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/firstIntro.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/firstIntro.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/pageTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/spotList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/spotList.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -32,9 +37,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -68,7 +73,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="68" y="20" width="1400" height="784" extended-state="1" />
+    <frame x="68" y="20" width="1400" height="784" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.3291789" />

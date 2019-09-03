@@ -7,13 +7,11 @@ import {
 } from 'react-native'
 import Colors from '../config/color';
 
-
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   btn: {
-
     marginBottom: 10,
     width: width * 0.35,
     height: 35,
@@ -45,7 +43,6 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 15
   }
-
 })
 
 export default class LocationBtn extends React.Component {

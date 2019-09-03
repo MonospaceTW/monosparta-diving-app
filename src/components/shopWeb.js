@@ -9,7 +9,6 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Styles from '../config/style';
 import Colors from '../config/color';
 
-
 const styles = StyleSheet.create({
   content: {
     marginTop: 20,
@@ -30,8 +29,6 @@ const styles = StyleSheet.create({
 })
 
 export default class ShopWeb extends React.Component {
-
-
   render() {
     return (
       <View style={Styles.component}>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
     Dimensions,
-    AsyncStorage,
     Modal
 } from 'react-native';
 import AppIntro from 'rn-falcon-app-intro';

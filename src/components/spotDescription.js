@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 })
 
 export default class SpotDescription extends React.Component {
-
   render() {
     return (
       <View style={styles.content}>

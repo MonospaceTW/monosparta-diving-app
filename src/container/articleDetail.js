@@ -12,12 +12,10 @@ import {
 import { WebBrowser } from 'expo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-import RoundedBtn from '../components/roundedBtn';
-
 import Colors from '../config/color';
 import Styles from '../config/style';
 import Images from '../config/images';
-import Api from '../config/api'
+
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;

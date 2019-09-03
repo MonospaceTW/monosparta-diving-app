@@ -8,7 +8,6 @@ import {
 import Colors from '../config/color';
 import { View } from 'native-base';
 
-
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
@@ -43,7 +42,6 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 15
   }
-
 })
 
 export default class Btn extends React.Component {

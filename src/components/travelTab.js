@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   }
 })
 
-
 export default class TravelTab extends React.Component {
   constructor(props) {
     super(props)
@@ -38,7 +37,6 @@ export default class TravelTab extends React.Component {
       loadingModalVisible: false
     }
   }
-
 
   onGetArticleDetail = async (id) => {
     const { navigate } = this.props.navigation;
@@ -70,7 +68,6 @@ export default class TravelTab extends React.Component {
   setLoadingModalVisible(visible) {
     this.setState({ loadingModalVisible: visible });
   }
-
 
   render() {
     if (this.props.articleResult.length === 0) {
